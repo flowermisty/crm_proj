@@ -208,21 +208,22 @@ class Event_admin extends BaseController
         $arr_lenth = $this->request->getVar('item_code');
         $model = new EventModel();
         $modelList = new EventListModel();
-        for ($i = 0; $i < count($arr_lenth); $i++) {
-            $deleteData = [
-                'optionCode' => $this->request->getVar('item_code')[$i],
-            ];
+            for ($i = 0; $i < count($arr_lenth); $i++) {
+                $deleteData = [
+                    'optionCode' => $this->request->getVar('item_code')[$i],
+                ];
 
 
-            $deleteListData = [
-                'item_code' => $this->request->getVar('itemCode'),
-            ];
-            $model->where("optionCode","{$this->request->getVar('item_code')[$i]}")->delete();
-            $modelList->where('item_code', "{$this->request->getVar('item_code')[$i]}")->delete();
-        }
+                $deleteListData = [
+                    'item_code' => $this->request->getVar('itemCode'),
+                ];
+                $model->where("optionCode","{$this->request->getVar('item_code')[$i]}")->delete();
+                $modelList->where('item_code', "{$this->request->getVar('item_code')[$i]}")->delete();
+            }
+            alert_move("삭제 되었습니다.", "http://godo.event.admin");
 
 
-        alert_move("삭제 되었습니다.", "http://godo.event.admin");
+
     }
 
 

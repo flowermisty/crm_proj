@@ -11,9 +11,9 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end"
                          style="line-height:81.59px;">
-                        <button class="btn btn-primary" onclick="selectAll(this)">전체선택</button>
+                        <button class="btn btn-primary" onclick="selectAll()" id="checkAll">전체선택</button>
                         <button class="btn btn-primary" onclick="location.href='<?=base_url('init');?>'">등록</button>
-                        <button class="btn btn-primary" type="button" onclick="document.getElementById('deleteForm').submit();">삭제</button>
+                        <button class="btn btn-primary" type="button" onclick="confirm_delCheck();">삭제</button>
 
                     </nav>
                 </div>
@@ -38,7 +38,7 @@
                             <tbody>
                             <?php foreach ($eventList as $row) : ?>
                                 <tr>
-                                    <td>&nbsp;&nbsp;<input type="checkbox" name="item_code[]" value="<?=$row['item_code']?>"></td>
+                                    <td>&nbsp;&nbsp;<input type="checkbox" name="item_code[]" value="<?=$row['item_code']?>" id="select"></td>
                                     <td>
                                         <a href="<?= base_url("update/{$row['item_code']}") ?>"><?= $row['event_name'] ?></a>
                                     </td>

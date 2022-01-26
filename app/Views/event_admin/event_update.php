@@ -8,7 +8,7 @@
         <div class="col-md-12 py-3 border" style="background:white;">
             <h5 class=""><b>기획팩 프로필 생성 / 수정</b></h5>
             <hr>
-            <form action="<?php echo base_url("update/$item_code"); ?>" method="post">
+            <form action="<?php echo base_url("update/$item_code"); ?>" method="post" id="updateForm">
                 <div class="form-row">
                     <div class="input-group col-md-6">
                         <input type="search" class="form-control rounded " placeholder="메뉴명, ERP코드 검색"
@@ -110,8 +110,8 @@
                     <hr class="input-group" style="float:right;">
                     <div class="btn-con" style="width:100%; float:right; line-height:47px;">
                         <div class="btn-wrap" style="float:right;">
-                            <button type="button" class="btn btn-secondary" style="">취소</button>
-                            <button type="submit" class="btn btn-secondary" style="">수정</button>
+                            <button type="reset" class="btn btn-secondary" style="">취소</button>
+                            <button type="button" class="btn btn-secondary" style="" onclick="confirm_updateCheck()">수정</button>
                         </div>
 
                     </div>

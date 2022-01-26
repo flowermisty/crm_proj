@@ -235,13 +235,46 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 
-function selectAll(selectAll)  {
-    const checkboxes
-        = document.querySelectorAll('input[type="checkbox"]');
+function selectAll() {
+    var select = document.querySelectorAll('input[type="checkbox"]');
+    var checked = select.checked;
+    var trans = document.getElementById('checkAll');
+    if (trans.innerText=="전체해제") {
+        select.forEach((select) => {
+            select.checked = false;
+            var trans = document.getElementById('checkAll');
+            trans.innerText = "전체선택";
+        })
+    }else{
+        select.forEach((select) => {
+            select.checked = true;
+            checked = select.checked;
+            if (checked == true) {
+                trans.innerText = "전체해제";
+            }
 
-    checkboxes.forEach((checkbox) => {
-        checkbox.checked = selectAll.checked
-    })
+        })
+    }
+
+}
+
+
+function confirm_delCheck(){
+
+    if(confirm('이벤트 리스트와 기획팩 구성품이 삭제 됩니다. 계속 진행 하시겠습니까?') == true){
+        document.getElementById('deleteForm').submit();
+    }else{
+        history.go(0);
+    }
+}
+
+function confirm_updateCheck(){
+
+    if(confirm('해당 기획팩 구성품이 변경 됩니다. 계속 진행 하시겠습니까?') == true){
+        document.getElementById('updateForm').submit();
+    }else{
+        history.go(0);
+    }
 }
 
 
