@@ -259,12 +259,22 @@ function selectAll() {
 }
 
 
+function confirm_insertCheck(){
+
+    if(confirm('작성하신 이벤트와 기획팩 구성품을 등록 하시겠습니까?') == true){
+        document.getElementById('insertForm').submit();
+    }else{
+        return false;
+    }
+}
+
+
 function confirm_delCheck(){
 
     if(confirm('이벤트 리스트와 기획팩 구성품이 삭제 됩니다. 계속 진행 하시겠습니까?') == true){
         document.getElementById('deleteForm').submit();
     }else{
-        history.go(0);
+        return false;
     }
 }
 
@@ -273,7 +283,7 @@ function confirm_updateCheck(){
     if(confirm('해당 기획팩 구성품이 변경 됩니다. 계속 진행 하시겠습니까?') == true){
         document.getElementById('updateForm').submit();
     }else{
-        history.go(0);
+        return false;
     }
 }
 
