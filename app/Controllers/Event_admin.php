@@ -100,7 +100,7 @@ class Event_admin extends BaseController
 
 
         echo view('event_admin/templates/header', $data);
-        echo view('event_admin/event_init');
+        echo view('event_admin/event_init_test');
         echo view('event_admin/templates/footer');
     }
 
@@ -224,6 +224,12 @@ class Event_admin extends BaseController
 
 
 
+    }
+
+    public function eventStep(){
+        echo view('event_admin/templates/header');
+        echo view('event_admin/event_step');
+        echo view('event_admin/templates/footer');
     }
 
 

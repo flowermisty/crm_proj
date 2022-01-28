@@ -35,6 +35,11 @@ $routes->get('/', 'Event_admin::index');
 $routes->match(['get','post'],'init','Event_admin::init');
 $routes->match(['get','post'],'update/(:segment)','Event_admin::update/$1');
 $routes->match(['get','post'],'delete','Event_admin::delete');
+$routes->match(['get','post'],'excel','ExcelController::index');
+$routes->match(['get','post'],'spreadsheet_format_download','ExcelController::spreadsheet_format_download');
+$routes->match(['get','post'],'spreadsheet_import','ExcelController::spreadsheet_import');
+$routes->match(['get','post'],'step','Event_admin::eventStep');
+
 
 
 /*
