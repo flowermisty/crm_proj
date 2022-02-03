@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layout Horizontal - Mazer Admin Dashboard</title>
+    <title>배냇밀몰 기획팩 등록 관리자 인터페이스</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -13,14 +13,25 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
 
     <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 
 <style>
+    ul,ol,li{
+        list-style: none !important;
+        text-decoration: none !important;
+    }
+    a{
+        text-decoration: none !important;
+    }
 
     body{
         font-family: 'Noto Sans KR', sans-serif;
@@ -44,6 +55,10 @@
     .dataTable-search{
         width: 100%;
         margin-left:1%;
+
+    }
+    .dataTable-container{
+        margin-top:1%;
 
     }
 

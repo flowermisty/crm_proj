@@ -32,7 +32,8 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Event_admin::index');
-$routes->match(['get','post'],'init','Event_admin::init');
+$routes->match(['get','post'],'init/(:segment)','Event_admin::init/$1');
+$routes->match(['get','post'],'eventRegist','Event_admin::eventRegist');
 $routes->match(['get','post'],'update/(:segment)','Event_admin::update/$1');
 $routes->match(['get','post'],'delete','Event_admin::delete');
 $routes->match(['get','post'],'excel','ExcelController::index');

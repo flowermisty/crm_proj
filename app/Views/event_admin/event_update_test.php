@@ -102,9 +102,7 @@
 
 <section class="testimonial py-4 h-100" id="testimonial">
     <div class="col-md-8 py-2" style="margin:auto;">
-        <?php foreach ($event_name as $row) : ?>
-        <h4 class="" style="margin-left:3%;"><b><?=$row['event_name']?></b></h4>
-        <?php endforeach; ?>
+        <h4 class="" style="margin-left:3%;"><b>이벤트 상세 프로필</b></h4>
         <hr>
     </div>
     <div class="tableAcor">
@@ -116,19 +114,21 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>단계</th>
-                                <th>Item Code</th>
+                                <th>선택</th>
+                                <th>이벤트 명</th>
+                                <th>상품코드</th>
 
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach ($eventList as $row) : ?>
                                 <tr>
+                                    <td>&nbsp;&nbsp;<input type="checkbox" name="item_code[]" value="<?=$row['item_code']?>" id="select"></td>
                                     <td>
-                                        <a href="<?= base_url("update/{$row['optionCode']}") ?>"><?= $row['optionCode'] ?></a>
+                                        <a href="<?= base_url("update/{$row['item_code']}") ?>"><?= $row['event_name'] ?></a>
                                     </td>
                                     <td>
-                                        <a href="<?= base_url("update/{$row['optionCode']}") ?>"><?= $row['optionCode'] ?></a>
+                                        <a href="<?= base_url("update/{$row['item_code']}") ?>"><?= $row['item_code'] ?></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -142,6 +142,7 @@
         <div class="table__cell">
             <div class="col-md-12 py-3 border" style="background:white; height:600px;">
 
+                <form action="<?php echo base_url('init'); ?>" method="post" id="insertForm">
                     <div class="form-row">
                         <div class="input-group col-md-12">
                             <input type="search" class="form-control rounded " placeholder="메뉴명, ERP코드 검색"
@@ -173,10 +174,16 @@
 
 
         <div class="table__cell">
-            <form action="<?php echo base_url("init/$event_code");?>" method="post" id="insertForm">
+
             <div class="col-md-12 py-3 border" style="background:white; height:600px;">
 
                 <div class="input-group col-md-12">
+
+                    <div class="input-group" style="height: 40px;">
+                        <span style="line-height: 38px;">세 트 이 름 &nbsp;: &nbsp;  </span>&nbsp;
+                        <input id="setName" name="setName" class="form-control" type="text"
+                               value="<?= set_value('setName') ?>">
+                    </div>
 
                     <div class="input-group py-1" style="height: 40px;">
                         <span style="line-height: 38px;">아이템 코드 : &nbsp;  </span>&nbsp;
@@ -185,8 +192,8 @@
                     </div>
                     <div class="input-group py-1" style="height: 40px;">
                         <span style="line-height: 38px;">이벤트 코드 : &nbsp;  </span>&nbsp;
-                        <input id="event_code" name="event_code" class="form-control"
-                               type="text" value="<?= $event_code ?>" >
+                        <input id="itemCode" name="itemCode" class="form-control"
+                               type="text" value="<?= set_value('itemCode') ?>">
                     </div>
 
 
@@ -228,7 +235,6 @@
                     </div>
 
                 </div>
-
                 <hr class="input-group" style="float:right;">
                 <div class="btn-con" style="width:100%; float:right; line-height:47px;">
                     <div class="btn-wrap" style="float:right;">
@@ -241,23 +247,20 @@
                 </div>
 
 
-
-
+                </form>
+                <?php if (isset($validation)): ?>
+                    <div class="alert alert-danger col-md-12" role="alert">
+                        <?= $validation->listErrors() ?>
+                    </div>
+                <?php endif; ?>
             </div>
-            </form>
-
         </div>
 
 
     </div>
-    <?php if (isset($validation)): ?>
-        <div class="alert alert-danger col-md-12" role="alert">
-            <?= $validation->listErrors() ?>
-        </div>
-    <?php endif; ?>
+
 
 </section>
-
 
 
 <?php

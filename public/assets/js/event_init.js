@@ -287,5 +287,14 @@ function confirm_updateCheck(){
     }
 }
 
+function confirm_event_check(){
+
+    if(confirm('이벤트를 등록하시겠습니까?') == true){
+        document.getElementById('eventRegist').submit();
+    }else{
+        return false;
+    }
+}
+
 
 

@@ -9,7 +9,7 @@ class EventListModel extends Model{
     protected $primaryKey = 'idx';
     protected $allowedFields = [
         'event_name',
-        'item_code',
+        'event_code',
         'regist_date',
 
     ];

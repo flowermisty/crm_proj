@@ -9,6 +9,7 @@ class EventModel extends Model{
     protected $primaryKey = 'idx';
     protected $allowedFields = [
         'optionCode',
+        'event_code',
         'orderDate',
         'erpCode',
         'menuName',

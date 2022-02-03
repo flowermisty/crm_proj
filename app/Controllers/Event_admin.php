@@ -19,7 +19,27 @@ class Event_admin extends BaseController
         echo view('event_admin/templates/footer');
     }
 
-    public function init()
+    public function eventRegist(){
+        $data = [];
+        helper(['form', 'alert']);
+        if ($this->request->getMethod() == 'post') {
+            $eventListModel = new EventListModel();
+
+            $eventData = [
+                'event_name' => $this->request->getVar('event_name'),
+                'event_code' => $this->request->getVar('event_code'),
+            ];
+            $dataResult = $eventListModel->save($eventData);
+
+            if ($dataResult) {
+                $session = session();
+                $session->setFlashdata('success', 'Successful Registration');
+                alert_move("등록 되었습니다.", "http://godo.event.admin");
+            }
+        }
+    }
+
+    public function init($event_code)
     {
         $data = [];
         $dataResult = [];
@@ -33,16 +53,16 @@ class Event_admin extends BaseController
         if ($this->request->getMethod() == 'post') {
             //let's do the validation here
             $rules = [
-                'setName' => 'required|min_length[3]|max_length[20]',
-                'itemCode' => 'required|min_length[10]|max_length[20]|is_unique[eventList.item_code]',
+                //'setName' => 'required|min_length[3]|max_length[20]',
+                'event_code' => 'required|min_length[10]|max_length[20]|',
                 'menuName' => 'required'
             ];
             $errors = [
-                'setName'=> [
-                    'required' => '세트이름은 필수입력 필드입니다.',
-                    'min_length' => '세트이름은 최소 3자 이상 이어야 합니다.',
-                    'max_length' => '세트이름은 최대 20자를 넘을수 없습니다.'
-                ],
+//                'setName'=> [
+//                    'required' => '세트이름은 필수입력 필드입니다.',
+//                    'min_length' => '세트이름은 최소 3자 이상 이어야 합니다.',
+//                    'max_length' => '세트이름은 최대 20자를 넘을수 없습니다.'
+//                ],
 
                 'itemCode'=> [
                     'required' => 'ItemCode는 필수입력 필드입니다.',
@@ -68,6 +88,7 @@ class Event_admin extends BaseController
 
                     $newData = [
                         'optionCode' => $this->request->getVar('itemCode'),
+                        'event_code' => $this->request->getVar('event_code'),
                         'menuName' => $this->request->getVar('menuName')[$i],
                         'erpCode' => $this->request->getVar('erpCode')[$i],
                         'ea' => $this->request->getVar('ea')[$i],
@@ -76,12 +97,12 @@ class Event_admin extends BaseController
                     $dataResult = $model->save($newData);
                 }
 
-                $newListData = [
-                    'event_name' => $this->request->getVar('setName'),
-                    'item_code' => $this->request->getVar('itemCode'),
-                ];
-
-                $modelList->save($newListData);
+//                $newListData = [
+//                    'event_name' => $this->request->getVar('setName'),
+//                    'item_code' => $this->request->getVar('itemCode'),
+//                ];
+//
+//                $modelList->save($newListData);
 
 
                 if ($dataResult) {
@@ -97,7 +118,14 @@ class Event_admin extends BaseController
 
             }
         }
-
+        $eventListModel = new EventListModel();
+        $eventModel->select('optionCode');
+        $eventModel->where('event_code',"$event_code");
+        $eventModel->groupBy('optionCode');
+        $queryList = $eventModel->findAll();
+        $data['eventList'] = $queryList;
+        $data['event_code'] = $event_code;
+        $data['event_name'] = $eventListModel->select('event_name')->where('event_code',"$event_code")->find();
 
         echo view('event_admin/templates/header', $data);
         echo view('event_admin/event_init_test');

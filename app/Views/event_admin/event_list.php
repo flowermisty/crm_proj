@@ -12,7 +12,8 @@
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end"
                          style="line-height:81.59px;">
                         <button class="btn btn-primary" onclick="selectAll()" id="checkAll">전체선택</button>
-                        <button class="btn btn-primary" onclick="location.href='<?=base_url('init');?>'">등록</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">등록
+                        </button>
                         <button class="btn btn-primary" type="button" onclick="confirm_delCheck();">삭제</button>
 
                     </nav>
@@ -22,14 +23,14 @@
         <section class="section">
             <div class="card">
                 <div class="card-body">
-                    <form action="<?=base_url('delete');?>" method="post" id="deleteForm">
+                    <form action="<?= base_url('delete'); ?>" method="post" id="deleteForm">
 
                         <table class="table table-striped" id="table1">
                             <thead>
                             <tr>
                                 <th>선택</th>
                                 <th>이벤트 명</th>
-                                <th>상품코드</th>
+                                <th>이벤트 코드</th>
                                 <th>최초 등록일</th>
                                 <th>최종 수정일</th>
 
@@ -38,18 +39,21 @@
                             <tbody>
                             <?php foreach ($eventList as $row) : ?>
                                 <tr>
-                                    <td>&nbsp;&nbsp;<input type="checkbox" name="item_code[]" value="<?=$row['item_code']?>" id="select"></td>
+                                    <td>&nbsp;&nbsp;<input type="checkbox" name="item_code[]"
+                                                           value="<?= $row['event_code'] ?>" id="select"></td>
                                     <td>
-                                        <a href="<?= base_url("update/{$row['item_code']}") ?>"><?= $row['event_name'] ?></a>
+                                        <a href="<?= base_url("init/{$row['event_code']}") ?>"><?= $row['event_name'] ?></a>
                                     </td>
                                     <td>
-                                        <a href="<?= base_url("update/{$row['item_code']}") ?>"><?= $row['item_code'] ?></a>
+                                        <a href="<?= base_url("init/{$row['event_code']}") ?>"><?= $row['event_code'] ?></a>
                                     </td>
                                     <td>
-                                        <span class="badge bg-success" style="width=100%;"><?= $row['regist_date'] ?></span>
+                                        <span class="badge bg-success"
+                                              style="width=100%;"><?= $row['regist_date'] ?></span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-danger" style="width=100%;"><?= $row['updated_at'] ?></span>
+                                        <span class="badge bg-danger"
+                                              style="width=100%;"><?= $row['updated_at'] ?></span>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -61,4 +65,40 @@
 
         </section>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">이벤트 등록</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="<?= base_url('eventRegist') ?>" id="eventRegist" method="post" name="eventRegist">
+                        <div class="form-group">
+                            <label for="event_name">이벤트명</label>
+                            <input type="text" class="form-control" name="event_name" id="event_name" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="event_code">이벤트코드</label>
+                            <input type="text" class="form-control" name="event_code" id="event_code" value="">
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-primary" onclick="confirm_event_check();">등록</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <?php
