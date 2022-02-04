@@ -10,6 +10,7 @@ class EventModel extends Model{
     protected $allowedFields = [
         'optionCode',
         'event_code',
+        'step',
         'orderDate',
         'erpCode',
         'menuName',

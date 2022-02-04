@@ -6,7 +6,7 @@
 <section class="testimonial py-5 h-100" id="testimonial">
     <div class="container">
         <div class="col-md-12 py-3 border" style="background:white;">
-            <h5 class=""><b>기획팩 프로필 생성 / 수정</b></h5>
+            <h5 class=""><b><?= $eventList['event_name']?> 상세 프로필</b></h5>
             <hr>
             <form action="<?php echo base_url("update/$item_code"); ?>" method="post" id="updateForm">
                 <div class="form-row">
@@ -49,7 +49,7 @@
                             <div class="input-group" style="height: 40px;">
                                 <span style="line-height: 38px;">Item Code : &nbsp;  </span>&nbsp;
                                 <input id="itemCode" name="itemCode" class="form-control"
-                                       type="text" value="<?= $eventList['item_code'] ?>">
+                                       type="text" value="<?= $item_code ?>">
                             </div>
 
 

@@ -33,13 +33,13 @@
                                 <th>이벤트 코드</th>
                                 <th>최초 등록일</th>
                                 <th>최종 수정일</th>
-
                             </tr>
                             </thead>
+
                             <tbody>
                             <?php foreach ($eventList as $row) : ?>
                                 <tr>
-                                    <td>&nbsp;&nbsp;<input type="checkbox" name="item_code[]"
+                                    <td>&nbsp;&nbsp;<input type="checkbox" name="event_code[]"
                                                            value="<?= $row['event_code'] ?>" id="select"></td>
                                     <td>
                                         <a href="<?= base_url("init/{$row['event_code']}") ?>"><?= $row['event_name'] ?></a>
@@ -62,14 +62,18 @@
                     </form>
                 </div>
             </div>
-
+            <?php if (isset($validation)): ?>
+                <div class="alert alert-danger col-md-12" role="alert">
+                    <?= $validation->listErrors() ?>
+                </div>
+            <?php endif; ?>
         </section>
     </div>
 
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -79,25 +83,27 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('eventRegist') ?>" id="eventRegist" method="post" name="eventRegist">
+                    <form action="<?= base_url('eventRegist') ?>" id="eventRegist" method="post" name="eventRegist" >
                         <div class="form-group">
                             <label for="event_name">이벤트명</label>
-                            <input type="text" class="form-control" name="event_name" id="event_name" value="">
+                            <input type="text" class="form-control" name="event_name" id="event_name" value=""  minlength="5" maxlength="20">
                         </div>
                         <div class="form-group">
                             <label for="event_code">이벤트코드</label>
-                            <input type="text" class="form-control" name="event_code" id="event_code" value="">
+                            <input type="text" class="form-control" name="event_code" id="event_code" value="" minlength="5" maxlength="20">
                         </div>
 
-
                     </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                     <button type="button" class="btn btn-primary" onclick="confirm_event_check();">등록</button>
                 </div>
+                </form>
             </div>
         </div>
+
     </div>
 
 

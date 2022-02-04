@@ -34,7 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Event_admin::index');
 $routes->match(['get','post'],'init/(:segment)','Event_admin::init/$1');
 $routes->match(['get','post'],'eventRegist','Event_admin::eventRegist');
-$routes->match(['get','post'],'update/(:segment)','Event_admin::update/$1');
+$routes->match(['get','post'],'update/(:any)','Event_admin::update/$1/$1');
 $routes->match(['get','post'],'delete','Event_admin::delete');
 $routes->match(['get','post'],'excel','ExcelController::index');
 $routes->match(['get','post'],'spreadsheet_format_download','ExcelController::spreadsheet_format_download');

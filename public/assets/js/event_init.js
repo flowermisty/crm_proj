@@ -290,10 +290,30 @@ function confirm_updateCheck(){
 function confirm_event_check(){
 
     if(confirm('이벤트를 등록하시겠습니까?') == true){
-        document.getElementById('eventRegist').submit();
+        var eventName = document.forms["eventRegist"]["event_name"].value;
+        var eventCode = document.forms["eventRegist"]["event_code"].value;
+        if(eventName==null || eventName==""){
+            alert("이벤트명은 필수입력 필드입니다.");
+            return false;
+        }
+        else if(eventCode==null || eventCode==""){
+            alert("이벤트코드는 필수입력 필드입니다.");
+            return false;
+        }else if(eventName.length < 5 || eventName.length > 20){
+            alert("이벤트명은 최소 5자 최대 20자로 작성하여야 합니다.");
+            return false;
+        }else if(eventCode.length < 5 || eventCode.length > 20){
+            alert("이벤트 코드는 최소 5자 최대 20자로 작성하여야 합니다.");
+            return false;
+        }else{
+            document.getElementById('eventRegist').submit();
+        }
     }else{
         return false;
     }
+
+
+
 }
 
 
