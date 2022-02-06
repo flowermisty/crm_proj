@@ -171,6 +171,7 @@ class Event_admin extends BaseController
         $dataResult = [];
         helper(['form', 'alert']);
         $data['item_code'] = $item_code;
+        $data['event_code'] = $event_code;
         $eventModel = new EventModel();
         $query = $eventModel->groupBy('menuName')->findAll();
         $data['eventModel'] = $query;
@@ -179,31 +180,33 @@ class Event_admin extends BaseController
             $data['eventList'] = $eventListModel->where("event_code", "$event_code")->first();
             //$eventListModel -> join('godoFreeEventMenuCalendarTemp','godoFreeEventMenuCalendarTemp.optionCode=eventList.item_code');
             $data['joinData'] = $eventModel->where('optionCode', "$item_code")->findAll();
+            $eventModel->where('event_code', "$event_code");
+            $eventModel->groupBy('optionCode');
+            $queryList = $eventModel->findAll();
+            $data['setList']=$queryList;
+            $data['step']=$eventModel->select("step")->where("optionCode","$item_code")->groupBy('optionCode')->find();
         }
 
         if ($this->request->getMethod() == 'post') {
             //let's do the validation here
             $rules = [
-                'setName' => 'required|min_length[3]|max_length[20]',
-                'itemCode' => 'required|min_length[10]|max_length[20]',
-                'menuName' => 'required'
+                'itemCode' => 'required|min_length[10]|max_length[20]|',
+                'event_code' => 'required|min_length[10]|max_length[20]|',
+                'menuName' => 'required',
+                'step'=> 'required'
             ];
             $errors = [
-                'setName' => [
-                    'required' => '세트이름은 필수입력 필드입니다.',
-                    'min_length' => '세트이름은 최소 3자 이상 이어야 합니다.',
-                    'max_length' => '세트이름은 최대 20자를 넘을수 없습니다.',
-
-                ],
 
                 'itemCode' => [
                     'required' => 'ItemCode는 필수입력 필드입니다.',
                     'min_length' => 'ItemCode는 최소 10자 이상 이어야 합니다.',
                     'max_length' => 'ItemCode는 최대 20자를 넘을수 없습니다.',
-
                 ],
                 'menuName' => [
                     'required' => '메뉴를 적어도 하나 이상 선택 하셔야 합니다.'
+                ],
+                'step' => [
+                    'required' => '단계는 필수 입력 필드 입니다.'
                 ],
 
             ];
@@ -213,7 +216,6 @@ class Event_admin extends BaseController
                 $data['validation'] = $this->validator;
             } else {
                 $model = new EventModel();
-                $modelList = new EventListModel();
 
                 $arr_lenth = $this->request->getVar('menuName');
                 $flag = false;
@@ -221,6 +223,8 @@ class Event_admin extends BaseController
 
                     $newData = [
                         'optionCode' => $this->request->getVar('itemCode'),
+                        'event_code' => $this->request->getVar('event_code'),
+                        'step' => $this->request->getVar('step'),
                         'menuName' => $this->request->getVar('menuName')[$i],
                         'erpCode' => $this->request->getVar('erpCode')[$i],
                         'ea' => $this->request->getVar('ea')[$i],
@@ -234,23 +238,13 @@ class Event_admin extends BaseController
 
                 }
 
-                $newListData = [
-                    'event_name' => $this->request->getVar('setName'),
-                    'item_code' => $this->request->getVar('itemCode'),
-                ];
-
-                $modelList->where("item_code", "$item_code")
-                    ->set($newListData)
-                    ->update();
-
-
                 if ($dataResult) {
                     $session = session();
                     $session->setFlashdata('success', 'Successful Registration');
-                    alert_move("수정 되었습니다.", "http://godo.event.admin");
+                    alert_move("수정 되었습니다.", "http://godo.event.admin/update/{$item_code}/{$event_code}");
 
                 } else {
-                    alert_move("수정에 실패하였습니다. 데이터에 오류가 있습니다.", "http://godo.event.admin/update/$item_code");
+                    alert_move("수정에 실패하였습니다. 데이터에 오류가 있습니다.", "http://godo.event.admin/update/{$item_code}/{$event_code}");
 
                 }
 
@@ -260,7 +254,7 @@ class Event_admin extends BaseController
 
 
         echo view('event_admin/templates/header', $data);
-        echo view('event_admin/event_update');
+        echo view('event_admin/event_update_test');
         echo view('event_admin/templates/footer');
     }
 

@@ -34,7 +34,7 @@
     }
 
     body{
-        font-family: 'Noto Sans KR', sans-serif;
+        font-family: 'Noto Sans KR' !important;
     }
 
     .main-navbar ul .menu-item{

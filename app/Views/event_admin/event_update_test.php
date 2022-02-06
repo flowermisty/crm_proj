@@ -1,104 +1,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="/assets/css/sweep.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="/assets/js/event_init.js"></script>
-
-<style>
-
-    body {
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-    }
-
-    .tableAcor {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-
-    }
-
-    .table__cell {
-        position: relative;
-        display: flex;
-        width: 20%;
-
-        transition: width 500ms cubic-bezier(0.2, 0, 0.2, 1);
-    }
-
-    .table__cell > * {
-        opacity: 0.4;
-    }
-
-    .table__cell:nth-child(1) {
-        background-color: #393a3a;
-    }
-
-    .table__cell:nth-child(2) {
-        background-color: #393a3a;
-    }
-
-    .table__cell:nth-child(3) {
-        background-color: #393a3a;
-    }
-
-    #menuTable > tr > td > button{
-        visibility: hidden;
-    }
-
-    .table__cell:nth-child(4) {
-        background-color: #EED974;
-    }
-
-    .table__cell:nth-child(5) {
-        background-color: #005397;
-    }
-
-    .table__cell:nth-child(1):hover {
-        width: 30%;
-    }
-
-    .table__cell:nth-child(1):hover > * {
-        opacity: 1;
-    }
-
-    .table__cell:nth-child(2):hover {
-        width: 30%;
-    }
-
-    .table__cell:nth-child(2):hover > * {
-        opacity: 1;
-    }
-
-    .table__cell:nth-child(3):hover {
-        width: 30%;
-    }
-
-    .table__cell:nth-child(3):hover > * {
-        opacity: 1;
-    }
-
-    .table__cell:nth-child(3):hover #menuTable > tr > td > button{
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .table__cell span {
-        opacity: 1;
-        transition: opacity 300ms cubic-bezier(0.7, 0, 0.7, 1);
-        transition-delay: 0ms;
-    }
-
-    .table__cell:hover span {
-        opacity: 1;
-        transition-delay: 300ms;
-    }
-
-    .container {
-
-    }
-</style>
+<script type="text/javascript" src="/assets/js/event_init.js"></script>
 
 <section class="testimonial py-4 h-100" id="testimonial">
     <div class="col-md-8 py-2" style="margin:auto;">
@@ -112,25 +15,26 @@
                     <div class="table-wrapper-scroll-y my-custom-scrollbar"
                          style="position: relative; width: 100%; height:500px; overflow: auto;">
                         <table class="table table-bordered table-striped">
-                            <thead>
+                            <thead align="center">
                             <tr>
-                                <th>선택</th>
-                                <th>이벤트 명</th>
-                                <th>상품코드</th>
-
+                                <th>단계</th>
+                                <th>ITEM CODE</th>
+                                <th>삭제</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <?php foreach ($eventList as $row) : ?>
-                                <tr>
-                                    <td>&nbsp;&nbsp;<input type="checkbox" name="item_code[]" value="<?=$row['item_code']?>" id="select"></td>
-                                    <td>
-                                        <a href="<?= base_url("update/{$row['item_code']}") ?>"><?= $row['event_name'] ?></a>
-                                    </td>
-                                    <td>
-                                        <a href="<?= base_url("update/{$row['item_code']}") ?>"><?= $row['item_code'] ?></a>
-                                    </td>
-                                </tr>
+                            <tbody align="center">
+                                <?php foreach ($setList as $row) : ?>
+                                    <tr>
+                                        <td>
+                                            <a href="<?= base_url("update/{$row['optionCode']}/$event_code") ?>"><?= $row['step'] ?></a>
+                                        </td>
+                                        <td>
+                                            <a href="<?= base_url("update/{$row['optionCode']}/$event_code") ?>"><?= $row['optionCode'] ?></a>
+                                        </td>
+                                        <td>
+                                            <a href="<?= base_url("update/{$row['optionCode']}/$event_code") ?>"><?= $row['optionCode'] ?></a>
+                                        </td>
+                                    </tr>
                             <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -142,7 +46,7 @@
         <div class="table__cell">
             <div class="col-md-12 py-3 border" style="background:white; height:600px;">
 
-                <form action="<?php echo base_url('init'); ?>" method="post" id="insertForm">
+                <form action="<?php echo base_url("update/{$item_code}/{$event_code}"); ?>" method="post" id="updateForm">
                     <div class="form-row">
                         <div class="input-group col-md-12">
                             <input type="search" class="form-control rounded " placeholder="메뉴명, ERP코드 검색"
@@ -180,20 +84,20 @@
                 <div class="input-group col-md-12">
 
                     <div class="input-group" style="height: 40px;">
-                        <span style="line-height: 38px;">세 트 이 름 &nbsp;: &nbsp;  </span>&nbsp;
-                        <input id="setName" name="setName" class="form-control" type="text"
-                               value="<?= set_value('setName') ?>">
+                        <span style="line-height: 38px;">단 계 입 력 : &nbsp; </span>&nbsp;
+                        <input id="step" name="step" class="form-control" type="text"
+                               value="<?=$step[0]['step']?>"  style="margin-left: 4.5px;">
                     </div>
 
                     <div class="input-group py-1" style="height: 40px;">
                         <span style="line-height: 38px;">아이템 코드 : &nbsp;  </span>&nbsp;
                         <input id="itemCode" name="itemCode" class="form-control"
-                               type="text" value="<?= set_value('itemCode') ?>">
+                               type="text" value="<?= $item_code ?>" readonly>
                     </div>
                     <div class="input-group py-1" style="height: 40px;">
                         <span style="line-height: 38px;">이벤트 코드 : &nbsp;  </span>&nbsp;
-                        <input id="itemCode" name="itemCode" class="form-control"
-                               type="text" value="<?= set_value('itemCode') ?>">
+                        <input id="event_code" name="event_code" class="form-control"
+                               type="text" value="<?= $eventList['event_code']?>" readonly>
                     </div>
 
 
@@ -210,7 +114,22 @@
                                 </tr>
                                 </thead>
                                 <tbody id="menuTable">
+                                <?php $index=1; ?>
+                                <?php foreach ($joinData as $row) : ?>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><input type="hidden" name="menuName[]" value="<?=$row['menuName']?>"><?=$row['menuName']?></td>
+                                        <td><input type="hidden" name="erpCode[]" value="<?=$row['erpCode']?>"><?=$row['erpCode']?></td>
+                                        <td id="quantity<?=$index?>">
+                                            <span><?=$row['ea']?></span>
+                                            <button type="button" class="btn-primary btn btn-sm" id="minus<?=$index?>" style="width: 27px; float: right;">-</button>
+                                            <button type="button" class="btn-primary btn btn-sm" id="plus<?=$index?>" style="float: right; margin-right: 5px;">+</button>
+                                            <input type="hidden" name="ea[]" value="">
+                                        </td>
 
+                                    </tr>
+                                    <?php $index++;?>
+                                <?php endforeach;?>
 
                                 </tbody>
                             </table>
@@ -239,15 +158,16 @@
                 <div class="btn-con" style="width:100%; float:right; line-height:47px;">
                     <div class="btn-wrap" style="float:right;">
                         <button type="button" class="btn btn-secondary" style="">취소</button>
-                        <button type="button" class="btn btn-secondary" style=""
-                                onclick="confirm_insertCheck();">등록
-                        </button>
+                        <button type="button" class="btn btn-secondary" style="" onclick="confirm_updateCheck()">수정</button>
+
+
                     </div>
 
                 </div>
 
 
                 </form>
+
                 <?php if (isset($validation)): ?>
                     <div class="alert alert-danger col-md-12" role="alert">
                         <?= $validation->listErrors() ?>
