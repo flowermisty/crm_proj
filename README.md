@@ -1,4 +1,4 @@
-# ![](../../Desktop/logo_big.png) 
+# ![logo_big](/uploads/1675ec4d36cd821d7dd20e378a46387b/logo_big.png) 
 ## 배냇밀몰 기획팩 관리자 인터페이스 설계 / 프로그램 설명
 
 ## 목차
