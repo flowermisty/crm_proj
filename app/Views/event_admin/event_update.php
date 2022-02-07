@@ -1,3 +1,4 @@
+<?php if (defined('BASEPATH')) exit('No direct script access allowed');?>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="/assets/js/event_init.js"></script>

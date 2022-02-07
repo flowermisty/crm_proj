@@ -4,14 +4,14 @@ namespace App\Controllers;
 
 use App\Models\EventListModel;
 use App\Models\EventModel;
-
+if (defined('BASEPATH')) exit('No direct script access allowed');
 class Event_admin extends BaseController
 {
     public function index()
     {
         $eventListModel = new EventListModel();
-        $query = $eventListModel->orderBy('idx', "desc")->findAll();
-        $data['eventList'] = $query;
+        $queryList = $eventListModel->orderBy('idx', "desc")->findAll();
+        $data['eventList'] = $queryList;
 
 
         echo view('event_admin/templates/header');
@@ -215,8 +215,17 @@ class Event_admin extends BaseController
             if (!$this->validate($rules, $errors)) {
                 $data['validation'] = $this->validator;
             } else {
-                $model = new EventModel();
+                $modelList = new EventListModel();
+                $modelList->select("idx")->where("event_code","{$this->request->getVar('event_code')}");
+                $id = $modelList->first();
+                $today = date('Y-m-d');
+                $updated_at=[
+                    'idx'=>$id,
+                    'updated_at'=>$today
+                ];
 
+
+                $model = new EventModel();
                 $arr_lenth = $this->request->getVar('menuName');
                 $flag = false;
                 for ($i = 0; $i < count($arr_lenth); $i++) {
@@ -234,8 +243,7 @@ class Event_admin extends BaseController
                         $flag = true;
                     }
                     $dataResult = $model->save($newData);
-
-
+                    $modelList->save($updated_at);
                 }
 
                 if ($dataResult) {

@@ -1,3 +1,4 @@
+<?php if (defined('BASEPATH')) exit('No direct script access allowed');?>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" href="/assets/css/sweep.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -31,6 +32,7 @@
                                         <td>
                                             <a href="<?= base_url("update/{$row['optionCode']}/$event_code") ?>"><?= $row['optionCode'] ?></a>
                                         </td>
+
 
                                     </tr>
                             <?php endforeach; ?>

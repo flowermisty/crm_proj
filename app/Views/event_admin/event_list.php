@@ -1,3 +1,5 @@
+<?php if (defined('BASEPATH')) exit('No direct script access allowed');?>
+
 <script src="/assets/js/event_init.js"></script>
 <div id="main" class="col-md-8" style="margin:auto;">
     <div class="page-heading">
@@ -48,12 +50,12 @@
                                         <a href="<?= base_url("init/{$row['event_code']}") ?>"><?= $row['event_code'] ?></a>
                                     </td>
                                     <td>
-                                        <span class="badge bg-success"
-                                              style="width=100%;"><?= $row['regist_date'] ?></span>
+                                        <h5><span class="badge bg-success "
+                                              style="width=100%;"><?= $row['regist_date'] ?></span></h5>
                                     </td>
                                     <td>
-                                        <span class="badge bg-danger"
-                                              style="width=100%;"><?= $row['updated_at'] ?></span>
+                                        <h5><span class="badge bg-danger "
+                                              style="width=100%;"><?= $row['updated_at'] ?></span></h5>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
