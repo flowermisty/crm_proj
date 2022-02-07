@@ -261,8 +261,22 @@ class Event_admin extends BaseController
     public function delete()
     {
         helper(['form', 'alert']);
+        $deletePack = $this->request->getVar('item_code');
+        if($this->request->getMethod() == 'post' && $deletePack){
+            $model = new EventModel();
+            $deleteData = [
+                'item_code' => $this->request->getVar('item_code'),
+            ];
+            $model->where('optionCode', "{$this->request->getVar('item_code')}")->delete();
+            alert_move("삭제 되었습니다.", "http://godo.event.admin/init/{$this->request->getVar('event_delete')}");
+            return;
+        }
+
+
         $arr_lenth = $this->request->getVar('event_code');
+
         $modelList = new EventListModel();
+
         for ($i = 0; $i < count($arr_lenth); $i++) {
             $deleteData = [
                 'event_code' => $this->request->getVar('event_code')[$i],

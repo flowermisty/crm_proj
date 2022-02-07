@@ -155,7 +155,7 @@
                     <hr class="input-group" style="float:right;">
                     <div class="btn-con" style="width:100%; float:right; line-height:47px;">
                         <div class="btn-wrap" style="float:right;">
-                            <button type="button" class="btn btn-secondary" style="">취소</button>
+                            <button type="button" class="btn btn-secondary" style="" onclick="location.href='http://godo.event.admin/'">취소</button>
                             <button type="button" class="btn btn-secondary" style=""
                                     onclick="confirm_insertCheck();">등록
                             </button>

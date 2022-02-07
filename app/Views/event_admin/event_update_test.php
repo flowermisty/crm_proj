@@ -17,23 +17,21 @@
                         <table class="table table-bordered table-striped">
                             <thead align="center">
                             <tr>
-                                <th>단계</th>
+                                <th>단계 / 패키지 구분 </th>
                                 <th>ITEM CODE</th>
-                                <th>삭제</th>
                             </tr>
                             </thead>
                             <tbody align="center">
                                 <?php foreach ($setList as $row) : ?>
                                     <tr>
+
                                         <td>
                                             <a href="<?= base_url("update/{$row['optionCode']}/$event_code") ?>"><?= $row['step'] ?></a>
                                         </td>
                                         <td>
                                             <a href="<?= base_url("update/{$row['optionCode']}/$event_code") ?>"><?= $row['optionCode'] ?></a>
                                         </td>
-                                        <td>
-                                            <a href="<?= base_url("update/{$row['optionCode']}/$event_code") ?>"><?= $row['optionCode'] ?></a>
-                                        </td>
+
                                     </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -157,8 +155,9 @@
                 <hr class="input-group" style="float:right;">
                 <div class="btn-con" style="width:100%; float:right; line-height:47px;">
                     <div class="btn-wrap" style="float:right;">
-                        <button type="button" class="btn btn-secondary" style="">취소</button>
+                        <button type="button" class="btn btn-secondary" style="" onclick="location.href='http://godo.event.admin/'">취소</button>
                         <button type="button" class="btn btn-secondary" style="" onclick="confirm_updateCheck()">수정</button>
+                        <button type="button" class="btn btn-secondary" style="" onclick="confirm_deletePackCheck()">삭제</button>
 
 
                     </div>
@@ -166,6 +165,11 @@
                 </div>
 
 
+                </form>
+
+                <form action="<?=base_url('delete')?>" name="deletePack" id="deletePack" method="post">
+                    <input type="hidden" name="item_code" value="<?= $item_code ?>">
+                    <input type="hidden" name="event_delete" value="<?= $eventList['event_code']?>">
                 </form>
 
                 <?php if (isset($validation)): ?>

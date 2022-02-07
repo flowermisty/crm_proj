@@ -147,7 +147,7 @@
                         <li class="menu-item active">
                             <a href="<?=base_url('init')?>" class='menu-link'>
                                 <i class="bi bi-grid-1x2-fill"></i>
-                                <span>기획팩 등록</span>
+                                <span>엑셀자료 일괄 업로드</span>
                             </a>
                         </li>
 

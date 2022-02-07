@@ -316,5 +316,13 @@ function confirm_event_check(){
 
 }
 
+function confirm_deletePackCheck(){
+    if(confirm('해당 구성품 패키지가  삭제 됩니다. 계속 진행 하시겠습니까?') == true){
+        document.getElementById('deletePack').submit();
+    }else{
+        return false;
+    }
+}
+
 
 
