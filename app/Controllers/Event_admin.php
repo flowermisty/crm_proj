@@ -173,6 +173,8 @@ class Event_admin extends BaseController
         $data['item_code'] = $item_code;
         $data['event_code'] = $event_code;
         $eventModel = new EventModel();
+        $eventListModel = new EventListModel();
+        $data['event_name'] = $eventListModel->select('event_name')->where('event_code', "$event_code")->find();
         $query = $eventModel->groupBy('menuName')->findAll();
         $data['eventModel'] = $query;
         if (!$item_code == "") {
@@ -244,11 +246,17 @@ class Event_admin extends BaseController
                     }
                     $dataResult = $model->save($newData);
                     $modelList->save($updated_at);
+                    $session = session();
+                    $s_item_code=[
+                        'item_code'=>$this->request->getVar('itemCode')
+                    ];
+                    $session->set($s_item_code);
                 }
 
                 if ($dataResult) {
                     $session = session();
                     $session->setFlashdata('success', 'Successful Registration');
+
                     alert_move("수정 되었습니다.", "http://godo.event.admin/update/{$item_code}/{$event_code}");
 
                 } else {

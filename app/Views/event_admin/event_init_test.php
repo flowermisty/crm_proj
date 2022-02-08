@@ -6,10 +6,10 @@
 
 <section class="testimonial py-4 h-100" id="testimonial">
     <div class="col-md-8 py-2" style="margin:auto;">
-        <?php foreach ($event_name as $row) : ?>
+
             <h4 class="" style="margin-left:3%;">
-                <b><?= $row['event_name'] ?></b></h4>
-        <?php endforeach; ?>
+                <b style="font-style:oblique; color:#435ebe" ><?= $event_name[0]['event_name'] ?>_상세 프로필 등록</b></h4>
+
 
         <hr>
 
@@ -86,7 +86,7 @@
 
                     <div class="input-group col-md-12">
 
-                        <div class="input-group py-1" style="height: 40px; text-indent:6px;">
+                        <div class="input-group py-1" style="height: 40px; text-indent:5px;">
                             <span style="line-height: 38px;">단 계 입 력 : &nbsp; </span>
                             <input id="step" name="step" class="form-control"
                                    type="text" value="<?= set_value('step') ?>" style="margin-left: 4.5px;">
@@ -117,11 +117,15 @@
                                         <th>수량</th>
                                     </tr>
 
-                                    <?php if (isset($validation)): ?>
-                                        <tr class="alert alert-danger col-md-12" role="alert">
-                                            <th colspan="4"><?= $validation->listErrors() ?></th>
-                                        </tr>
-                                    <?php endif; ?>
+                                    <tr>
+                                        <?php if (isset($validation)): ?>
+                                            <div class="alert alert-danger col-md-12" role="alert">
+                                                <?= $validation->listErrors() ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </tr>
+
+
 
                                     </thead>
                                     <tbody id="menuTable">
@@ -157,7 +161,7 @@
                         <div class="btn-wrap" style="float:right;">
                             <button type="button" class="btn btn-secondary" style="" onclick="location.href='http://godo.event.admin/'">취소</button>
                             <button type="button" class="btn btn-secondary" style=""
-                                    onclick="confirm_insertCheck();">등록
+                                    onclick="confirm_insertCheck();">저장
                             </button>
                         </div>
 
