@@ -19,6 +19,12 @@ class Event_admin extends BaseController
         echo view('event_admin/templates/footer');
     }
 
+    public function getEventList(){
+        $eventListModel = new EventListModel();
+        $data['eventList'] = $eventListModel->findAll();
+        return $this->response->setJSON($data);
+    }
+
     public function eventRegist()
     {
         $data = [];
@@ -62,14 +68,19 @@ class Event_admin extends BaseController
                 $eventListModel->where('event_name', "{$eventData['event_name']}");
                 $count_event_name = $eventListModel->countAllResults();
                 if ($count_event_code != 0 || $count_event_name !=0 ) {
-                    alert_move("동일한 이벤트 코드 또는 이벤트명이 이미 존재합니다.", "http://godo.event.admin");
+                    $duplicate = ['status'=>'fail'];
+                    return $this->response->setJSON($duplicate);
+                    /*alert_move("동일한 이벤트 코드 또는 이벤트명이 이미 존재합니다.", "http://godo.event.admin");*/
                 } else {
-                    $dataResult = $eventListModel->save($eventData);
-                    if ($dataResult) {
+                    $eventListModel->save($eventData);
+                    return $this->response->setJSON($eventData);
+
+
+                    /*if ($dataResult) {
                         $session = session();
                         $session->setFlashdata('success', 'Successful Registration');
                         alert_move("등록 되었습니다.", "http://godo.event.admin");
-                    }
+                    }*/
                 }
 
 
@@ -299,8 +310,10 @@ class Event_admin extends BaseController
             ];
 
             $modelList->where('event_code', "{$this->request->getVar('event_code')[$i]}")->delete();
+            $deleteSuccess = ['status'=>'success'];
+            return $this->response->setJSON($deleteSuccess);
         }
-        alert_move("삭제 되었습니다.", "http://godo.event.admin");
+
 
 
     }

@@ -1,8 +1,3 @@
-<?php if (defined('BASEPATH')) exit('No direct script access allowed');?>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" href="/assets/css/sweep.css">
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="/assets/js/event_init.js"></script>
 
 <section class="testimonial py-4 h-100" id="testimonial">
     <div class="col-md-8 py-2" style="margin:auto;">

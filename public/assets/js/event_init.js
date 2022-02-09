@@ -272,7 +272,28 @@ function confirm_insertCheck(){
 function confirm_delCheck(){
 
     if(confirm('이벤트 리스트와 기획팩 구성품이 삭제 됩니다. 계속 진행 하시겠습니까?') == true){
-        document.getElementById('deleteForm').submit();
+        var eventCode = [];
+
+        $("input:checkbox[name='event_code\[\]']:checked").each(function(i){
+            eventCode.push($(this).val());
+        });
+        var param ={event_code:eventCode};
+
+        $.ajax({
+            type: "POST",
+            url: "/delete",
+            data: param,
+            success: function(response){
+                if(response.status == 'success'){
+                    alert('삭제 되었습니다.');
+                    $('.eventListData').html("");
+                    load_event();
+                }
+
+
+            }
+        });
+        /*document.getElementById('deleteForm').submit();*/
     }else{
         return false;
     }
@@ -282,6 +303,7 @@ function confirm_updateCheck(){
 
     if(confirm('해당 기획팩 구성품이 변경 됩니다. 계속 진행 하시겠습니까?') == true){
         document.getElementById('updateForm').submit();
+
     }else{
         return false;
     }
@@ -306,7 +328,26 @@ function confirm_event_check(){
             alert("이벤트 코드는 최소 5자 최대 20자로 작성하여야 합니다.");
             return false;
         }else{
-            document.getElementById('eventRegist').submit();
+            $.ajax({
+               type: "POST",
+               url: "/eventRegist",
+               data:{event_name:eventName, event_code:eventCode},
+               success: function(response){
+                   $('#exampleModalCenter').modal('hide');
+                   $('.close').click();
+
+                   if(response.status == 'fail'){
+                       alert('동일한 이벤트 또는 코드명이 이미 존재합니다.')
+                   }else{
+                       alert('등록 되었습니다.');
+                       $('.eventListData').html("");
+                       load_event()
+                   }
+
+
+               }
+            });
+            /*document.getElementById('eventRegist').submit();*/
         }
     }else{
         return false;
@@ -314,6 +355,24 @@ function confirm_event_check(){
 
 
 
+}
+
+function load_event(){
+    $.ajax({
+       type:"GET",
+       url:"/getEventList",
+       success:function(response){
+           $.each(response.eventList, function(key,value){
+               $('.eventListData').append('<tr>' +
+                   '<td> <input type="checkbox" name="event_code[]" value="'+value['event_code']+'" id="select"></td>' +
+                   '<td><a href="/init/'+value['event_code']+'">'+value['event_name']+'</a></td>'+
+                   '<td><a href="/init/'+value['event_code']+'">'+value['event_code']+'</a></td>'+
+                   '<td><h5><span class="badge bg-success "style="width=100%;">'+value['regist_date']+'</span></h5></td>'+
+                   '<td><h5><span class="badge bg-danger "style="width=100%;">'+value['updated_at']+'</span></h5></td>'+
+                   '</tr>');
+           });
+       }
+    });
 }
 
 function confirm_deletePackCheck(){

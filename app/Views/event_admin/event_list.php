@@ -1,6 +1,9 @@
-<?php if (defined('BASEPATH')) exit('No direct script access allowed');?>
+<style>
+    .dataTables-empty{
+        display: none;
+    }
+</style>
 
-<script src="/assets/js/event_init.js"></script>
 <div id="main" class="col-md-8" style="margin:auto;">
     <div class="page-heading">
         <div class="page-title">
@@ -38,27 +41,8 @@
                             </tr>
                             </thead>
 
-                            <tbody>
-                            <?php foreach ($eventList as $row) : ?>
-                                <tr>
-                                    <td>&nbsp;&nbsp;<input type="checkbox" name="event_code[]"
-                                                           value="<?= $row['event_code'] ?>" id="select"></td>
-                                    <td>
-                                        <a href="<?= base_url("init/{$row['event_code']}") ?>"><?= $row['event_name'] ?></a>
-                                    </td>
-                                    <td>
-                                        <a href="<?= base_url("init/{$row['event_code']}") ?>"><?= $row['event_code'] ?></a>
-                                    </td>
-                                    <td>
-                                        <h5><span class="badge bg-success "
-                                              style="width=100%;"><?= $row['regist_date'] ?></span></h5>
-                                    </td>
-                                    <td>
-                                        <h5><span class="badge bg-danger "
-                                              style="width=100%;"><?= $row['updated_at'] ?></span></h5>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+                            <tbody class="eventListData">
+
                             </tbody>
                         </table>
                     </form>
@@ -73,7 +57,7 @@
     </div>
 
 
-    <!-- Modal -->
+    <!-- 이벤트 등록 모달 Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -100,7 +84,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-primary" onclick="confirm_event_check();">등록</button>
+                    <button type="button" class="btn btn-primary event_save">등록</button>
                 </div>
                 </form>
             </div>
@@ -108,5 +92,18 @@
 
     </div>
 
+    <script>
+        $(document).ready(function(){
+           $(document).on('click', '.event_save', function (){
+                 confirm_event_check();
+           });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            load_event();
+        });
+    </script>
 
 <?php
