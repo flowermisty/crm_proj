@@ -71,15 +71,16 @@
                 <div class="modal-body">
                     <form action="<?= base_url('eventRegist') ?>" id="eventRegist" method="post" name="eventRegist" >
                         <div class="form-group">
-                            <label for="event_name">이벤트명</label>
+                            <label for="event_name">이벤트명</label> <span id = "error_event_name" class="text-danger ms-3"></span>
                             <input type="text" class="form-control" name="event_name" id="event_name" value=""  minlength="5" maxlength="20">
                         </div>
                         <div class="form-group">
-                            <label for="event_code">이벤트코드</label>
+                            <label for="event_code">이벤트코드</label> <span id = "error_event_code" class="text-danger ms-3"></span>
                             <input type="text" class="form-control" name="event_code" id="event_code" value="" minlength="5" maxlength="20">
                         </div>
 
                     </form>
+                    <span id = "error_duplicate" class="text-danger ms-3">
 
                 </div>
                 <div class="modal-footer">

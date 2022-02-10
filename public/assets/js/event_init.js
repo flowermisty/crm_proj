@@ -95,8 +95,12 @@ function menuAddRow() {
             clickEventPlus.addEventListener('click', function () {
                 let count = clickEventPlus.parentElement.textContent[0];
                 count = parseInt(count) + 1;
+                if (count > 10) {
+                    alert('수량은 10개를 초과할 수 없습니다.');
+                    count = 10;
+                }
                 clickEventPlus.parentElement.children[0].innerText = count.toString();
-                addInputEa.value = addCount.innerText;
+                clickEventPlus.parentElement.children[3].value = clickEventPlus.parentElement.children[0].innerText;
             });
 
             let clickEventMinus = document.getElementById("minus" + (j - 1));
@@ -108,7 +112,7 @@ function menuAddRow() {
                     count = 1;
                 }
                 clickEventMinus.parentElement.children[0].innerText = count.toString();
-                addInputEa.value = addCount.innerText;
+                clickEventPlus.parentElement.children[3].value = clickEventMinus.parentElement.children[0].innerText;
             });
 
 
@@ -137,16 +141,19 @@ function menuCheckDeleteRow() {
 
             var delMenuStr = deleteMenu.join(",");
             if (j == 0) {
-                confirm("선택하신 " + "[" + delMenuStr + "]" + "을(를) 삭제 하시겠습니까?");
+
+                if ( confirm("선택하신 " + "[" + delMenuStr + "]" + "을(를) 삭제 하시겠습니까?")) {
+                    menuTable.deleteRow(i);
+                    rowCnt--;
+                    i--;
+
+                }else{
+                    return false;
+                }
             }
             j++;
 
-            if (confirm) {
-                menuTable.deleteRow(i);
-                rowCnt--;
-                i--;
 
-            }
         }
 
         row.cells[3].id = "quantity" + (i + 1);
@@ -194,6 +201,43 @@ function filter() {
     }
 }
 
+function buttonClickAddEvent(){
+    var menuTable = document.getElementById("menuTable");
+
+    for (let i = 1; i <= menuTable.rows.length; i++) {
+        let clickEventPlus = document.getElementById("plus" + (i));
+        var hiddenEa = clickEventPlus.parentElement.children[3];
+        hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
+        clickEventPlus.addEventListener('click', function () {
+            let count = clickEventPlus.parentElement.children[0].textContent;
+
+            count = parseInt(count) + 1;
+            if (count > 10) {
+                alert('수량은 10개를 초과할 수 없습니다.');
+                count = 10;
+            }
+            clickEventPlus.parentElement.children[0].innerText = count.toString();
+            var hiddenEa = clickEventPlus.parentElement.children[3];
+            hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
+        });
+
+        let clickEventMinus = document.getElementById("minus" + (i));
+
+
+        clickEventMinus.addEventListener('click', function () {
+            let count = clickEventMinus.parentElement.children[0].textContent;
+            count = parseInt(count) - 1;
+            if (count < 1) {
+                alert("등록 수량은 0이 될 수 없습니다.")
+                count = 1;
+            }
+            clickEventMinus.parentElement.children[0].innerText = count.toString();
+            var hiddenEa = clickEventPlus.parentElement.children[3];
+            hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
+
+        });
+    }
+}
 
 window.addEventListener('DOMContentLoaded', function () {
     let menuTable = document.getElementById("menuTable");
@@ -315,17 +359,37 @@ function confirm_event_check(){
         var eventName = document.forms["eventRegist"]["event_name"].value;
         var eventCode = document.forms["eventRegist"]["event_code"].value;
         if(eventName==null || eventName==""){
-            alert("이벤트명은 필수입력 필드입니다.");
+            var error_event_name = "이벤트명은 필수입력 필드 입니다."
+            document.getElementById('error_event_name').innerText = error_event_name;
+            document.getElementById('event_name').focus();
+            window.addEventListener("keyup",(e)=>{
+                document.getElementById('error_event_name').innerText = "";
+            });
             return false;
         }
         else if(eventCode==null || eventCode==""){
-            alert("이벤트코드는 필수입력 필드입니다.");
+            var error_event_code = "이벤트코드는 필수입력 필드 입니다."
+            document.getElementById('error_event_code').innerText = error_event_code;
+            document.getElementById('event_code').focus();
+            window.addEventListener("keyup",(e)=>{
+                document.getElementById('error_event_code').innerText = "";
+            });
             return false;
         }else if(eventName.length < 5 || eventName.length > 20){
-            alert("이벤트명은 최소 5자 최대 20자로 작성하여야 합니다.");
+            var error_event_name = "이벤트명은 최소 5자 최대 20자로 작성하여야 합니다."
+            document.getElementById('error_event_name').innerText = error_event_name;
+            document.getElementById('event_name').focus();
+            window.addEventListener("keyup",(e)=>{
+                document.getElementById('error_event_name').innerText = "";
+            });
             return false;
         }else if(eventCode.length < 5 || eventCode.length > 20){
-            alert("이벤트 코드는 최소 5자 최대 20자로 작성하여야 합니다.");
+            var error_event_code = "이벤트 코드는 최소 5자 최대 20자로 작성하여야 합니다."
+            document.getElementById('error_event_code').innerText = error_event_code;
+            document.getElementById('event_code').focus();
+            window.addEventListener("keyup",(e)=>{
+                document.getElementById('error_event_code').innerText = "";
+            });
             return false;
         }else{
             $.ajax({
@@ -333,12 +397,17 @@ function confirm_event_check(){
                url: "/eventRegist",
                data:{event_name:eventName, event_code:eventCode},
                success: function(response){
-                   $('#exampleModalCenter').modal('hide');
-                   $('.close').click();
 
                    if(response.status == 'fail'){
-                       alert('동일한 이벤트 또는 코드명이 이미 존재합니다.')
+                       var error_duplicate = "데이터 중복 에러 : 동일한 이벤트명 또는 코드명이 이미 존재합니다.";
+                       document.getElementById('error_duplicate').innerText = error_duplicate;
+                       window.addEventListener("keyup",(e)=>{
+                           document.getElementById('error_duplicate').innerText = "";
+                       });
+                       return false;
                    }else{
+                       $('#exampleModalCenter').modal('hide');
+                       $('.close').click();
                        alert('등록 되었습니다.');
                        $('.eventListData').html("");
                        load_event()
@@ -375,12 +444,53 @@ function load_event(){
     });
 }
 
+
 function confirm_deletePackCheck(){
     if(confirm('해당 구성품 패키지가  삭제 됩니다. 계속 진행 하시겠습니까?') == true){
         document.getElementById('deletePack').submit();
     }else{
         return false;
     }
+}
+
+function get_event_profile(itemCode){
+    var event_code = document.getElementById("event_code").value;
+    var item_code = itemCode;
+    var index = 1;
+    $.ajax({
+        type: "GET",
+        url: "/update/"+item_code+"/"+event_code,
+        success: function(response){
+            $('.item_save').hide();
+            $('.item_update').show();
+            $('.item_delete').show();
+            $('#menuTable').html("");
+            $.each(response.joinData, function(key,value){
+                $('#step').val(value['step']);
+                $('#itemCode').val(value['optionCode']);
+                $('#event_code').val(value['event_code']);
+                $('#menuTable').append('<tr>' +
+                    '<td><input type="checkbox"></td>' +
+                    '<td><input type="hidden" name="menuName[]" value="'+value['menuName']+'">'+value['menuName']+'</td>'+
+                    '<td><input type="hidden" name="erpCode[]" value="'+value['erpCode']+'">'+value['erpCode']+'</td>'+
+                    '<td id="quantity'+index+'">'+
+                    '<span>'+value['ea']+'</span>'+
+                    '<button type="button" class="btn-primary btn btn-sm" id="minus'+index+'" style="width: 27px; float: right;">-</button>'+
+                    '<button type="button" class="btn-primary btn btn-sm" id="plus'+index+'" style="width: 27px; float: right; margin-right: 5px;">+</button>'+
+                    '<input type="hidden" name="ea[]" value="'+value['ea']+'">'+
+                    '</td>'+
+                    '</tr>');
+                    index++;
+
+
+            });
+            buttonClickAddEvent();
+
+        }
+
+    });
+
+
 }
 
 

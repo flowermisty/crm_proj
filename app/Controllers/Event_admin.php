@@ -180,24 +180,32 @@ class Event_admin extends BaseController
     {
         $data = [];
         $dataResult = [];
+
         helper(['form', 'alert']);
+
         $data['item_code'] = $item_code;
         $data['event_code'] = $event_code;
+
         $eventModel = new EventModel();
         $eventListModel = new EventListModel();
+
         $data['event_name'] = $eventListModel->select('event_name')->where('event_code', "$event_code")->find();
+
         $query = $eventModel->groupBy('menuName')->findAll();
         $data['eventModel'] = $query;
+
         if (!$item_code == "") {
             $eventListModel = new EventListModel();
-            $data['eventList'] = $eventListModel->where("event_code", "$event_code")->first();
+            //$data['eventList'] = $eventListModel->where("event_code", "$event_code")->first();
             //$eventListModel -> join('godoFreeEventMenuCalendarTemp','godoFreeEventMenuCalendarTemp.optionCode=eventList.item_code');
             $data['joinData'] = $eventModel->where('optionCode', "$item_code")->findAll();
-            $eventModel->where('event_code', "$event_code");
-            $eventModel->groupBy('optionCode');
-            $queryList = $eventModel->findAll();
-            $data['setList']=$queryList;
-            $data['step']=$eventModel->select("step")->where("optionCode","$item_code")->groupBy('optionCode')->find();
+            return $this->response->setJSON($data);
+            //$eventModel->where('event_code', "$event_code");
+            //$eventModel->groupBy('optionCode');
+            //$queryList = $eventModel->findAll();
+            //$data['setList']=$queryList;
+            //$data['step']=$eventModel->select("step")->where("optionCode","$item_code")->groupBy('optionCode')->find();
+
         }
 
         if ($this->request->getMethod() == 'post') {
