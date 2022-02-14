@@ -1,8 +1,3 @@
-<style>
-    .dataTables-empty{
-        display: none;
-    }
-</style>
 
 <div id="main" class="col-md-8" style="margin:auto;">
     <div class="page-heading">
@@ -26,7 +21,7 @@
             </div>
         </div>
         <section class="section">
-            <div class="card">
+            <div class="card" style="height:650px; overflow:auto;">
                 <div class="card-body">
                     <form action="<?= base_url('delete'); ?>" method="post" id="deleteForm">
 
@@ -42,6 +37,27 @@
                             </thead>
 
                             <tbody class="eventListData">
+
+                            <?php foreach ($eventList as $row) : ?>
+                                <tr>
+                                    <td>&nbsp;&nbsp;<input type="checkbox" name="event_code[]"
+                                                           value="<?= $row['event_code'] ?>" id="select"></td>
+                                    <td>
+                                        <a href="<?= base_url("init/{$row['event_code']}") ?>"><?= $row['event_name'] ?></a>
+                                    </td>
+                                    <td>
+                                        <a href="<?= base_url("init/{$row['event_code']}") ?>"><?= $row['event_code'] ?></a>
+                                    </td>
+                                    <td>
+                                        <h5><span class="badge bg-success "
+                                                  style="width=100%;"><?= $row['regist_date'] ?></span></h5>
+                                    </td>
+                                    <td>
+                                        <h5><span class="badge bg-danger "
+                                                  style="width=100%;"><?= $row['updated_at'] ?></span></h5>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
 
                             </tbody>
                         </table>
@@ -102,9 +118,13 @@
     </script>
 
     <script>
+
         $(document).ready(function(){
-            load_event();
+            $(".card").smoothWheel();
         });
+
     </script>
 
-<?php
+<?php if (isset($session)): ?>
+    <?php echo session_destroy(); ?>
+<?php endif; ?>

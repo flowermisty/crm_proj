@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use App\Models\EventListModel;
 use App\Models\EventModel;
+
 if (defined('BASEPATH')) exit('No direct script access allowed');
+
 class Event_admin extends BaseController
 {
     public function index()
@@ -19,7 +21,8 @@ class Event_admin extends BaseController
         echo view('event_admin/templates/footer');
     }
 
-    public function getEventList(){
+    public function getEventList()
+    {
         $eventListModel = new EventListModel();
         $data['eventList'] = $eventListModel->findAll();
         return $this->response->setJSON($data);
@@ -67,8 +70,8 @@ class Event_admin extends BaseController
                 $count_event_code = $eventListModel->countAllResults();
                 $eventListModel->where('event_name', "{$eventData['event_name']}");
                 $count_event_name = $eventListModel->countAllResults();
-                if ($count_event_code != 0 || $count_event_name !=0 ) {
-                    $duplicate = ['status'=>'fail'];
+                if ($count_event_code != 0 || $count_event_name != 0) {
+                    $duplicate = ['status' => 'fail'];
                     return $this->response->setJSON($duplicate);
                     /*alert_move("동일한 이벤트 코드 또는 이벤트명이 이미 존재합니다.", "http://godo.event.admin");*/
                 } else {
@@ -108,7 +111,7 @@ class Event_admin extends BaseController
                 'itemCode' => 'required|min_length[10]|max_length[20]|is_unique[godoFreeEventMenuCalendarTemp.optionCode]',
                 'event_code' => 'required|min_length[10]|max_length[20]|',
                 'menuName' => 'required',
-                'step'=> 'required'
+                'step' => 'required'
             ];
             $errors = [
 
@@ -194,7 +197,7 @@ class Event_admin extends BaseController
         $query = $eventModel->groupBy('menuName')->findAll();
         $data['eventModel'] = $query;
 
-        if (!$item_code == "") {
+        if (!$item_code == "" && $this->request->getMethod() == 'get') {
             $eventListModel = new EventListModel();
             //$data['eventList'] = $eventListModel->where("event_code", "$event_code")->first();
             //$eventListModel -> join('godoFreeEventMenuCalendarTemp','godoFreeEventMenuCalendarTemp.optionCode=eventList.item_code');
@@ -214,7 +217,7 @@ class Event_admin extends BaseController
                 'itemCode' => 'required|min_length[10]|max_length[20]|',
                 'event_code' => 'required|min_length[10]|max_length[20]|',
                 'menuName' => 'required',
-                'step'=> 'required'
+                'step' => 'required'
             ];
             $errors = [
 
@@ -237,12 +240,12 @@ class Event_admin extends BaseController
                 $data['validation'] = $this->validator;
             } else {
                 $modelList = new EventListModel();
-                $modelList->select("idx")->where("event_code","{$this->request->getVar('event_code')}");
+                $modelList->select("idx")->where("event_code", "{$this->request->getVar('event_code')}");
                 $id = $modelList->first();
                 $today = date('Y-m-d');
-                $updated_at=[
-                    'idx'=>$id,
-                    'updated_at'=>$today
+                $updated_at = [
+                    'idx' => $id,
+                    'updated_at' => $today
                 ];
 
 
@@ -266,8 +269,8 @@ class Event_admin extends BaseController
                     $dataResult = $model->save($newData);
                     $modelList->save($updated_at);
                     $session = session();
-                    $s_item_code=[
-                        'item_code'=>$this->request->getVar('itemCode')
+                    $s_item_code = [
+                        'item_code' => $this->request->getVar('itemCode')
                     ];
                     $session->set($s_item_code);
                 }
@@ -276,7 +279,7 @@ class Event_admin extends BaseController
                     $session = session();
                     $session->setFlashdata('success', 'Successful Registration');
 
-                    alert_move("수정 되었습니다.", "http://godo.event.admin/update/{$item_code}/{$event_code}");
+                    alert_move("수정 되었습니다. \\n \\n※직전 수정 항목은 초록색으로 표기 됩니다.", "http://godo.event.admin/init/{$event_code}");
 
                 } else {
                     alert_move("수정에 실패하였습니다. 데이터에 오류가 있습니다.", "http://godo.event.admin/update/{$item_code}/{$event_code}");
@@ -288,8 +291,12 @@ class Event_admin extends BaseController
         }
 
 
+        $queryList = $eventModel->where('event_code',"{$event_code}")->groupBy('optionCode')->findAll();
+        $data['eventList'] = $queryList;
+
+
         echo view('event_admin/templates/header', $data);
-        echo view('event_admin/event_update_test');
+        echo view('event_admin/event_init_test');
         echo view('event_admin/templates/footer');
     }
 
@@ -297,7 +304,7 @@ class Event_admin extends BaseController
     {
         helper(['form', 'alert']);
         $deletePack = $this->request->getVar('item_code');
-        if($this->request->getMethod() == 'post' && $deletePack){
+        if ($this->request->getMethod() == 'post' && $deletePack) {
             $model = new EventModel();
             $deleteData = [
                 'item_code' => $this->request->getVar('item_code'),
@@ -313,15 +320,10 @@ class Event_admin extends BaseController
         $modelList = new EventListModel();
 
         for ($i = 0; $i < count($arr_lenth); $i++) {
-            $deleteData = [
-                'event_code' => $this->request->getVar('event_code')[$i],
-            ];
-
             $modelList->where('event_code', "{$this->request->getVar('event_code')[$i]}")->delete();
-            $deleteSuccess = ['status'=>'success'];
-            return $this->response->setJSON($deleteSuccess);
         }
-
+        $deleteSuccess = ['status' => 'success'];
+        return $this->response->setJSON($deleteSuccess);
 
 
     }

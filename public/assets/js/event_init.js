@@ -126,34 +126,39 @@ function menuCheckDeleteRow() {
 
     var rowCnt = menuTable.rows.length;
     var deleteMenu = [];
+    var delMenuStr = [];
     for (let i = 0; i < rowCnt; i++) {
         var row = menuTable.rows[i];
         var chkBox = row.cells[0].childNodes[0];
-        if (chkBox != null && chkBox.checked == true) {
-            deleteMenu[i] = row.cells[1].childNodes[0].textContent;
+        if (chkBox != null && chkBox.checked === true) {
+            deleteMenu[i] = row.cells[1].childNodes[0].value;
+        }
+    }
+    var k = 0;
+    for (let i = 0; i < deleteMenu.length; i++) {
+
+        if(deleteMenu[i]!=null){
+            delMenuStr[k] = deleteMenu[i];
+            k++;
         }
     }
     var j = 0;
     for (let i = 0; i < rowCnt; i++) {
-        var row = menuTable.rows[i];
-        var chkBox = row.cells[0].childNodes[0];
-        if (chkBox != null && chkBox.checked == true) {
-
-            var delMenuStr = deleteMenu.join(",");
-            if (j == 0) {
-
-                if ( confirm("선택하신 " + "[" + delMenuStr + "]" + "을(를) 삭제 하시겠습니까?")) {
-                    menuTable.deleteRow(i);
-                    rowCnt--;
-                    i--;
-
-                }else{
-                    return false;
-                }
+        row = menuTable.rows[i];
+        chkBox = row.cells[0].childNodes[0];
+        if (chkBox != null && chkBox.checked === true) {
+            if (j === 0) {
+                delMenuStr = delMenuStr.join(',');
+                confirm("선택하신 " + "[" + delMenuStr + "]" + "을(를) 삭제 하시겠습니까?");
             }
             j++;
 
+            if (confirm) {
+                menuTable.deleteRow(i);
+                rowCnt--;
+                i--;
 
+            }
         }
 
         row.cells[3].id = "quantity" + (i + 1);
@@ -163,6 +168,7 @@ function menuCheckDeleteRow() {
     }
 
 }
+
 
 function menuAllDeleteRow() {
     var menuTable = document.getElementById("menuTable");
@@ -303,10 +309,17 @@ function selectAll() {
 }
 
 
-function confirm_insertCheck(){
+function confirm_insertCheck(mode){
 
+    var theForm = document.getElementById('submit_form');
+    var event_code = document.getElementById('event_code').value;
+    if(mode=="0"){
+        theForm.method = "post";
+        theForm.target = "_self";
+        theForm.action = "/init/"+event_code;
+    }
     if(confirm('작성하신 이벤트와 기획팩 구성품을 등록 하시겠습니까?') == true){
-        document.getElementById('insertForm').submit();
+        theForm.submit();
     }else{
         return false;
     }
@@ -316,12 +329,14 @@ function confirm_insertCheck(){
 function confirm_delCheck(){
 
     if(confirm('이벤트 리스트와 기획팩 구성품이 삭제 됩니다. 계속 진행 하시겠습니까?') == true){
-        var eventCode = [];
-
-        $("input:checkbox[name='event_code\[\]']:checked").each(function(i){
-            eventCode.push($(this).val());
-        });
-        var param ={event_code:eventCode};
+        var eventCode_arr = $("input[name='event_code[]']");
+        var chk_data = [];
+        for( var i=0; i<eventCode_arr.length; i++ ) {
+            if( eventCode_arr[i].checked == true ) {
+                chk_data.push(eventCode_arr[i].value);
+            }
+        }
+        var param ={event_code:chk_data};
 
         $.ajax({
             type: "POST",
@@ -330,8 +345,7 @@ function confirm_delCheck(){
             success: function(response){
                 if(response.status == 'success'){
                     alert('삭제 되었습니다.');
-                    $('.eventListData').html("");
-                    load_event();
+                    window.location.reload();
                 }
 
 
@@ -343,14 +357,22 @@ function confirm_delCheck(){
     }
 }
 
-function confirm_updateCheck(){
+function confirm_updateCheck(mode){
+    var theForm = document.getElementById('submit_form');
+    var event_code = document.getElementById('event_code').value;
+    var item_code = document.getElementById('itemCode').value;
 
+    if(mode=="1"){
+        theForm.method = "post";
+        theForm.target = "_self";
+        theForm.action = "/update/"+item_code+"/"+event_code;
+    }
     if(confirm('해당 기획팩 구성품이 변경 됩니다. 계속 진행 하시겠습니까?') == true){
-        document.getElementById('updateForm').submit();
-
+        theForm.submit();
     }else{
         return false;
     }
+
 }
 
 function confirm_event_check(){
@@ -409,8 +431,7 @@ function confirm_event_check(){
                        $('#exampleModalCenter').modal('hide');
                        $('.close').click();
                        alert('등록 되었습니다.');
-                       $('.eventListData').html("");
-                       load_event()
+                       window.location.reload();
                    }
 
 
@@ -446,6 +467,8 @@ function load_event(){
 
 
 function confirm_deletePackCheck(){
+    var item_code = document.getElementById('itemCode').value;
+    document.getElementById('item_code').value = item_code;
     if(confirm('해당 구성품 패키지가  삭제 됩니다. 계속 진행 하시겠습니까?') == true){
         document.getElementById('deletePack').submit();
     }else{
@@ -492,6 +515,12 @@ function get_event_profile(itemCode){
 
 
 }
+
+window.addEventListener("keyup",(e)=>{
+    $('.alert-danger').hide();
+});
+
+
 
 
 

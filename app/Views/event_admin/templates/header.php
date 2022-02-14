@@ -27,6 +27,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
+
     <!--스크립트-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -37,6 +38,9 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!--이벤트 관리자 인터페이스 테이블 생성 및 유효성 검사-->
     <script src="/assets/js/event_init.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script src="/asset/js/jquery.smoothwheel.js"></script>
 </head>
 
 <style>
@@ -95,6 +99,13 @@
         margin-bottom: 0;
     }
 
+    .card {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+    .card::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
+    }
 </style>
 
 

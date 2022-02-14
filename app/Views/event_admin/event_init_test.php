@@ -27,10 +27,14 @@
                             <?php foreach ($eventList as $row) : ?>
                                 <tr>
                                     <td>
-                                        <a href="javascript:void(0);" onclick="get_event_profile('<?= $row['optionCode']?>')"><?= $row['step'] ?></a>
+                                        <a href="javascript:void(0);" onclick="get_event_profile('<?= $row['optionCode']?>')"
+                                            <?php if($row['optionCode']==session()->get('item_code')):?>
+                                                <?php echo "style='text-decoration:none; color:green;'" ?><?php endif;?>><?= $row['step'] ?></a>
                                     </td>
                                     <td>
-                                        <a href="javascript:void(0);" onclick="get_event_profile('<?= $row['optionCode']?>')"><?= $row['optionCode'] ?></a>
+                                        <a href="javascript:void(0);" onclick="get_event_profile('<?= $row['optionCode']?>')"
+                                            <?php if($row['optionCode']==session()->get('item_code')):?>
+                                                <?php echo "style='text-decoration:none; color:green;'" ?><?php endif;?>><?= $row['optionCode'] ?></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -83,7 +87,7 @@
 
 
         <div class="table__cell">
-            <form action="<?php echo base_url("init/$event_code"); ?>" method="post" id="insertForm">
+            <form id="submit_form">
                 <div class="col-md-12 py-3 border" style="background:white; height:600px;">
 
                     <div class="input-group col-md-12">
@@ -162,15 +166,20 @@
                     <div class="btn-con" style="width:100%; float:right; line-height:47px;">
                         <div class="btn-wrap" style="float:right;">
                             <button type="button" class="btn btn-secondary" style="" onclick="location.href='http://godo.event.admin/'">취소</button>
-                            <button type="button" class="btn btn-secondary item_save" style="" onclick="confirm_insertCheck();">저장</button>
-                            <button type="button" class="btn btn-secondary item_update" style="display:none" onclick="">수정</button>
-                            <button type="button" class="btn btn-secondary item_delete" style="display:none" onclick="">삭제</button>
+                            <button type="button" class="btn btn-secondary item_save" style="" onclick="confirm_insertCheck(0);">저장</button>
+                            <button type="button" class="btn btn-secondary item_update" style="display:none" onclick="confirm_updateCheck(1);">수정</button>
+                            <button type="button" class="btn btn-secondary item_delete" style="display:none" onclick="confirm_deletePackCheck();">삭제</button>
                         </div>
 
                     </div>
 
 
                 </div>
+            </form>
+
+            <form action="<?=base_url('delete')?>" name="deletePack" id="deletePack" method="post">
+                <input type="hidden" id="item_code" name="item_code" value="">
+                <input type="hidden" id="event_code" name="event_delete" value="<?= $event_code ?>">
             </form>
 
         </div>
@@ -182,4 +191,4 @@
 </section>
 
 
-<?php
+<?php echo session_destroy();?>
