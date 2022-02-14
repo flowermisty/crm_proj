@@ -108,8 +108,8 @@ class Event_admin extends BaseController
         if ($this->request->getMethod() == 'post') {
             //let's do the validation here
             $rules = [
-                'itemCode' => 'required|min_length[10]|max_length[20]|is_unique[godoFreeEventMenuCalendarTemp.optionCode]',
-                'event_code' => 'required|min_length[10]|max_length[20]|',
+                'itemCode' => 'required|min_length[5]|max_length[20]|is_unique[godoFreeEventMenuCalendarTemp.optionCode]',
+                'event_code' => 'required|min_length[5]|max_length[20]|',
                 'menuName' => 'required',
                 'step' => 'required'
             ];
@@ -117,7 +117,7 @@ class Event_admin extends BaseController
 
                 'itemCode' => [
                     'required' => 'ItemCode는 필수입력 필드입니다.',
-                    'min_length' => 'ItemCode는 최소 10자 이상 이어야 합니다.',
+                    'min_length' => 'ItemCode는 최소 5자 이상 이어야 합니다.',
                     'max_length' => 'ItemCode는 최대 20자를 넘을수 없습니다.',
                     'is_unique' => '동일한 코드가 이미 존재합니다.'
                 ],
@@ -214,8 +214,8 @@ class Event_admin extends BaseController
         if ($this->request->getMethod() == 'post') {
             //let's do the validation here
             $rules = [
-                'itemCode' => 'required|min_length[10]|max_length[20]|',
-                'event_code' => 'required|min_length[10]|max_length[20]|',
+                'itemCode' => 'required|min_length[5]|max_length[20]|',
+                'event_code' => 'required|min_length[5]|max_length[20]|',
                 'menuName' => 'required',
                 'step' => 'required'
             ];
@@ -223,7 +223,7 @@ class Event_admin extends BaseController
 
                 'itemCode' => [
                     'required' => 'ItemCode는 필수입력 필드입니다.',
-                    'min_length' => 'ItemCode는 최소 10자 이상 이어야 합니다.',
+                    'min_length' => 'ItemCode는 최소 5자 이상 이어야 합니다.',
                     'max_length' => 'ItemCode는 최대 20자를 넘을수 없습니다.',
                 ],
                 'menuName' => [

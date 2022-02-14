@@ -80,7 +80,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">이벤트 등록</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="modal_reset();">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -125,6 +125,6 @@
 
     </script>
 
-<?php if (isset($session)): ?>
+<?php if (isset($_SESSION)): ?>
     <?php echo session_destroy(); ?>
 <?php endif; ?>

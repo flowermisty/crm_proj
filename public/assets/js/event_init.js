@@ -520,7 +520,12 @@ window.addEventListener("keyup",(e)=>{
     $('.alert-danger').hide();
 });
 
-
+function modal_reset(){
+    document.getElementById('error_event_name').innerText="";
+    document.getElementById('error_event_code').innerText="";
+    document.getElementById('error_duplicate').innerText="";
+    document.forms['eventRegist'].reset();
+}
 
 
 

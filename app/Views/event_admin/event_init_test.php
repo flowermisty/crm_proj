@@ -191,4 +191,7 @@
 </section>
 
 
-<?php echo session_destroy();?>
+<?php if (isset($_SESSION)): ?>
+    <?php session_destroy();?>
+<?php endif; ?>
+
