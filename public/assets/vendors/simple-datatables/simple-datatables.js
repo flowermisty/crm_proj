@@ -711,7 +711,7 @@
                         layout: {...defaultConfig.layout, ...e.layout},
                         labels: {...defaultConfig.labels, ...e.labels}
                     }, "string" == typeof t && (t = document.querySelector(t)), this.initialLayout = t.innerHTML, this.initialSortable = this.options.sortable, this.options.header || (this.options.sortable = !1), null === t.tHead && (!this.options.data || this.options.data && !this.options.data.headings) && (this.options.sortable = !1), t.tBodies.length && !t.tBodies[0].rows.length && this.options.data && !this.options.data.data) throw new Error("You seem to be using the data option, but you've not defined any rows.");
-                    this.table = t, this.init()
+                    this.table = t /*this.init()*/
                 }
 
                 static extend(t, e) {

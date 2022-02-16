@@ -1,3 +1,12 @@
+
+/**
+ * @section into 설명
+ *                  - function name => menuAddRow
+ *                    가. 이벤트 상세 프로필 단계 패키지 구성품목 추가시 테이블 생성
+ *                    나. 각테이블의 valu값을 전달할 input태그와 그의 속성을 동적 생성
+ *                    다. 테이블 생성시에 수량 추가 / 제거 버튼의 이벤트 리스너를 발생시켜,
+ *                        각 버튼이 독립적으로 자신의 행을 구분할 수 있도록 제어
+ */
 function menuAddRow() {
     var select = document.getElementById("inputState");
     var select2 = [];
@@ -121,6 +130,15 @@ function menuAddRow() {
     }
 }
 
+/**
+ * @section into 설명
+ *                  - function name => menuCheckDeleteRow
+ *                    가. menuAddRow함수에서 동적생성된 로우의 첫번째 td에는 체크박스가 추가 되어 있음
+ *                    나. 해당 체크박스의 체크여부를 확인하여 해당 행을 삭제하고
+ *                    다. 테이블 생성시에 수량 추가 / 제거 버튼의 이벤트 리스너를 발생시켜,
+ *                        각 버튼이 독립적으로 자신의 행을 구분할 수 있도록 제어
+ *                    라. 수량 버튼의 구별을 위한 인덱스가 되는 요소의 id값 재정렬
+ */
 function menuCheckDeleteRow() {
     var menuTable = document.getElementById("menuTable");
 
@@ -169,7 +187,11 @@ function menuCheckDeleteRow() {
 
 }
 
-
+/**
+ * @section into 설명
+ *                  - function name => menuAllDeleteRow
+ *                    가. 동적 생성된 테이블의 행 전체 삭제를 위한 함수
+ */
 function menuAllDeleteRow() {
     var menuTable = document.getElementById("menuTable");
     var rowCnt = menuTable.rows.length;
@@ -192,6 +214,11 @@ function menuAllDeleteRow() {
 }
 
 
+/**
+ * @section into 설명
+ *                  - function name => filter
+ *                    가. 동적 생성된 테이블의 행 전체 삭제를 위한 함수
+ */
 function filter() {
     let search = document.getElementById("search").value;
     let listInner = document.getElementsByTagName("option");
@@ -247,7 +274,6 @@ function buttonClickAddEvent(){
 
 window.addEventListener('DOMContentLoaded', function () {
     let menuTable = document.getElementById("menuTable");
-
 
     for (let i = 1; i <= menuTable.rows.length; i++) {
         let clickEventPlus = document.getElementById("plus" + (i));

@@ -42,6 +42,15 @@ $routes->match(['get','post'],'spreadsheet_format_download','ExcelController::sp
 $routes->match(['get','post'],'spreadsheet_import','ExcelController::spreadsheet_import');
 $routes->match(['get','post'],'step','Event_admin::eventStep');
 
+$routes->match(['get','post'],'event_admin_new','Event_admin_new::index');
+$routes->match(['get','post'],'event_admin_new/init/(:segment)','Event_admin_new::init/$1');
+$routes->match(['get','post'],'event_admin_new/schedule','EventScheduleController::index');
+$routes->match(['get','post'],'event_admin_new/schedule/load','EventScheduleController::load');
+$routes->match(['get','post'],'event_admin_new/schedule/insert','EventScheduleController::insert');
+$routes->match(['get','post'],'event_admin_new/schedule/update','EventScheduleController::update');
+$routes->match(['get','post'],'event_admin_new/schedule/delete','EventScheduleController::delete');
+
+
 
 
 /*
