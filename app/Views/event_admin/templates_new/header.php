@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/assets2/css/app.css">
     <link rel="stylesheet" href="/assets2/css/app.css">
     <link rel="stylesheet" href="/assets3/sweep.css">
-
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -32,7 +32,9 @@
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!--이벤트 관리자 인터페이스 테이블 생성 및 유효성 검사-->
+    <script src="/assets2/js/event_init_new.js"></script>
 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>

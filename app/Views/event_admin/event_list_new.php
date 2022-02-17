@@ -1,4 +1,6 @@
-
+<script>
+    AOS.init();
+</script>
 
 <div id="app">
     <div id="sidebar" class="active">
@@ -6,7 +8,7 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo py-3">
-                        <a href="index.html"><img src="/assets/images/logo/logo_big.png" alt="Logo" srcset=""></a>
+                        <a href="<?=base_url('event_admin_new')?>"><img src="/assets/images/logo/logo_big.png" alt="Logo" srcset=""></a>
                         <h6 class="font-extrabold mb-0" style="font-size:12px;">이벤트 주문코드 등록 관리자 프로그램</h6>
                     </div>
                     <div class="toggler">
@@ -165,7 +167,7 @@
             <section class="row">
                 <div class="col-12 col-lg-11">
                     <div class="row">
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
                             <a href="http://i.venet.kr/nlogin.php" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" data-bs-toggle="tooltip"
                                data-placement="bottom" data-bs-or>
@@ -187,7 +189,7 @@
                             </a>
                         </div>
 
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
                             <a href="exampleModalCenter" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" data-toggle="modal"
                                data-target="#exampleModalCenter">
@@ -208,7 +210,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-right" data-aos-delay="50" data-aos-duration="1000">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" onclick="confirm_delCheck();">
                                 <div class="card">
@@ -228,7 +230,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-right" data-aos-delay="50" data-aos-duration="1000">
                             <a href="eventSchedule" class="" onmouseover="this.style.opacity='0.7';" data-toggle="modal"
                                data-target="#eventSchedule"
                                onmouseout="this.style.opacity='1';" style=display:block;">
@@ -252,7 +254,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <div class="card">
+                            <div class="card" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000">
                                 <div class="card-header text-muted font-semibold">
                                     배냇밀몰에 등록된 이벤트 리스트 목록 입니다.
                                 </div>
@@ -277,10 +279,12 @@
                                                                            value="<?= $row['event_code'] ?>"
                                                                            id="select"></td>
                                                     <td>
-                                                        <a href="<?= base_url("event_admin_new/init/{$row['event_code']}") ?>" class="text-muted font-semibold"><?= $row['event_name'] ?></a>
+                                                        <a href="<?= base_url("event_admin_new/init/{$row['event_code']}") ?>"
+                                                           class="text-muted font-semibold"><?= $row['event_name'] ?></a>
                                                     </td>
                                                     <td>
-                                                        <a href="<?= base_url("event_admin_new/init/{$row['event_code']}") ?>" class="text-muted font-semibold"><?= $row['event_code'] ?></a>
+                                                        <a href="<?= base_url("event_admin_new/init/{$row['event_code']}") ?>"
+                                                           class="text-muted font-semibold"><?= $row['event_code'] ?></a>
                                                     </td>
                                                     <td>
                                                         <span class="badge bg-success"><?= $row['regist_date'] ?></span>
@@ -298,7 +302,11 @@
                         </div>
                     </div>
                 </div>
-
+                <?php if (isset($validation)): ?>
+                    <div class="alert alert-danger col-md-12" role="alert">
+                        <?= $validation->listErrors() ?>
+                    </div>
+                <?php endif; ?>
             </section>
 
 
@@ -346,18 +354,19 @@
         </div>
 
         <div class="modal fade" id="eventSchedule" tabindex="-1" role="dialog"
-              aria-hidden="false">
+             aria-hidden="false">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">이벤트 스케줄</h5>
+                        <h4 class="modal-title">이벤트 스케줄</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                 onclick="modal_reset();">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <embed type="text/html" src="<?=base_url('event_admin_new/schedule');?>"  style="height:500px; width:-webkit-fill-available;">
+                        <embed type="text/html" src="<?= base_url('event_admin_new/schedule'); ?>"
+                               style="height:650px; width:-webkit-fill-available;">
                     </div>
 
                 </div>
@@ -375,10 +384,12 @@
         </script>
 
         <script>
+
             $(document).ready(function () {
                 $(document).on('click', '.event_save', function () {
                     confirm_event_check();
                 });
+                $('.dataTable-dropdown').after("<button type='button' class='btn btn-primary' onclick='selectAll()' id='checkAll' style='float:right;'>전체선택</button>");
             });
         </script>
 

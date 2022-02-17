@@ -31,19 +31,29 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Event_admin::index');
+$routes->get('/', 'Event_admin_new::index');
 $routes->match(['get','post'],'init/(:segment)','Event_admin::init/$1');
 $routes->match(['get','post'],'eventRegist','Event_admin::eventRegist');
 $routes->match(['get','post'],'getEventList','Event_admin::getEventList');
 $routes->match(['get','post'],'update/(:any)','Event_admin::update/$1/$1');
 $routes->match(['get','post'],'delete','Event_admin::delete');
+
+//이벤트 관리자 인터페이스 UI변경 mapping
+$routes->match(['get','post'],'event_admin_new/eventRegist','Event_admin_new::eventRegist');
+$routes->match(['get','post'],'event_admin_new/getEventList','Event_admin_new::getEventList');
+$routes->match(['get','post'],'event_admin_new/update/(:any)','Event_admin_new::update/$1/$1');
+$routes->match(['get','post'],'event_admin_new/init/(:segment)','Event_admin_new::init/$1');
+$routes->match(['get','post'],'event_admin_new/delete','Event_admin_new::delete');
+
+//엑셀 import/export 관련 기능 URI mapping
 $routes->match(['get','post'],'excel','ExcelController::index');
 $routes->match(['get','post'],'spreadsheet_format_download','ExcelController::spreadsheet_format_download');
 $routes->match(['get','post'],'spreadsheet_import','ExcelController::spreadsheet_import');
 $routes->match(['get','post'],'step','Event_admin::eventStep');
 
-$routes->match(['get','post'],'event_admin_new','Event_admin_new::index');
-$routes->match(['get','post'],'event_admin_new/init/(:segment)','Event_admin_new::init/$1');
+
+
+//이벤트 스케줄 캘린더 URI mapping
 $routes->match(['get','post'],'event_admin_new/schedule','EventScheduleController::index');
 $routes->match(['get','post'],'event_admin_new/schedule/load','EventScheduleController::load');
 $routes->match(['get','post'],'event_admin_new/schedule/insert','EventScheduleController::insert');

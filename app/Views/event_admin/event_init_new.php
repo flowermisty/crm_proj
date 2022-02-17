@@ -1,4 +1,46 @@
-<script src="/assets/js/event_init.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        let menuTable = document.getElementById("menuTable");
+
+        for (let i = 1; i <= menuTable.rows.length; i++) {
+            let clickEventPlus = document.getElementById("plus" + (i));
+            var hiddenEa = clickEventPlus.parentElement.children[3];
+            hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
+            clickEventPlus.addEventListener('click', function () {
+                let count = clickEventPlus.parentElement.children[0].textContent;
+
+                count = parseInt(count) + 1;
+                if (count > 10) {
+                    alert('수량은 10개를 초과할 수 없습니다.');
+                    count = 10;
+                }
+                clickEventPlus.parentElement.children[0].innerText = count.toString();
+                var hiddenEa = clickEventPlus.parentElement.children[3];
+                hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
+            });
+
+            let clickEventMinus = document.getElementById("minus" + (i));
+
+
+            clickEventMinus.addEventListener('click', function () {
+                let count = clickEventMinus.parentElement.children[0].textContent;
+                count = parseInt(count) - 1;
+                if (count < 1) {
+                    alert("등록 수량은 0이 될 수 없습니다.")
+                    count = 1;
+                }
+                clickEventMinus.parentElement.children[0].innerText = count.toString();
+                var hiddenEa = clickEventPlus.parentElement.children[3];
+                hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
+
+            });
+        }
+    });
+</script>
+
+<script>
+    AOS.init();
+</script>
 
 <div id="app">
     <div id="sidebar" class="active">
@@ -6,7 +48,7 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo py-3">
-                        <a href="index.html"><img src="/assets/images/logo/logo_big.png" alt="Logo" srcset=""></a>
+                        <a href="<?=base_url('event_admin_new')?>"><img src="/assets/images/logo/logo_big.png" alt="Logo" srcset=""></a>
                         <h6 class="font-extrabold mb-0" style="font-size:12px;">이벤트 주문코드 등록 관리자 프로그램</h6>
                     </div>
                     <div class="toggler">
@@ -165,7 +207,7 @@
             <section class="row">
                 <div class="col-12 col-lg-11">
                     <div class="row">
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
                             <a href="<?=base_url('event_admin_new')?>" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" data-bs-toggle="tooltip"
                                data-placement="bottom" data-bs-or>
@@ -187,10 +229,9 @@
                             </a>
                         </div>
 
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <a href="exampleModalCenter" class="" onmouseover="this.style.opacity='0.7';"
-                               onmouseout="this.style.opacity='1';" style=display:block;" data-toggle="modal"
-                               data-target="#exampleModalCenter">
+                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
+                            <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
+                               onmouseout="this.style.opacity='1';" style="display:block;" onclick="window.location.reload()">
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
                                         <div class="row">
@@ -208,7 +249,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-right" data-aos-delay="50" data-aos-duration="1000">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" onclick="menuCheckDeleteRow();">
                                 <div class="card">
@@ -228,7 +269,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-right" data-aos-delay="50" data-aos-duration="1000">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style="display:block;" onclick="menuAllDeleteRow();">
                                 <div class="card">
@@ -249,7 +290,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="padding-bottom:4%;">
                         <div>
 
                             <h4 class="" style="margin-left:3%;">
@@ -260,7 +301,7 @@
                             <hr>
 
                         </div>
-                        <div class="tableAcor">
+                        <div class="tableAcor" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000">
                             <div class="table__cell">
                                 <div class="col-md-12 py-3 border" style="background:white; height:600px;">
                                     <div class="input-group py-2">
@@ -282,25 +323,25 @@
                                                             <a href="javascript:void(0);" class="text-muted font-semibold"
                                                                onclick="get_event_profile('<?= $row['optionCode'] ?>')"
                                                                 <?php if ($row['optionCode'] == session()->get('item_code')): ?>
-                                                                    <?php echo "style='text-decoration:none; color:green;'" ?><?php endif; ?>><?= $row['step'] ?></a>
+                                                                    <?php echo "style='text-decoration:none; color:green !important;'" ?><?php endif; ?>><?= $row['step'] ?></a>
                                                         </td>
                                                         <td>
                                                             <a href="javascript:void(0);" class="text-muted font-semibold"
                                                                onclick="get_event_profile('<?= $row['optionCode'] ?>')"
                                                                 <?php if ($row['optionCode'] == session()->get('item_code')): ?>
-                                                                    <?php echo "style='text-decoration:none; color:green;'" ?><?php endif; ?>><?= $row['optionCode'] ?></a>
+                                                                    <?php echo "style='text-decoration:none; color:green !important;'" ?><?php endif; ?>><?= $row['optionCode'] ?></a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <hr class="input-group" style="float:right;">
+                                        <hr class="input-group" style="margin-left: auto; margin-right:auto; width:97%;">
                                         <div class="btn-con" style="width:100%; float:right; line-height:47px; margin-right: 3%;">
                                             <div class="btn-wrap" style="float:right;">
-                                                <button type="button" class="btn btn-secondary" style=""
+                                                <!--<button type="button" class="btn btn-secondary" style=""
                                                         onclick="window.location.reload()">세트등록
-                                                </button>
+                                                </button>-->
 
                                             </div>
 
@@ -384,7 +425,7 @@
 
                                                         <tr>
                                                             <?php if (isset($validation)): ?>
-                                                                <div class="alert alert-danger col-md-12" role="alert">
+                                                                <div class="alert alert-danger col-md-12" role="alert" id="validation">
                                                                     <?= $validation->listErrors() ?>
                                                                 </div>
                                                             <?php endif; ?>
@@ -429,7 +470,7 @@
                                     </div>
                                 </form>
 
-                                <form action="<?= base_url('delete') ?>" name="deletePack" id="deletePack"
+                                <form action="<?= base_url('/event_admin_new/delete') ?>" name="deletePack" id="deletePack"
                                       method="post">
                                     <input type="hidden" id="item_code" name="item_code" value="">
                                     <input type="hidden" id="event_code" name="event_delete" value="<?= $event_code ?>">
