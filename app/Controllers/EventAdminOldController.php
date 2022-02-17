@@ -3,11 +3,11 @@
 namespace App\Controllers;
 
 use App\Models\EventListModel;
-use App\Models\EventModel;
+use App\Models\EventComponentsModel;
 
 if (defined('BASEPATH')) exit('No direct script access allowed');
 
-class Event_admin extends BaseController
+class EventAdminOldController extends BaseController
 {
     public function index()
     {
@@ -17,7 +17,7 @@ class Event_admin extends BaseController
 
 
         echo view('event_admin/templates/header');
-        echo view('event_admin/event_list', $data);
+        echo view('event_admin/event_list_old', $data);
         echo view('event_admin/templates/footer');
     }
 
@@ -100,7 +100,7 @@ class Event_admin extends BaseController
         $dataResult = [];
         helper(['form', 'alert']);
 
-        $eventModel = new EventModel();
+        $eventModel = new EventComponentsModel();
         $query = $eventModel->groupBy('menuName')->findAll();
         $data['eventModel'] = $query;
 
@@ -134,7 +134,7 @@ class Event_admin extends BaseController
             if (!$this->validate($rules, $errors)) {
                 $data['validation'] = $this->validator;
             } else {
-                $model = new EventModel();
+                $model = new EventComponentsModel();
                 $modelList = new EventListModel();
 
                 $arr_lenth = $this->request->getVar('menuName');
@@ -175,7 +175,7 @@ class Event_admin extends BaseController
         $data['event_name'] = $eventListModel->select('event_name')->where('event_code', "$event_code")->find();
 
         echo view('event_admin/templates/header', $data);
-        echo view('event_admin/event_init_test');
+        echo view('event_admin/event_init_old');
         echo view('event_admin/templates/footer');
     }
 
@@ -189,7 +189,7 @@ class Event_admin extends BaseController
         $data['item_code'] = $item_code;
         $data['event_code'] = $event_code;
 
-        $eventModel = new EventModel();
+        $eventModel = new EventComponentsModel();
         $eventListModel = new EventListModel();
 
         $data['event_name'] = $eventListModel->select('event_name')->where('event_code', "$event_code")->find();
@@ -249,7 +249,7 @@ class Event_admin extends BaseController
                 ];
 
 
-                $model = new EventModel();
+                $model = new EventComponentsModel();
                 $arr_lenth = $this->request->getVar('menuName');
                 $flag = false;
                 for ($i = 0; $i < count($arr_lenth); $i++) {
@@ -296,7 +296,7 @@ class Event_admin extends BaseController
 
 
         echo view('event_admin/templates/header', $data);
-        echo view('event_admin/event_init_test');
+        echo view('event_admin/event_init_old');
         echo view('event_admin/templates/footer');
     }
 
@@ -305,7 +305,7 @@ class Event_admin extends BaseController
         helper(['form', 'alert']);
         $deletePack = $this->request->getVar('item_code');
         if ($this->request->getMethod() == 'post' && $deletePack) {
-            $model = new EventModel();
+            $model = new EventComponentsModel();
             $deleteData = [
                 'item_code' => $this->request->getVar('item_code'),
             ];

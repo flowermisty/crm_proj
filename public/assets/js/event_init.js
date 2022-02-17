@@ -543,8 +543,10 @@ function get_event_profile(itemCode){
 }
 
 window.addEventListener("keyup",(e)=>{
-    $('.alert-danger').hide();
+    $('.alert-danger').delete();
 });
+
+
 
 function modal_reset(){
     document.getElementById('error_event_name').innerText="";

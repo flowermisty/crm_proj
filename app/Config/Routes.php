@@ -31,19 +31,20 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Event_admin_new::index');
-$routes->match(['get','post'],'init/(:segment)','Event_admin::init/$1');
-$routes->match(['get','post'],'eventRegist','Event_admin::eventRegist');
-$routes->match(['get','post'],'getEventList','Event_admin::getEventList');
-$routes->match(['get','post'],'update/(:any)','Event_admin::update/$1/$1');
-$routes->match(['get','post'],'delete','Event_admin::delete');
+$routes->get('/event_admin_old', 'EventAdminOldController::index');
+$routes->match(['get','post'],'init/(:segment)','EventAdminOldController::init/$1');
+$routes->match(['get','post'],'eventRegist','EventAdminOldController::eventRegist');
+$routes->match(['get','post'],'getEventList','EventAdminOldController::getEventList');
+$routes->match(['get','post'],'update/(:any)','EventAdminOldController::update/$1/$1');
+$routes->match(['get','post'],'delete','EventAdminOldController::delete');
 
 //이벤트 관리자 인터페이스 UI변경 mapping
-$routes->match(['get','post'],'event_admin_new/eventRegist','Event_admin_new::eventRegist');
-$routes->match(['get','post'],'event_admin_new/getEventList','Event_admin_new::getEventList');
-$routes->match(['get','post'],'event_admin_new/update/(:any)','Event_admin_new::update/$1/$1');
-$routes->match(['get','post'],'event_admin_new/init/(:segment)','Event_admin_new::init/$1');
-$routes->match(['get','post'],'event_admin_new/delete','Event_admin_new::delete');
+$routes->get('/', 'EventAdminNewController::index');
+$routes->match(['get','post'],'event_admin_new/eventRegist','EventAdminNewController::eventRegist');
+$routes->match(['get','post'],'event_admin_new/getEventList','EventAdminNewController::getEventList');
+$routes->match(['get','post'],'event_admin_new/update/(:any)','EventAdminNewController::update/$1/$1');
+$routes->match(['get','post'],'event_admin_new/init/(:segment)','EventAdminNewController::init/$1');
+$routes->match(['get','post'],'event_admin_new/delete','EventAdminNewController::delete');
 
 //엑셀 import/export 관련 기능 URI mapping
 $routes->match(['get','post'],'excel','ExcelController::index');

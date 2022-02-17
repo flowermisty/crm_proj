@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Controllers\BaseController;
-use App\Models\ScheduleModel;
+use App\Models\EventScheduleModel;
 
 
 class EventScheduleController extends BaseController {
@@ -10,7 +10,7 @@ class EventScheduleController extends BaseController {
 
    public function index()
     {
-        $ScheduleModel = new ScheduleModel();
+        $ScheduleModel = new EventScheduleModel();
         $event_data = $ScheduleModel->findAll();
         foreach($event_data as $row)
         {
@@ -27,7 +27,7 @@ class EventScheduleController extends BaseController {
 
     public function load()
     {
-        $ScheduleModel = new ScheduleModel();
+        $ScheduleModel = new EventScheduleModel();
         $event_data = $ScheduleModel->findAll();
         foreach($event_data as $row)
         {
@@ -50,7 +50,7 @@ class EventScheduleController extends BaseController {
                 'start_date'=> $this->request->getVar('start'),
                 'end_date' => $this->request->getVar('end')
             ];
-            $scheduleModel = new ScheduleModel();
+            $scheduleModel = new EventScheduleModel();
             $scheduleModel->save($data);
         }
     }
@@ -64,7 +64,7 @@ class EventScheduleController extends BaseController {
                 'start_date' => $this->request->getVar('start'),
                 'end_date'  => $this->request->getVar('end'),
             ];
-            $scheduleModel = new ScheduleModel();
+            $scheduleModel = new EventScheduleModel();
             $id = $this->request->getVar('id');
             $scheduleModel->where('id', $id)
                           ->set($data)
@@ -76,7 +76,7 @@ class EventScheduleController extends BaseController {
     {
         if($this->request->getMethod() == 'post')
         {
-            $scheduleModel = new ScheduleModel();
+            $scheduleModel = new EventScheduleModel();
             $scheduleModel->where('id',"{$this->request->getVar('id')}")->delete();
         }
     }

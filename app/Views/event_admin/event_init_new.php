@@ -208,7 +208,7 @@
                 <div class="col-12 col-lg-11">
                     <div class="row">
                         <div class="col-6 col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
-                            <a href="<?=base_url('event_admin_new')?>" class="" onmouseover="this.style.opacity='0.7';"
+                            <a href="<?=base_url('/')?>" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" data-bs-toggle="tooltip"
                                data-placement="bottom" data-bs-or>
                                 <div class="card">
@@ -487,7 +487,9 @@
 
         </div>
 
-
+        <?php if (isset($_SESSION)): ?>
+            <?php session_destroy();?>
+        <?php endif; ?>
 
 
 

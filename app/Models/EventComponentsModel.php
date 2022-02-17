@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class EventModel extends Model{
+class EventComponentsModel extends Model{
     protected $table = 'godoFreeEventMenuCalendarTemp';
     protected $primaryKey = 'idx';
     protected $allowedFields = [
