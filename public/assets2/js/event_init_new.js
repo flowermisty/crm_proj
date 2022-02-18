@@ -419,7 +419,9 @@ function confirm_event_check(){
                        $('#exampleModalCenter').modal('hide');
                        $('.close').click();
                        alert('등록 되었습니다.');
-                       window.location.reload();
+                       $('.eventListData').html("");
+                       load_event()
+
                    }
 
 
@@ -443,10 +445,10 @@ function load_event(){
            $.each(response.eventList, function(key,value){
                $('.eventListData').append('<tr>' +
                    '<td> <input type="checkbox" name="event_code[]" value="'+value['event_code']+'" id="select"></td>' +
-                   '<td><a href="/init/'+value['event_code']+'">'+value['event_name']+'</a></td>'+
-                   '<td><a href="/init/'+value['event_code']+'">'+value['event_code']+'</a></td>'+
-                   '<td><h5><span class="badge bg-success "style="width=100%;">'+value['regist_date']+'</span></h5></td>'+
-                   '<td><h5><span class="badge bg-danger "style="width=100%;">'+value['updated_at']+'</span></h5></td>'+
+                   '<td><a href="/event_admin_new/init/'+value['event_code']+'" class="text-muted font-semibold">'+value['event_name']+'</a></td>'+
+                   '<td><a href="/event_admin_new/init/'+value['event_code']+'" class="text-muted font-semibold">'+value['event_code']+'</a></td>'+
+                   '<td><span class="badge bg-success "style="width=100%;">'+value['regist_date']+'</span></td>'+
+                   '<td><span class="badge bg-danger "style="width=100%;">'+value['updated_at']+'</span></td>'+
                    '</tr>');
            });
        }
@@ -514,6 +516,8 @@ function modal_reset(){
     document.getElementById('error_duplicate').innerText="";
     document.forms['eventRegist'].reset();
 }
+
+
 
 
 

@@ -18,7 +18,8 @@ class EventScheduleController extends BaseController {
                 'id' => $row['id'],
                 'title' => $row['title'],
                 'start' => $row['start_date'],
-                'end' => $row['end_date']
+                'end' => $row['end_date'],
+                'color'=>$row['event_color'],
             );
         }
         echo view('event_admin/event_schedule');
@@ -35,7 +36,8 @@ class EventScheduleController extends BaseController {
                 'id' => $row['id'],
                 'title' => $row['title'],
                 'start' => $row['start_date'],
-                'end' => $row['end_date']
+                'end' => $row['end_date'],
+                'color'=>$row['event_color'],
             );
         }
         return $this->response->setJSON($data);
@@ -48,7 +50,8 @@ class EventScheduleController extends BaseController {
             $data = [
                 'title'  => $this->request->getVar('title'),
                 'start_date'=> $this->request->getVar('start'),
-                'end_date' => $this->request->getVar('end')
+                'end_date' => $this->request->getVar('end'),
+                'event_color'=>$this->request->getVar('color'),
             ];
             $scheduleModel = new EventScheduleModel();
             $scheduleModel->save($data);

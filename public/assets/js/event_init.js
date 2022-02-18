@@ -454,10 +454,16 @@ function confirm_event_check(){
                        });
                        return false;
                    }else{
+                       /*$('#exampleModalCenter').modal('hide');
+                       $('.close').click();
+                       alert('등록 되었습니다.');
+                       window.location.reload();*/
                        $('#exampleModalCenter').modal('hide');
                        $('.close').click();
                        alert('등록 되었습니다.');
-                       window.location.reload();
+                       $('.eventListData').html("");
+                       load_event()
+
                    }
 
 

@@ -16,7 +16,7 @@ class EventAdminNewController extends BaseController
     {
 
         $eventListModel = new EventListModel();
-        $queryList = $eventListModel->orderBy('idx', "desc")->findAll();
+        $queryList = $eventListModel->orderBy('idx', 'desc')->findAll();
         $data['eventList'] = $queryList;
 
 
@@ -96,7 +96,7 @@ class EventAdminNewController extends BaseController
     public function getEventList()
     {
         $eventListModel = new EventListModel();
-        $data['eventList'] = $eventListModel->findAll();
+        $data['eventList'] = $eventListModel->orderBy('idx', 'desc')->findAll();
         return $this->response->setJSON($data);
     }
 

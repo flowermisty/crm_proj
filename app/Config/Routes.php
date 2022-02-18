@@ -64,6 +64,9 @@ $routes->match(['get','post'],'event_admin_new/schedule/delete','EventScheduleCo
 
 
 
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

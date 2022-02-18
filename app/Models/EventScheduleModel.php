@@ -12,6 +12,7 @@ class EventScheduleModel extends Model
         'title',
         'start_date',
         'end_date',
+        'event_color',
     ];
 }
 

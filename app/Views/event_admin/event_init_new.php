@@ -48,7 +48,7 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo py-3">
-                        <a href="<?=base_url('event_admin_new')?>"><img src="/assets/images/logo/logo_big.png" alt="Logo" srcset=""></a>
+                        <a href="<?=base_url('/')?>"><img src="/assets/images/logo/logo_big.png" alt="Logo" srcset=""></a>
                         <h6 class="font-extrabold mb-0" style="font-size:12px;">이벤트 주문코드 등록 관리자 프로그램</h6>
                     </div>
                     <div class="toggler">
@@ -228,10 +228,15 @@
                                 </div>
                             </a>
                         </div>
-
+                        <script>
+                        function validationRefresh() {
+                        location.replace('http://godo.event.admin/event_admin_new/init/<?=$event_code?>');
+                        }
+                        </script>
                         <div class="col-6 col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
-                               onmouseout="this.style.opacity='1';" style="display:block;" onclick="window.location.reload()">
+                               onmouseout="this.style.opacity='1';" style="display:block;" onclick=" validationRefresh();">
+
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
                                         <div class="row">
