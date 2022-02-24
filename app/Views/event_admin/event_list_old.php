@@ -49,11 +49,11 @@
                                         <a href="<?= base_url("init/{$row['event_code']}") ?>"><?= $row['event_code'] ?></a>
                                     </td>
                                     <td>
-                                        <h5><span class="badge bg-success "
+                                        <h5><span class="badge bg-success"
                                                   style="width=100%;"><?= $row['regist_date'] ?></span></h5>
                                     </td>
                                     <td>
-                                        <h5><span class="badge bg-danger "
+                                        <h5><span class="badge bg-danger"
                                                   style="width=100%;"><?= $row['updated_at'] ?></span></h5>
                                     </td>
                                 </tr>

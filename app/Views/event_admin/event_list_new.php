@@ -100,7 +100,7 @@
                                 <a href="form-element-input.html">바이모션 변환</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="form-element-input-group.html">고도몰 변환</a>
+                                <a href="<?=base_url('convert/godo')?>">고도몰 변환</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="form-element-select.html">쿠팡 변환</a>

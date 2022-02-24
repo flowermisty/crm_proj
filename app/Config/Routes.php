@@ -61,6 +61,10 @@ $routes->match(['get','post'],'event_admin_new/schedule/insert','EventScheduleCo
 $routes->match(['get','post'],'event_admin_new/schedule/update','EventScheduleController::update');
 $routes->match(['get','post'],'event_admin_new/schedule/delete','EventScheduleController::delete');
 
+//주문서 변환
+$routes->match(['get','post'],'convert/godo','OrderConvertController::index');
+$routes->match(['get','post'],'convert/godo/venetmeal_v4','OrderConvertController::godoConvertVenetmealVer4');
+
 
 
 
