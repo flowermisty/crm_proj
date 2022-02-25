@@ -12,6 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     <script>
         $(document).ready(function(){
+            alert('이벤트 색상 / 이벤트 명을 선택하시고 날짜를 클릭 하시면 등록됩니다.')
             var calendar = $('#calendar').fullCalendar({
                 editable:true,
                 header:{
@@ -24,25 +25,29 @@
                 selectHelper:true,
                 select:function(start, end, allDay, color)
                 {
-                    var title = prompt("이벤트명을 입력하세요");
-                    if(title)
-                    {
+
+                        var title = $("select[name=event_name] option:selected").text();
                         var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
                         var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
                         var color = $("input[name='Primary']:checked").val();
-                        alert(color);
-                        $.ajax({
-                            url:"<?= base_url('event_admin_new/schedule/insert'); ?>",
-                            type:"POST",
-                            data:{title:title, start:start, end:end, color:color},
+                        if(title==="이벤트를 선택해 주세요"){
+                            alert("이벤트명을 선택해주세요")
+                            return false;
+                        }else{
+                            $.ajax({
+                                url:"<?= base_url('event_admin_new/schedule/insert'); ?>",
+                                type:"POST",
+                                data:{title:title, start:start, end:end, color:color},
 
-                            success:function()
-                            {
-                                calendar.fullCalendar('refetchEvents');
-                                alert("스케줄이 등록 되었습니다.");
-                            }
-                        })
-                    }
+                                success:function()
+                                {
+                                    calendar.fullCalendar('refetchEvents');
+                                    alert("스케줄이 등록 되었습니다.");
+                                }
+                            })
+                        }
+
+
                 },
                 editable:true,
                 eventResize:function(event)
@@ -114,7 +119,7 @@
 </head>
 <body style="background:white !important; font-weight: bold;">
 
-<div style="display: flex; margin-left: 5%; padding-bottom: 2%;">
+<div style="display: flex; margin-left: 5%; margin-top:2%; padding-bottom: 2%;">
     이벤트 색상 선택 :
     <div class="form-check form-check-primary" style="padding-left: 5%;">
         <input class="form-check-input" type="radio" name="Primary" id="event_color"  value="#435ebe" checked>
@@ -146,9 +151,20 @@
 
         </label>
     </div>
+
+    <select class="custom-select custom-select-sm" style="margin-left:9%;" name="event_name">
+        <option selected>이벤트를 선택해 주세요</option>
+        <?php foreach($eventList as $row):?>
+        <option value="<?=$row['event_name']?>"><?=$row['event_name']?></option>
+        <?php endforeach;?>
+    </select>
 </div>
+
 <div class="container">
     <div id="calendar"></div>
 </div>
 </body>
 </html>
+<script src="/assets2/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/assets2/js/bootstrap.bundle.min.js"></script>
+<script src="/assets2/js/mazer.js"></script>

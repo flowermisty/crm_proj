@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Controllers\BaseController;
+use App\Models\EventListModel;
 use App\Models\EventScheduleModel;
 
 
@@ -11,7 +12,9 @@ class EventScheduleController extends BaseController {
    public function index()
     {
         $ScheduleModel = new EventScheduleModel();
+        $eventListModel = new EventListModel();
         $event_data = $ScheduleModel->findAll();
+        $event_list = $eventListModel->select('event_name')->findAll();
         foreach($event_data as $row)
         {
             $data[] = array(
@@ -22,9 +25,11 @@ class EventScheduleController extends BaseController {
                 'color'=>$row['event_color'],
             );
         }
-        echo view('event_admin/event_schedule');
+        $data['eventList'] = $event_list;
+        echo view('event_admin/event_schedule',$data);
 
     }
+
 
     public function load()
     {
