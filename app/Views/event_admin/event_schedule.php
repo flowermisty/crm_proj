@@ -33,7 +33,7 @@
                         if(title==="이벤트를 선택해 주세요"){
                             alert("이벤트명을 선택해주세요")
                             return false;
-                        }else{
+                        } else{
                             $.ajax({
                                 url:"<?= base_url('event_admin_new/schedule/insert'); ?>",
                                 type:"POST",
@@ -43,6 +43,9 @@
                                 {
                                     calendar.fullCalendar('refetchEvents');
                                     alert("스케줄이 등록 되었습니다.");
+                                    $("select[name=event_name] option:eq(0)").prop("selected", true);
+                                    $("input[name='Primary']:eq(0)").prop("checked", true);
+
                                 }
                             })
                         }
@@ -122,7 +125,7 @@
 <div style="display: flex; margin-left: 5%; margin-top:2%; padding-bottom: 2%;">
     이벤트 색상 선택 :
     <div class="form-check form-check-primary" style="padding-left: 5%;">
-        <input class="form-check-input" type="radio" name="Primary" id="event_color"  value="#435ebe" checked>
+        <input class="form-check-input" id="firstRadio" type="radio" name="Primary" id="event_color"  value="#435ebe" checked>
         <label class="form-check-label" for="Primary">
 
         </label>

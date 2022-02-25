@@ -571,8 +571,93 @@ class OrderConvertController extends BaseController
                             }
                             ?>
                             <tr>
-                            <td style='mso-number-format:"\@";'>18500</td>
-                            <td style='mso-number-format:"\@";'>
+                                <td style='mso-number-format:"\@";'>18500</td>
+                                <td style='mso-number-format:"\@";'>
+                                    <?php
+                                    if (
+                                        in_array($sheetData[$i][$colIndexArr['erpCode']], $mealGubun)
+                                        || in_array($sheetData[$i][$colIndexArr['optionCode']], $mealGubun)
+                                        || in_array($sheetData[$i][$colIndexArr['erpCode']], $eventGoods)
+                                        || in_array($sheetData[$i][$colIndexArr['optionCode']], $eventGoods)
+                                    ) {
+                                        // 블랙 프라이데이로 인해서 일부 상품 택배창고에서 보내기로 요청 들어옮. 2021-11-17 추가 작업 함. hjlee
+                                        // 일반배송상품 목록을 작성하고, 해당 상품인 경우 일반창고코드 30020 을 출력함 by Cho Sung Jae at 2021-11-17
+                                        $generalPkgList = array(
+                                            "OHB001-004", // 요거트[딸기]
+                                            "OHB006-013", // 쌀떡뻥[콜라비]
+                                            "OHB019-002", // 찹쌀구름[자색고구마]
+                                            "PHB007-002", // 쌩마멧[바나나]
+                                            "TOH001-002", // 젖병&주방세제 액상형
+                                            "TOH001-008", // 베이비 섬유 세제
+                                        );
+                                        if ( // ERP 코드 값에 따라 일반배송 창고코드를 출력하도록 수정함 by Cho Sung Jae at 2021-11-17
+                                        in_array(trim($ROW2['erpCode']), $generalPkgList)
+                                        )
+                                            echo "30020"; // 일반택배 창고코드
+                                        else // 일반배송 상품 목록에 없는 ERP 코드일 경우, 냉장창고에서 출고하도록 함
+                                            echo "61000";
+                                    } else if (
+                                        $sheetData[$i][$colIndexArr['erpCode']] == "ABC001-0012"
+                                        || $sheetData[$i][$colIndexArr['erpCode']] == "ABC001-0013"
+                                        || $sheetData[$i][$colIndexArr['optionCode']] == "ABC001-0012"
+                                        || $sheetData[$i][$colIndexArr['optionCode']] == "ABC001-0013"
+                                        || $sheetData[$i][$colIndexArr['erpCode']] == "ABC001-0011"
+                                        || $sheetData[$i][$colIndexArr['optionCode']] == "ABC001-0011"
+                                        || $sheetData[$i][$colIndexArr['erpCode']] == "EV-HW"
+                                    ) {
+                                        echo "30020";
+                                    } else {
+                                        echo $ROW2["cCode"];
+                                    }
+                                    ?></td>
+                                <td style='mso-number-format:"\@";'><?= date("Y-m-d"); ?></td>
+                                <td style='mso-number-format:"\@";'>1001162</td>
+                                <td style='mso-number-format:"\@";'>0204002</td>
+                                <td style='mso-number-format:"\@";'><?= $ROW2['erpCode']; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $ROW2['prdName']; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['productAmount']] * $prdCode[$j]['ea'] ?></td>
+                                <td style='mso-number-format:"\@";'><?= $finDanga; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $finRhdrmq * $prdCode[$j]['ea']; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $finTax * $prdCode[$j]['ea']; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipient']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['payMethod']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= date("Y-m-d", strtotime("+1 day")); ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipientPhone']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipientPostNumber']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipientAddress']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['ordererMemo']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['orderNo']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['memberId']]; ?></td>
+                                <td style='mso-number-format:"\@";'></td>
+                                <td align='center'></td>
+                                <td align='center'></td>
+                                <td align='center'></td>
+                                <td align='center'></td>
+                            </tr>
+                            <?php
+                        }// end if ( $j == ( count($prdCode) - 1) )
+                    }
+
+                    /**
+                     * @brief 배송비 출력부분
+                     */
+                    $query = $db->query("SELECT * FROM godoConvert where 1 and viewYN = 'Y' and erpCode = '" . $ROW2['erpCode'] . "'");
+                    $ROW = $query->getRowArray();
+
+                    $prdName = ($sheetData[$i][$colIndexArr['erpCode']]) ? $sheetData[$i][$colIndexArr['optionInfo']] . "[" . $sheetData[$i][$colIndexArr['erpCode']] . "]" : $sheetData[$i][$colIndexArr['optionInfo']];
+
+                    if ($_CSJ_DEBUG_LEVEL == 2) echo "<tr> <td>주문번호 " . $sheetData[$z][$colIndexArr['productOrderNo']] . " / " . $sheetData[$i][$colIndexArr['productOrderNo']] . "</td></tr>";
+
+                    /** @brief 배송지 및 사용 마일리지 표시 부분
+                     * 주소지가 다른 경우, 별도의 배송건으로 인식하여, 배송비를 추가함.
+                     * TODO : 추후 패키지 갯수, 품목 갯수, 주문 수량에 따라 추가로 배송비를 책정해야 할 수 있음
+                     */
+
+                    if ($sheetData[$i][$colIndexArr['productOrderNo']]) {
+                        ?>
+                        <tr>
+                            <td style='mso-number-format:"\@"; background:yellow;'>18500</td>
+                            <td style='mso-number-format:"\@"; background:yellow;'>
                                 <?php
                                 if (
                                     in_array($sheetData[$i][$colIndexArr['erpCode']], $mealGubun)
@@ -580,22 +665,7 @@ class OrderConvertController extends BaseController
                                     || in_array($sheetData[$i][$colIndexArr['erpCode']], $eventGoods)
                                     || in_array($sheetData[$i][$colIndexArr['optionCode']], $eventGoods)
                                 ) {
-                                    // 블랙 프라이데이로 인해서 일부 상품 택배창고에서 보내기로 요청 들어옮. 2021-11-17 추가 작업 함. hjlee
-                                    // 일반배송상품 목록을 작성하고, 해당 상품인 경우 일반창고코드 30020 을 출력함 by Cho Sung Jae at 2021-11-17
-                                    $generalPkgList = array(
-                                        "OHB001-004", // 요거트[딸기]
-                                        "OHB006-013", // 쌀떡뻥[콜라비]
-                                        "OHB019-002", // 찹쌀구름[자색고구마]
-                                        "PHB007-002", // 쌩마멧[바나나]
-                                        "TOH001-002", // 젖병&주방세제 액상형
-                                        "TOH001-008", // 베이비 섬유 세제
-                                    );
-                                    if ( // ERP 코드 값에 따라 일반배송 창고코드를 출력하도록 수정함 by Cho Sung Jae at 2021-11-17
-                                    in_array(trim($ROW2['erpCode']), $generalPkgList)
-                                    )
-                                        echo "30020"; // 일반택배 창고코드
-                                    else // 일반배송 상품 목록에 없는 ERP 코드일 경우, 냉장창고에서 출고하도록 함
-                                        echo "61000";
+                                    echo "61000";
                                 } else if (
                                     $sheetData[$i][$colIndexArr['erpCode']] == "ABC001-0012"
                                     || $sheetData[$i][$colIndexArr['erpCode']] == "ABC001-0013"
@@ -607,117 +677,105 @@ class OrderConvertController extends BaseController
                                 ) {
                                     echo "30020";
                                 } else {
-                                    echo $ROW2["cCode"];
+                                    echo $ROW["cCode"];
                                 }
                                 ?></td>
-                            <td style='mso-number-format:"\@";'><?= date("Y-m-d"); ?></td>
-                            <td style='mso-number-format:"\@";'>1001162</td>
-                            <td style='mso-number-format:"\@";'>0204002</td>
-                            <td style='mso-number-format:"\@";'><?= $ROW2['erpCode']; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $ROW2['prdName']; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['productAmount']] * $prdCode[$j]['ea'] ?></td>
-                            <td style='mso-number-format:"\@";'><?= $finDanga; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $finRhdrmq * $prdCode[$j]['ea']; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $finTax * $prdCode[$j]['ea']; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipient']]; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['payMethod']]; ?></td>
-                            <td style='mso-number-format:"\@";'><?= date("Y-m-d", strtotime("+1 day")); ?></td>
-                            <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipientPhone']]; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipientPostNumber']]; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipientAddress']]; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['ordererMemo']]; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['orderNo']]; ?></td>
-                            <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['memberId']]; ?></td>
-                            <td style='mso-number-format:"\@";'></td>
-                            <td align='center'></td>
-                            <td align='center'></td>
-                            <td align='center'></td>
-                            <td align='center'></td>
-                            <?php
-                        }
-                        ?>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= date("Y-m-d"); ?></td>
+                            <td style='mso-number-format:"\@"; background:yellow;'>1001162</td>
+                            <td style='mso-number-format:"\@"; background:yellow;'>0204002</td>
+                            <td style='mso-number-format:"\@"; background:yellow;'>SGS001-001</td>
+                            <td style='mso-number-format:"\@"; background:yellow;'>[자사몰]배송비</td>
+                            <td style='mso-number-format:"\@"; background:yellow;'>1</td>
+                            <td style='mso-number-format:"\@"; background:yellow;'>3000</td>
+                            <td style='mso-number-format:"\@"; background:yellow;'>2727</td>
+                            <td style='mso-number-format:"\@"; background:yellow;'>273</td>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['recipient']]; ?></td>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['payMethod']]; ?></td>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= date("Y-m-d", strtotime("+1 day")); ?></td>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['recipientPhone']]; ?></td>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['recipientPostNumber']]; ?></td>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['recipientAddress']]; ?></td>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['ordererMemo']]; ?></td>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['orderNo']]; ?></td>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['memberId']]; ?></td>
+                            <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['productOrderNo']] ?></td>
+                            <td align='center' style="background:yellow;"></td>
+                            <td align='center' style="background:yellow;"></td>
+                            <td align='center' style="background:yellow;"></td>
+                            <td align='center' style="background:yellow;"></td>
                         </tr>
                         <?php
-                    } // end if ( $j == ( count($prdCode) - 1) )
-                }// for ( $j = 0; $j < count($prdCode); $j++)
-                /**
-                 * @brief 배송비 출력부분
-                 */
-                $query = $db->query("SELECT * FROM godoConvert where 1 and viewYN = 'Y' and erpCode = '" . $ROW2['erpCode'] . "'");
-                $ROW = $query->getRowArray();
+                        if ($sheetData[$i][$colIndexArr['usedMileage']] != "0포인트") {
+                            // 사용된 총 마일리지가 있을때. 마일리지를 I열데이터를 가져와서 쓰던 것을 Y열 데이터로 변환
+                            // (그게 각 상품별로 나뉘어서 들어간 마일리지라서. I열은 총 주문에 사용된 마일리지를 표기해주는 것이라
+                            // 이걸 쓰면 마일리지사용량이 하나를 변환할 때마다 총 사용량으로 들어가면서 뻥튀기됨.)
+                            $sheetData[$i][$colIndexArr['usedMileage']] = str_replace(",", "", $sheetData[$i][$colIndexArr['usedMileage']]);
+                            $sheetData[$i][$colIndexArr['usedMileage']] = str_replace("포인트", "", $sheetData[$i][$colIndexArr['usedMileage']]);
 
-                $prdName = ($sheetData[$i][$colIndexArr['erpCode']]) ? $sheetData[$i][$colIndexArr['optionInfo']] . "[" . $sheetData[$i][$colIndexArr['erpCode']] . "]" : $sheetData[$i][$colIndexArr['optionInfo']];
-
-                if ($_CSJ_DEBUG_LEVEL == 2) echo "<tr> <td>주문번호 " . $sheetData[$z][$colIndexArr['productOrderNo']] . " / " . $sheetData[$i][$colIndexArr['productOrderNo']] . "</td></tr>";
-
-                /** @brief 배송지 및 사용 마일리지 표시 부분
-                 * 주소지가 다른 경우, 별도의 배송건으로 인식하여, 배송비를 추가함.
-                 * TODO : 추후 패키지 갯수, 품목 갯수, 주문 수량에 따라 추가로 배송비를 책정해야 할 수 있음
-                 */
-
-                if ($sheetData[$i][$colIndexArr['productOrderNo']]) {
-                    ?>
-                    <tr>
-                        <td style='mso-number-format:"\@"; background:yellow;'>18500</td>
-                        <td style='mso-number-format:"\@"; background:yellow;'>
+                            ?>
+                            <tr>
+                                <td style='mso-number-format:"\@";'>18500</td>
+                                <td style='mso-number-format:"\@";'>
+                                    <?php
+                                    if (
+                                        in_array($sheetData[$i][$colIndexArr['erpCode']], $mealGubun)
+                                        || in_array($sheetData[$i][$colIndexArr['optionCode']], $mealGubun)
+                                        || in_array($sheetData[$i][$colIndexArr['erpCode']], $eventGoods)
+                                        || in_array($sheetData[$i][$colIndexArr['optionCode']], $eventGoods)
+                                    ) {
+                                        echo "61000";
+                                    } else if (
+                                        $sheetData[$i][$colIndexArr['erpCode']] == "ABC001-0012"
+                                        || $sheetData[$i][$colIndexArr['erpCode']] == "ABC001-0013"
+                                        || $sheetData[$i][$colIndexArr['optionCode']] == "ABC001-0012"
+                                        || $sheetData[$i][$colIndexArr['optionCode']] == "ABC001-0013"
+                                        || $sheetData[$i][$colIndexArr['erpCode']] == "EV-HW"
+                                    ) {
+                                        echo "30020";
+                                    } else {
+                                        echo $ROW["cCode"];
+                                    }
+                                    ?></td>
+                                <td style='mso-number-format:"\@";'><?= date("Y-m-d"); ?></td>
+                                <td style='mso-number-format:"\@";'>1001162</td>
+                                <td style='mso-number-format:"\@";'>0204002</td>
+                                <td style='mso-number-format:"\@";'>SGS001-002</td>
+                                <td style='mso-number-format:"\@";'>[자사몰]마일리지</td>
+                                <td style='mso-number-format:"\@";'>1</td><!--마일리지는 수량 무조건 1-->
+                                <td style='mso-number-format:"\@";'><?= 0 - $pointSum; ?></td>
+                                <td style='mso-number-format:"\@";'><?= 0 - $pointSum; ?></td>
+                                <td style='mso-number-format:"\@";'>0</td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipient']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['payMethod']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= date("Y-m-d", strtotime("+1 day")); ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipientPhone']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipientPostNumber']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['recipientAddress']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['ordererMemo']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['orderNo']]; ?></td>
+                                <td style='mso-number-format:"\@";'><?= $sheetData[$i][$colIndexArr['memberId']]; ?></td>
+                                <td style='mso-number-format:"\@";'></td>
+                                <td align='center' style="background:yellow;"></td>
+                                <td align='center' style="background:yellow;"></td>
+                                <td align='center' style="background:yellow;"></td>
+                                <td align='center' style="background:yellow;"></td>
+                            </tr>
                             <?php
-                            if (
-                                in_array($sheetData[$i][$colIndexArr['erpCode']], $mealGubun)
-                                || in_array($sheetData[$i][$colIndexArr['optionCode']], $mealGubun)
-                                || in_array($sheetData[$i][$colIndexArr['erpCode']], $eventGoods)
-                                || in_array($sheetData[$i][$colIndexArr['optionCode']], $eventGoods)
-                            ) {
-                                echo "61000";
-                            } else if (
-                                $sheetData[$i][$colIndexArr['erpCode']] == "ABC001-0012"
-                                || $sheetData[$i][$colIndexArr['erpCode']] == "ABC001-0013"
-                                || $sheetData[$i][$colIndexArr['optionCode']] == "ABC001-0012"
-                                || $sheetData[$i][$colIndexArr['optionCode']] == "ABC001-0013"
-                                || $sheetData[$i][$colIndexArr['erpCode']] == "ABC001-0011"
-                                || $sheetData[$i][$colIndexArr['optionCode']] == "ABC001-0011"
-                                || $sheetData[$i][$colIndexArr['erpCode']] == "EV-HW"
-                            ) {
-                                echo "30020";
-                            } else {
-                                echo $ROW["cCode"];
-                            }
-                            ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?= date("Y-m-d"); ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'>1001162</td>
-                        <td style='mso-number-format:"\@"; background:yellow;'>0204002</td>
-                        <td style='mso-number-format:"\@"; background:yellow;'>SGS001-001</td>
-                        <td style='mso-number-format:"\@"; background:yellow;'>[자사몰]배송비</td>
-                        <td style='mso-number-format:"\@"; background:yellow;'>1</td>
-                        <td style='mso-number-format:"\@"; background:yellow;'>3000</td>
-                        <td style='mso-number-format:"\@"; background:yellow;'>2727</td>
-                        <td style='mso-number-format:"\@"; background:yellow;'>273</td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['recipient']]; ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['payMethod']]; ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?= date("Y-m-d", strtotime("+1 day")); ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['recipientPhone']]; ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['recipientPostNumber']]; ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['recipientAddress']]; ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['ordererMemo']]; ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['orderNo']]; ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?= $sheetData[$i][$colIndexArr['memberId']]; ?></td>
-                        <td style='mso-number-format:"\@"; background:yellow;'><?=$sheetData[$i][$colIndexArr['productOrderNo']]?></td>
-                        <td align='center' style="background:yellow;"></td>
-                        <td align='center' style="background:yellow;"></td>
-                        <td align='center' style="background:yellow;"></td>
-                        <td align='center' style="background:yellow;"></td>
-                    </tr>
-                    <?php
-                }
+                            $pointSum = 0; // 총 마일리지포인트 초기화
+                        } // if ( $sheetData[$i]['Y'] != "0포인트" )
 
+
+                    }
+                }
             }
         }
-        ?>
-        </table>
-        <?php
+            ?>
+            </table>
+            <?php
 
 
-    }// godoConvertVenetmealVer4 method end
+        }// godoConvertVenetmealVer4 method end
 
 
-}//class end
+    }//class end
 ?>
