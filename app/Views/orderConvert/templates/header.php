@@ -18,7 +18,30 @@
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script src="/assets2/js/refundCalc.js"></script>
 </head>
+
+<style>
+    body::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Track */
+    body::-webkit-scrollbar-track {
+        border-radius: 5px;
+    }
+
+    /* Handle */
+    body::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 5px;
+    }
+
+</style>
 
 <body>
 

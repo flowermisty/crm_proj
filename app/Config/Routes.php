@@ -65,6 +65,10 @@ $routes->match(['get','post'],'event_admin_new/schedule/delete','EventScheduleCo
 $routes->match(['get','post'],'convert/godo','OrderConvertController::index');
 $routes->match(['get','post'],'convert/godo/venetmeal_v4','OrderConvertController::godoConvertVenetmealVer4');
 
+//환불계산기
+$routes->match(['get','post'],'refundCalc/refund','RefundCalcController::refund');
+$routes->match(['get','post'],'refundCalc/refundPoint','RefundCalcController::refundPoint');
+
 
 
 
