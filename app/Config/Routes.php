@@ -62,8 +62,9 @@ $routes->match(['get','post'],'event_admin_new/schedule/update','EventScheduleCo
 $routes->match(['get','post'],'event_admin_new/schedule/delete','EventScheduleController::delete');
 
 //주문서 변환
-$routes->match(['get','post'],'convert/godo','OrderConvertController::index');
-$routes->match(['get','post'],'convert/godo/venetmeal_v4','OrderConvertController::godoConvertVenetmealVer4');
+$routes->match(['get','post'],'convert/godo','orderConvert/GodoConvertVenetmealv4Controller::index');
+$routes->match(['get','post'],'convert/godo/venetmeal_v4','orderConvert/GodoConvertVenetmealv4Controller::godoConvertVenetmealVer4');
+$routes->match(['get','post'],'convert/godo/eventout','orderConvert/EventProductOutConvertController::EventProductOutConvert');
 
 //환불계산기
 $routes->match(['get','post'],'refundCalc/refund','RefundCalcController::refund');

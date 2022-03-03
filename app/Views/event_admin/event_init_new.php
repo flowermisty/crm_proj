@@ -155,7 +155,7 @@
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="form-element-textarea.html">식품이려</a>
+                                <a href="form-element-textarea.html">식품이력</a>
                             </li>
 
                             <li class="submenu-item ">

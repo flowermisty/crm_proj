@@ -75,6 +75,10 @@
 
     });
 
+    FilePond.create(document.querySelector('.basic-filepond4'), {
+        storeAsFile: true,
+    })
+
     // Filepond: Multiple Files
     FilePond.create(document.querySelector('.multiple-files-filepond'), {
         allowImagePreview: false,

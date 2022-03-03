@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\orderConvert;
 
 use \CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
@@ -29,14 +29,14 @@ class MyReadFilter implements IReadFilter
 }
 
 
-class OrderConvertController extends BaseController
+class GodoConvertVenetmealv4Controller extends \App\Controllers\BaseController
 {
     protected $helpers = ['form'];
 
     public function index()
     {
         echo view('orderConvert/templates/header');
-        echo view('orderConvert/godoConvert/godoConvertVenetmealVer4');
+        echo view('orderConvert/godoConvert/godoConvert');
         echo view('orderConvert/templates/footer');
     }
 
@@ -769,13 +769,12 @@ class OrderConvertController extends BaseController
                 }
             }
         }
-            ?>
-            </table>
-            <?php
+        ?>
+        </table>
+        <?php
+    }// godoConvertVenetmealVer4 method end
 
 
-        }// godoConvertVenetmealVer4 method end
 
-
-    }//class end
+}//class end
 ?>

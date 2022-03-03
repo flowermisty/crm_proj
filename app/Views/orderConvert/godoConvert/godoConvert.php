@@ -110,6 +110,53 @@
                 </div>
             </div>
 
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-header" style="padding-bottom:0 !important;">
+                        <h5 class="card-title text-muted">이벤트 제품 출고</h5>
+                    </div>
+                    <div class="card-content" style="padding-bottom: 2%;">
+                        <div class="card-body" style="padding-top: 0 !important;">
+                            <p class="card-text">* 이현일 과장만 사용하세요.<br>
+                                * xls파일 확인 및 반드시 상품코드 전부 입력한 뒤 업로드버튼 눌러주세요!
+                                <code></code>
+                            </p>
+                            <!-- Basic file uploader -->
+                            <form action="<?= base_url('convert/godo/eventout') ?>" method="post"
+                                  enctype="multipart/form-data" class="form-row" name="eventProductOut">
+                                <div class="row" id="eventOut">
+                                    <div class="" style="line-height: 40px; width:auto; padding-right: 6%;">
+                                        <label>상품</label>
+                                    </div>
+                                    <div class="col-md-10 form-group" style="display:flex;">
+                                        <input type="text" class="form-control col-md-4" name="gubun" required>
+                                    </div>
+
+                                    <div class="" style="line-height: 40px; width:auto;">
+                                        <label>작성일자</label>
+                                    </div>
+                                    <div class="col-md-4 form-group" style="display:flex;">
+                                        <input type="date" class="form-control" name="sdate" required>
+                                    </div>
+
+
+                                    <div class="" style="line-height: 40px; width:auto; padding-left: 6%;">
+                                        <label>납기요청</label>
+                                    </div>
+                                    <div class="col-md-4 form-group" style="display:flex;">
+                                        <input type="date" class="form-control" name="fdate" required>
+                                    </div>
+                                </div>
+
+                                <input type="file" class="basic-filepond4" name="excel_file">
+                                <input type="submit" class="btn btn-primary" value="upload"
+                                       style="float: right; margin-top:2%;">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="modal fade" id="refundRegular" tabindex="-1" role="dialog"
                  aria-hidden="false">
@@ -379,7 +426,8 @@
                                                         <label>특별할인율</label>
                                                     </div>
                                                     <div class="col-md-7 form-group" style="display:flex;">
-                                                        <input type="text" name="specialDiscountRatio" id="tf_specialDiscountRatio"
+                                                        <input type="text" name="specialDiscountRatio"
+                                                               id="tf_specialDiscountRatio"
                                                                class="form-control"
                                                                placeholder="" value="35">
 
@@ -392,7 +440,8 @@
                                                         <label>상시할인율</label>
                                                     </div>
                                                     <div class="col-md-7 form-group" style="display:flex;">
-                                                        <input type="text" name="generalDiscountRatio" id="tf_generalDiscountRatio"
+                                                        <input type="text" name="generalDiscountRatio"
+                                                               id="tf_generalDiscountRatio"
                                                                class="form-control"
                                                                placeholder="" value="12">
 
@@ -407,7 +456,7 @@
                                                     <div class="col-md-7 form-group" style="display:flex;">
                                                         <input type="text" name="totalEa" id="tf_totalEa"
                                                                class="form-control"
-                                                               placeholder="" >
+                                                               placeholder="">
 
                                                     </div>
                                                     <div class="col-md-1 form-group" style="display:flex;"><span
