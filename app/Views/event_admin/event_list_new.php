@@ -9,8 +9,9 @@
                 <div class="d-flex justify-content-between">
                     <div class="logo py-3">
                         <a href="<?= base_url('/') ?>"><img src="/assets/images/logo/logo_big.png"
-                                                                          alt="Logo" srcset=""></a>
+                                                            alt="Logo" srcset=""></a>
                         <h6 class="font-extrabold mb-0" style="font-size:12px;">이벤트 주문코드 등록 관리자 프로그램</h6>
+
                     </div>
                     <div class="toggler">
                         <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -100,7 +101,7 @@
                                 <a href="form-element-input.html">바이모션 변환</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="<?=base_url('convert/godo')?>">고도몰 변환</a>
+                                <a href="<?= base_url('convert/godo') ?>">고도몰 변환</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="form-element-select.html">쿠팡 변환</a>
@@ -168,14 +169,14 @@
             <section class="row">
                 <div class="col-12 col-lg-11">
                     <div class="row">
-                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="50"
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50"
                              data-aos-duration="1000">
                             <a href="http://i.venet.kr/nlogin.php" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" data-bs-toggle="tooltip"
                                data-placement="bottom" data-bs-or>
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
-                                        <div class="row">
+                                        <div class="row" style="margin-left:4%;">
                                             <div class="col-md-4">
                                                 <div class="stats-icon purple">
                                                     <i class="iconly-boldHome"></i>
@@ -191,14 +192,14 @@
                             </a>
                         </div>
 
-                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="50"
-                             data-aos-duration="1000">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50"
+                             data-aos-duration="1000" style="margin-left:4%;">
                             <a href="exampleModalCenter" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" data-toggle="modal"
                                data-target="#exampleModalCenter">
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
-                                        <div class="row">
+                                        <div class="row" style="margin-left:4%;">
                                             <div class="col-md-4">
                                                 <div class="stats-icon blue">
                                                     <i class="iconly-boldPlus"></i>
@@ -213,13 +214,13 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-right" data-aos-delay="50"
-                             data-aos-duration="1000">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-right" data-aos-delay="50"
+                             data-aos-duration="1000" style="margin-left:4%;">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" onclick="confirm_delCheck();">
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
-                                        <div class="row">
+                                        <div class="row" style="margin-left:4%;">
                                             <div class="col-md-4">
                                                 <div class="stats-icon red">
                                                     <i class="iconly-boldDelete"></i>
@@ -234,14 +235,14 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-right" data-aos-delay="50"
-                             data-aos-duration="1000">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-right" data-aos-delay="50"
+                             data-aos-duration="1000" style="margin-left:4%;">
                             <a href="eventSchedule" class="" onmouseover="this.style.opacity='0.7';" data-toggle="modal"
                                data-target="#eventSchedule"
                                onmouseout="this.style.opacity='1';" style=display:block;">
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
-                                        <div class="row">
+                                        <div class="row" style="margin-left:4%;">
                                             <div class="col-md-4">
                                                 <div class="stats-icon green">
                                                     <i class="iconly-boldCalendar"></i>
@@ -258,7 +259,32 @@
                                 </div>
                             </a>
                         </div>
+
+
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-right" data-aos-delay="50"
+                             data-aos-duration="1000" style="margin-left:4%;">
+                                <div class="card">
+                                    <div class="card-body px-3 py-2-3" style="padding-bottom: 17%;">
+                                        <div class="d-flex align-items-center" style="padding-left: 4%;">
+                                            <div class="stats-icon blue">
+                                                <i class="iconly-boldProfile"></i>
+                                            </div>
+                                            <?php if (isset($_SESSION['aIdx'])): ?>
+
+                                            <div class="ms-3 name">
+                                                <h6 class="font-bold text-muted"><?=$_SESSION['aName']?> 님</h6>
+                                                <a href="<?=base_url("logout")?>" onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';"><h6 class="text-primary mb-0">Log-Out</h6></a>
+                                            </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
+
+
+
+
                     <div class="row">
                         <div class="col-12">
                             <div class="card" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000">
@@ -401,9 +427,9 @@
         </script>
 
 
-
-
-        <?php if (isset($_SESSION)): ?>
-            <?php echo session_destroy(); ?>
+        <?php if (isset($_SESSION['item_code'])): ?>
+            <?php
+            $session = session();
+            $session->remove('item_code');
+            ?>
         <?php endif; ?>
-

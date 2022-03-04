@@ -35,6 +35,12 @@ class GodoConvertVenetmealv4Controller extends \App\Controllers\BaseController
 
     public function index()
     {
+        helper(['form', 'alert']);
+
+        if( session()->has('aIdx') == "") {
+            alert_move("로그인 후 들어와 주세요 ", "http://godo.event.admin/login");
+        }
+
         echo view('orderConvert/templates/header');
         echo view('orderConvert/godoConvert/godoConvert');
         echo view('orderConvert/templates/footer');

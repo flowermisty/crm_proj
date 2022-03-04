@@ -31,6 +31,13 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+//login
+$routes->get('/login', 'LoginController::index');
+$routes->match(['get','post'],'/login/init','LoginController::loginInit');
+$routes->match(['get','post'],'/logout','LoginController::logOut');
+
+
 $routes->get('/event_admin_old', 'EventAdminOldController::index');
 $routes->match(['get','post'],'init/(:segment)','EventAdminOldController::init/$1');
 $routes->match(['get','post'],'eventRegist','EventAdminOldController::eventRegist');

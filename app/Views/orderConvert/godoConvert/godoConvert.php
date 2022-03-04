@@ -20,11 +20,11 @@
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" style="padding-bottom:0 !important;">
                         <h5 class="card-title text-muted">고도몰 식단</h5>
                     </div>
-                    <div class="card-content  py-3">
-                        <div class="card-body">
+                    <div class="card-content" style="padding-bottom: 2%;">
+                        <div class="card-body" style="padding-top: 0 !important;">
                             <p class="card-text">* 고도몰에서 다운로드한 원본 파일을 그대로 올려주세요.<br>
                                 * 상품 준비중 리스트에서 다운 받은 파일을 올려주시면 됩니다!
                                 <code></code>
@@ -40,11 +40,11 @@
 
             <div class="col-12 col-md-6">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" style="padding-bottom:0 !important;">
                         <h5 class="card-title text-muted">고도몰 ERP 주문 변경프로그램 Ver4</h5>
                     </div>
-                    <div class="card-content  py-3">
-                        <div class="card-body ">
+                    <div class="card-content" style="padding-bottom: 2%;">
+                        <div class="card-body" style="padding-top: 0 !important;">
                             <p class="card-text">* 고도몰에서 다운로드한 원본 파일을 그대로 올려주세요.<br>
                                 * 상품 준비중 리스트에서 다운 받은 파일을 올려주시면 됩니다!
                                 <code></code>
@@ -64,11 +64,11 @@
 
             <div class="col-12 col-md-6">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" style="padding-bottom:0 !important;">
                         <h5 class="card-title text-muted">홈플러스 온라인몰 ERP 주문 변경 프로그램 Ver1</h5>
                     </div>
-                    <div class="card-content  py-3">
-                        <div class="card-body">
+                    <div class="card-content" style="padding-bottom: 2%;">
+                        <div class="card-body" style="padding-top: 0 !important;">
                             <p class="card-text">* 홈플러스 온라인몰에서 다운로드한 원본파일을 그대로 올려주세요.<br>
                                 * (단, xls파일로 저장되어 있어야 합니다.)
                                 <code></code>
@@ -84,17 +84,17 @@
 
             <div class="col-12 col-md-6">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" style="padding-bottom:0 !important;">
                         <h5 class="card-title text-muted">환불 금액 / 포인트 비율 계산기</h5>
                     </div>
-                    <div class="card-content  py-5">
-                        <div class="card-body">
+                    <div class="card-content" style="padding-bottom: 1%;">
+                        <div class="card-body" style="padding-top: 0 !important;">
                             <p class="card-text">* 정기 배송 / 3,4 이벤트 부분 환불 금액 및 포인트 비율을 계산하기 위한 계산 프로그램 모음 입니다.<br>
                                 * 각 버튼 클릭시 해당 계산기가 출력 됩니다.
                                 <code></code>
                             </p>
 
-                            <div style="margin-top:5%;font-size:12px;">
+                            <div style="margin-top:15%;font-size:12px;">
                                 <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal"
                                         data-bs-target="#refundRegular">정기배송 부분환불 금액 계산
                                 </button>

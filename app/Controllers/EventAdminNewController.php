@@ -8,12 +8,22 @@ namespace App\Controllers;
 use App\Models\EventListModel;
 use App\Models\EventComponentsModel;
 
+
 if(defined("BASEPATH")) { exit("No direct script access allowed"); }
 
 class EventAdminNewController extends BaseController
 {
     public function index()
     {
+
+        helper(['form', 'alert']);
+        if( session()->has('aIdx') == "") {
+            alert_move("로그인 후 들어와 주세요 ", "http://godo.event.admin/login");
+        }
+
+
+
+
 
         $eventListModel = new EventListModel();
         $queryList = $eventListModel->orderBy('idx', 'desc')->findAll();
@@ -107,6 +117,14 @@ class EventAdminNewController extends BaseController
         $data = [];
         $dataResult = [];
         helper(['form', 'alert']);
+
+        $session = session();
+        $loginSession= [
+            'aName' => session()->get('aName'),
+            'aIdx' => session()->get('aIdx'),
+            'orgCode' =>session()->get('orgCode'),
+        ];
+        $session->set($loginSession);
 
         $eventModel = new EventComponentsModel();
         $query = $eventModel->groupBy('menuName')->findAll();

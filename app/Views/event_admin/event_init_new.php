@@ -207,13 +207,13 @@
             <section class="row">
                 <div class="col-12 col-lg-11">
                     <div class="row">
-                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
                             <a href="<?=base_url('/')?>" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" data-bs-toggle="tooltip"
                                data-placement="bottom" data-bs-or>
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
-                                        <div class="row">
+                                        <div class="row" style="margin-left:4%;">
                                             <div class="col-md-4">
                                                 <div class="stats-icon purple">
                                                     <i class="iconly-boldHome"></i>
@@ -233,13 +233,13 @@
                         location.replace('http://godo.event.admin/event_admin_new/init/<?=$event_code?>');
                         }
                         </script>
-                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000" style="margin-left:4%;">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style="display:block;" onclick=" validationRefresh();">
 
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
-                                        <div class="row">
+                                        <div class="row" style="margin-left:4%;">
                                             <div class="col-md-4">
                                                 <div class="stats-icon blue">
                                                     <i class="iconly-boldPlus"></i>
@@ -254,13 +254,13 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-right" data-aos-delay="50" data-aos-duration="1000">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000" style="margin-left:4%;">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style=display:block;" onclick="menuCheckDeleteRow();">
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-4" style="padding-right:1%;">
                                                 <div class="stats-icon red">
                                                     <i class="iconly-boldClose-Square"></i>
                                                 </div>
@@ -274,13 +274,13 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6" data-aos="flip-right" data-aos-delay="50" data-aos-duration="1000">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000" style="margin-left:4%;">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
                                onmouseout="this.style.opacity='1';" style="display:block;" onclick="menuAllDeleteRow();">
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-4" style="padding-right:1%;">
                                                 <div class="stats-icon green">
                                                     <i class="iconly-boldDelete"></i>
                                                 </div>
@@ -293,6 +293,26 @@
                                     </div>
                                 </div>
                             </a>
+                        </div>
+
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-right" data-aos-delay="50"
+                             data-aos-duration="1000" style="margin-left:4%;">
+                            <div class="card">
+                                <div class="card-body px-3 py-2-3" style="padding-bottom: 17%;">
+                                    <div class="d-flex align-items-center">
+                                        <div class="stats-icon blue" style="margin-left:4%;">
+                                            <i class="iconly-boldProfile"></i>
+                                        </div>
+                                        <?php  if (isset($_SESSION['aIdx'])): ?>
+
+                                            <div class="ms-3 name">
+                                                <h6 class="font-bold text-muted"><?=$_SESSION['aName']?> 님</h6>
+                                                <a href="<?=base_url("logout")?>" onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';"><h6 class="text-primary mb-0">Log-Out</h6></a>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row" style="padding-bottom:4%;">
@@ -492,8 +512,11 @@
 
         </div>
 
-        <?php if (isset($_SESSION)): ?>
-            <?php session_destroy();?>
+        <?php if (isset($_SESSION['item_code'])): ?>
+            <?php
+            $session = session();
+            $session->remove('item_code');
+            ?>
         <?php endif; ?>
 
 
