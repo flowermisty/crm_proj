@@ -24,7 +24,7 @@
                         <h5 class="card-title text-muted">고도몰 식단</h5>
                     </div>
                     <div class="card-content" style="padding-bottom: 2%;">
-                        <div class="card-body" style="padding-top: 0 !important;">
+                        <div class="card-body" style="padding-top: 4% !important;">
                             <p class="card-text">* 고도몰에서 다운로드한 원본 파일을 그대로 올려주세요.<br>
                                 * 상품 준비중 리스트에서 다운 받은 파일을 올려주시면 됩니다!
                                 <code></code>
@@ -52,6 +52,30 @@
                             <!-- Basic file uploader -->
                             <form action="<?= base_url('convert/godo/venetmeal_v4') ?>" method="post"
                                   enctype="multipart/form-data" class="form-row">
+                                <div style="display: flex;">
+                                    <div class="form-check form-check-primary"
+                                         style="padding-right: 3%; margin-top:1%;">
+                                        <label class="form-check-label" for="primary"
+                                               style="font-size: 12px;">
+                                            새벽배송
+                                        </label>
+                                        <input class="form-check-input" type="radio" name="dtype"
+                                               id="dtype" value="d" checked>
+
+                                    </div>
+
+                                    <div class="form-check form-check-success"
+                                         style="padding-right: 3%; margin-top:1%;">
+                                        <label class="form-check-label" for="success"
+                                               style="font-size: 12px;">
+                                            일반배송
+                                        </label>
+                                        <input class="form-check-input" type="radio" name="dtype"
+                                               id="dtype" value="g">
+
+                                    </div>
+                                </div>
+
                                 <input type="file" class="basic-filepond2" name="excel_file" id="excel_file">
                                 <input type="submit" class="btn btn-primary" value="upload"
                                        style="float: right; margin-top:2%;">

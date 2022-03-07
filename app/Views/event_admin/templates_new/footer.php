@@ -18,7 +18,12 @@
 <script src="/assets2/js/bootstrap.bundle.min.js"></script>
 <script src="/assets2/js/pages/dashboard.js"></script>
 <script src="/assets2/js/mazer.js"></script>
-
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
 
 
 

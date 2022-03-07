@@ -48,7 +48,7 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo py-3">
-                        <a href="<?=base_url('/')?>"><img src="/assets/images/logo/logo_big.png" alt="Logo" srcset=""></a>
+                        <a href="<?=base_url('/eventAdmin')?>"><img src="/assets/images/logo/logo_big.png" alt="Logo" srcset=""></a>
                         <h6 class="font-extrabold mb-0" style="font-size:12px;">이벤트 주문코드 등록 관리자 프로그램</h6>
                     </div>
                     <div class="toggler">
@@ -142,7 +142,7 @@
                                 <a href="<?=base_url('convert/godo')?>">고도몰 변환</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="form-element-select.html">쿠팡 변환</a>
+                                <a href="<?=base_url('convert/coupang')?>">쿠팡 변환</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="form-element-radio.html">마트 변환</a>
@@ -208,7 +208,7 @@
                 <div class="col-12 col-lg-11">
                     <div class="row">
                         <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
-                            <a href="<?=base_url('/')?>" class="" onmouseover="this.style.opacity='0.7';"
+                            <a href="<?=base_url('/eventAdmin')?>" class="" onmouseover="this.style.opacity='0.7';"s
                                onmouseout="this.style.opacity='1';" style=display:block;" data-bs-toggle="tooltip"
                                data-placement="bottom" data-bs-or>
                                 <div class="card">
@@ -300,8 +300,10 @@
                             <div class="card">
                                 <div class="card-body px-3 py-2-3" style="padding-bottom: 17%;">
                                     <div class="d-flex align-items-center">
-                                        <div class="stats-icon blue" style="margin-left:4%;">
-                                            <i class="iconly-boldProfile"></i>
+                                        <div class="stats-icon gray" style="margin-left:4%;">
+                                            <i class="iconly-boldProfile" data-bs-toggle="tooltip" data-bs-placement="top" title data-bs-original-title="정보변경"
+                                               onmouseover="this.style.opacity='0.7';"
+                                               onmouseout="this.style.opacity='1';"></i>
                                         </div>
                                         <?php  if (isset($_SESSION['aIdx'])): ?>
 

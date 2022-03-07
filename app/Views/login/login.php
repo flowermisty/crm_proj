@@ -171,7 +171,7 @@
             data: {Mode:Mode, user_id:user_id, user_pw:user_pw},
             success: function (response) {
                 if (response.STATUS == "SUC") {
-                    window.location.href = "http://godo.event.admin";
+                    window.location.href = "http://godo.event.admin/eventAdmin/";
 
                 } else {
                     alert(response.MSG);

@@ -52,7 +52,7 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo py-3">
-                        <a href="<?= base_url('/') ?>"><img src="/assets/images/logo/logo_big.png"
+                        <a href="<?= base_url('/eventAdmin') ?>"><img src="/assets/images/logo/logo_big.png"
                                                             alt="Logo" srcset=""></a>
                         <h6 class="font-extrabold mb-0" style="font-size:12px;">이벤트 주문코드 등록 관리자 프로그램</h6>
                     </div>
@@ -147,7 +147,7 @@
                                 <a href="<?=base_url('convert/godo')?>">고도몰 변환</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="form-element-select.html">쿠팡 변환</a>
+                                <a href="<?=base_url('convert/coupang')?>">쿠팡 변환</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="form-element-radio.html">마트 변환</a>

@@ -33,7 +33,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 //login
-$routes->get('/login', 'LoginController::index');
+$routes->get('/', 'LoginController::index');
 $routes->match(['get','post'],'/login/init','LoginController::loginInit');
 $routes->match(['get','post'],'/logout','LoginController::logOut');
 
@@ -46,7 +46,7 @@ $routes->match(['get','post'],'update/(:any)','EventAdminOldController::update/$
 $routes->match(['get','post'],'delete','EventAdminOldController::delete');
 
 //이벤트 관리자 인터페이스 UI변경 mapping
-$routes->get('/', 'EventAdminNewController::index');
+$routes->get('/eventAdmin', 'EventAdminNewController::index');
 $routes->match(['get','post'],'event_admin_new/eventRegist','EventAdminNewController::eventRegist');
 $routes->match(['get','post'],'event_admin_new/getEventList','EventAdminNewController::getEventList');
 $routes->match(['get','post'],'event_admin_new/update/(:any)','EventAdminNewController::update/$1/$1');
@@ -72,6 +72,9 @@ $routes->match(['get','post'],'event_admin_new/schedule/delete','EventScheduleCo
 $routes->match(['get','post'],'convert/godo','orderConvert/GodoConvertVenetmealv4Controller::index');
 $routes->match(['get','post'],'convert/godo/venetmeal_v4','orderConvert/GodoConvertVenetmealv4Controller::godoConvertVenetmealVer4');
 $routes->match(['get','post'],'convert/godo/eventout','orderConvert/EventProductOutConvertController::EventProductOutConvert');
+
+$routes->match(['get','post'],'convert/coupang','orderConvert/CoupangConvertController::index');
+$routes->match(['get','post'],'convert/coupangResult','orderConvert/CoupangConvertController::coupangResult');
 
 //환불계산기
 $routes->match(['get','post'],'refundCalc/refund','RefundCalcController::refund');

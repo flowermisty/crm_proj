@@ -91,7 +91,7 @@ class LoginController extends BaseController
         helper(['form', 'alert']);
         if( session()->has('aIdx') != "") {
             session_destroy();
-            alert_move("로그아웃 되었습니다. ", "http://godo.event.admin/login");
+            alert_move("로그아웃 되었습니다. ", "http://godo.event.admin/");
         }
 
     }
