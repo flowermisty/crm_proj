@@ -369,7 +369,7 @@ class GodoConvertVenetmealv4Controller extends \App\Controllers\BaseController
 
             $time = $sheetData[$i][$colIndexArr['orderDate']];
             $t = date("Y-m-d", time_convert_EXCEL_to_PHP($time));
-
+            echo $t;
 
             if ( // 이유식이나, 영양식 제품이 아닌 것을 확인 하는 필터 부분
                 $sheetData[$i][$colIndexArr['productName']] != "이유식"
