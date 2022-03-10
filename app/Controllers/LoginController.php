@@ -95,4 +95,34 @@ class LoginController extends BaseController
         }
 
     }
+
+    public function profile(){
+        define("IVENETCRMKEY","ODU1NjM=");
+        helper(['form', 'alert']);
+        $db = \Config\Database::connect();
+
+        if( session()->has('aIdx') == "") {
+            alert_move("로그인 후 들어와 주세요 ", "http://godo.event.admin/");
+        }
+
+        if( session()->has('aIdx') != ""){
+
+            $SQL = $db->query("select * from nAdmin where idx='{$_SESSION['aIdx']}'");
+            $ROW = $SQL->getRowArray();
+            $data['nAdmin'] = $ROW;
+            $SQL2 = $db->query("select * from nAdminadd where aIdx='{$_SESSION['aIdx']}'");
+            $ROW2 = $SQL2->getRowArray();
+            $data['nAdminadd']=$ROW2;
+            $SQL3 = $db ->query("select AES_DECRYPT(UNHEX(Tel),'".IVENETCRMKEY."') as Tel,  
+                                            AES_DECRYPT(UNHEX(Hp),'".IVENETCRMKEY."') as Hp, 
+                                            AES_DECRYPT(UNHEX(eMail),'".IVENETCRMKEY."') as eMail
+                                            from nAdminadd where aIdx='{$_SESSION['aIdx']}'");
+            $ROW3 = $SQL3->getRowArray();
+            $data['nAdminaddHex']=$ROW3;
+        }
+
+        echo view('login/templates/header');
+        echo view('login/profile',$data);
+        echo view('login/templates/footer');
+    }
 }

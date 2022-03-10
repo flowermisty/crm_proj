@@ -301,9 +301,9 @@
                                 <div class="card-body px-3 py-2-3" style="padding-bottom: 17%;">
                                     <div class="d-flex align-items-center">
                                         <div class="stats-icon gray" style="margin-left:4%;">
-                                            <i class="iconly-boldProfile" data-bs-toggle="tooltip" data-bs-placement="top" title data-bs-original-title="정보변경"
-                                               onmouseover="this.style.opacity='0.7';"
-                                               onmouseout="this.style.opacity='1';"></i>
+                                            <a href="<?= base_url('profile')?>"><i class="iconly-boldProfile" data-bs-toggle="tooltip" data-bs-placement="top" title data-bs-original-title="정보변경"
+                                               onmouseover="this.style.opacity='0.3';"
+                                               onmouseout="this.style.opacity='1';"></i></a>
                                         </div>
                                         <?php  if (isset($_SESSION['aIdx'])): ?>
 

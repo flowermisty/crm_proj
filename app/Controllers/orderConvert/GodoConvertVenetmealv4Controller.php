@@ -134,6 +134,7 @@ class GodoConvertVenetmealv4Controller extends \App\Controllers\BaseController
             "BF021-008", "BF021-009", "BF021-010", // 2021년 11월 16일 블랙프라이데이 주문 코드 추가 by Cho Sung Jae at 21.11.16
             "NOVA021-101", "NOVA021-102", "NOVC021-101", "NOVC021-102", "NOVD021-101", "NOVD021-102", "NOVE021-101", "NOVE021-102", "NOVF021-101", "NOVF021-102", // 2021년 11월 만원의 행복 이벤트 코드 added by Cho Sung Jae at 21.11.15
             "FEBB022-001", "FEBB022-002", "FEBC022-001", "FEBC022-002", "FEBD022-001", "FEBD022-002", "FEBE022-001", "FEBE022-002", //2022년 2월 만원의 행복 기획팩 이벤트 코드 added by Lee Yont Suk at 22.01.27
+            "MARB022-002","MARB022-003","MARC022-002","MARC022-003","MARD022-002","MARD022-003","MARE022-002","MARE022-003","MARF022-002","MARF022-003", //2022년 3월 만원의 행복 기획팩 이벤트 코드  added by Lee Yong Suk at 22.02.28
             "LMNB021-001", "LMNC021-001", "LMND021-001", "LMND021-002", "LMNE021-001", // 레몬트리 기획전 주문 코드 by Cho Sung Jae at 21.12.01
             "TTS0121-001", "TTS0121-002", // 12월 타임세일 단품이벤트 코드 added by Cho Sung Jae at 21.12.03
             "TTS022-001", "TTS022-002", "TTS022-003", // 22년 2월 타임세일(간식세트) 코드 added by LEE Yong Suk at 22.01.28

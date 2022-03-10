@@ -55,6 +55,20 @@ class CoupangConvertController extends \App\Controllers\BaseController
         $db = \Config\Database::connect();
         $db->query("TRUNCATE TABLE `coupangConvert`");
 
+        function str_con($str)
+        {
+            $testlen = strlen($str);
+            $tests = "";
+            $str1 = "";
+            for ($i = 0; $i < $testlen; $i++) {
+                $test_substr = substr($str, $i, 1);
+                if (preg_match("/[0-9]/", $test_substr) == true) {
+                    $str1 .= $test_substr;
+                }
+            }
+            return $str1;
+        }
+
         for ($i = 0; $i < count($this->request->getFileMultiple('excel_file')); $i++) {
             $UpFile = $this->request->getFileMultiple('excel_file')[$i];
             $UpFileName = $UpFile->getName();
@@ -97,19 +111,7 @@ class CoupangConvertController extends \App\Controllers\BaseController
             $total_rows = count($sheetData);
 
 
-            function str_con($str)
-            {
-                $testlen = strlen($str);
-                $tests = "";
-                $str1 = "";
-                for ($i = 0; $i < $testlen; $i++) {
-                    $test_substr = substr($str, $i, 1);
-                    if (preg_match("/[0-9]/", $test_substr) == true) {
-                        $str1 .= $test_substr;
-                    }
-                }
-                return $str1;
-            }
+
 
             for ($k = 22; $k < count($sheetData); $k++) {
                 if ($sheetData[$k]['A']) {
