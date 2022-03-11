@@ -37,7 +37,7 @@ class LemonTreeConvertController extends \App\Controllers\BaseController
         helper(['form', 'alert']);
 
         if (session()->has('aIdx') == "") {
-            alert_move("로그인 후 들어와 주세요 ", "http://godo.event.admin/login");
+            alert_move("로그인 후 들어와 주세요 ", "http://godo.event.admin/");
         }
 
         echo view('orderConvert/templates/header');

@@ -13,7 +13,7 @@ class EventScheduleController extends BaseController {
     {
         helper(['form', 'alert']);
         if( session()->has('aIdx') == "") {
-            alert_move("로그인 후 들어와 주세요 ", "http://godo.event.admin/login");
+            alert_move("로그인 후 들어와 주세요 ", "http://godo.event.admin/");
         }
         $ScheduleModel = new EventScheduleModel();
         $eventListModel = new EventListModel();

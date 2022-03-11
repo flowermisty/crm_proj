@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+
+use App\Models\NAdminModel;
 class LoginController extends BaseController
 {
     public function index(){
@@ -124,5 +126,35 @@ class LoginController extends BaseController
         echo view('login/templates/header');
         echo view('login/profile',$data);
         echo view('login/templates/footer');
+    }
+
+    public function employeeRegist(){
+
+        helper(['form', 'alert']);
+        $data=[];
+        $nAdmin = new NAdminModel();
+        if ($this->request->getMethod() == 'post') {
+            $data['nAdmin'] = [
+                "gPage"=>$this->request->getVar('page'),
+                "aName"=>$this->request->getVar('name'),
+                "aId"=>$this->request->getVar('userId'),
+                "aPwd"=>md5($this->request->getVar('password')),
+                "aIp"=>"{$_SERVER['REMOTE_ADDR']}",
+                "orgCode"=>$this->request->getVar('part'),
+            ];
+
+            $nAdmin->save( $data['nAdmin']);
+            $result = $nAdmin->select('*')->where('aId',"{$this->request->getVar('userId')}")->findAll();
+            $session=session();
+            $data['session']=[
+                'aIdx'=>$result[0]['idx'],
+                'aName'=>$result[0]['aName'],
+            ];
+            $session->set($data['session']);
+            alert_move('등록 되었습니다.','http://godo.event.admin/eventAdmin');
+
+
+        }
+
     }
 }
