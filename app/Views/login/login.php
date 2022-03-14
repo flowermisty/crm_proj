@@ -126,8 +126,8 @@
                             <select name="mobileAgree" id="mobileAgree"
                                     style="width: 35%; margin-left: 5%; padding: .0em .1em; /* 여백으로 높이 설정 */">
                                 <option value="">수신여부</option>
-                                <option value="N">동의</option>
-                                <option value="Y">비동의</option>
+                                <option value="Y">동의</option>
+                                <option value="N">비동의</option>
                             </select>
                         </div>
                     </label>
@@ -144,10 +144,14 @@
                     </label>
                 </div>
 
-                <div>
-                    <label style="width: 95%;">
+                <div style="display: flex;">
+                    <label style="">
                         <span>상세주소</span>
                         <input type="text" id="addressDetail" placeholder="직접입력" name="addressDetail"/>
+                    </label>
+                    <label style="">
+                        <span>입사일</span>
+                        <input type="date" id="inDate"  name="inDate"/>
                     </label>
                 </div>
 
