@@ -277,4 +277,16 @@ class LoginController extends BaseController
             alert_move('변경 되었습니다.', 'http://godo.event.admin/');
         }
     }
+
+    public function IdDuplCheck(){
+        if ($this->request->getMethod() == 'post') {
+            $nAdmin = new NAdminModel();
+            $data = [];
+            $data['userId'] = $nAdmin->select('*')->where('aId',"{$this->request->getVar('userId')}")->findAll();
+            if(!$data['userId']){
+                $data['userId']="false";
+            }
+            return $this->response->setJSON($data);
+        }
+    }
 }

@@ -29,7 +29,7 @@
                                     <label for="first-name-icon">*이름</label>
                                     <div class="position-relative">
                                         <input type="text" class="form-control" placeholder="" id="name" name="name"
-                                               value="<?= $nAdmin['aName'] ?>">
+                                               value="<?= $nAdmin['aName'] ?>" readonly>
                                         <div class="form-control-icon">
                                             <i class="bi bi-person"></i>
                                         </div>
@@ -42,7 +42,7 @@
                                     <label for="first-name-icon">*아이디</label>
                                     <div class="position-relative">
                                         <input type="text" class="form-control" placeholder="" id="userId" name="userId"
-                                               value="<?= $nAdmin['aId'] ?>">
+                                               value="<?= $nAdmin['aId'] ?>" readonly>
                                         <div class="form-control-icon">
                                             <i class="bi bi-info"></i>
                                         </div>
@@ -55,7 +55,7 @@
                                     <label for="first-name-icon">사원코드</label>
                                     <div class="position-relative">
                                         <input type="text" class="form-control" placeholder="" id="employeeCode" name="employeeCode"
-                                               value="<?= $nAdmin['erpCode'] ?>">
+                                               value="<?= $nAdmin['erpCode'] ?>" readonly>
                                         <div class="form-control-icon">
                                             <i class="bi bi-code"></i>
                                         </div>
@@ -345,7 +345,7 @@
                                             <label for="birth-id-icon">*생년월일</label>
                                             <div class="position-relative">
                                                 <input type="date" class="form-control"
-                                                       id="birth" name="birth" value="<?= $nAdminadd['aBirth'] ?>">
+                                                       id="birth" name="birth" value="<?= $nAdminadd['aBirth'] ?>" readonly>
                                                 <div class="form-control-icon">
                                                     <i class="bi bi-calendar-date-fill"></i>
                                                 </div>

@@ -38,9 +38,15 @@
         font-weight: bold !important;
     }
 
+    #idCheck:hover{
+        color:green !important;
+        font-weight: bold !important;
+    }
+
 
 </style>
 <body>
+<input type="hidden" name="idCheckFlag" id="idCheckFlag"/>
 <h1 class="tip" style="color:#373b3e; font-size: revert; font-weight: ">IVENET CRM ADMINISTRATOR</h1>
 <div class="cont" style="height:850px;">
     <div class="form sign-in" style="padding-top: 20%;">
@@ -83,8 +89,10 @@
                         <input type="text" name="name" id="name"/>
                     </label>
                     <label>
-                        <span>*아이디</span>
+                        <span>*아이디<a href="javascript:void(0);" onclick="idDuplCheck()" id="idCheck"
+                                 style="text-decoration:none; background:black; color: whitesmoke; margin-left: 8%; padding: 1.5%; border-radius:5px;">아이디 중복 확인</a></span>
                         <input type="text" name="userId" id="userId"/>
+
                     </label>
                 </div>
 
@@ -286,6 +294,23 @@
                 } else {
                     alert(response.MSG);
 
+                }
+            }
+        });
+    }
+
+    function idDuplCheck() {
+        var userId = $('#userId').val();
+        $.ajax({
+            url: "/idDuplCheck",
+            type: "POST",
+            data: {userId: userId},
+            success: function (response) {
+                if(response.userId != "false"){
+                    alert("사용할 수 없는 아이디 입니다.");
+                }else if(response.userId=="false"){
+                    $('#idCheckFlag').val('ok');
+                    alert(userId+"는 사용가능한 아이디 입니다.");
                 }
             }
         });

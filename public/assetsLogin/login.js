@@ -54,6 +54,8 @@ function employeeSubmit(){
     }else if(grade == null || grade =="") {
         alert('직급을 선택해 주세요');
         return false;
+    }else if(document.getElementById('idCheckFlag').value != "ok"){
+        alert('아이디 중복 여부를 확인 해주세요.');
     }else{
         if(confirm('기입하신 정보로 가입 하시겠습니까?')==true){
             fmEmployee.submit();

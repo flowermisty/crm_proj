@@ -39,6 +39,7 @@ $routes->match(['get','post'],'/logout','LoginController::logOut');
 $routes->match(['get','post'],'/profile','LoginController::profile');
 $routes->match(['get','post'],'/employeeRegist','LoginController::employeeRegist');
 $routes->match(['get','post'],'/employeeUpdate','LoginController::employeeUpdate');
+$routes->match(['get','post'],'/idDuplCheck','LoginController::IdDuplCheck');
 
 
 $routes->get('/event_admin_old', 'EventAdminOldController::index');
