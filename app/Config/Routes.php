@@ -73,6 +73,13 @@ $routes->match(['get','post'],'event_admin_new/schedule/update','EventScheduleCo
 $routes->match(['get','post'],'event_admin_new/schedule/delete','EventScheduleController::delete');
 
 //주문서 변환
+
+//->ERP 변환
+$routes->match(['get','post'],'convert/erpConvert','orderConvert/ErpConvertController::index');
+$routes->match(['get','post'],'convert/erpB2B','orderConvert/ErpConvertController::erpB2B');
+
+
+
 //->고도몰 변환
 $routes->match(['get','post'],'convert/godo','orderConvert/GodoConvertVenetmealv4Controller::index');
 $routes->match(['get','post'],'convert/godo/venetmeal_v4','orderConvert/GodoConvertVenetmealv4Controller::godoConvertVenetmealVer4');

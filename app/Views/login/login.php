@@ -301,19 +301,25 @@
 
     function idDuplCheck() {
         var userId = $('#userId').val();
-        $.ajax({
-            url: "/idDuplCheck",
-            type: "POST",
-            data: {userId: userId},
-            success: function (response) {
-                if(response.userId != "false"){
-                    alert("사용할 수 없는 아이디 입니다.");
-                }else if(response.userId=="false"){
-                    $('#idCheckFlag').val('ok');
-                    alert(userId+"는 사용가능한 아이디 입니다.");
+        if(userId == ""){
+            alert('중복 확인은 아이디 필드를 입력후 검색 하셔야 합니다.');
+        }else{
+            $.ajax({
+                url: "/idDuplCheck",
+                type: "POST",
+                data: {userId: userId},
+
+                success: function (response) {
+                    if(response.userId != "false"){
+                        alert("사용할 수 없는 아이디 입니다.");
+                    }else if(response.userId=="false"){
+                        $('#idCheckFlag').val('ok');
+                        alert(userId+"는 사용가능한 아이디 입니다.");
+                    }
                 }
-            }
-        });
+            });
+        }
+
     }
 
 </script>

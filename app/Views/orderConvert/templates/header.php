@@ -164,7 +164,7 @@
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="form-element-textarea.html">ERP 변경</a>
+                                <a href="<?=base_url('convert/erpConvert')?>">ERP 변경</a>
                             </li>
 
                             <li class="submenu-item ">
