@@ -77,6 +77,7 @@ $routes->match(['get','post'],'event_admin_new/schedule/delete','EventScheduleCo
 //->ERP 변환
 $routes->match(['get','post'],'convert/erpConvert','orderConvert/ErpConvertController::index');
 $routes->match(['get','post'],'convert/erpB2B','orderConvert/ErpConvertController::erpB2B');
+$routes->match(['get','post'],'convert/erp','orderConvert/ErpConvertController::erp');
 
 
 
