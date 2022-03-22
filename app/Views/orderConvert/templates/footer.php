@@ -91,6 +91,18 @@
         storeAsFile: true,
     })
 
+    FilePond.create(document.querySelector('.basic-filepond8'), {
+        storeAsFile: true,
+    })
+
+    FilePond.create(document.querySelector('.basic-filepond9'), {
+        storeAsFile: true,
+    })
+
+    FilePond.create(document.querySelector('.basic-filepond10'), {
+        storeAsFile: true,
+    })
+
 
     // Filepond: Multiple Files
     FilePond.create(document.querySelector('.multiple-files-filepond'), {

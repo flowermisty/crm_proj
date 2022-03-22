@@ -117,7 +117,7 @@
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="form-element-textarea.html">식품이력</a>
+                                <a href="<?=base_url('convert/foodHistory')?>">식품이력</a>
                             </li>
 
                             <li class="submenu-item ">

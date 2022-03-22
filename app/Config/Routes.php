@@ -74,12 +74,18 @@ $routes->match(['get','post'],'event_admin_new/schedule/delete','EventScheduleCo
 
 //주문서 변환
 
+
+//->식품이력 변경
+$routes->match(['get','post'],'convert/foodHistory','orderConvert/FoodHistoryController::index');
+$routes->match(['get','post'],'convert/foodHistory/foodConvert1','orderConvert/FoodHistoryController::foodConvert1');
+$routes->match(['get','post'],'convert/foodHistory/foodConvert2','orderConvert/FoodHistoryController::foodConvert2');
+$routes->match(['get','post'],'convert/foodHistory/foodConvert3','orderConvert/FoodHistoryController::foodConvert3');
+
+
 //->ERP 변환
 $routes->match(['get','post'],'convert/erpConvert','orderConvert/ErpConvertController::index');
 $routes->match(['get','post'],'convert/erpB2B','orderConvert/ErpConvertController::erpB2B');
 $routes->match(['get','post'],'convert/erp','orderConvert/ErpConvertController::erp');
-
-
 
 //->고도몰 변환
 $routes->match(['get','post'],'convert/godo','orderConvert/GodoConvertVenetmealv4Controller::index');
@@ -93,6 +99,8 @@ $routes->match(['get','post'],'convert/coupangResult','orderConvert/CoupangConve
 //->레몬트리 변환
 $routes->match(['get','post'],'convert/lemonTree','orderConvert/LemonTreeConvertController::index');
 $routes->match(['get','post'],'convert/lemonTreeResult','orderConvert/LemonTreeConvertController::lemonTreeResult');
+
+
 
 //환불계산기
 $routes->match(['get','post'],'refundCalc/refund','RefundCalcController::refund');

@@ -96,7 +96,6 @@ class ErpConvertController extends \App\Controllers\BaseController
         $yesterday = date("Y-m-d", strtotime($day . " -1 day"));
 
         $EXCEL_NAME = str_replace('.', '_ERPupload.', $UpFileName);
-        echo $EXCEL_NAME;
         $db = \Config\Database::connect();
 
         header("Content-type: application/vnd.ms-excel");
