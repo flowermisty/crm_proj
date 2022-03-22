@@ -107,6 +107,10 @@
         storeAsFile: true,
     })
 
+    FilePond.create(document.querySelector('.basic-filepond12'), {
+        storeAsFile: true,
+    })
+
 
     // Filepond: Multiple Files
     FilePond.create(document.querySelector('.multiple-files-filepond'), {

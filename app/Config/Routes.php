@@ -74,6 +74,10 @@ $routes->match(['get','post'],'event_admin_new/schedule/delete','EventScheduleCo
 
 //주문서 변환
 
+//자가사용변경
+$routes->match(['get','post'],'convert/self','orderConvert/SelfConvertController::index');
+$routes->match(['get','post'],'convert/self/selfConvert','orderConvert/SelfConvertController::selfConvert');
+
 
 //->식품이력 변경
 $routes->match(['get','post'],'convert/foodHistory','orderConvert/FoodHistoryController::index');

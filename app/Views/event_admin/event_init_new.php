@@ -163,7 +163,7 @@
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="form-element-textarea.html">자가사용 변경</a>
+                                <a href="<?=base_url('convert/self')?>">자가사용 변경</a>
                             </li>
                         </ul>
                     </li>
