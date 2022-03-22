@@ -150,7 +150,7 @@
                                 <a href="<?=base_url('convert/coupang')?>">쿠팡 변환</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="form-element-radio.html">마트 변환</a>
+                                <a href="<?=base_url('convert/mart')?>">마트 변환</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="form-element-checkbox.html">세이베베 변환</a>

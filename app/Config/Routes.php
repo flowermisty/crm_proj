@@ -81,6 +81,10 @@ $routes->match(['get','post'],'convert/foodHistory/foodConvert1','orderConvert/F
 $routes->match(['get','post'],'convert/foodHistory/foodConvert2','orderConvert/FoodHistoryController::foodConvert2');
 $routes->match(['get','post'],'convert/foodHistory/foodConvert3','orderConvert/FoodHistoryController::foodConvert3');
 
+//->마트변환
+$routes->match(['get','post'],'convert/mart','orderConvert/MartConvertController::index');
+$routes->match(['get','post'],'convert/mart/martConvert','orderConvert/MartConvertController::martConvert');
+
 
 //->ERP 변환
 $routes->match(['get','post'],'convert/erpConvert','orderConvert/ErpConvertController::index');
