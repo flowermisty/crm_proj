@@ -50,6 +50,21 @@
 
                     <li class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
+                            <i class="bi bi-stack"></i>
+                            <span>관리자 설정</span>
+                        </a>
+                        <ul class="submenu" style="">
+                            <li class="submenu-item ">
+                                <a href="component-alert.html">직원관리</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="component-badge.html">상품관리</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
                             <i class="bi bi-collection-fill"></i>
                             <span>통계 및 기타관리</span>
                         </a>

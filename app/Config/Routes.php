@@ -115,6 +115,10 @@ $routes->match(['get','post'],'refundCalc/refund','RefundCalcController::refund'
 $routes->match(['get','post'],'refundCalc/refundPoint','RefundCalcController::refundPoint');
 
 
+//직원관리
+$routes->match(['get','post'],'employee','EmployeeController::index');
+
+
 
 
 
