@@ -55,7 +55,7 @@
                         </a>
                         <ul class="submenu" style="">
                             <li class="submenu-item ">
-                                <a href="component-alert.html">직원관리</a>
+                                <a href="<?=base_url('employee')?>">직원관리</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="component-badge.html">상품관리</a>
@@ -181,130 +181,8 @@
             <h3>이벤트 등록 현황</h3>
         </div>-->
         <div class="page-content" style="margin-left: 2% !important;">
-            <section class="row">
-                <div class="col-12 col-lg-11">
-                    <div class="row">
-                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50"
-                             data-aos-duration="1000">
-                            <a href="http://i.venet.kr/nlogin.php" class="" onmouseover="this.style.opacity='0.7';"
-                               onmouseout="this.style.opacity='1';" style=display:block;" data-bs-toggle="tooltip"
-                               data-placement="bottom" data-bs-or>
-                                <div class="card">
-                                    <div class="card-body px-3 py-2-3">
-                                        <div class="row" style="margin-left:4%;">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon purple">
-                                                    <i class="iconly-boldHome"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 py-3">
-                                                <h6 class="text-muted font-semibold">CRM HOME</h6>
-                                                <h6 class="font-extrabold mb-0"></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50"
-                             data-aos-duration="1000" style="margin-left:4%;">
-                            <a href="exampleModalCenter" class="" onmouseover="this.style.opacity='0.7';"
-                               onmouseout="this.style.opacity='1';" style=display:block;" data-toggle="modal"
-                               data-target="#exampleModalCenter">
-                                <div class="card">
-                                    <div class="card-body px-3 py-2-3">
-                                        <div class="row" style="margin-left:4%;">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon blue">
-                                                    <i class="iconly-boldPlus"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 py-3">
-                                                <h6 class="text-muted font-semibold">이벤트 등록</h6>
-                                                <h6 class="font-extrabold mb-0" style="font-size:12px;"></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-right" data-aos-delay="50"
-                             data-aos-duration="1000" style="margin-left:4%;">
-                            <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
-                               onmouseout="this.style.opacity='1';" style=display:block;" onclick="confirm_delCheck();">
-                                <div class="card">
-                                    <div class="card-body px-3 py-2-3">
-                                        <div class="row" style="margin-left:4%;">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon red">
-                                                    <i class="iconly-boldDelete"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 py-3">
-                                                <h6 class="text-muted font-semibold">이벤트삭제</h6>
-                                                <h6 class="font-extrabold mb-0"></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-right" data-aos-delay="50"
-                             data-aos-duration="1000" style="margin-left:4%;">
-                            <a href="eventSchedule" class="" onmouseover="this.style.opacity='0.7';" data-toggle="modal"
-                               data-target="#eventSchedule"
-                               onmouseout="this.style.opacity='1';" style=display:block;">
-                                <div class="card">
-                                    <div class="card-body px-3 py-2-3">
-                                        <div class="row" style="margin-left:4%;">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon green">
-                                                    <i class="iconly-boldCalendar"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 py-3">
-                                                <h6 class="text-muted font-semibold">이벤트스케줄</h6>
-                                                <h6 class="font-extrabold mb-0"></h6>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-
-                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-right" data-aos-delay="50"
-                             data-aos-duration="1000" style="margin-left:4%;">
-                            <div class="card">
-                                <div class="card-body px-3 py-2-3" style="padding-bottom: 17%;">
-                                    <div class="d-flex align-items-center" style="padding-left: 4%;">
-                                        <div class="stats-icon gray">
-                                            <a href="<?= base_url('profile') ?>"><i class="iconly-boldProfile"
-                                                                                    data-bs-toggle="tooltip"
-                                                                                    data-bs-placement="top" title
-                                                                                    data-bs-original-title="정보변경"
-                                                                                    onmouseover="this.style.opacity='0.3';"
-                                                                                    onmouseout="this.style.opacity='1';"></i></a>
-                                        </div>
-                                        <?php if (isset($_SESSION['aIdx'])): ?>
-
-                                            <div class="ms-3 name">
-                                                <h6 class="font-bold text-muted"><?= $_SESSION['aName'] ?> 님</h6>
-                                                <a href="<?= base_url("logout") ?>"
-                                                   onmouseover="this.style.fontStyle='italic';"
-                                                   onmouseout="this.style.fontStyle='normal';"><h6
-                                                            class="text-primary mb-0">Log-Out</h6></a>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+            <section class="row py-3">
+                <div class="col-12 col-lg-12">
 
                     <div class="row">
                         <div class="col-12">
@@ -323,39 +201,145 @@
                                                 <th style="text-align: center;">아이디</th>
                                                 <th style="text-align: center;">부서명</th>
                                                 <th style="text-align: center;">직위</th>
-                                                <th style="text-align: center;">사내번호(내선)</th>
+                                                <th style="text-align: center;">내선번호</th>
                                                 <th style="text-align: center;">이메일</th>
+                                                <th style="text-align: center;">계정상태</th>
 
                                             </tr>
                                             </thead>
                                             <tbody class="employeeList">
-                                            <?php foreach ($nadmin as $row):?>
-                                            <tr>
-                                                <td>&nbsp;&nbsp;
-                                                    <a href="" class="font-semibold badge bg-primary"><?=$row['aName']?></a>
-                                                </td>
-                                                <td>
-                                                    <a href=""
-                                                       class="text-muted font-semibold"><?=$row['aId']?></a>
-                                                </td>
+                                            <?php foreach ($nadmin as $row): ?>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;
+                                                        <a href="joinAgreeModalCenter"
+                                                           class="font-semibold badge bg-primary employeeName"
+                                                           style="width:65px; height:100%;" data-toggle="modal"
+                                                           data-target="#joinAgreeModalCenter" onclick="dataInsert('<?= $row['aId'] ?>','<?=$row['aStatus']?>')"><?= $row['aName'] ?></a>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                           class="text-muted font-semibold employeeId"><?= $row['aId'] ?></span>
+                                                    </td>
 
-                                                <td>
-                                                    <a href=""
-                                                       class="text-muted font-semibold"><?=$row['orgCode']?></a>
-                                                </td>
-                                                <td>
-                                                    <a href=""
-                                                       class="text-muted font-semibold"><?=$row['grade']?></a>
-                                                </td>
-                                                <td>
-                                                    <a href=""
-                                                       class="text-muted font-semibold"><?=$row['inTel']?></a>
-                                                </td>
-                                                <td>
-                                                    <a href=""
-                                                       class="text-muted font-semibold"><?=$row['eMail']?></a>
-                                                </td>
-                                            </tr>
+                                                    <td>
+                                                        <span
+                                                           class="text-muted font-semibold"><?php if ($row['orgCode'] == "400001") {
+                                                                echo "재무팀";
+                                                            } elseif ($row['orgCode'] == "400002") {
+                                                                echo "구매관리팀";
+                                                            } elseif ($row['orgCode'] == "800001") {
+                                                                echo "CS팀";
+                                                            } elseif ($row['orgCode'] == "600001") {
+                                                                echo "영업1팀";
+                                                            } elseif ($row['orgCode'] == "600002") {
+                                                                echo "영업2팀";
+                                                            } elseif ($row['orgCode'] == "600003") {
+                                                                echo "영업3팀";
+                                                            } elseif ($row['orgCode'] == "300001") {
+                                                                echo "해외영업팀";
+                                                            } elseif ($row['orgCode'] == "600004") {
+                                                                echo "영업지원팀";
+                                                            } elseif ($row['orgCode'] == "500001") {
+                                                                echo "마케팅1팀";
+                                                            } elseif ($row['orgCode'] == "500002") {
+                                                                echo "마케팅2팀";
+                                                            } elseif ($row['orgCode'] == "500003") {
+                                                                echo "홍보팀";
+                                                            } elseif ($row['orgCode'] == "500004") {
+                                                                echo "디자인팀";
+                                                            } elseif ($row['orgCode'] == "500005") {
+                                                                echo "웹디자인팀";
+                                                            } elseif ($row['orgCode'] == "700001") {
+                                                                echo "연구개발팀";
+                                                            } elseif ($row['orgCode'] == "900001") {
+                                                                echo "물류팀";
+                                                            } elseif ($row['orgCode'] == "110001") {
+                                                                echo "생산팀";
+                                                            } elseif ($row['orgCode'] == "110003") {
+                                                                echo "품질보증팀";
+                                                            } elseif ($row['orgCode'] == "110002") {
+                                                                echo "생산관리팀";
+                                                            } else {
+                                                                echo "부서정보없음";
+                                                            } ?></span>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                           class="text-muted font-semibold"><?php if ($row['grade'] == "1") {
+                                                                echo "기타";
+                                                            } elseif ($row['grade'] == "2") {
+                                                                echo "계약직사원";
+                                                            } elseif ($row['grade'] == "3") {
+                                                                echo "사원";
+                                                            } elseif ($row['grade'] == "4") {
+                                                                echo "주임";
+                                                            } elseif ($row['grade'] == "5") {
+                                                                echo "대리";
+                                                            } elseif ($row['grade'] == "6") {
+                                                                echo "과장";
+                                                            } elseif ($row['grade'] == "7") {
+                                                                echo "차장";
+                                                            } elseif ($row['grade'] == "8") {
+                                                                echo "부장";
+                                                            } elseif ($row['grade'] == "9") {
+                                                                echo "팀장";
+                                                            } elseif ($row['grade'] == "10") {
+                                                                echo "본부장";
+                                                            } elseif ($row['grade'] == "11") {
+                                                                echo "상임고문";
+                                                            } elseif ($row['grade'] == "12") {
+                                                                echo "이사";
+                                                            } elseif ($row['grade'] == "13") {
+                                                                echo "재무이사";
+                                                            } elseif ($row['grade'] == "14") {
+                                                                echo "상무";
+                                                            } elseif ($row['grade'] == "15") {
+                                                                echo "전무";
+                                                            } elseif ($row['grade'] == "16") {
+                                                                echo "고문";
+                                                            } elseif ($row['grade'] == "17") {
+                                                                echo "부사장";
+                                                            } elseif ($row['grade'] == "18") {
+                                                                echo "대표이사";
+                                                            } else {
+                                                                echo "직위정보없음";
+                                                            } ?></span>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                           class="text-muted font-semibold"><?= $row['inTel'] ?></span>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                           class="text-muted font-semibold"><?= $row['eMail'] ?></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class=" font-semibold badge <?php if ($row['aStatus'] == "A") {
+                                                            echo "bg-danger";
+                                                        } elseif ($row['aStatus'] == "N") {
+                                                            echo "bg-success";
+                                                        } elseif ($row['aStatus'] == "H") {
+                                                            echo "bg-warning";
+                                                        } elseif ($row['aStatus'] == "W") {
+                                                            echo "bg-dark";
+                                                        } else {
+                                                            echo "";
+                                                        } ?>" style="width: 65px;">
+                                                            <?php if ($row['aStatus'] == "A") {
+                                                                echo "승인대기";
+                                                            } elseif ($row['aStatus'] == "N") {
+                                                                echo "재직";
+                                                            } elseif ($row['aStatus'] == "H") {
+                                                                echo "휴직";
+                                                            } elseif ($row['aStatus'] == "W") {
+                                                                echo "퇴사";
+                                                            } else {
+                                                                echo "";
+                                                            } ?>
+                                                        </span>
+                                                    </td>
+                                                </tr>
                                             <?php endforeach; ?>
                                             </tbody>
 
@@ -440,12 +424,124 @@
         </div>
 
 
+        <div class="modal fade" id="joinAgreeModalCenter" tabindex="-1" role="dialog"
+             aria-labelledby="joinAgreeModalCenterTitle" aria-hidden="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="joinAgreeModalLongTitle">계정 상태 변경</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                onclick="">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="<?=base_url('employee/joinAgree')?>" id="joinAgreeForm" method="post" name="joinAgreeForm">
+                            <div class="form-group">
+                                <div class="row col-10">
+                                    <div style="display: flex; margin-top:2%; margin-left: 3%" class="col-12">
+                                        <div class="form-check form-check-primary col-4"
+                                             style="padding-right: 3%; margin-top:1%;">
+                                            <label class="form-check-label" for="primary"
+                                                   style="">
+                                                승인대기
+                                            </label>
+                                            <input class="form-check-input" type="radio" name="status"
+                                                   id="status1" value="A" style="" >
+
+                                        </div>
+
+                                        <div class="form-check form-check-success col-4"
+                                             style="padding-right: 3%; margin-top:1%;">
+                                            <label class="form-check-label" for="success"
+                                                   style="">
+                                                재직
+                                            </label>
+                                            <input class="form-check-input" type="radio" name="status"
+                                                   id="status2" value="N" style="">
+
+                                        </div>
+
+                                        <div class="form-check form-check-warning col-4"
+                                             style="padding-right: 3%; margin-top:1%;">
+                                            <label class="form-check-label" for="success"
+                                                   style="">
+                                                휴직
+                                            </label>
+                                            <input class="form-check-input" type="radio" name="status"
+                                                   id="status3" value="H" style="" >
+
+                                        </div>
+
+                                        <div class="form-check form-check-danger col-4"
+                                             style="padding-right: 3%; margin-top:1%;">
+                                            <label class="form-check-label" for="success"
+                                                   style="">
+                                                퇴사
+                                            </label>
+                                            <input class="form-check-input" type="radio" name="status"
+                                                   id="status4" value="W" style="" >
+
+                                        </div>
+                                        <input type="hidden" name="aId" id="aId">
+                                        <input type="hidden" name="aStatus" id="aStatus">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                        <button type="button" class="btn btn-primary statusSave" onclick="joinAgreeFormSubmit()">변경</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
         <script src="/assetsEmployee/vendors/simple-datatables/simple-datatables.js"></script>
 
         <script>
             // Simple Datatable
             let table1 = document.querySelector('#table1');
             let dataTable = new simpleDatatables.DataTable(table1);
+        </script>
+
+        <script>
+            function dataInsert(employeeId,status){
+                document.getElementById('aId').value = employeeId;
+                document.getElementById('aStatus').value = status;
+                var status1 = document.getElementById('status1');
+                var status2 = document.getElementById('status2');
+                var status3 = document.getElementById('status3');
+                var status4 = document.getElementById('status4');
+                if(status1.value == status){
+                    status1.checked = true;
+                }else if(status2.value == status){
+                    status2.checked = true;
+                }else if(status3.value == status){
+                    status3.checked = true;
+                }else if(status4.value == status){
+                    status4.checked = true;
+                }else{
+
+                }
+            }
+
+            function joinAgreeFormSubmit(){
+                var form =  document.getElementById('joinAgreeForm');
+                if(confirm('해당 직원의 계정상태를 변경 하시겠습니까?')){
+                    form.submit();
+                }else{
+                    return false;
+                }
+            }
         </script>
 
         <!--<script>

@@ -21,7 +21,7 @@ class EmployeeController extends BaseController{
         $nadmin = new NAdminModel();
         $nadminAdd = new NAdminaddModel();
         $db = \Config\Database::connect();
-        $query = $db->query("select na.aName, na.aId, na.orgCode, nd.grade, nd.inTel, AES_DECRYPT(UNHEX(nd.eMail),'" . IVENETCRMKEY . "') as eMail 
+        $query = $db->query("select na.aName, na.aId, na.orgCode, na.aStatus, nd.grade, nd.inTel, AES_DECRYPT(UNHEX(nd.eMail),'" . IVENETCRMKEY . "') as eMail 
                                  from nAdmin as na left join nAdminadd as nd  on na.idx = nd.aIdx 
                                  ORDER BY na.idx DESC");
         $data['nadmin'] = $query->getResultArray();
@@ -29,6 +29,15 @@ class EmployeeController extends BaseController{
         echo view('employee/templates/header');
         echo view('employee/employeeList',$data);
         echo view('employee/templates/footer');
+    }
+
+    public function joinAgree(){
+        helper(['form', 'alert']);
+        $aStatus = $this->request->getPost('status');
+        $aId = $this->request->getPost('aId');
+        $db = \Config\Database::connect();
+        $db->query("update nAdmin set aStatus = '{$aStatus}' where aId = '{$aId}'");
+        alert_move("변경 되었습니다.", "http://godo.event.admin/employee");
     }
 
 }

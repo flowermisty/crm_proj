@@ -170,6 +170,7 @@
                             <select name="part" id="part">
                                 <option value="">부서를 선택 하세요</option>
                                 <option value="400001">재무팀</option>
+                                <option value="400002">구매관리팀</option>
                                 <option value="800001">CS팀</option>
                                 <option value="600001">영업1팀</option>
                                 <option value="600002">영업2팀</option>

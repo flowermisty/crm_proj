@@ -195,7 +195,15 @@ class LoginController extends BaseController
                                                            '{$data['nAdminadd']['regDate']}', 
                                                            '{$data['nAdminadd']['modifyDate']}', 
                                                            '{$data['nAdminadd']['dePwd']}') ");
-            alert_move('등록 되었습니다. 관리자 승인을 받으세요 내선번호(426)', 'http://godo.event.admin/');
+
+            $email = \Config\Services::email();
+            $email->setFrom("{$this->request->getVar('userId')}@ivenet.co.kr","{$this->request->getVar('name')}");
+            $email->setTo('flowermisty@ivenet.co.kr');
+            $email->setSubject("{$this->request->getVar('name')}님이 CRM에 신규 가입 하셨습니다.");
+            $email->setMessage('관리자 승인 부탁 드립니다.');
+            $email->send();
+            alert_move('등록 되었습니다. 관리자에게 승인 요청 메일이 발송됩니다.', 'http://godo.event.admin/');
+
 
 
         }

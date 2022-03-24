@@ -1,4 +1,4 @@
-<footer class="col-12 col-lg-11">
+<footer class="col-12 col-lg-12">
     <div class="col-12 px-5" style="padding-right: 0rem !important;">
         <div class="footer clearfix mb-0 text-muted">
             <div class="float-start">

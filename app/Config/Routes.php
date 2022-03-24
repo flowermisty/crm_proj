@@ -117,6 +117,7 @@ $routes->match(['get','post'],'refundCalc/refundPoint','RefundCalcController::re
 
 //직원관리
 $routes->match(['get','post'],'employee','EmployeeController::index');
+$routes->match(['get','post'],'employee/joinAgree','EmployeeController::joinAgree');
 
 
 

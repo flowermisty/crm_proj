@@ -55,7 +55,7 @@
                         </a>
                         <ul class="submenu" style="">
                             <li class="submenu-item ">
-                                <a href="component-alert.html">직원관리</a>
+                                <a href="<?=base_url('employee')?>">직원관리</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="component-badge.html">상품관리</a>
