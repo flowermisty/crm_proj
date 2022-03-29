@@ -68,7 +68,7 @@
                         </a>
                         <ul class="submenu" style="display:block;">
                             <li class="submenu-item ">
-                                <a href="component-alert.html">회원관리</a>
+                                <a href="<?=base_url('customer/all')?>">회원관리</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="component-badge.html">상담관리</a>
@@ -86,20 +86,24 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-item  has-sub">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-stack"></i>
+                    <?php
+                    if($_SESSION['aIdx']=="159"){
+                        echo "<li class=\"sidebar-item  has-sub\">
+                        <a href=\"#\" class='sidebar-link'>
+                            <i class=\"bi bi-stack\"></i>
                             <span>관리자 설정</span>
                         </a>
-                        <ul class="submenu" style="display:block;">
-                            <li class="submenu-item ">
-                                <a href="<?=base_url('employee')?>">직원관리</a>
+                        <ul class=\"submenu\" style=\"\">
+                            <li class=\"submenu-item \">
+                                <a href=\"<?=base_url('employee')?>\">직원관리</a>
                             </li>
-                            <li class="submenu-item ">
-                                <a href="component-badge.html">상품관리</a>
+                            <li class=\"submenu-item \">
+                                <a href=\"component-badge.html\">상품관리</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>";
+                    }
+                    ?>
 
                     <li class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>

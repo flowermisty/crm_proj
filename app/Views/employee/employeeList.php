@@ -30,7 +30,7 @@
                         </a>
                         <ul class="submenu" style="display:block;">
                             <li class="submenu-item ">
-                                <a href="component-alert.html">회원관리</a>
+                                <a href="<?=base_url('customer/all')?>">회원관리</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="component-badge.html">상담관리</a>
@@ -47,22 +47,24 @@
 
                         </ul>
                     </li>
-
-                    <li class="sidebar-item  has-sub">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-stack"></i>
+                    <?php
+                    if($_SESSION['aIdx']=="159"){
+                        echo "<li class=\"sidebar-item  has-sub\">
+                        <a href=\"#\" class='sidebar-link'>
+                            <i class=\"bi bi-stack\"></i>
                             <span>관리자 설정</span>
                         </a>
-                        <ul class="submenu" style="">
-                            <li class="submenu-item ">
-                                <a href="<?=base_url('employee')?>">직원관리</a>
+                        <ul class=\"submenu\" style=\"\">
+                            <li class=\"submenu-item \">
+                                <a href=\"http://godo.event.admin/employee\">직원관리</a>
                             </li>
-                            <li class="submenu-item ">
-                                <a href="component-badge.html">상품관리</a>
+                            <li class=\"submenu-item \">
+                                <a href=\"component-badge.html\">상품관리</a>
                             </li>
                         </ul>
-                    </li>
-
+                    </li>";
+                    }
+                    ?>
                     <li class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-collection-fill"></i>
@@ -214,16 +216,17 @@
                                                         <a href="joinAgreeModalCenter"
                                                            class="font-semibold badge bg-primary employeeName"
                                                            style="width:65px; height:100%;" data-toggle="modal"
-                                                           data-target="#joinAgreeModalCenter" onclick="dataInsert('<?= $row['aId'] ?>','<?=$row['aStatus']?>')"><?= $row['aName'] ?></a>
+                                                           data-target="#joinAgreeModalCenter"
+                                                           onclick="dataInsert('<?= $row['aId'] ?>','<?= $row['aStatus'] ?>')"><?= $row['aName'] ?></a>
                                                     </td>
                                                     <td>
                                                         <span
-                                                           class="text-muted font-semibold employeeId"><?= $row['aId'] ?></span>
+                                                                class="text-muted font-semibold employeeId"><?= $row['aId'] ?></span>
                                                     </td>
 
                                                     <td>
                                                         <span
-                                                           class="text-muted font-semibold"><?php if ($row['orgCode'] == "400001") {
+                                                                class="text-muted font-semibold"><?php if ($row['orgCode'] == "400001") {
                                                                 echo "재무팀";
                                                             } elseif ($row['orgCode'] == "400002") {
                                                                 echo "구매관리팀";
@@ -260,12 +263,12 @@
                                                             } elseif ($row['orgCode'] == "110002") {
                                                                 echo "생산관리팀";
                                                             } else {
-                                                                echo "부서정보없음";
+                                                                echo "정보없음";
                                                             } ?></span>
                                                     </td>
                                                     <td>
                                                         <span
-                                                           class="text-muted font-semibold"><?php if ($row['grade'] == "1") {
+                                                                class="text-muted font-semibold"><?php if ($row['grade'] == "1") {
                                                                 echo "기타";
                                                             } elseif ($row['grade'] == "2") {
                                                                 echo "계약직사원";
@@ -302,16 +305,16 @@
                                                             } elseif ($row['grade'] == "18") {
                                                                 echo "대표이사";
                                                             } else {
-                                                                echo "직위정보없음";
+                                                                echo "정보없음";
                                                             } ?></span>
                                                     </td>
                                                     <td>
                                                         <span
-                                                           class="text-muted font-semibold"><?= $row['inTel'] ?></span>
+                                                                class="text-muted font-semibold"><?= $row['inTel'] ?></span>
                                                     </td>
                                                     <td>
                                                         <span
-                                                           class="text-muted font-semibold"><?= $row['eMail'] ?></span>
+                                                                class="text-muted font-semibold"><?= $row['eMail'] ?></span>
                                                     </td>
 
                                                     <td>
@@ -436,7 +439,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="<?=base_url('employee/joinAgree')?>" id="joinAgreeForm" method="post" name="joinAgreeForm">
+                        <form action="<?= base_url('employee/joinAgree') ?>" id="joinAgreeForm" method="post"
+                              name="joinAgreeForm">
                             <div class="form-group">
                                 <div class="row col-10">
                                     <div style="display: flex; margin-top:2%; margin-left: 3%" class="col-12">
@@ -447,7 +451,7 @@
                                                 승인대기
                                             </label>
                                             <input class="form-check-input" type="radio" name="status"
-                                                   id="status1" value="A" style="" >
+                                                   id="status1" value="A" style="">
 
                                         </div>
 
@@ -469,7 +473,7 @@
                                                 휴직
                                             </label>
                                             <input class="form-check-input" type="radio" name="status"
-                                                   id="status3" value="H" style="" >
+                                                   id="status3" value="H" style="">
 
                                         </div>
 
@@ -480,7 +484,7 @@
                                                 퇴사
                                             </label>
                                             <input class="form-check-input" type="radio" name="status"
-                                                   id="status4" value="W" style="" >
+                                                   id="status4" value="W" style="">
 
                                         </div>
                                         <input type="hidden" name="aId" id="aId">
@@ -496,7 +500,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                        <button type="button" class="btn btn-primary statusSave" onclick="joinAgreeFormSubmit()">변경</button>
+                        <button type="button" class="btn btn-primary statusSave" onclick="joinAgreeFormSubmit()">변경
+                        </button>
                     </div>
                     </form>
                 </div>
@@ -514,31 +519,31 @@
         </script>
 
         <script>
-            function dataInsert(employeeId,status){
+            function dataInsert(employeeId, status) {
                 document.getElementById('aId').value = employeeId;
                 document.getElementById('aStatus').value = status;
                 var status1 = document.getElementById('status1');
                 var status2 = document.getElementById('status2');
                 var status3 = document.getElementById('status3');
                 var status4 = document.getElementById('status4');
-                if(status1.value == status){
+                if (status1.value == status) {
                     status1.checked = true;
-                }else if(status2.value == status){
+                } else if (status2.value == status) {
                     status2.checked = true;
-                }else if(status3.value == status){
+                } else if (status3.value == status) {
                     status3.checked = true;
-                }else if(status4.value == status){
+                } else if (status4.value == status) {
                     status4.checked = true;
-                }else{
+                } else {
 
                 }
             }
 
-            function joinAgreeFormSubmit(){
-                var form =  document.getElementById('joinAgreeForm');
-                if(confirm('해당 직원의 계정상태를 변경 하시겠습니까?')){
+            function joinAgreeFormSubmit() {
+                var form = document.getElementById('joinAgreeForm');
+                if (confirm('해당 직원의 계정상태를 변경 하시겠습니까?')) {
                     form.submit();
-                }else{
+                } else {
                     return false;
                 }
             }
