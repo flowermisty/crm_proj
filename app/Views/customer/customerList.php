@@ -61,7 +61,7 @@
                         </a>
                         <ul class="submenu" style="display:block;">
                             <li class="submenu-item ">
-                                <a href="<?=base_url('customer/all')?>">회원관리</a>
+                                <a href="<?= base_url('customer/all') ?>">회원관리</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="component-badge.html">상담관리</a>
@@ -218,7 +218,8 @@
                 <div class="col-12 col-lg-12">
 
                     <div class="row">
-                        <div id="route_view" class="bg bg-success" style="" data-aos="zoom-in" data-aos-delay="50" data-aos-duration="1000">
+                        <div id="route_view" class="bg bg-success" style="" data-aos="zoom-in" data-aos-delay="50"
+                             data-aos-duration="1000">
 
                         </div>
                         <div class="col-12">
@@ -238,11 +239,12 @@
                                                 <th style="text-align: center;">고객명&nbsp;&nbsp;</th>
                                                 <th style="text-align: center;">월령&nbsp;&nbsp;</th>
                                                 <th style="text-align: center;">아기이름&nbsp;</th>
-                                                <th style="text-align: center;">휴대폰</th>
+                                                <th style="text-align: center;">휴대폰&nbsp;&nbsp;</th>
                                                 <th style="text-align: center;">주소</th>
                                                 <th style="text-align: center;">담당자&nbsp;</th>
                                                 <th style="text-align: center;">상담횟수&nbsp;</th>
                                                 <th style="text-align: center;">정품체험&nbsp;</th>
+                                                <th style="text-align: center;">등록경로&nbsp;</th>
                                                 <th style="text-align: center;">전환&nbsp;&nbsp;</th>
 
                                             </tr>
@@ -266,12 +268,12 @@
                                                     </td>
                                                     <td>
                                                         <span
-                                                                class="text-muted font-semibold employeeId"><?= $mem_de_code ?></span>
+                                                                class="text-muted font-semibold employeeId" style="font-size:15px;"><?= $mem_de_code ?></span>
                                                     </td>
 
                                                     <td>
                                                         <span
-                                                                class="text-muted font-semibold">
+                                                                class="text-muted font-semibold" style="font-size:15px;">
                                                             <?php
                                                             $name = "{$row['name']}";
                                                             if (mb_strlen($name, "UTF-8") > 3) {
@@ -283,7 +285,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <span class="text-muted font-semibold">
+                                                        <span class="text-muted font-semibold" style="font-size:15px;">
                                                             <?php
 
                                                             if (!$row['baby_birth']) {
@@ -296,7 +298,7 @@
                                                     </td>
                                                     <td>
                                                         <span
-                                                                class="text-muted font-semibold">
+                                                                class="text-muted font-semibold" style="font-size:15px;">
                                                             <?php
 
                                                             $baby_name = "{$row['babyName']['baby_name']}";
@@ -313,11 +315,11 @@
                                                     </td>
                                                     <td>
                                                         <span
-                                                                class="text-muted font-semibold"><?= $row['hand'] ?></span>
+                                                                class="text-muted font-semibold" style="font-size:15px;"><?= $row['hand']?></span>
                                                     </td>
 
                                                     <td>
-                                                        <span class="text-muted font-semibold" style="">
+                                                        <span class="text-muted font-semibold" style="font-size:15px;">
                                                             <?php
                                                             $address = $row['address1'];
                                                             if (mb_strlen($address, "UTF-8") > 25) {
@@ -331,16 +333,16 @@
 
                                                     <td>
                                                         <span class="text-muted font-semibold"
-                                                              style=""><?= $row['adminId'] ?></span>
+                                                              style="font-size:15px;"><?= $row['adminId'] ?></span>
                                                     </td>
 
                                                     <td>
                                                         <span class="text-muted font-semibold"
-                                                              style=""><?= $row['csCount'] ?></span>
+                                                              sstyle="font-size:15px;"><?= $row['csCount'] ?></span>
                                                     </td>
 
                                                     <td>
-                                                        <span class="text-muted font-semibold" style="">
+                                                        <span class="text-muted font-semibold" style="font-size:15px;">
                                                             <?php
                                                             switch ($row['product_name']['product_name']) {
                                                                 case '0':
@@ -374,7 +376,94 @@
 
                                                     <td>
                                                         <span class="text-muted font-semibold"
-                                                              style=""><?= $row['chgPrd']['chgPrd'] ?></span>
+                                                              style="font-size:15px;"><?php
+                                                            switch ($row['rute_code']) {
+                                                                case 'H':
+                                                                    echo '홈페이지';
+                                                                    break;
+                                                                case 'M':
+                                                                    echo '판촉사원';# code...
+                                                                    break;
+                                                                case 'D':
+                                                                    echo '제휴(클래스)';
+                                                                    break;
+                                                                case 'E':
+                                                                    echo '기타고객';
+                                                                    break;
+                                                                case 'C':
+                                                                    echo '클래임';
+                                                                    break;
+                                                                case 'S':
+                                                                    echo '서수연추천';
+                                                                    break;
+                                                                case 'A':
+                                                                    echo '모아베베';
+                                                                    break;
+                                                                case 'U':
+                                                                    echo '두드림';
+                                                                    break;
+                                                                case 'O':
+                                                                    echo '맘껏스쿨';
+                                                                    break;
+                                                                case 'K':
+                                                                    echo '카파스튜디오';
+                                                                    break;
+                                                                case 'N':
+                                                                    echo '더넥스트웨이브';
+                                                                    break;
+                                                                case 'B':
+                                                                    echo '미즈톡톡';
+                                                                    break;
+                                                                case 'P':
+                                                                    echo '산모피아';
+                                                                    break;
+                                                                case 'V':
+                                                                    echo '배냇밀몰';
+                                                                    break;
+                                                                case 'F':
+                                                                    echo '일등맘';
+                                                                    break;
+                                                                case 'R':
+                                                                    echo '베베나린';
+                                                                    break;
+                                                                case 'J':
+                                                                    echo '조은맘';
+                                                                    break;
+                                                                case 'G':
+                                                                    echo '베베폼';
+                                                                    break;
+                                                                case 'I':
+                                                                    echo '아이보리';
+                                                                    break;
+                                                                case 'Y':
+                                                                    echo '맘스다이어리';
+                                                                    break;
+                                                                case 'T':
+                                                                    echo '성인고객';
+                                                                    break;
+                                                                case 'X':
+                                                                    echo '임산부의날';
+                                                                    break;
+                                                                case 'Q':
+                                                                    echo '지인추천';
+                                                                    break;
+                                                                case 'W':
+                                                                    echo '임신/출산';
+                                                                    break;
+                                                                case 'L':
+                                                                    echo '산후조리원';
+                                                                    break;
+                                                                default:
+                                                                    echo '';
+                                                                    break;
+                                                            }
+                                                            ?>
+                                                        </span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="text-muted font-semibold"
+                                                              style="font-size:15px;"><?= $row['chgPrd']['chgPrd'] ?></span>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -412,47 +501,122 @@
                     "<div style='display: flex;' class='col-12'> " +
                     "<span class='col-4' style='margin-top: 1.5%;'>고객 등록 경로 : </span>" +
                     "<select name=\"part\" id=\"part\" style='color:#555252; font-size: .9025rem;' onchange='route_filter(this)'> " +
-                    "<option value=\"all\" <?php if($route_code == "all"){echo "selected";} ?>>전체 고객</option>" +
-                    "<option value=\"H\" <?php if($route_code == "H"){echo "selected";} ?>>홈페이지 고객</option>" +
-                    "<option value=\"M\" <?php if($route_code == "M"){echo "selected";} ?>>판촉사원 고객</option>" +
-                    "<option value=\"D\" <?php if($route_code == "D"){echo "selected";} ?>>제휴(클래스)고객</option>" +
-                    "<option value=\"E\" <?php if($route_code == "E"){echo "selected";} ?>>기타고객</option>" +
-                    "<option value=\"C\" <?php if($route_code == "C"){echo "selected";} ?>>클래임고객</option>" +
-                    "<option value=\"A\" <?php if($route_code == "A"){echo "selected";} ?>>모아베베</option>" +
-                    "<option value=\"U\" <?php if($route_code == "U"){echo "selected";} ?>>두드림</option>" +
-                    "<option value=\"O\" <?php if($route_code == "O"){echo "selected";} ?>>맘껏스쿨</option>" +
-                    "<option value=\"K\" <?php if($route_code == "K"){echo "selected";} ?>>카파스튜디오</option>" +
-                    "<option value=\"N\" <?php if($route_code == "N"){echo "selected";} ?>>더넥스트웨이브</option>" +
-                    "<option value=\"B\" <?php if($route_code == "B"){echo "selected";} ?>>미즈톡톡</option>" +
-                    "<option value=\"P\" <?php if($route_code == "P"){echo "selected";} ?>>산모피아</option>" +
-                    "<option value=\"V\" <?php if($route_code == "V"){echo "selected";} ?>>배냇밀몰</option>" +
-                    "<option value=\"F\" <?php if($route_code == "F"){echo "selected";} ?>>일등맘</option>" +
-                    "<option value=\"R\" <?php if($route_code == "R"){echo "selected";} ?>>베베나린</option>" +
-                    "<option value=\"J\" <?php if($route_code == "J"){echo "selected";} ?>>조은맘</option>" +
-                    "<option value=\"G\" <?php if($route_code == "G"){echo "selected";} ?>>베베폼</option>" +
-                    "<option value=\"T\" <?php if($route_code == "T"){echo "selected";} ?>>성인고객</option>" +
-                    "<option value=\"I\" <?php if($route_code == "I"){echo "selected";} ?>>아이보리</option>" +
-                    "<option value=\"Y\" <?php if($route_code == "Y"){echo "selected";} ?>>맘스다이어리</option>" +
-                    "<option value=\"X\" <?php if($route_code == "X"){echo "selected";} ?>>임산부의 날</option>" +
-                    "<option value=\"Q\" <?php if($route_code == "Q"){echo "selected";} ?>>지인추천</option>" +
-                    "<option value=\"L\" <?php if($route_code == "L"){echo "selected";} ?>>산후조리원</option>" +
-                    "<option value=\"W\" <?php if($route_code == "W"){echo "selected";} ?>>임신&출산 축하박스</option>" +
+                    "<option value=\"all\" <?php if ($route_code == "all") {
+                        echo "selected";
+                    } ?>>전체 고객</option>" +
+                    "<option value=\"H\" <?php if ($route_code == "H") {
+                        echo "selected";
+                    } ?>>홈페이지 고객</option>" +
+                    "<option value=\"M\" <?php if ($route_code == "M") {
+                        echo "selected";
+                    } ?>>판촉사원 고객</option>" +
+                    "<option value=\"D\" <?php if ($route_code == "D") {
+                        echo "selected";
+                    } ?>>제휴(클래스)고객</option>" +
+                    "<option value=\"E\" <?php if ($route_code == "E") {
+                        echo "selected";
+                    } ?>>기타고객</option>" +
+                    "<option value=\"C\" <?php if ($route_code == "C") {
+                        echo "selected";
+                    } ?>>클래임고객</option>" +
+                    "<option value=\"A\" <?php if ($route_code == "A") {
+                        echo "selected";
+                    } ?>>모아베베</option>" +
+                    "<option value=\"U\" <?php if ($route_code == "U") {
+                        echo "selected";
+                    } ?>>두드림</option>" +
+                    "<option value=\"O\" <?php if ($route_code == "O") {
+                        echo "selected";
+                    } ?>>맘껏스쿨</option>" +
+                    "<option value=\"K\" <?php if ($route_code == "K") {
+                        echo "selected";
+                    } ?>>카파스튜디오</option>" +
+                    "<option value=\"N\" <?php if ($route_code == "N") {
+                        echo "selected";
+                    } ?>>더넥스트웨이브</option>" +
+                    "<option value=\"B\" <?php if ($route_code == "B") {
+                        echo "selected";
+                    } ?>>미즈톡톡</option>" +
+                    "<option value=\"P\" <?php if ($route_code == "P") {
+                        echo "selected";
+                    } ?>>산모피아</option>" +
+                    "<option value=\"V\" <?php if ($route_code == "V") {
+                        echo "selected";
+                    } ?>>배냇밀몰</option>" +
+                    "<option value=\"F\" <?php if ($route_code == "F") {
+                        echo "selected";
+                    } ?>>일등맘</option>" +
+                    "<option value=\"R\" <?php if ($route_code == "R") {
+                        echo "selected";
+                    } ?>>베베나린</option>" +
+                    "<option value=\"J\" <?php if ($route_code == "J") {
+                        echo "selected";
+                    } ?>>조은맘</option>" +
+                    "<option value=\"G\" <?php if ($route_code == "G") {
+                        echo "selected";
+                    } ?>>베베폼</option>" +
+                    "<option value=\"T\" <?php if ($route_code == "T") {
+                        echo "selected";
+                    } ?>>성인고객</option>" +
+                    "<option value=\"I\" <?php if ($route_code == "I") {
+                        echo "selected";
+                    } ?>>아이보리</option>" +
+                    "<option value=\"Y\" <?php if ($route_code == "Y") {
+                        echo "selected";
+                    } ?>>맘스다이어리</option>" +
+                    "<option value=\"X\" <?php if ($route_code == "X") {
+                        echo "selected";
+                    } ?>>임산부의 날</option>" +
+                    "<option value=\"Q\" <?php if ($route_code == "Q") {
+                        echo "selected";
+                    } ?>>지인추천</option>" +
+                    "<option value=\"L\" <?php if ($route_code == "L") {
+                        echo "selected";
+                    } ?>>산후조리원</option>" +
+                    "<option value=\"W\" <?php if ($route_code == "W") {
+                        echo "selected";
+                    } ?>>임신&출산 축하박스</option>" +
                     "</select>" +
                     "</div>" +
                     "</label>");
-                 var route_view = $('#part option:checked').text();
-                 $("#route_view").text(route_view);
-                 if($("#route_view").text() !="전체 고객"){
-                     $("#route_view").show();
-                 }
+                var route_view = $('#part option:checked').text();
+                $("#route_view").text(route_view);
+                if ($("#route_view").text() != "전체 고객") {
+                    $("#route_view").show();
+                }
+
+                 var start = $(".page-link").eq(1);
+                 start.text('start');
+
+                var end = $(".page-link").eq(-2);
+                end.text('end');
+
             });
         </script>
 
         <script>
-            function route_filter(code){
+            function route_filter(code) {
                 var route_code = code.value;
-                location.href="http://godo.event.admin/customer/"+route_code;
+                location.href = "http://godo.event.admin/customer/" + route_code;
             }
+        </script>
+
+        <script>
+            $(document).click(function(){
+                var start = $(".page-link").eq(1);
+                start.text('start');
+
+                var end = $(".page-link").eq(-2);
+                end.text('end');
+            });
+
+            $(document).keyup(function(){
+                var start = $(".page-link").eq(1);
+                start.text('start');
+
+                var end = $(".page-link").eq(-2);
+                end.text('end');
+            });
         </script>
 
 <?php

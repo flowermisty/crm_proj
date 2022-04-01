@@ -450,6 +450,7 @@
                     for (let n = s; n != a; n += e) if (t[n + e] && t[n].value > t[n + e].value) {
                         const s = t[n], a = t[n + e], l = s;
                         t[n] = a, t[n + e] = l, i = !0
+
                     }
                 }
                 return t
@@ -699,7 +700,7 @@
                     placeholder: "열 제목으로 검색",
                     perPage: "{select}",
                     noRows: "No entries found",
-                    info: "Showing {start} to {end} of {rows} entries"
+                    info: "Showing {start} to {end}"
                 },
                 layout: {top: "{select}{search}", bottom: "{info}{pager}"}
             };

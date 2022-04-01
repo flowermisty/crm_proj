@@ -24,6 +24,7 @@ class CustomerController extends BaseController{
         $memberList = new MemberListModel();
         $adminList = new AdminModel();
 
+
         if($route_code == "all"){
             $data['memberList'] = $memberList->orderBy('idx','desc')->findAll('1000');
             $data['memberListHex'] = $memberList->select("AES_DECRYPT(UNHEX(hand), '".IVENETCRMKEY."') as hand")->orderBy('idx','desc')->findAll('1000');
