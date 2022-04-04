@@ -122,8 +122,9 @@ $routes->match(['get','post'],'employee/joinAgree','EmployeeController::joinAgre
 //고객관리
 $routes->match(['get','post'],'customer/(:any)','CustomerController::index/$1');
 
-
-
+//상품관리
+$routes->match(['get','post'],'product','ProductManageController::index');
+$routes->match(['get','post'],'product/loadSecond','ProductManageController::loadSecond');
 
 
 

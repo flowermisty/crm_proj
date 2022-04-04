@@ -8,9 +8,16 @@ use App\Models\NAdminModel;
 
 class LoginController extends BaseController
 {
-    public function index()
-    {
-        echo view('login/login');
+    public function index(){
+        helper(['form', 'alert']);
+
+        if( session()->has('aIdx') == "") {
+            echo view('login/login');
+        }else if( session()->has('aIdx') != ""){
+            alert_move('메인페이지로 이동합니다.','http://godo.event.admin/eventAdmin');
+        }
+
+
     }
 
     public function loginInit()

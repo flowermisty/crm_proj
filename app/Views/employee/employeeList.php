@@ -59,7 +59,7 @@
                                 <a href=\"http://godo.event.admin/employee\">직원관리</a>
                             </li>
                             <li class=\"submenu-item \">
-                                <a href=\"component-badge.html\">상품관리</a>
+                                <a href=\"http://godo.event.admin/product\">상품관리</a>
                             </li>
                         </ul>
                     </li>";

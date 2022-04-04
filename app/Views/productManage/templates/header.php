@@ -92,22 +92,22 @@
                     </li>
 
                     <?php
-                    if($_SESSION['aIdx']=="159"){
-                        echo "<li class=\"sidebar-item  has-sub\">
-                        <a href=\"#\" class='sidebar-link'>
-                            <i class=\"bi bi-stack\"></i>
-                            <span>관리자 설정</span>
-                        </a>
-                        <ul class=\"submenu\" style=\"\">
-                            <li class=\"submenu-item \">
-                                <a href=\"http://godo.event.admin/employee\">직원관리</a>
-                            </li>
-                            <li class=\"submenu-item \">
-                                <a href=\"http://godo.event.admin/product\">상품관리</a>
-                            </li>
-                        </ul>
-                    </li>";
-                    }
+//                    if($_SESSION['aIdx']=="159"){
+//                        echo "<li class=\"sidebar-item  has-sub\">
+//                        <a href=\"#\" class='sidebar-link'>
+//                            <i class=\"bi bi-stack\"></i>
+//                            <span>관리자 설정</span>
+//                        </a>
+//                        <ul class=\"submenu\" style=\"\">
+//                            <li class=\"submenu-item \">
+//                                <a href=\"http://godo.event.admin/employee\">직원관리</a>
+//                            </li>
+//                            <li class=\"submenu-item \">
+//                                <a href=\"http://godo.event.admin/product\">상품관리</a>
+//                            </li>
+//                        </ul>
+//                    </li>";
+//                    }
                     ?>
 
                     <li class="sidebar-item  has-sub">
