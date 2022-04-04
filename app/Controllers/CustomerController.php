@@ -13,7 +13,7 @@ if(defined("BASEPATH")) { exit("No direct script access allowed"); }
 
 class CustomerController extends BaseController{
 
-    public function index($route_code){
+    public function index($rute_code){
         helper(['form', 'alert']);
         if( session()->has('aIdx') == "") {
             alert_move("로그인 후 들어와 주세요 ", "http://godo.event.admin/");
@@ -23,15 +23,25 @@ class CustomerController extends BaseController{
 
         $memberList = new MemberListModel();
         $adminList = new AdminModel();
-
-
-        if($route_code == "all"){
-            $data['memberList'] = $memberList->orderBy('idx','desc')->findAll('1000');
-            $data['memberListHex'] = $memberList->select("AES_DECRYPT(UNHEX(hand), '".IVENETCRMKEY."') as hand")->orderBy('idx','desc')->findAll('1000');
-        }else{
-            $data['memberList'] = $memberList->where('rute_code',"{$route_code}")->orderBy('idx','desc')->findAll('1000');
-            $data['memberListHex'] = $memberList->select("AES_DECRYPT(UNHEX(hand), '".IVENETCRMKEY."') as hand")->where('rute_code',"{$route_code}")->orderBy('idx','desc')->findAll('1000');
+        if($_GET['page']){
+            $limitstart = ((int)$_GET['page']-1)*10;
+            if($rute_code == "all"){
+                if($_GET['page']=="1"){
+                    $data['memberList'] = $memberList->orderBy('idx','desc')->findAll("10");
+                }else{
+                    $data['memberList'] = $memberList->orderBy('idx','desc')->findAll("10","$limitstart");
+                }
+                $data['memberListHex'] = $memberList->select("AES_DECRYPT(UNHEX(hand), '".IVENETCRMKEY."') as hand")->orderBy('idx','desc')->findAll("10","$limitstart");
+            }else{
+                $data['memberList'] = $memberList->where('rute_code',"{$rute_code}")->orderBy('idx','desc')->findAll("10","$limitstart");
+                $data['memberListHex'] = $memberList->select("AES_DECRYPT(UNHEX(hand), '".IVENETCRMKEY."') as hand")->where('rute_code',"{$rute_code}")->orderBy('idx','desc')->findAll("10","$limitstart");
+                $lastpage = count($data['memberList']);
+                $data['lastpage'] = $lastpage;
+            }
         }
+
+
+
 
 
         $cnt = count($data['memberList']);
@@ -108,17 +118,17 @@ class CustomerController extends BaseController{
             $data['memberList'][$i]['chgPrd'] = $data['chgPrd'];
             $data['memberList'][$i]['product_name'] = $data['product_name'];
             $data['memberList'][$i]['baby_birth'] = $baby_mon;
-            $data['route_code'] = $route_code;
+            $data['rute_code'] = $rute_code;
 
         }
+        $data['user'] = $memberList->paginate(10);
+        $data['pager'] = $memberList->pager;
 
 
 
         echo view('customer/templates/header');
         echo view('customer/customerList',$data);
         echo view('customer/templates/footer');
-
-        unset($data);
     }
 
 

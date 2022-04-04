@@ -61,7 +61,7 @@
                         </a>
                         <ul class="submenu" style="display:block;">
                             <li class="submenu-item ">
-                                <a href="<?= base_url('customer/all') ?>">회원관리</a>
+                                <a href="<?= base_url('customer/all?page=1') ?>">회원관리</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="component-badge.html">상담관리</a>
@@ -268,12 +268,14 @@
                                                     </td>
                                                     <td>
                                                         <span
-                                                                class="text-muted font-semibold employeeId" style="font-size:15px;"><?= $mem_de_code ?></span>
+                                                                class="text-muted font-semibold employeeId"
+                                                                style="font-size:15px;"><?= $mem_de_code ?></span>
                                                     </td>
 
                                                     <td>
                                                         <span
-                                                                class="text-muted font-semibold" style="font-size:15px;">
+                                                                class="text-muted font-semibold"
+                                                                style="font-size:15px;">
                                                             <?php
                                                             $name = "{$row['name']}";
                                                             if (mb_strlen($name, "UTF-8") > 3) {
@@ -298,7 +300,8 @@
                                                     </td>
                                                     <td>
                                                         <span
-                                                                class="text-muted font-semibold" style="font-size:15px;">
+                                                                class="text-muted font-semibold"
+                                                                style="font-size:15px;">
                                                             <?php
 
                                                             $baby_name = "{$row['babyName']['baby_name']}";
@@ -315,7 +318,8 @@
                                                     </td>
                                                     <td>
                                                         <span
-                                                                class="text-muted font-semibold" style="font-size:15px;"><?= $row['hand']?></span>
+                                                                class="text-muted font-semibold"
+                                                                style="font-size:15px;"><?= $row['hand'] ?></span>
                                                     </td>
 
                                                     <td>
@@ -468,9 +472,12 @@
                                                 </tr>
                                             <?php endforeach; ?>
                                             </tbody>
+
                                         </table>
+                                        <?=$pager->links()?>
                                     </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -501,79 +508,79 @@
                     "<div style='display: flex;' class='col-12'> " +
                     "<span class='col-4' style='margin-top: 1.5%;'>고객 등록 경로 : </span>" +
                     "<select name=\"part\" id=\"part\" style='color:#555252; font-size: .9025rem;' onchange='route_filter(this)'> " +
-                    "<option value=\"all\" <?php if ($route_code == "all") {
+                    "<option value=\"all\" <?php if ($rute_code == "all") {
                         echo "selected";
                     } ?>>전체 고객</option>" +
-                    "<option value=\"H\" <?php if ($route_code == "H") {
+                    "<option value=\"H\" <?php if ($rute_code == "H") {
                         echo "selected";
                     } ?>>홈페이지 고객</option>" +
-                    "<option value=\"M\" <?php if ($route_code == "M") {
+                    "<option value=\"M\" <?php if ($rute_code == "M") {
                         echo "selected";
                     } ?>>판촉사원 고객</option>" +
-                    "<option value=\"D\" <?php if ($route_code == "D") {
+                    "<option value=\"D\" <?php if ($rute_code == "D") {
                         echo "selected";
                     } ?>>제휴(클래스)고객</option>" +
-                    "<option value=\"E\" <?php if ($route_code == "E") {
+                    "<option value=\"E\" <?php if ($rute_code == "E") {
                         echo "selected";
                     } ?>>기타고객</option>" +
-                    "<option value=\"C\" <?php if ($route_code == "C") {
+                    "<option value=\"C\" <?php if ($rute_code == "C") {
                         echo "selected";
                     } ?>>클래임고객</option>" +
-                    "<option value=\"A\" <?php if ($route_code == "A") {
+                    "<option value=\"A\" <?php if ($rute_code == "A") {
                         echo "selected";
                     } ?>>모아베베</option>" +
-                    "<option value=\"U\" <?php if ($route_code == "U") {
+                    "<option value=\"U\" <?php if ($rute_code == "U") {
                         echo "selected";
                     } ?>>두드림</option>" +
-                    "<option value=\"O\" <?php if ($route_code == "O") {
+                    "<option value=\"O\" <?php if ($rute_code == "O") {
                         echo "selected";
                     } ?>>맘껏스쿨</option>" +
-                    "<option value=\"K\" <?php if ($route_code == "K") {
+                    "<option value=\"K\" <?php if ($rute_code == "K") {
                         echo "selected";
                     } ?>>카파스튜디오</option>" +
-                    "<option value=\"N\" <?php if ($route_code == "N") {
+                    "<option value=\"N\" <?php if ($rute_code == "N") {
                         echo "selected";
                     } ?>>더넥스트웨이브</option>" +
-                    "<option value=\"B\" <?php if ($route_code == "B") {
+                    "<option value=\"B\" <?php if ($rute_code == "B") {
                         echo "selected";
                     } ?>>미즈톡톡</option>" +
-                    "<option value=\"P\" <?php if ($route_code == "P") {
+                    "<option value=\"P\" <?php if ($rute_code == "P") {
                         echo "selected";
                     } ?>>산모피아</option>" +
-                    "<option value=\"V\" <?php if ($route_code == "V") {
+                    "<option value=\"V\" <?php if ($rute_code == "V") {
                         echo "selected";
                     } ?>>배냇밀몰</option>" +
-                    "<option value=\"F\" <?php if ($route_code == "F") {
+                    "<option value=\"F\" <?php if ($rute_code == "F") {
                         echo "selected";
                     } ?>>일등맘</option>" +
-                    "<option value=\"R\" <?php if ($route_code == "R") {
+                    "<option value=\"R\" <?php if ($rute_code == "R") {
                         echo "selected";
                     } ?>>베베나린</option>" +
-                    "<option value=\"J\" <?php if ($route_code == "J") {
+                    "<option value=\"J\" <?php if ($rute_code == "J") {
                         echo "selected";
                     } ?>>조은맘</option>" +
-                    "<option value=\"G\" <?php if ($route_code == "G") {
+                    "<option value=\"G\" <?php if ($rute_code == "G") {
                         echo "selected";
                     } ?>>베베폼</option>" +
-                    "<option value=\"T\" <?php if ($route_code == "T") {
+                    "<option value=\"T\" <?php if ($rute_code == "T") {
                         echo "selected";
                     } ?>>성인고객</option>" +
-                    "<option value=\"I\" <?php if ($route_code == "I") {
+                    "<option value=\"I\" <?php if ($rute_code == "I") {
                         echo "selected";
                     } ?>>아이보리</option>" +
-                    "<option value=\"Y\" <?php if ($route_code == "Y") {
+                    "<option value=\"Y\" <?php if ($rute_code == "Y") {
                         echo "selected";
                     } ?>>맘스다이어리</option>" +
-                    "<option value=\"X\" <?php if ($route_code == "X") {
+                    "<option value=\"X\" <?php if ($rute_code == "X") {
                         echo "selected";
                     } ?>>임산부의 날</option>" +
-                    "<option value=\"Q\" <?php if ($route_code == "Q") {
+                    "<option value=\"Q\" <?php if ($rute_code == "Q") {
                         echo "selected";
                     } ?>>지인추천</option>" +
-                    "<option value=\"L\" <?php if ($route_code == "L") {
+                    "<option value=\"L\" <?php if ($rute_code == "L") {
                         echo "selected";
                     } ?>>산후조리원</option>" +
-                    "<option value=\"W\" <?php if ($route_code == "W") {
+                    "<option value=\"W\" <?php if ($rute_code == "W") {
                         echo "selected";
                     } ?>>임신&출산 축하박스</option>" +
                     "</select>" +
@@ -585,38 +592,24 @@
                     $("#route_view").show();
                 }
 
-                 var start = $(".page-link").eq(1);
-                 start.text('start');
-
-                var end = $(".page-link").eq(-2);
-                end.text('end');
+                $('nav > .pagination').attr("class", "pagination pagination-primary float-end dataTable-pagination");
+                if ($('nav > .pagination > li > a > span').eq(1).text() == "Previous") {
+                    $('nav > .pagination > li > a > span').eq(1).text('◀');
+                }
+                if ($('nav > .pagination > li > a > span').eq(-2).text() == "Next") {
+                    $('nav > .pagination > li > a > span').eq(-2).text('▶');
+                }
 
             });
         </script>
+
+
 
         <script>
             function route_filter(code) {
-                var route_code = code.value;
-                location.href = "http://godo.event.admin/customer/" + route_code;
+                var rute_code = code.value;
+                location.href = "http://godo.event.admin/customer/" + rute_code + "?page=1";
             }
-        </script>
-
-        <script>
-            $(document).click(function(){
-                var start = $(".page-link").eq(1);
-                start.text('start');
-
-                var end = $(".page-link").eq(-2);
-                end.text('end');
-            });
-
-            $(document).keyup(function(){
-                var start = $(".page-link").eq(1);
-                start.text('start');
-
-                var end = $(".page-link").eq(-2);
-                end.text('end');
-            });
         </script>
 
 <?php

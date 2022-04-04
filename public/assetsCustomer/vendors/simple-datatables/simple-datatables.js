@@ -700,7 +700,7 @@
                     placeholder: "열 제목으로 검색",
                     perPage: "{select}",
                     noRows: "No entries found",
-                    info: "Showing {start} to {end}"
+                    //info: "Showing {start} to {end} of {rows} entries"
                 },
                 layout: {top: "{select}{search}", bottom: "{info}{pager}"}
             };

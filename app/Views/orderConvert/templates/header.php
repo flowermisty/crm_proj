@@ -73,7 +73,7 @@
                         </a>
                         <ul class="submenu" style="display:block;">
                             <li class="submenu-item ">
-                                <a href="<?=base_url('customer/all')?>">회원관리</a>
+                                <a href="<?=base_url('customer/all?page=1')?>">회원관리</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="component-badge.html">상담관리</a>
