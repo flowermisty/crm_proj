@@ -37,7 +37,49 @@ class ProductManageController extends BaseController{
             $ROW = $SQL->getResultArray();
             return $this->response->setJSON($ROW);
         }
-
-
     }
+
+    public function productInit(){
+        helper(['form', 'alert']);
+
+        $data=[];
+        if($this->request->getPost()){
+            $nprdInfo = new NPrdInfoModel();
+            $cate2 = $this->request->getPost();
+            $prdCode = $cate2['cate2'][0];
+            $db = \Config\Database::connect();
+
+            $data['prdinfo'] = $nprdInfo->where('prdCode',"{$prdCode}")->findAll();
+            $SQL = $db->query("select coupangEa from nPrdInfoadd where idx = '{$data['prdinfo'][0]['idx']}'");
+            $ROW = $SQL->getResultArray();
+            print_r($ROW);
+            return $this->response->setJSON($data);
+        }
+    }
+
+    public function addNewCate1(){
+        helper(['form', 'alert']);
+        $db = \Config\Database::connect();
+        $data=[];
+        if($this->request->getPost('cate1')=="addNewCate1"){
+            $SQL = $db->query("SELECT prdCode, prdName FROM nPrdInfo where 1 AND length(prdCode) = '3' AND viewYN = 'Y' AND cpYN = 'Y' ORDER BY prdCode DESC LIMIT 1");
+            $data['lastCateNum'] = $SQL->getResultArray();
+            return $this->response->setJSON($data);
+        }
+    }
+
+    public function addNewCate2(){
+        helper(['form', 'alert']);
+        $db = \Config\Database::connect();
+        $data=[];
+        $cate1 = $this->request->getPost('cate1')[0];
+
+        if($this->request->getPost('cate1')){
+            $SQL = $db->query("SELECT prdCode FROM nPrdInfo where 1 AND prdCode LIKE '{$cate1}%' AND length(prdCode) = '6' AND viewYN = 'Y' AND cpYN = 'Y' ORDER BY prdCode DESC LIMIT 1");
+            $data['lastCateNum'] = $SQL->getResultArray();
+            return $this->response->setJSON($data);
+        }
+    }
+
+
 }

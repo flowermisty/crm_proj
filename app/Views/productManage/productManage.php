@@ -1,7 +1,23 @@
 <style>
 
-    tbody {
+    #chitColor {
+        width: 100%; /* 원하는 너비설정 */
+
+        padding: .5em .3em; /* 여백으로 높이 설정 */
+        font-family: inherit; /* 폰트 상속 */
+        background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+        border: 1px solid #dce7f1;
+        border-radius: .25rem; /* iOS 둥근모서리 제거 */
+        -webkit-appearance: none; /* 네이티브 외형 감추기 */
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .columInfo {
         padding: 1%;
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
     }
 
 </style>
@@ -26,229 +42,458 @@
     <section class="section">
         <div class="row">
             <div class="col-12 col-md-12">
-                <div class="card">
+                <div class="card" style="margin-bottom:0;">
                     <div class="card-header" style="padding-bottom:0 !important;">
                         <h5 class="card-title text-muted">상품관리 설정</h5>
                     </div>
                     <div class="card-content">
-                        <div class="card-body">
-                            <p class="card-text">
-                                🔳 1차 카테고리 <span style="margin-left:25.5%;">🔳 2차 카테고리</span>
-                                <code></code>
-                            </p>
-                            <form id="fmSelf" method="post" action="<?= base_url("convert/self/selfConvert") ?>"
-                                  enctype="multipart/form-data">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="table__cell text-muted font-semibold"
-                                             style="background: white; font-size: smaller;">
-                                            <div class="col-md-12 py-3 border" style="background:white;">
-                                                <div class=""
-                                                     style="position: relative; width: 95%; height:95%;  margin: auto;">
-                                                    <div class="form-row text-muted font-semibold">
-                                                        <div class="input-group text-muted font-semibold">
-                                                            <input type="search"
-                                                                   class="form-control rounded text-muted font-semibold"
-                                                                   placeholder="메뉴명, ERP코드 검색"
-                                                                   aria-label="Search"
-                                                                   aria-describedby="search-addon" id="search"
-                                                                   onkeyup="filter()"/>
-                                                            <button type="button" class="btn btn-primary"
-                                                                    id="filterText"
-                                                                    style="margin-left: 3px; display: none;">검색
-                                                            </button>
-                                                            <button type="button" class="btn btn-primary"
-                                                                    style="margin-left: 3px;"
-                                                                    onclick="">추가
-                                                            </button>
-                                                        </div>
+                        <div class="card-body" style="padding-bottom: 0;">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p class="card-text">
+                                        🔳 1차 카테고리
+                                        <button type="button" class="btn btn-primary float-end"
+                                                style="" id="buttonCate1"
+                                                onclick="newCate1();">카테고리 추가
+                                        </button>
+                                        <code></code>
+                                    </p>
+                                    <div class="table__cell text-muted font-semibold"
+                                         style="background: white; font-size: smaller;">
+                                        <div class="col-md-12 py-3 border" style="background:white;">
+                                            <div class=""
+                                                 style="position: relative; width: 95%; height:95%;  margin: auto;">
+                                                <div class="form-row text-muted font-semibold">
+                                                    <div class="input-group text-muted font-semibold">
+                                                        <input type="search"
+                                                               class="form-control rounded text-muted font-semibold"
+                                                               placeholder="카테고리명 검색"
+                                                               aria-label="Search"
+                                                               aria-describedby="search-addon" id="search1"
+                                                               onkeyup="filter()"/>
+                                                        <button type="button" class="btn btn-primary"
+                                                                id="filterText"
+                                                                style="margin-left: 3px; display: none;">검색
+                                                        </button>
+
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-row">
-                                                        <div class="input-group col-md-12 py-3">
-                                                            <select name="cate1" id="sCate1"
-                                                                    class="form-control text-muted font-semibold"
-                                                                    multiple
-                                                                    size="10" onchange="secondCate();">
+                                                <div class="form-row">
+                                                    <div class="input-group col-md-12 py-3" style="height:300px;">
+                                                        <select name="cate1[]" id="sCate1"
+                                                                class="form-control text-muted font-semibold"
+                                                                multiple
+                                                                size="10" onchange="secondCateload();">
 
-                                                                <?php foreach ($product as $row): ?>
-                                                                    <option value="<?= $row['prdCode'] ?>"><?= $row['prdName'] ?></option>
-                                                                <?php endforeach; ?>
+                                                            <?php foreach ($product as $row): ?>
+                                                                <option id="sCate1Option"
+                                                                        value="<?= $row['prdCode'] ?>"><?= $row['prdName'] ?></option>
+                                                            <?php endforeach; ?>
 
 
-                                                            </select>
-                                                        </div>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1" style="margin-top: 15%; text-align: center; padding: 0;">
+                                    <span>▶▶▶</span>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <p class="card-text">
+                                        🔳 2차 카테고리
+                                        <button type="button" class="btn btn-success float-end"
+                                                style=""
+                                                onclick="newCate2();" id="buttonCate2">세부품목 추가
+                                        </button>
+                                        <code></code>
+                                    </p>
+                                    <div class="table__cell text-muted font-semibold"
+                                         style="background: white; font-size: smaller;">
+                                        <div class="col-md-12 py-3 border" style="background:white;">
+                                            <div class=""
+                                                 style="position: relative; width: 95%; height:95%;  margin: auto;">
+                                                <div class="form-row text-muted font-semibold">
+                                                    <div class="input-group text-muted font-semibold">
+                                                        <input type="search"
+                                                               class="form-control rounded text-muted font-semibold"
+                                                               placeholder="품명 검색"
+                                                               aria-label="Search"
+                                                               aria-describedby="search-addon" id="search2"
+                                                               onkeyup="filter2()"/>
+                                                        <button type="button" class="btn btn-primary"
+                                                                id="filterText"
+                                                                style="margin-left: 3px; display: none;">검색
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="input-group col-md-12 py-3" style="height:300px;">
+                                                        <select name="cate2" id="sCate2"
+                                                                class="form-control text-muted font-semibold"
+                                                                multiple
+                                                                size="10" onchange="productInit();">
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3" style="margin-top:2.7%;">
+                                    <div class="col-md-12">
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <form class="form-row col-12 col-md-12" style="border:1px solid #dee2e6; margin-top:1%;">
+
+                                <div class="row col-12 columInfo"
+                                     style="border-bottom:1px solid #dee2e6;" columInfo>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">카테고리코드</label>
+                                            <input type="text" id="catecode"
+                                                   class="form-control"
+                                                   placeholder="" name="catecode">
                                         </div>
                                     </div>
-
-                                    <div class="col-md-1" style="margin-top: 10%; text-align: center; padding: 0;">
-                                        <span>▶▶▶</span>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="last-name-column">상품명</label>
+                                            <input type="text" id="prdName"
+                                                   class="form-control"
+                                                   placeholder="" name="prdName">
+                                        </div>
                                     </div>
-
-
-                                    <div class="col-md-3">
-                                        <div class="table__cell text-muted font-semibold"
-                                             style="background: white; font-size: smaller;">
-                                            <div class="col-md-12 py-3 border" style="background:white;">
-                                                <div class=""
-                                                     style="position: relative; width: 95%; height:95%;  margin: auto;">
-                                                    <div class="form-row text-muted font-semibold">
-                                                        <div class="input-group text-muted font-semibold">
-                                                            <input type="search"
-                                                                   class="form-control rounded text-muted font-semibold"
-                                                                   placeholder="메뉴명, ERP코드 검색"
-                                                                   aria-label="Search"
-                                                                   aria-describedby="search-addon" id="search"
-                                                                   onkeyup="filter()"/>
-                                                            <button type="button" class="btn btn-primary"
-                                                                    id="filterText"
-                                                                    style="margin-left: 3px; display: none;">검색
-                                                            </button>
-                                                            <button type="button" class="btn btn-primary"
-                                                                    style="margin-left: 3px;"
-                                                                    onclick="">추가
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-row">
-                                                        <div class="input-group col-md-12 py-3">
-                                                            <select name="cate2" id="sCate2"
-                                                                    class="form-control text-muted font-semibold"
-                                                                    multiple
-                                                                    size="10">
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="city-column">분유여부</label>
+                                            <div class="row col-12" style="margin-top:2%;">
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="boonyoo" id="boonyoo_y" value="Y"
+                                                       style="padding:0; margin-left:3.5%;" checked>
+                                                <label class="form-check-label  col-md-3" for="danger">
+                                                    YES
+                                                </label>
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="boonyoo" id="boonyoo_n" value="N"
+                                                       style="padding:0;">
+                                                <label class="form-check-label col-md-2" for="danger">
+                                                    NO
+                                                </label>
                                             </div>
-
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="country-floating">보여지는 이름</label>
+                                            <input type="text" id="prdRname"
+                                                   class="form-control"
+                                                   name="prdRname" placeholder="">
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <div class="row col-12 columInfo"
+                                     style="border-bottom:1px solid #dee2e6;">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="company-column">하위상품반영 (분유, 입수, 규격, 제품판매, 과세,
+                                                사내판매,
+                                                TM판매, 각종 가격)</label>
+                                            <div class="row col-12" style="margin-top:1.5%;">
+                                                <input class="form-check-input col-md-2" type="radio"
+                                                       name="underYN" value="Y" id="underYN_y"
+                                                       style="padding:0; margin-left:2%;" checked>
+                                                <label class="form-check-label  col-md-2" for="danger"
+                                                       style="padding-right: 0; width:12%;">
+                                                    YES
+                                                </label>
+                                                <input class="form-check-input col-md-2" type="radio"
+                                                       name="underYN" value="N" id="underYN_n"
+                                                       style="padding:0;">
+                                                <label class="form-check-label col-md-9" for="danger">
+                                                    NO
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">쿠팡 전표 색상</label>
+                                            <select name="chitColor" id="chitColor">
+                                                <option value="">
+                                                    -----------------------------------------
+                                                </option>
+                                                <option value="">녹색</option>
+                                                <option value="">노란색</option>
+                                                <option value="">파란색</option>
+                                                <option value="">주황색</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">입수</label>
+                                            <input type="text" id="prdBox"
+                                                   class="form-control"
+                                                   name="prdBox" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row col-12 columInfo"
+                                     style="border-bottom:1px solid #dee2e6;">
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">TM판매여부</label>
+                                            <div class="row col-12" style="margin-top:2%;">
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="tmYN" value="Y" id="tmYN_y"
+                                                       style="padding:0; margin-left:3.5%;" checked>
+                                                <label class="form-check-label  col-md-3" for="danger">
+                                                    YES
+                                                </label>
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="tmYN" value="N" style="padding:0;"
+                                                       id="tmYN_n">
+                                                <label class="form-check-label col-md-2" for="danger">
+                                                    NO
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">규격</label>
+                                            <input type="text" id="prdSize"
+                                                   class="form-control"
+                                                   name="email-id-column" placeholder="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">ERP코드</label>
+                                            <input type="text" id="erpCode"
+                                                   class="form-control"
+                                                   name="email-id-column" placeholder="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">정가</label>
+                                            <input type="text" id="prdPrice"
+                                                   class="form-control"
+                                                   name="email-id-column" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row col-12 columInfo"
+                                     style="border-bottom:1px solid #dee2e6;">
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">과세여부</label>
+                                            <div class="row col-12" style="margin-top:2%;">
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="taxYN" value="Y" id="taxYN_y"
+                                                       style="padding:0; margin-left:3.5%;" checked>
+                                                <label class="form-check-label  col-md-3" for="danger">
+                                                    YES
+                                                </label>
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="taxYN" value="N" style="padding:0;"
+                                                       id="taxYN_n">
+                                                <label class="form-check-label col-md-2" for="danger">
+                                                    NO
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">제품판매여부</label>
+                                            <div class="row col-12" style="margin-top:2%;">
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="sellYN" value="Y" id="sellYN_y"
+                                                       style="padding:0; margin-left:3.5%;" checked>
+                                                <label class="form-check-label  col-md-3" for="danger">
+                                                    YES
+                                                </label>
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="sellYN" value="N" style="padding:0;"
+                                                       id="sellYN_n">
+                                                <label class="form-check-label col-md-2" for="danger">
+                                                    NO
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">정품출고여부</label>
+                                            <div class="row col-12" style="margin-top:2%;">
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="genuineYN" value="Y" id="genuineYN_y"
+                                                       style="padding:0; margin-left:3.5%;" checked>
+                                                <label class="form-check-label  col-md-3" for="danger">
+                                                    YES
+                                                </label>
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="genuineYN" value="N" style="padding:0;"
+                                                       id="genuineYN_n">
+                                                <label class="form-check-label col-md-2" for="danger">
+                                                    NO
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">사내판매여부</label>
+                                            <div class="row col-12" style="margin-top:2%;">
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="inSellYN" value="Y"
+                                                       style="padding:0; margin-left:3.5%;"
+                                                       id="inSellYN_y" checked>
+                                                <label class="form-check-label  col-md-3" for="danger">
+                                                    YES
+                                                </label>
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="inSellYN" value="N" style="padding:0;"
+                                                       id="inSellYN_n">
+                                                <label class="form-check-label col-md-2" for="danger">
+                                                    NO
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row col-12 columInfo"
+                                     style="border-bottom:1px solid #dee2e6;">
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">롯데마트코드</label>
+                                            <input type="text" id="lotCode"
+                                                   class="form-control"
+                                                   name="lotCode" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">홈플러스코드</label>
+                                            <input type="text" id="homCode"
+                                                   class="form-control"
+                                                   name="homCode" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">메가마트코드</label>
+                                            <input type="text" id="MGCode"
+                                                   class="form-control"
+                                                   name="MGCode" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">농협코드</label>
+                                            <input type="text" id="NHCode"
+                                                   class="form-control"
+                                                   name="NHCode" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row col-12 columInfo"
+                                     style="">
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">이랜드리테일</label>
+                                            <input type="text" id="ELCode"
+                                                   class="form-control"
+                                                   name="ELCode" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">GS리테일</label>
+                                            <input type="text" id="GSCode"
+                                                   class="form-control"
+                                                   name="GSCode" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">상품바코드</label>
+                                            <input type="text" id="prdBarcode"
+                                                   class="form-control"
+                                                   name="prdBarcode" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">쿠팡입수</label>
+                                            <input type="text" id=""
+                                                   class="form-control"
+                                                   name="" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group col-12">
+                                    <div class="form-check">
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="checkbox5"
+                                                   class="form-check-input" checked="">
+                                            <label for="checkbox5">Remember Me</label>
+                                        </div>
+                                    </div>
+                                </div>-->
+
+
                             </form>
 
-                            <div class="row col-12 col-md-12"
-                                 style="padding:1%; border:1px solid #ccc; margin-top:2%; margin-left: 0.05%;">
-                                <table class="info-table-style text-muted  font-semibold">
 
-                                    <tbody>
-
-                                    <tr>
-                                        <th class="its-th-align cneter">카테고리코드</th>
-                                        <td class="its-td"><input type="text" name="prdCode" id="prdCode" readonly/>
-                                        </td>
-                                        <th class="its-th-align cneter">상품명</th>
-                                        <td class="its-td"><input type="text" name="prdName" id="prdName"
-                                                                  size="20"/>
-                                        </td>
-                                        <th class="its-th-align cneter">분유여부</th>
-                                        <td class="its-td">
-                                            <input type="radio" name="milkYN" value="Y"> Yes &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" name="milkYN" value="N" checked> No
-                                        </td>
-                                        <th class="its-th-align cneter">보여지는이름</th>
-                                        <td class="its-td"><input type="text" name="prdRName" id="prdRName"
-                                                                  size="30"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="its-th-align cneter">하위 상품 반영</th>
-                                        <td class="its-td" colspan="3">
-                                            <input type="radio" name="underYN" value="Y" checked> Yes &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" name="underYN" value="N"> No (분유, 입수, 규격, 제품판매, 과세,
-                                            사내판매, TM판매, 각종 가격 )
-                                        </td>
-                                        <th class="its-th-align cneter">전표색상</th>
-                                        <td class="its-td">
-                                            <select name="pColor">
-                                                <option value="">-------</option>
-                                                <option value="ccff99">녹색</option>
-                                                <option value="00ff00">노란색</option>
-                                                <option value="ccccff">파란색</option>
-                                                <option value="ffc000">주황색</option>
-                                            </select>
-                                        </td>
-                                        <th class="its-th-align cneter">입 수</th>
-                                        <td class="its-td"><input type="text" name="prdBox" id="prdBox" size="10"
-                                                                  class="wr_right"/> 개
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="its-th-align cneter">TM판매여부</th>
-                                        <td class="its-td">
-                                            <input type="radio" name="tmYN" value="Y" checked> Yes &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" name="tmYN" value="N"> No
-                                        </td>
-                                        <th class="its-th-align cneter">규 격</th>
-                                        <td class="its-td"><input type="text" name="prdSize" id="prdSize" size="20"/>
-                                        </td>
-                                        <th class="its-th-align cneter">erp코드</th>
-                                        <td class="its-td"><input type="text" name="erpCode" id="erpCode" size="20"/>
-                                        </td>
-                                        <th class="its-th-align cneter">정 가</th>
-                                        <td class="its-td"><input type="text" name="prdPrice" id="prdPrice" size="30"
-                                                                  class="wr_right" onBlur="autoComma(this);"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="its-th-align cneter">과세여부</th>
-                                        <td class="its-td">
-                                            <input type="radio" name="taxYN" value="Y" class="taxYN" checked> 과세 &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" name="taxYN" value="N" class="taxYN"> 비과세
-                                        </td>
-                                        <th class="its-th-align cneter">제품판매여부</th>
-                                        <td class="its-td">
-                                            <input type="radio" name="sellYN" value="Y" checked> Yes &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" name="sellYN" value="N"> No
-                                        </td>
-                                        <th class="its-th-align cneter">정품출고여부</th>
-                                        <td class="its-td">
-                                            <input type="radio" name="genuineYN" value="Y" checked> Yes &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" name="genuineYN" value="N"> No
-                                        </td>
-                                        <th class="its-th-align cneter">사내판매여부</th>
-                                        <td class="its-td">
-                                            <input type="radio" name="inSellYN" value="Y" checked> Yes &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" name="inSellYN" value="N"> No
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    </tr>
-                                    <tr>
-                                        <th class="its-th-align cneter">롯데마트코드</th>
-                                        <td class="its-td"><input type="text" name="lotCode" id="lotCode" value=""
-                                                                  size="20"/></td>
-                                        <th class="its-th-align cneter">홈플러스코드</th>
-                                        <td class="its-td"><input type="text" name="homCode" id="homCode" value=""
-                                                                  size="20"/></td>
-                                        <th class="its-th-align cneter">메가마트코드</th>
-                                        <td class="its-td"><input type="text" name="MGCode" id="MGCode" value=""
-                                                                  size="20"/></td>
-                                        <th class="its-th-align cneter">농협코드</th>
-                                        <td class="its-td"><input type="text" name="NHCode" id="NHCode" value=""
-                                                                  size="20"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="its-th-align cneter">이랜드리테일</th>
-                                        <td class="its-td"><input type="text" name="GSCode" id="GSCode" value=""
-                                                                  size="20"/></td>
-                                        <th class="its-th-align cneter">GS리테일</th>
-                                        <td class="its-td"><input type="text" name="GSCode" id="GSCode" value=""
-                                                                  size="20"/></td>
-                                        <th class="its-th-align cneter">바코드</th>
-                                        <td class="its-td"><input type="text" name="BarCode" id="BarCode" value=""
-                                                                  size="20"/></td>
-                                        <th class="its-th-align cneter">쿠팡입수</th>
-                                        <td class="its-td"><input type="text" name="coupang" id="coupang" value=""
-                                                                  size="20"/></td>
-                                    </tr>
-
-                                </table>
+                            <div class="col-12 d-flex justify-content-end" style="margin-top:1.5%; margin-bottom:2%;">
+                                <button type="submit" class="btn btn-primary me-1 mb-1" id="submit">
+                                    등록
+                                </button>
+                                <button type="reset" class="btn btn-light-secondary me-1 mb-1" id="reset">
+                                    취소
+                                </button>
+                                <button type="button" class="btn btn-success me-1 mb-1" id="button"
+                                        style="display:none">
+                                    등록
+                                </button>
                             </div>
 
                         </div>
@@ -406,12 +651,25 @@ Auto resize image file uploader
 
 <script>
     function filter() {
-        let search = document.getElementById("search").value;
-        let listInner = document.getElementsByTagName("option");
+        let search = document.getElementById("search1").value;
+        let listInner = document.getElementById("sCate1");
         let menuName = [];
         for (let i = 0; i < listInner.length; i++) {
-            menuName[i] = listInner[i].value;
+            menuName[i] = listInner[i].innerText;
+            if (menuName[i].indexOf(search) != -1) {
+                listInner[i].style.display = "flex"
+            } else {
+                listInner[i].style.display = "none"
+            }
+        }
+    }
 
+    function filter2() {
+        let search = document.getElementById("search2").value;
+        let listInner = document.getElementById("sCate2");
+        let menuName = [];
+        for (let i = 0; i < listInner.length; i++) {
+            menuName[i] = listInner[i].innerText;
             if (menuName[i].indexOf(search) != -1) {
                 listInner[i].style.display = "flex"
             } else {
@@ -421,7 +679,7 @@ Auto resize image file uploader
     }
 
 
-    function secondCate() {
+    function secondCateload() {
         var select = $('#sCate1').val();
         var param = {cate1: select};
         $.ajax({
@@ -431,13 +689,153 @@ Auto resize image file uploader
             success: function (response) {
                 $('#sCate2').html("");
                 for (let i = 0; i < Object.keys(response).length; i++) {
-                    var prdCode = response[i]['prdName'];
-                    $('#sCate2').append("<option>" + prdCode + "</option>");
+                    var prdName = response[i]['prdName'];
+                    var prdCode = response[i]['prdCode'];
+                    $('#sCate2').append("<option value='" + prdCode + "'>" + prdName + "</option>");
                 }
             }
 
 
         });
+    }
+
+
+    function productInit() {
+        var select = $('#sCate2').val();
+        var param = {cate2: select};
+        $.ajax({
+            type: "POST",
+            url: "/product/productInit",
+            data: param,
+            success: function (response) {
+                $('#catecode').val(response.prdinfo[0]['prdCode'])
+                $('#prdName').val(response.prdinfo[0]['prdName'])
+                $('#prdRname').val(response.prdinfo[0]['prdRName']);
+
+
+                if (response.prdinfo[0]['milkYN'] == $('#boonyoo_y').val()) {
+                    $('#boonyoo_y').attr('checked', 'true');
+                } else if (response.prdinfo[0]['milkYN'] == $('#boonyoo_n').val()) {
+                    $('#boonyoo_n').attr('checked', 'true');
+                }
+
+                if (response.prdinfo[0]['underYN'] == $('#underYN_y').val()) {
+                    $('#underYN_y').attr('checked', 'true');
+                } else if (response.prdinfo[0]['underYN'] == $('#underYN_n').val()) {
+                    $('#underYN_n').attr('checked', 'true');
+                }
+
+
+                if (response.prdinfo[0]['tmYN'] == $('#tmYN_y').val()) {
+                    $('#tmYN_y').attr('checked', 'true');
+                } else if (response.prdinfo[0]['underYN'] == $('#tmYN_n').val()) {
+                    $('#tmYN_n').attr('checked', 'true');
+                }
+
+                if (response.prdinfo[0]['taxYN'] == $('#taxYN_y').val()) {
+                    $('#taxYN_y').attr('checked', 'true');
+                } else if (response.prdinfo[0]['taxYN'] == $('#taxYN_n').val()) {
+                    $('#taxYN_n').attr('checked', 'true');
+                }
+
+                if (response.prdinfo[0]['sellYN'] == $('#sellYN_y').val()) {
+                    $('#sellYN_y').attr('checked', 'true');
+                } else if (response.prdinfo[0]['sellYN'] == $('#sellYN_n').val()) {
+                    $('#sellYN_n').attr('checked', 'true');
+                }
+                if (response.prdinfo[0]['genuineYN'] == $('#genuineYN_y').val()) {
+                    $('#genuineYN_y').attr('checked', 'true');
+                } else if (response.prdinfo[0]['genuineYN'] == $('#genuineYN_n').val()) {
+                    $('#genuineYN_n').attr('checked', 'true');
+                }
+
+                if (response.prdinfo[0]['inSellYN'] == $('#inSellYN_y').val()) {
+                    $('#inSellYN_y').attr('checked', 'true');
+                } else if (response.prdinfo[0]['inSellYN'] == $('#inSellYN_n').val()) {
+                    $('#inSellYN_n').attr('checked', 'true');
+                }
+
+                $('#prdSize').val(response.prdinfo[0]['prdSize']);
+                $('#prdBox').val(response.prdinfo[0]['prdBox']);
+                $('#erpCode').val(response.prdinfo[0]['erpCode']);
+                $('#prdPrice').val(response.prdinfo[0]['prdPrice']);
+                $('#lotCode').val(response.prdinfo[0]['lotCode']);
+                $('#homCode').val(response.prdinfo[0]['homCode']);
+                $('#MGCode').val(response.prdinfo[0]['MGCode']);
+                $('#NHCode').val(response.prdinfo[0]['NHCode']);
+                $('#ELCode').val(response.prdinfo[0]['ELCode']);
+                $('#GSCode').val(response.prdinfo[0]['GSCode']);
+                $('#prdBarcode').val(response.prdinfo[0]['prdBarcode']);
+                $('#submit').text('수정');
+                $('#reset').text('삭제');
+                $('#button').show();
+
+            }
+
+
+        });
+    }
+
+    $('#button').on('click', function () {
+        location.reload();
+    });
+
+
+    function newCate1() {
+        var param = {cate1: "addNewCate1"};
+        $.ajax({
+            type: "POST",
+            data: param,
+            url: "/product/addNewCate1",
+            success: function (response) {
+                var newCate1Num = parseInt(response.lastCateNum[0]['prdCode']) + 1;
+                if ($('#prdName').val() == "") {
+                    $('#catecode').val(newCate1Num);
+                } else {
+                    if (confirm('카테고리 등록페이지로 이동 하시겠습니까?') == true) {
+                        location.reload();
+                    } else {
+                        return false;
+                    }
+                }
+
+            }
+
+        });
+    }
+
+
+    function newCate2(){
+        var selected = $("#sCate1").attr('selected','true').val();
+        if(selected == null){
+            alert('1차 카테고리를 선택해 주세요.');
+            return false;
+        }else if(selected.length != 1){
+            alert('1개의 카테고리를 선택 하셔야 합니다.');
+            return false;
+        }else{
+            var param = {cate1: selected};
+            $.ajax({
+                type: "POST",
+                data: param,
+                url: "/product/addNewCate2",
+                success: function (response) {
+                    var newCate2Num = parseInt(response.lastCateNum[0]['prdCode']) + 1;
+                    if ($('#prdName').val() == "") {
+                        $('#catecode').val(newCate2Num);
+                    } else {
+                        if (confirm('카테고리 등록페이지로 이동 하시겠습니까?') == true) {
+                            location.reload();
+                        } else {
+                            return false;
+                        }
+                    }
+
+                }
+
+            });
+        }
+
     }
 </script>
 <?php

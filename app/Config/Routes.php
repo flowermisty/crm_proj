@@ -125,6 +125,9 @@ $routes->match(['get','post'],'customer/(:any)','CustomerController::index/$1');
 //상품관리
 $routes->match(['get','post'],'product','ProductManageController::index');
 $routes->match(['get','post'],'product/loadSecond','ProductManageController::loadSecond');
+$routes->match(['get','post'],'product/productInit','ProductManageController::productInit');
+$routes->match(['get','post'],'product/addNewCate1','ProductManageController::addNewCate1');
+$routes->match(['get','post'],'product/addNewCate2','ProductManageController::addNewCate2');
 
 
 
