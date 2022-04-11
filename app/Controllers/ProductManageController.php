@@ -52,7 +52,7 @@ class ProductManageController extends BaseController{
             $data['prdinfo'] = $nprdInfo->where('prdCode',"{$prdCode}")->findAll();
             $SQL = $db->query("select coupangEa from nPrdInfoadd where idx = '{$data['prdinfo'][0]['idx']}'");
             $ROW = $SQL->getResultArray();
-            print_r($ROW);
+            $data['prdinfo'][0]['coupangEa'] = $ROW[0]['coupangEa'];
             return $this->response->setJSON($data);
         }
     }
@@ -79,6 +79,35 @@ class ProductManageController extends BaseController{
             $data['lastCateNum'] = $SQL->getResultArray();
             return $this->response->setJSON($data);
         }
+    }
+
+
+
+    public function update(){
+        helper(['form', 'alert']);
+        $dataNprdInfo = [];
+        $dataNprdInfoAdd =[];
+        $nPrdInfo = new NPrdInfoModel();
+        if($this->request->getMethod() == 'post'){
+            $dataNprdInfo = $this->request->getPost();
+            $dataNprdInfoAdd['prdBarcode'] = $dataNprdInfo['prdBarcode'];
+            $dataNprdInfoAdd['coupangEa'] = $dataNprdInfo['coupangEa'];
+            $dataNprdInfo['sell18_tot'] = $this->request->getPost('sell18_tot');
+            $dataNprdInfo['sell18_sup'] = $this->request->getPost('sell18_sup');
+            $dataNprdInfo['sell18_tax'] = $this->request->getPost('sell18_tax');
+            $dataNprdInfo['sell30_tot'] = $this->request->getPost('sell30_tot');
+            $dataNprdInfo['sell30_sup'] = $this->request->getPost('sell30_sup');
+            $dataNprdInfo['sell30_tax'] = $this->request->getPost('sell30_tax');
+            $dataNprdInfo['sell50_tot'] = $this->request->getPost('sell50_tot');
+            $dataNprdInfo['sell50_sup'] = $this->request->getPost('sell50_sup');
+            $dataNprdInfo['sell50_tax'] = $this->request->getPost('sell50_tax');
+            unset($dataNprdInfo['coupangEa']);
+            unset($dataNprdInfo['honeypot']);
+            $nPrdInfo -> update("{$dataNprdInfo['idx']}",$dataNprdInfo);
+            alert_move("선택하신 품목 \"{$dataNprdInfo['prdRname']}\" 이(가) 수정 되었습니다.",'http://godo.event.admin/product');
+
+        }
+
     }
 
 

@@ -128,6 +128,8 @@ $routes->match(['get','post'],'product/loadSecond','ProductManageController::loa
 $routes->match(['get','post'],'product/productInit','ProductManageController::productInit');
 $routes->match(['get','post'],'product/addNewCate1','ProductManageController::addNewCate1');
 $routes->match(['get','post'],'product/addNewCate2','ProductManageController::addNewCate2');
+$routes->match(['get','post'],'product/regist','ProductManageController::regist');
+$routes->match(['get','post'],'product/update','ProductManageController::update');
 
 
 

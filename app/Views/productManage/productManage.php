@@ -54,13 +54,14 @@
                                         🔳 1차 카테고리
                                         <button type="button" class="btn btn-primary float-end"
                                                 style="" id="buttonCate1"
-                                                onclick="newCate1();">카테고리 추가
+                                                onclick="newCate1();">카테고리 생성
                                         </button>
                                         <code></code>
                                     </p>
                                     <div class="table__cell text-muted font-semibold"
                                          style="background: white; font-size: smaller;">
-                                        <div class="col-md-12 py-3 border" style="background:white;">
+                                        <div class="col-md-12 py-3 border"
+                                             style="background:white; border-radius: 6px;">
                                             <div class=""
                                                  style="position: relative; width: 95%; height:95%;  margin: auto;">
                                                 <div class="form-row text-muted font-semibold">
@@ -111,13 +112,14 @@
                                         🔳 2차 카테고리
                                         <button type="button" class="btn btn-success float-end"
                                                 style=""
-                                                onclick="newCate2();" id="buttonCate2">세부품목 추가
+                                                onclick="newCate2();" id="buttonCate2">세부품목 생성
                                         </button>
                                         <code></code>
                                     </p>
                                     <div class="table__cell text-muted font-semibold"
                                          style="background: white; font-size: smaller;">
-                                        <div class="col-md-12 py-3 border" style="background:white;">
+                                        <div class="col-md-12 py-3 border"
+                                             style="background:white; border-radius: 6px;">
                                             <div class=""
                                                  style="position: relative; width: 95%; height:95%;  margin: auto;">
                                                 <div class="form-row text-muted font-semibold">
@@ -157,14 +159,16 @@
 
                                     </div>
                                     <div class="col-md-12">
-                                        
+
                                     </div>
                                 </div>
 
 
                             </div>
 
-                            <form class="form-row col-12 col-md-12" style="border:1px solid #dee2e6; margin-top:1%;">
+                            <form class="form-row col-12 col-md-12"
+                                  style="border:1px solid #dee2e6; margin-top:1%; border-radius: 6px;"
+                                  id="nPrdInfoForm" method="post">
 
                                 <div class="row col-12 columInfo"
                                      style="border-bottom:1px solid #dee2e6;" columInfo>
@@ -462,9 +466,9 @@
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="email-id-column">쿠팡입수</label>
-                                            <input type="text" id=""
+                                            <input type="text" id="coupangEa"
                                                    class="form-control"
-                                                   name="" placeholder="">
+                                                   name="coupangEa" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -478,22 +482,24 @@
                                         </div>
                                     </div>
                                 </div>-->
-
+                                <input type="hidden" name="idx" id="idx">
+                                <input type="hidden" name="sell18_tot" id="sell18_tot">
+                                <input type="hidden" name="sell18_sup" id="sell18_sup">
+                                <input type="hidden" name="sell18_tax" id="sell18_tax">
+                                <input type="hidden" name="sell30_tot" id="sell30_tot">
+                                <input type="hidden" name="sell30_sup" id="sell30_sup">
+                                <input type="hidden" name="sell30_tax" id="sell30_tax">
+                                <input type="hidden" name="sell50_tot" id="sell50_tot">
+                                <input type="hidden" name="sell50_sup" id="sell50_sup">
+                                <input type="hidden" name="sell50_tax" id="sell50_tax">
 
                             </form>
 
 
                             <div class="col-12 d-flex justify-content-end" style="margin-top:1.5%; margin-bottom:2%;">
-                                <button type="submit" class="btn btn-primary me-1 mb-1" id="submit">
-                                    등록
-                                </button>
-                                <button type="reset" class="btn btn-light-secondary me-1 mb-1" id="reset">
-                                    취소
-                                </button>
-                                <button type="button" class="btn btn-success me-1 mb-1" id="button"
-                                        style="display:none">
-                                    등록
-                                </button>
+                                <button type="button" class="btn btn-primary me-1 mb-1" id="submit" onclick="submit_form();">등록</button>
+                                <button type="button" class="btn btn-light-secondary me-1 mb-1" id="reset_delete" onclick="cancel_delete();">취소</button>
+
                             </div>
 
                         </div>
@@ -766,9 +772,10 @@ Auto resize image file uploader
                 $('#ELCode').val(response.prdinfo[0]['ELCode']);
                 $('#GSCode').val(response.prdinfo[0]['GSCode']);
                 $('#prdBarcode').val(response.prdinfo[0]['prdBarcode']);
+                $('#coupangEa').val(response.prdinfo[0]['coupangEa']);
+                $('#idx').val(response.prdinfo[0]['idx']);
                 $('#submit').text('수정');
-                $('#reset').text('삭제');
-                $('#button').show();
+                $('#reset_delete').text('삭제');
 
             }
 
@@ -805,15 +812,15 @@ Auto resize image file uploader
     }
 
 
-    function newCate2(){
-        var selected = $("#sCate1").attr('selected','true').val();
-        if(selected == null){
+    function newCate2() {
+        var selected = $("#sCate1").attr('selected', 'true').val();
+        if (selected == null) {
             alert('1차 카테고리를 선택해 주세요.');
             return false;
-        }else if(selected.length != 1){
+        } else if (selected.length != 1) {
             alert('1개의 카테고리를 선택 하셔야 합니다.');
             return false;
-        }else{
+        } else {
             var param = {cate1: selected};
             $.ajax({
                 type: "POST",
@@ -837,6 +844,108 @@ Auto resize image file uploader
         }
 
     }
+
+
+    function submit_form() {
+        var mode = $('#submit').text();
+        if (mode == "등록") {
+            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/product/regist");
+        } else if (mode == "수정") {
+            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/product/update");
+        } else {
+            alert('notDefined');
+        }
+        $('#nPrdInfoForm').submit();
+
+    }
+
+    function cancel_delete() {
+        var mode = $('#reset_delete').text();
+        if (mode == "취소") {
+            $('#nPrdInfoForm')[0].reset();
+        } else if (mode == "삭제") {
+            alert('notDefined');
+        }
+    }
+
+
+
+    function calculate() {
+        var prdPrice = parseInt($('#prdPrice').val());
+        var sell18_tot = parseInt(Math.round(prdPrice * 0.82));
+        var sell18_sup = parseInt(Math.round(sell18_tot/11*10));
+        var sell18_tax = parseInt(Math.round(sell18_sup/10));
+        var sell30_tot = parseInt(Math.round(prdPrice * 0.70));
+        var sell30_sup = parseInt(Math.round(sell30_tot/11*10));
+        var sell30_tax = parseInt(Math.round(sell30_sup/10));
+        var sell50_tot = parseInt(Math.round(prdPrice * 0.50));
+        var sell50_sup = parseInt(Math.round(sell50_tot/11*10));
+        var sell50_tax = parseInt(Math.round(sell50_sup/10));
+        $('#sell18_tot').val(sell18_tot);
+        $('#sell18_sup').val(sell18_sup);
+        $('#sell18_tax').val(sell18_tax);
+        $('#sell30_tot').val(sell30_tot);
+        $('#sell30_sup').val(sell30_sup);
+        $('#sell30_tax').val(sell30_tax);
+        $('#sell50_tot').val(sell50_tot);
+        $('#sell50_sup').val(sell50_sup);
+        $('#sell50_tax').val(sell50_tax);
+        alert("18퍼센트 할인 총계 :" + sell18_tot +"\n"
+              +"18퍼센트 공급 가액 :" + sell18_sup +"\n"
+              +"18퍼센트 부가 세액 :" + sell18_tax +"\n"
+              +"30퍼센트 할인 총계 :" + sell30_tot +"\n"
+              +"30퍼센트 공급 가액 :" + sell30_sup +"\n"
+              +"30퍼센트 부가 세엑 :" + sell30_tax +"\n"
+              +"50퍼센트 할인 총계 :" + sell50_tot +"\n"
+              +"50퍼센트 공급 가액 :" + sell50_sup +"\n"
+              +"50퍼센트 부가 세엑 :" + sell50_tax +"\n"
+        );
+    }
+
+    $('#prdPrice').on('keyup', function(){
+        var prdPrice = parseInt($('#prdPrice').val());
+        var sell18_tot = parseInt(Math.round(prdPrice * 0.82));
+        var sell18_sup = parseInt(Math.round(sell18_tot/11*10));
+        var sell18_tax = parseInt(Math.round(sell18_sup/10));
+        var sell30_tot = parseInt(Math.round(prdPrice * 0.70));
+        var sell30_sup = parseInt(Math.round(sell30_tot/11*10));
+        var sell30_tax = parseInt(Math.round(sell30_sup/10));
+        var sell50_tot = parseInt(Math.round(prdPrice * 0.50));
+        var sell50_sup = parseInt(Math.round(sell50_tot/11*10));
+        var sell50_tax = parseInt(Math.round(sell50_sup/10));
+        $('#sell18_tot').val(sell18_tot);
+        $('#sell18_sup').val(sell18_sup);
+        $('#sell18_tax').val(sell18_tax);
+        $('#sell30_tot').val(sell30_tot);
+        $('#sell30_sup').val(sell30_sup);
+        $('#sell30_tax').val(sell30_tax);
+        $('#sell50_tot').val(sell50_tot);
+        $('#sell50_sup').val(sell50_sup);
+        $('#sell50_tax').val(sell50_tax);
+        if($('#sell18_tot').val() == "NaN"){
+            $('#sell18_tot').val(0);
+            $('#sell18_sup').val(0);
+            $('#sell18_tax').val(0);
+            $('#sell30_tot').val(0);
+            $('#sell30_sup').val(0);
+            $('#sell30_tax').val(0);
+            $('#sell50_tot').val(0);
+            $('#sell50_sup').val(0);
+            $('#sell50_tax').val(0);
+        }
+        // alert("18퍼센트 할인 총계 :" + sell18_tot +"\n"
+        //     +"18퍼센트 공급 가액 :" + sell18_sup +"\n"
+        //     +"18퍼센트 부가 세액 :" + sell18_tax +"\n"
+        //     +"30퍼센트 할인 총계 :" + sell30_tot +"\n"
+        //     +"30퍼센트 공급 가액 :" + sell30_sup +"\n"
+        //     +"30퍼센트 부가 세엑 :" + sell30_tax +"\n"
+        //     +"50퍼센트 할인 총계 :" + sell50_tot +"\n"
+        //     +"50퍼센트 공급 가액 :" + sell50_sup +"\n"
+        //     +"50퍼센트 부가 세엑 :" + sell50_tax +"\n"
+        // );
+    });
 </script>
+
+
 <?php
 
