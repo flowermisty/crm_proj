@@ -2,6 +2,10 @@
 
 namespace App\Controllers;
 
+if(!defined("BASEPATH") && session()->has('aIdx') == "") {
+    exit("No direct script access allowed");
+}
+
 class RefundCalcController extends BaseController{
 
     public function refund(){

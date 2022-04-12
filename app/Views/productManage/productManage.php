@@ -1,6 +1,6 @@
 <style>
 
-    #chitColor {
+    #pColor {
         width: 100%; /* 원하는 너비설정 */
 
         padding: .5em .3em; /* 여백으로 높이 설정 */
@@ -171,13 +171,13 @@
                                   id="nPrdInfoForm" method="post">
 
                                 <div class="row col-12 columInfo"
-                                     style="border-bottom:1px solid #dee2e6;" columInfo>
+                                     style="border-bottom:1px solid #dee2e6;">
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="first-name-column">카테고리코드</label>
-                                            <input type="text" id="catecode"
+                                            <input type="text" id="prdCode"
                                                    class="form-control"
-                                                   placeholder="" name="catecode">
+                                                   placeholder="" name="prdCode">
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
@@ -193,13 +193,13 @@
                                             <label for="city-column">분유여부</label>
                                             <div class="row col-12" style="margin-top:2%;">
                                                 <input class="form-check-input col-md-3" type="radio"
-                                                       name="boonyoo" id="boonyoo_y" value="Y"
+                                                       name="milkYN" id="milkYN_y" value="Y"
                                                        style="padding:0; margin-left:3.5%;" checked>
                                                 <label class="form-check-label  col-md-3" for="danger">
                                                     YES
                                                 </label>
                                                 <input class="form-check-input col-md-3" type="radio"
-                                                       name="boonyoo" id="boonyoo_n" value="N"
+                                                       name="milkYN" id="milkYN_n" value="N"
                                                        style="padding:0;">
                                                 <label class="form-check-label col-md-2" for="danger">
                                                     NO
@@ -245,7 +245,7 @@
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
                                             <label for="email-id-column">쿠팡 전표 색상</label>
-                                            <select name="chitColor" id="chitColor">
+                                            <select name="pColor" id="pColor">
                                                 <option value="">
                                                     -----------------------------------------
                                                 </option>
@@ -295,7 +295,7 @@
                                             <label for="email-id-column">규격</label>
                                             <input type="text" id="prdSize"
                                                    class="form-control"
-                                                   name="email-id-column" placeholder="">
+                                                   name="prdSize" placeholder="">
                                         </div>
                                     </div>
 
@@ -304,7 +304,7 @@
                                             <label for="email-id-column">ERP코드</label>
                                             <input type="text" id="erpCode"
                                                    class="form-control"
-                                                   name="email-id-column" placeholder="">
+                                                   name="erpCode" placeholder="">
                                         </div>
                                     </div>
 
@@ -313,7 +313,7 @@
                                             <label for="email-id-column">정가</label>
                                             <input type="text" id="prdPrice"
                                                    class="form-control"
-                                                   name="email-id-column" placeholder="">
+                                                   name="prdPrice" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -714,15 +714,15 @@ Auto resize image file uploader
             url: "/product/productInit",
             data: param,
             success: function (response) {
-                $('#catecode').val(response.prdinfo[0]['prdCode'])
+                $('#prdCode').val(response.prdinfo[0]['prdCode'])
                 $('#prdName').val(response.prdinfo[0]['prdName'])
                 $('#prdRname').val(response.prdinfo[0]['prdRName']);
 
 
-                if (response.prdinfo[0]['milkYN'] == $('#boonyoo_y').val()) {
-                    $('#boonyoo_y').attr('checked', 'true');
-                } else if (response.prdinfo[0]['milkYN'] == $('#boonyoo_n').val()) {
-                    $('#boonyoo_n').attr('checked', 'true');
+                if (response.prdinfo[0]['milkYN'] == $('#milkYN_y').val()) {
+                    $('#milkYN_y').attr('checked', 'true');
+                } else if (response.prdinfo[0]['milkYN'] == $('#milkYN_n').val()) {
+                    $('#milkYN_n').attr('checked', 'true');
                 }
 
                 if (response.prdinfo[0]['underYN'] == $('#underYN_y').val()) {
@@ -797,7 +797,7 @@ Auto resize image file uploader
             success: function (response) {
                 var newCate1Num = parseInt(response.lastCateNum[0]['prdCode']) + 1;
                 if ($('#prdName').val() == "") {
-                    $('#catecode').val(newCate1Num);
+                    $('#prdCode').val(newCate1Num);
                 } else {
                     if (confirm('카테고리 등록페이지로 이동 하시겠습니까?') == true) {
                         location.reload();
@@ -829,7 +829,7 @@ Auto resize image file uploader
                 success: function (response) {
                     var newCate2Num = parseInt(response.lastCateNum[0]['prdCode']) + 1;
                     if ($('#prdName').val() == "") {
-                        $('#catecode').val(newCate2Num);
+                        $('#prdCode').val(newCate2Num);
                     } else {
                         if (confirm('카테고리 등록페이지로 이동 하시겠습니까?') == true) {
                             location.reload();
@@ -869,39 +869,6 @@ Auto resize image file uploader
     }
 
 
-
-    function calculate() {
-        var prdPrice = parseInt($('#prdPrice').val());
-        var sell18_tot = parseInt(Math.round(prdPrice * 0.82));
-        var sell18_sup = parseInt(Math.round(sell18_tot/11*10));
-        var sell18_tax = parseInt(Math.round(sell18_sup/10));
-        var sell30_tot = parseInt(Math.round(prdPrice * 0.70));
-        var sell30_sup = parseInt(Math.round(sell30_tot/11*10));
-        var sell30_tax = parseInt(Math.round(sell30_sup/10));
-        var sell50_tot = parseInt(Math.round(prdPrice * 0.50));
-        var sell50_sup = parseInt(Math.round(sell50_tot/11*10));
-        var sell50_tax = parseInt(Math.round(sell50_sup/10));
-        $('#sell18_tot').val(sell18_tot);
-        $('#sell18_sup').val(sell18_sup);
-        $('#sell18_tax').val(sell18_tax);
-        $('#sell30_tot').val(sell30_tot);
-        $('#sell30_sup').val(sell30_sup);
-        $('#sell30_tax').val(sell30_tax);
-        $('#sell50_tot').val(sell50_tot);
-        $('#sell50_sup').val(sell50_sup);
-        $('#sell50_tax').val(sell50_tax);
-        alert("18퍼센트 할인 총계 :" + sell18_tot +"\n"
-              +"18퍼센트 공급 가액 :" + sell18_sup +"\n"
-              +"18퍼센트 부가 세액 :" + sell18_tax +"\n"
-              +"30퍼센트 할인 총계 :" + sell30_tot +"\n"
-              +"30퍼센트 공급 가액 :" + sell30_sup +"\n"
-              +"30퍼센트 부가 세엑 :" + sell30_tax +"\n"
-              +"50퍼센트 할인 총계 :" + sell50_tot +"\n"
-              +"50퍼센트 공급 가액 :" + sell50_sup +"\n"
-              +"50퍼센트 부가 세엑 :" + sell50_tax +"\n"
-        );
-    }
-
     $('#prdPrice').on('keyup', function(){
         var prdPrice = parseInt($('#prdPrice').val());
         var sell18_tot = parseInt(Math.round(prdPrice * 0.82));
@@ -922,7 +889,7 @@ Auto resize image file uploader
         $('#sell50_tot').val(sell50_tot);
         $('#sell50_sup').val(sell50_sup);
         $('#sell50_tax').val(sell50_tax);
-        if($('#sell18_tot').val() == "NaN"){
+        if($('#sell18_tot').val() == "NaN" || $('#prdPrice').val() == "0"){
             $('#sell18_tot').val(0);
             $('#sell18_sup').val(0);
             $('#sell18_tax').val(0);
@@ -933,16 +900,6 @@ Auto resize image file uploader
             $('#sell50_sup').val(0);
             $('#sell50_tax').val(0);
         }
-        // alert("18퍼센트 할인 총계 :" + sell18_tot +"\n"
-        //     +"18퍼센트 공급 가액 :" + sell18_sup +"\n"
-        //     +"18퍼센트 부가 세액 :" + sell18_tax +"\n"
-        //     +"30퍼센트 할인 총계 :" + sell30_tot +"\n"
-        //     +"30퍼센트 공급 가액 :" + sell30_sup +"\n"
-        //     +"30퍼센트 부가 세엑 :" + sell30_tax +"\n"
-        //     +"50퍼센트 할인 총계 :" + sell50_tot +"\n"
-        //     +"50퍼센트 공급 가액 :" + sell50_sup +"\n"
-        //     +"50퍼센트 부가 세엑 :" + sell50_tax +"\n"
-        // );
     });
 </script>
 

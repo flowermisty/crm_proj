@@ -45,4 +45,53 @@ class NPrdInfoModel extends Model
         'cpYN',
         'viewYN'
     ];
+
+    /**
+     * @param string $primaryKey
+     */
+    public function setPrimaryKey(string $primaryKey)
+    {
+        $this->primaryKey = $primaryKey;
+
+    }
+
+    /**
+     * @param string[] $allowedFields
+     */
+
+    public function setAllowedFields(array $allowedFields)
+    {
+        $this->allowedFields = $allowedFields;
+
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getAllowedFields(): array
+    {
+        return $this->allowedFields;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrimaryKey(): string
+    {
+        return $this->primaryKey;
+    }
+
+    public function nPrdInfoUpdate(array $data):bool{
+        $model = new NPrdInfoModel();
+        unset($data['honeypot']);
+        unset($data['coupangEa']);
+        $this->setPrimaryKey($data['idx']);
+        $this->setAllowedFields($data);
+        $idx = $this->getPrimaryKey();
+        $allowedFields = $this->getAllowedFields();
+        $result = $model->update("$idx",$allowedFields);
+        return $result;
+    }
+
+
 }

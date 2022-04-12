@@ -8,7 +8,9 @@ namespace App\Controllers;
 use App\Models\NAdminModel;
 use App\Models\NAdminaddModel;
 
-if(defined("BASEPATH")) { exit("No direct script access allowed"); }
+if(!defined("BASEPATH") && session()->has('aIdx') == "") {
+    exit("No direct script access allowed");
+}
 
 class EmployeeController extends BaseController{
 

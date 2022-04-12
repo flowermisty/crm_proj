@@ -4,7 +4,9 @@ use App\Controllers\BaseController;
 use App\Models\EventListModel;
 use App\Models\EventScheduleModel;
 
-
+if(!defined("BASEPATH") && session()->has('aIdx') == "") {
+    exit("No direct script access allowed");
+}
 class EventScheduleController extends BaseController {
 
 

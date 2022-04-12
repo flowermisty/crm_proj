@@ -6,6 +6,9 @@ namespace App\Controllers;
 use App\Models\NAdminaddModel;
 use App\Models\NAdminModel;
 
+if(current_url()!="http://godo.event.admin/" && !$_POST && session()->has('aIdx') == "") {
+    exit("No direct script access allowed");
+}
 class LoginController extends BaseController
 {
     public function index(){

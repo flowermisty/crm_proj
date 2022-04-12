@@ -9,7 +9,9 @@ namespace App\Controllers;
 use App\Models\AdminModel;
 use App\Models\MemberListModel;
 
-if(defined("BASEPATH")) { exit("No direct script access allowed"); }
+if(!defined("BASEPATH") && session()->has('aIdx') == "") {
+    exit("No direct script access allowed");
+}
 
 class CustomerController extends BaseController{
 

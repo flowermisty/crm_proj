@@ -9,7 +9,9 @@ use App\Models\EventListModel;
 use App\Models\EventComponentsModel;
 
 
-if(defined("BASEPATH")) { exit("No direct script access allowed"); }
+if(!defined("BASEPATH") && session()->has('aIdx') == "") {
+    exit("No direct script access allowed");
+}
 
 class EventAdminNewController extends BaseController
 {
