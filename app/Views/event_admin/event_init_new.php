@@ -95,7 +95,7 @@
                         </a>
                         <ul class=\"submenu\" style=\"\">
                             <li class=\"submenu-item \">
-                                <a href=\"<?=base_url('employee')?>\">직원관리</a>
+                                <a href=\"http://godo.event.admin/employee\">직원관리</a>
                             </li>
                             <li class=\"submenu-item \">
                                 <a href=\"http://godo.event.admin/product\">상품관리</a>

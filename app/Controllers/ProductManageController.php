@@ -39,7 +39,7 @@ class ProductManageController extends BaseController
             $db = \Config\Database::connect();
             $cate1 = $this->request->getPost();
             $cate1Code = $cate1['cate1'][0];
-            $SQL = $db->query("SELECT prdCode, prdName FROM nPrdInfo where 1 AND prdCode LIKE '{$cate1Code}%' AND length(prdCode) = '6'");
+            $SQL = $db->query("SELECT prdCode, prdName FROM nPrdInfo where 1 AND prdCode LIKE '{$cate1Code}%' AND length(prdCode) = '6' AND viewYN = 'Y'");
             $ROW = $SQL->getResultArray();
             return $this->response->setJSON($ROW);
         }
@@ -86,6 +86,9 @@ class ProductManageController extends BaseController
         if ($this->request->getPost('cate1')) {
             $SQL = $db->query("SELECT prdCode FROM nPrdInfo where 1 AND prdCode LIKE '{$cate1}%' AND length(prdCode) = '6' AND viewYN = 'Y' AND cpYN = 'Y' ORDER BY prdCode DESC LIMIT 1");
             $data['lastCateNum'] = $SQL->getResultArray();
+            if(!$data['lastCateNum']){
+                $data['lastCateNum'][0]['prdCode'] = "$cate1"."001";
+            }
             return $this->response->setJSON($data);
         }
     }
@@ -107,6 +110,35 @@ class ProductManageController extends BaseController
 
         }
 
+    }
+
+    public function insert(){
+        helper(['form', 'alert']);
+        $nPrdInfo = new NPrdInfoModel();
+        if($this->request->getMethod() == 'post'){
+            $dataNprdInfo = $this->request->getPost();
+            $result = $nPrdInfo->nPrdInfoInsert($dataNprdInfo);
+            if($result){
+                alert_move("신규 상품이 등록 되었습니다.","http://godo.event.admin/product");
+            }else{
+                alert_move("상품 등록에 문제가 있습니다. 관리자 에게 문의 주세요.","http://godo.event.admin/product");
+            }
+        }
+    }
+
+
+    public function delete(){
+        helper(['form', 'alert']);
+        $nPrdInfo = new NPrdInfoModel();
+        if($this->request->getMethod() == 'post'){
+            $dataNprdInfo = $this->request->getPost();
+            $result = $nPrdInfo->nPrdInfoDelete($dataNprdInfo);
+            if($result){
+                alert_move("선택하신 상품({$dataNprdInfo['prdRname']})이 삭제 되었습니다.","http://godo.event.admin/product");
+            }else{
+                alert_move("상품 삭제에 문제가 있습니다. 관리자 에게 문의 주세요.","http://godo.event.admin/product");
+            }
+        }
     }
 
 

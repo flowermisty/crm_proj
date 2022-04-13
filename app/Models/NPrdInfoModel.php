@@ -93,5 +93,28 @@ class NPrdInfoModel extends Model
         return $result;
     }
 
+    public function nPrdInfoInsert(array $data):bool{
+        $model = new NPrdInfoModel();
+        unset($data['honeypot']);
+        unset($data['coupangEa']);
+        $this->setAllowedFields($data);
+        $allowedFields = $this->getAllowedFields();
+        $result = $model->insert($allowedFields);
+        return $result;
+    }
+
+    public function nPrdInfoDelete(array $data):bool{
+        $model = new NPrdInfoModel();
+        unset($data['honeypot']);
+        unset($data['coupangEa']);
+        $data['viewYN'] = 'N';
+        $this->setPrimaryKey($data['idx']);
+        $this->setAllowedFields($data);
+        $idx=$this->getPrimaryKey();
+        $allowedFields = $this->getAllowedFields();
+        $result = $model->update("$idx",$allowedFields);
+        return $result;
+    }
+
 
 }

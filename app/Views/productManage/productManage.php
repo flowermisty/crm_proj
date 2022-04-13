@@ -177,7 +177,7 @@
                                             <label for="first-name-column">카테고리코드</label>
                                             <input type="text" id="prdCode"
                                                    class="form-control"
-                                                   placeholder="" name="prdCode">
+                                                   placeholder="" name="prdCode" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
@@ -827,16 +827,31 @@ Auto resize image file uploader
                 data: param,
                 url: "/product/addNewCate2",
                 success: function (response) {
-                    var newCate2Num = parseInt(response.lastCateNum[0]['prdCode']) + 1;
-                    if ($('#prdName').val() == "") {
-                        $('#prdCode').val(newCate2Num);
-                    } else {
-                        if (confirm('카테고리 등록페이지로 이동 하시겠습니까?') == true) {
-                            location.reload();
+                    var newCate2NumFirst = response.lastCateNum[0]['prdCode'].substr(3,5);
+                    if(newCate2NumFirst=="001"){
+                        var newCate2Num = parseInt(response.lastCateNum[0]['prdCode']);
+                        if ($('#prdName').val() == "") {
+                            $('#prdCode').val(newCate2Num);
                         } else {
-                            return false;
+                            if (confirm('카테고리 등록페이지로 이동 하시겠습니까?') == true) {
+                                location.reload();
+                            } else {
+                                return false;
+                            }
+                        }
+                    }else{
+                        var newCate2Num = parseInt(response.lastCateNum[0]['prdCode']) + 1;
+                        if ($('#prdName').val() == "") {
+                            $('#prdCode').val(newCate2Num);
+                        } else {
+                            if (confirm('카테고리 등록페이지로 이동 하시겠습니까?') == true) {
+                                location.reload();
+                            } else {
+                                return false;
+                            }
                         }
                     }
+
 
                 }
 
@@ -849,7 +864,7 @@ Auto resize image file uploader
     function submit_form() {
         var mode = $('#submit').text();
         if (mode == "등록") {
-            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/product/regist");
+            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/product/insert");
         } else if (mode == "수정") {
             $('#nPrdInfoForm').attr("action", "http://godo.event.admin/product/update");
         } else {
@@ -864,8 +879,12 @@ Auto resize image file uploader
         if (mode == "취소") {
             $('#nPrdInfoForm')[0].reset();
         } else if (mode == "삭제") {
+            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/product/delete");
+            $('#nPrdInfoForm').submit();
+        }else{
             alert('notDefined');
         }
+
     }
 
 
