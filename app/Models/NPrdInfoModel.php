@@ -5,7 +5,6 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-
 use App\Libraries\CustomDB;
 
 class NPrdInfoModel extends Model
@@ -138,6 +137,27 @@ class NPrdInfoModel extends Model
                                                         ->where("milkYN","Y")->findAll();
         return $cate2;
 
+    }
+
+    public function addNewCate($cate1){
+        $model = new NPrdInfoModel();
+        $result = $model->select("prdCode, prdName")->where('length(prdCode)','3')
+                                                        ->where('viewYN','Y')
+                                                        ->where('cpYN','Y')
+                                                        ->orderBy('prdCode','DESC')
+                                                        ->limit(1)->find();
+        return $result;
+    }
+
+    public function addNewProduct($cate1){
+        $model = new NPrdInfoModel();
+        $result = $model->select("prdCode")->like('prdCode',"$cate1"."%")
+            ->where('length(prdCode)','6')
+            ->where('viewYN','Y')
+            ->where('cpYN','Y')
+            ->orderBy('prdCode','DESC')
+            ->limit(1)->find();
+        return $result;
     }
 
 

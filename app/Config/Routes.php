@@ -136,6 +136,10 @@ $routes->match(['get','post'],'product/delete','ProductManageController::delete'
 $routes->match(['get','post'],'drymilk','DryMilkController::index');
 $routes->match(['get','post'],'drymilk/loadSecond','DryMilkController::loadSecond');
 $routes->match(['get','post'],'drymilk/productInit','DryMilkController::productInit');
+$routes->match(['get','post'],'drymilk/addNewCate1','DryMilkController::addNewCate1');
+$routes->match(['get','post'],'drymilk/addNewCate2','DryMilkController::addNewCate2');
+$routes->match(['get','post'],'drymilk/update','DryMilkController::update');
+$routes->match(['get','post'],'drymilk/delete','DryMilkController::delete');
 
 
 

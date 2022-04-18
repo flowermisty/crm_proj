@@ -54,8 +54,8 @@
                                     <p class="card-text">
                                         🔳 1차 카테고리
                                         <button type="button" class="btn btn-primary float-end"
-                                                style="" id="buttonCate1"
-                                                onclick="">카테고리 생성
+                                                style="display:none;" id="buttonCate1"
+                                                onclick="newCate1();">카테고리 생성
                                         </button>
                                         <code></code>
                                     </p>
@@ -114,7 +114,7 @@
                                     <p class="card-text">
                                         🔳 2차 카테고리
                                         <button type="button" class="btn btn-success float-end"
-                                                style=""
+                                                style="display: none;"
                                                 onclick="newCate2();" id="buttonCate2">세부품목 생성
                                         </button>
                                         <code></code>
@@ -282,8 +282,8 @@
 
 
                             <div class="col-12 d-flex justify-content-end" style="margin-top:1.5%; margin-bottom:2%;">
-                                <button type="button" class="btn btn-primary me-1 mb-1" id="submit" onclick="submit_form();">등록</button>
-                                <button type="button" class="btn btn-light-secondary me-1 mb-1" id="reset_delete" onclick="cancel_delete();">취소</button>
+                                <button type="button" class="btn btn-primary me-1 mb-1" id="submit" onclick="submit_form();" style="display: none;">등록</button>
+                                <button type="button" class="btn btn-light-secondary me-1 mb-1" id="reset_delete" onclick="cancel_delete();" style="display: none;">취소</button>
 
                             </div>
 
@@ -518,7 +518,9 @@ Auto resize image file uploader
                 $('#idx').val(response.prdInfo[0]['idx']);
 
                 $('#submit').text('수정');
+                $('#submit').show();
                 $('#reset_delete').text('삭제');
+                $('#reset_delete').show();
 
             }
 
@@ -536,7 +538,7 @@ Auto resize image file uploader
         $.ajax({
             type: "POST",
             data: param,
-            url: "/product/addNewCate1",
+            url: "/drymilk/addNewCate1",
             success: function (response) {
                 var newCate1Num = parseInt(response.lastCateNum[0]['prdCode']) + 1;
                 if ($('#prdName').val() == "") {
@@ -607,9 +609,10 @@ Auto resize image file uploader
     function submit_form() {
         var mode = $('#submit').text();
         if (mode == "등록") {
-            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/product/insert");
+            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/drymilk/insert");
         } else if (mode == "수정") {
-            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/product/update");
+
+            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/drymilk/update");
         } else {
             alert('notDefined');
         }
@@ -622,7 +625,7 @@ Auto resize image file uploader
         if (mode == "취소") {
             $('#nPrdInfoForm')[0].reset();
         } else if (mode == "삭제") {
-            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/product/delete");
+            $('#nPrdInfoForm').attr("action", "http://godo.event.admin/drymilk/delete");
             $('#nPrdInfoForm').submit();
         }else{
             alert('notDefined');
