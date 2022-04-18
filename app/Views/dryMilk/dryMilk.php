@@ -1,4 +1,5 @@
 <style>
+
     #pColor {
         width: 100%; /* 원하는 너비설정 */
 
@@ -20,11 +21,12 @@
     }
 
 </style>
+
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-12 order-md-1 order-last">
-                <h3 class="text-title text-muted">상품카테고리 등록 / 관리 프로그램</h3>
+                <h3 class="text-title text-muted">분유 카테고리 등록 / 관리 프로그램</h3>
                 <p class="text-subtitle text-muted"></p>
                 <hr style="border-top:2px solid">
             </div>
@@ -32,7 +34,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">관리자 관리</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">상품관리</li>
+                        <li class="breadcrumb-item active" aria-current="page">분유관리</li>
                     </ol>
                 </nav>
             </div>
@@ -43,17 +45,17 @@
             <div class="col-12 col-md-12">
                 <div class="card" style="margin-bottom:0;">
                     <div class="card-header" style="padding-bottom:0 !important;">
-                        <h5 class="card-title text-muted">상품관리 설정</h5>
+                        <h5 class="card-title text-muted">분유관리 설정</h5>
                     </div>
                     <div class="card-content">
                         <div class="card-body" style="padding-bottom: 0;">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <p class="card-text">
                                         🔳 1차 카테고리
                                         <button type="button" class="btn btn-primary float-end"
                                                 style="" id="buttonCate1"
-                                                onclick="newCate1();">카테고리 생성
+                                                onclick="">카테고리 생성
                                         </button>
                                         <code></code>
                                     </p>
@@ -86,10 +88,12 @@
                                                                 multiple
                                                                 size="10" onchange="secondCateload();">
 
-                                                            <?php foreach ($product as $row): ?>
+
+                                                            <?php foreach ($cate1 as $row): ?>
                                                                 <option id="sCate1Option"
                                                                         value="<?= $row['prdCode'] ?>"><?= $row['prdName'] ?></option>
                                                             <?php endforeach; ?>
+
 
 
                                                         </select>
@@ -101,12 +105,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-1" style="margin-top: 15%; text-align: center; padding: 0;">
+                                <div class="col-md-2" style="margin-top: 15%; text-align: center; padding: 0;">
                                     <span>▶▶▶</span>
                                 </div>
 
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <p class="card-text">
                                         🔳 2차 카테고리
                                         <button type="button" class="btn btn-success float-end"
@@ -139,7 +143,7 @@
 
                                                 <div class="form-row">
                                                     <div class="input-group col-md-12 py-3" style="height:300px;">
-                                                        <select name="cate2" id="sCate2"
+                                                        <select name="cate2[]" id="sCate2"
                                                                 class="form-control text-muted font-semibold"
                                                                 multiple
                                                                 size="10" onchange="productInit();">
@@ -171,7 +175,7 @@
 
                                 <div class="row col-12 columInfo"
                                      style="border-bottom:1px solid #dee2e6;">
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="first-name-column">카테고리코드</label>
                                             <input type="text" id="prdCode"
@@ -179,7 +183,7 @@
                                                    placeholder="" name="prdCode" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="last-name-column">상품명</label>
                                             <input type="text" id="prdName"
@@ -187,26 +191,8 @@
                                                    placeholder="" name="prdName">
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="city-column">분유여부</label>
-                                            <div class="row col-12" style="margin-top:2%;">
-                                                <input class="form-check-input col-md-3" type="radio"
-                                                       name="milkYN" id="milkYN_y" value="Y"
-                                                       style="padding:0; margin-left:3.5%;" checked>
-                                                <label class="form-check-label  col-md-3" for="danger">
-                                                    YES
-                                                </label>
-                                                <input class="form-check-input col-md-3" type="radio"
-                                                       name="milkYN" id="milkYN_n" value="N"
-                                                       style="padding:0;">
-                                                <label class="form-check-label col-md-2" for="danger">
-                                                    NO
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
+
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="country-floating">보여지는 이름</label>
                                             <input type="text" id="prdRname"
@@ -214,74 +200,24 @@
                                                    name="prdRname" placeholder="">
                                         </div>
                                     </div>
+
                                 </div>
 
-
                                 <div class="row col-12 columInfo"
-                                     style="border-bottom:1px solid #dee2e6;">
-                                    <div class="col-md-6 col-12">
+                                     style="">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group">
-                                            <label for="company-column">하위상품반영 (분유, 입수, 규격, 제품판매, 과세,
-                                                사내판매,
-                                                TM판매, 각종 가격)</label>
-                                            <div class="row col-12" style="margin-top:1.5%;">
-                                                <input class="form-check-input col-md-2" type="radio"
-                                                       name="underYN" value="Y" id="underYN_y"
-                                                       style="padding:0; margin-left:2%;" checked>
-                                                <label class="form-check-label  col-md-2" for="danger"
-                                                       style="padding-right: 0; width:12%;">
-                                                    YES
-                                                </label>
-                                                <input class="form-check-input col-md-2" type="radio"
-                                                       name="underYN" value="N" id="underYN_n"
-                                                       style="padding:0;">
-                                                <label class="form-check-label col-md-9" for="danger">
-                                                    NO
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">쿠팡 전표 색상</label>
-                                            <select name="pColor" id="pColor">
-                                                <option value="">
-                                                    -----------------------------------------
-                                                </option>
-                                                <option value="">녹색</option>
-                                                <option value="">노란색</option>
-                                                <option value="">파란색</option>
-                                                <option value="">주황색</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">입수</label>
-                                            <input type="text" id="prdBox"
-                                                   class="form-control"
-                                                   name="prdBox" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row col-12 columInfo"
-                                     style="border-bottom:1px solid #dee2e6;">
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">TM판매여부</label>
+                                            <label for="city-column">보여지기 여부</label>
                                             <div class="row col-12" style="margin-top:2%;">
                                                 <input class="form-check-input col-md-3" type="radio"
-                                                       name="tmYN" value="Y" id="tmYN_y"
+                                                       name="sellYN" id="sellYN_y" value="Y"
                                                        style="padding:0; margin-left:3.5%;" checked>
                                                 <label class="form-check-label  col-md-3" for="danger">
                                                     YES
                                                 </label>
                                                 <input class="form-check-input col-md-3" type="radio"
-                                                       name="tmYN" value="N" style="padding:0;"
-                                                       id="tmYN_n">
+                                                       name="sellYN" id="sellYN_n" value="N"
+                                                       style="padding:0;">
                                                 <label class="form-check-label col-md-2" for="danger">
                                                     NO
                                                 </label>
@@ -289,25 +225,27 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group">
-                                            <label for="email-id-column">규격</label>
-                                            <input type="text" id="prdSize"
-                                                   class="form-control"
-                                                   name="prdSize" placeholder="">
+                                            <label for="city-column">자사제품</label>
+                                            <div class="row col-12" style="margin-top:2%;">
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="cpYN" id="cpYN_y" value="Y"
+                                                       style="padding:0; margin-left:3.5%;" checked>
+                                                <label class="form-check-label  col-md-3" for="danger">
+                                                    YES
+                                                </label>
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="cpYN" id="cpYN_n" value="N"
+                                                       style="padding:0;">
+                                                <label class="form-check-label col-md-2" for="danger">
+                                                    NO
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">ERP코드</label>
-                                            <input type="text" id="erpCode"
-                                                   class="form-control"
-                                                   name="erpCode" placeholder="">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="email-id-column">정가</label>
                                             <input type="text" id="prdPrice"
@@ -315,162 +253,10 @@
                                                    name="prdPrice" placeholder="">
                                         </div>
                                     </div>
+
                                 </div>
 
 
-                                <div class="row col-12 columInfo"
-                                     style="border-bottom:1px solid #dee2e6;">
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">과세여부</label>
-                                            <div class="row col-12" style="margin-top:2%;">
-                                                <input class="form-check-input col-md-3" type="radio"
-                                                       name="taxYN" value="Y" id="taxYN_y"
-                                                       style="padding:0; margin-left:3.5%;" checked>
-                                                <label class="form-check-label  col-md-3" for="danger">
-                                                    YES
-                                                </label>
-                                                <input class="form-check-input col-md-3" type="radio"
-                                                       name="taxYN" value="N" style="padding:0;"
-                                                       id="taxYN_n">
-                                                <label class="form-check-label col-md-2" for="danger">
-                                                    NO
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">제품판매여부</label>
-                                            <div class="row col-12" style="margin-top:2%;">
-                                                <input class="form-check-input col-md-3" type="radio"
-                                                       name="sellYN" value="Y" id="sellYN_y"
-                                                       style="padding:0; margin-left:3.5%;" checked>
-                                                <label class="form-check-label  col-md-3" for="danger">
-                                                    YES
-                                                </label>
-                                                <input class="form-check-input col-md-3" type="radio"
-                                                       name="sellYN" value="N" style="padding:0;"
-                                                       id="sellYN_n">
-                                                <label class="form-check-label col-md-2" for="danger">
-                                                    NO
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">정품출고여부</label>
-                                            <div class="row col-12" style="margin-top:2%;">
-                                                <input class="form-check-input col-md-3" type="radio"
-                                                       name="genuineYN" value="Y" id="genuineYN_y"
-                                                       style="padding:0; margin-left:3.5%;" checked>
-                                                <label class="form-check-label  col-md-3" for="danger">
-                                                    YES
-                                                </label>
-                                                <input class="form-check-input col-md-3" type="radio"
-                                                       name="genuineYN" value="N" style="padding:0;"
-                                                       id="genuineYN_n">
-                                                <label class="form-check-label col-md-2" for="danger">
-                                                    NO
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">사내판매여부</label>
-                                            <div class="row col-12" style="margin-top:2%;">
-                                                <input class="form-check-input col-md-3" type="radio"
-                                                       name="inSellYN" value="Y"
-                                                       style="padding:0; margin-left:3.5%;"
-                                                       id="inSellYN_y" checked>
-                                                <label class="form-check-label  col-md-3" for="danger">
-                                                    YES
-                                                </label>
-                                                <input class="form-check-input col-md-3" type="radio"
-                                                       name="inSellYN" value="N" style="padding:0;"
-                                                       id="inSellYN_n">
-                                                <label class="form-check-label col-md-2" for="danger">
-                                                    NO
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row col-12 columInfo"
-                                     style="border-bottom:1px solid #dee2e6;">
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">롯데마트코드</label>
-                                            <input type="text" id="lotCode"
-                                                   class="form-control"
-                                                   name="lotCode" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">홈플러스코드</label>
-                                            <input type="text" id="homCode"
-                                                   class="form-control"
-                                                   name="homCode" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">메가마트코드</label>
-                                            <input type="text" id="MGCode"
-                                                   class="form-control"
-                                                   name="MGCode" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">농협코드</label>
-                                            <input type="text" id="NHCode"
-                                                   class="form-control"
-                                                   name="NHCode" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row col-12 columInfo"
-                                     style="">
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">이랜드리테일</label>
-                                            <input type="text" id="ELCode"
-                                                   class="form-control"
-                                                   name="ELCode" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">GS리테일</label>
-                                            <input type="text" id="GSCode"
-                                                   class="form-control"
-                                                   name="GSCode" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">상품바코드</label>
-                                            <input type="text" id="prdBarcode"
-                                                   class="form-control"
-                                                   name="prdBarcode" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label for="email-id-column">쿠팡입수</label>
-                                            <input type="text" id="coupangEa"
-                                                   class="form-control"
-                                                   name="coupangEa" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <!--<div class="form-group col-12">
                                     <div class="form-check">
@@ -653,7 +439,6 @@ Auto resize image file uploader
     </section>
 </div>
 
-
 <script>
     function filter() {
         let search = document.getElementById("search1").value;
@@ -689,14 +474,14 @@ Auto resize image file uploader
         var param = {cate1: select};
         $.ajax({
             type: "POST",
-            url: "/product/loadSecond",
+            url: "/drymilk/loadSecond",
             data: param,
             success: function (response) {
                 $('#sCate2').html("");
                 for (let i = 0; i < Object.keys(response).length; i++) {
-                    var prdName = response[i]['prdName'];
+                    var prdRName = response[i]['prdRName'];
                     var prdCode = response[i]['prdCode'];
-                    $('#sCate2').append("<option value='" + prdCode + "'>" + prdName + "</option>");
+                    $('#sCate2').append("<option value='" + prdCode + "'>" + prdRName + "</option>");
                 }
             }
 
@@ -710,69 +495,28 @@ Auto resize image file uploader
         var param = {cate2: select};
         $.ajax({
             type: "POST",
-            url: "/product/productInit",
+            url: "/drymilk/productInit",
             data: param,
             success: function (response) {
-                $('#prdCode').val(response.prdinfo[0]['prdCode'])
-                $('#prdName').val(response.prdinfo[0]['prdName'])
-                $('#prdRname').val(response.prdinfo[0]['prdRName']);
+                $('#prdCode').val(response.prdInfo[0]['prdCode'])
+                $('#prdName').val(response.prdInfo[0]['prdName'])
+                $('#prdRname').val(response.prdInfo[0]['prdRName']);
 
 
-                if (response.prdinfo[0]['milkYN'] == $('#milkYN_y').val()) {
-                    $('#milkYN_y').attr('checked', 'true');
-                } else if (response.prdinfo[0]['milkYN'] == $('#milkYN_n').val()) {
-                    $('#milkYN_n').attr('checked', 'true');
+                if (response.prdInfo[0]['viewYN'] == $('#viewYN_y').val()) {
+                    $('#viewYN_y').attr('checked', 'true');
+                } else if (response.prdInfo[0]['viewYN'] == $('#viewYN_n').val()) {
+                    $('#viewYN_n').attr('checked', 'true');
+                }
+                if (response.prdInfo[0]['cpYN'] == $('#cpYN_y').val()) {
+                    $('#cpYN_y').attr('checked', 'true');
+                } else if (response.prdInfo[0]['cpYN'] == $('#cpYN_n').val()) {
+                    $('#cpYN_n').attr('checked', 'true');
                 }
 
-                if (response.prdinfo[0]['underYN'] == $('#underYN_y').val()) {
-                    $('#underYN_y').attr('checked', 'true');
-                } else if (response.prdinfo[0]['underYN'] == $('#underYN_n').val()) {
-                    $('#underYN_n').attr('checked', 'true');
-                }
+                $('#prdPrice').val(response.prdInfo[0]['prdPrice']);
+                $('#idx').val(response.prdInfo[0]['idx']);
 
-
-                if (response.prdinfo[0]['tmYN'] == $('#tmYN_y').val()) {
-                    $('#tmYN_y').attr('checked', 'true');
-                } else if (response.prdinfo[0]['underYN'] == $('#tmYN_n').val()) {
-                    $('#tmYN_n').attr('checked', 'true');
-                }
-
-                if (response.prdinfo[0]['taxYN'] == $('#taxYN_y').val()) {
-                    $('#taxYN_y').attr('checked', 'true');
-                } else if (response.prdinfo[0]['taxYN'] == $('#taxYN_n').val()) {
-                    $('#taxYN_n').attr('checked', 'true');
-                }
-
-                if (response.prdinfo[0]['sellYN'] == $('#sellYN_y').val()) {
-                    $('#sellYN_y').attr('checked', 'true');
-                } else if (response.prdinfo[0]['sellYN'] == $('#sellYN_n').val()) {
-                    $('#sellYN_n').attr('checked', 'true');
-                }
-                if (response.prdinfo[0]['genuineYN'] == $('#genuineYN_y').val()) {
-                    $('#genuineYN_y').attr('checked', 'true');
-                } else if (response.prdinfo[0]['genuineYN'] == $('#genuineYN_n').val()) {
-                    $('#genuineYN_n').attr('checked', 'true');
-                }
-
-                if (response.prdinfo[0]['inSellYN'] == $('#inSellYN_y').val()) {
-                    $('#inSellYN_y').attr('checked', 'true');
-                } else if (response.prdinfo[0]['inSellYN'] == $('#inSellYN_n').val()) {
-                    $('#inSellYN_n').attr('checked', 'true');
-                }
-
-                $('#prdSize').val(response.prdinfo[0]['prdSize']);
-                $('#prdBox').val(response.prdinfo[0]['prdBox']);
-                $('#erpCode').val(response.prdinfo[0]['erpCode']);
-                $('#prdPrice').val(response.prdinfo[0]['prdPrice']);
-                $('#lotCode').val(response.prdinfo[0]['lotCode']);
-                $('#homCode').val(response.prdinfo[0]['homCode']);
-                $('#MGCode').val(response.prdinfo[0]['MGCode']);
-                $('#NHCode').val(response.prdinfo[0]['NHCode']);
-                $('#ELCode').val(response.prdinfo[0]['ELCode']);
-                $('#GSCode').val(response.prdinfo[0]['GSCode']);
-                $('#prdBarcode').val(response.prdinfo[0]['prdBarcode']);
-                $('#coupangEa').val(response.prdinfo[0]['coupangEa']);
-                $('#idx').val(response.prdinfo[0]['idx']);
                 $('#submit').text('수정');
                 $('#reset_delete').text('삭제');
 
@@ -824,7 +568,7 @@ Auto resize image file uploader
             $.ajax({
                 type: "POST",
                 data: param,
-                url: "/product/addNewCate2",
+                url: "/drymilk/addNewCate2",
                 success: function (response) {
                     var newCate2NumFirst = response.lastCateNum[0]['prdCode'].substr(3,5);
                     if(newCate2NumFirst=="001"){
@@ -920,7 +664,3 @@ Auto resize image file uploader
         }
     });
 </script>
-
-
-<?php
-

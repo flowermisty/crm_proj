@@ -122,9 +122,18 @@ class CustomerController extends BaseController{
             $data['memberList'][$i]['baby_birth'] = $baby_mon;
             $data['rute_code'] = $rute_code;
 
+
+            if($rute_code=="all"){
+                $data['user'] = $memberList->paginate(10);
+                $data['pager'] = $memberList->pager;
+            }else{
+                $data['user'] = $memberList->where('rute_code',"$rute_code")->paginate(10);
+                $data['pager'] = $memberList->pager;
+            }
+
+
         }
-        $data['user'] = $memberList->paginate(10);
-        $data['pager'] = $memberList->pager;
+
 
 
 

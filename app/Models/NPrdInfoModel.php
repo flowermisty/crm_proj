@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+
 use CodeIgniter\Model;
+
+
+use App\Libraries\CustomDB;
 
 class NPrdInfoModel extends Model
 {
@@ -114,6 +118,26 @@ class NPrdInfoModel extends Model
         $allowedFields = $this->getAllowedFields();
         $result = $model->update("$idx",$allowedFields);
         return $result;
+    }
+
+    public function dryMilkLoadCate1():array{
+        $model = new NPrdInfoModel();
+        $cate1 = $model->select("prdCode, prdName")->where("length(prdCode)","3")
+                                                        ->where("sellYN","Y")
+                                                        ->where("viewYN","Y")
+                                                        ->where("milkYN","Y")->findAll();
+        return $cate1;
+    }
+
+    public function dryMilkLoadCate2(string $cate1):array{
+        $model = new NPrdInfoModel();
+        $cate2 = $model->select("prdCode, prdRName")->where("left(prdCode,3)","$cate1")
+                                                        ->where("length(prdCode)","6")
+                                                        ->where("sellYN","Y")
+                                                        ->where("viewYN","Y")
+                                                        ->where("milkYN","Y")->findAll();
+        return $cate2;
+
     }
 
 

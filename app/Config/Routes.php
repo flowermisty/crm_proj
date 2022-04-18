@@ -132,6 +132,11 @@ $routes->match(['get','post'],'product/insert','ProductManageController::insert'
 $routes->match(['get','post'],'product/update','ProductManageController::update');
 $routes->match(['get','post'],'product/delete','ProductManageController::delete');
 
+//분유관리
+$routes->match(['get','post'],'drymilk','DryMilkController::index');
+$routes->match(['get','post'],'drymilk/loadSecond','DryMilkController::loadSecond');
+$routes->match(['get','post'],'drymilk/productInit','DryMilkController::productInit');
+
 
 
 
