@@ -514,6 +514,17 @@ Auto resize image file uploader
                     $('#cpYN_n').attr('checked', 'true');
                 }
 
+                $('#sell18_tot').val(response.prdInfo[0]['sell18_tot']);
+                $('#sell18_sup').val(response.prdInfo[0]['sell18_sup']);
+                $('#sell18_tax').val(response.prdInfo[0]['sell18_tax']);
+                $('#sell30_tot').val(response.prdInfo[0]['sell30_tot']);
+                $('#sell30_sup').val(response.prdInfo[0]['sell30_sup']);
+                $('#sell30_tax').val(response.prdInfo[0]['sell30_tax']);
+                $('#sell50_tot').val(response.prdInfo[0]['sell50_tot']);
+                $('#sell50_sup').val(response.prdInfo[0]['sell50_sup']);
+                $('#sell50_tax').val(response.prdInfo[0]['sell50_tax']);
+
+
                 $('#prdPrice').val(response.prdInfo[0]['prdPrice']);
                 $('#idx').val(response.prdInfo[0]['idx']);
 

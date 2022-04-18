@@ -759,6 +759,16 @@ Auto resize image file uploader
                 } else if (response.prdinfo[0]['inSellYN'] == $('#inSellYN_n').val()) {
                     $('#inSellYN_n').attr('checked', 'true');
                 }
+                $('#sell18_tot').val(response.prdinfo[0]['sell18_tot']);
+                $('#sell18_sup').val(response.prdinfo[0]['sell18_sup']);
+                $('#sell18_tax').val(response.prdinfo[0]['sell18_tax']);
+                $('#sell30_tot').val(response.prdinfo[0]['sell30_tot']);
+                $('#sell30_sup').val(response.prdinfo[0]['sell30_sup']);
+                $('#sell30_tax').val(response.prdinfo[0]['sell30_tax']);
+                $('#sell50_tot').val(response.prdinfo[0]['sell50_tot']);
+                $('#sell50_sup').val(response.prdinfo[0]['sell50_sup']);
+                $('#sell50_tax').val(response.prdinfo[0]['sell50_tax']);
+
 
                 $('#prdSize').val(response.prdinfo[0]['prdSize']);
                 $('#prdBox').val(response.prdinfo[0]['prdBox']);
