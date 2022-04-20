@@ -86,8 +86,6 @@ class NPrdInfoModel extends Model
 
     public function nPrdInfoUpdate(array $data):bool{
         $model = new NPrdInfoModel();
-        unset($data['honeypot']);
-        unset($data['coupangEa']);
         $this->setPrimaryKey($data['idx']);
         $this->setAllowedFields($data);
         $idx = $this->getPrimaryKey();
@@ -98,8 +96,6 @@ class NPrdInfoModel extends Model
 
     public function nPrdInfoInsert(array $data):bool{
         $model = new NPrdInfoModel();
-        unset($data['honeypot']);
-        unset($data['coupangEa']);
         $this->setAllowedFields($data);
         $allowedFields = $this->getAllowedFields();
         $result = $model->insert($allowedFields);
@@ -108,8 +104,6 @@ class NPrdInfoModel extends Model
 
     public function nPrdInfoDelete(array $data):bool{
         $model = new NPrdInfoModel();
-        unset($data['honeypot']);
-        unset($data['coupangEa']);
         $data['viewYN'] = 'N';
         $this->setPrimaryKey($data['idx']);
         $this->setAllowedFields($data);
