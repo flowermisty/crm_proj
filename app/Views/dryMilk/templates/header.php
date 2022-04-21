@@ -8,6 +8,9 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
 
     <link rel="stylesheet" href="/assets/vendors/toastify/toastify.css">
@@ -39,6 +42,10 @@
     body::-webkit-scrollbar-thumb {
         background: #ccc;
         border-radius: 5px;
+    }
+
+    body{
+        font-family: "Noto Sans KR";
     }
 
 </style>

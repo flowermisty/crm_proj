@@ -1,8 +1,8 @@
 <script>
     AOS.init();
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet">
 
 
 <style>
@@ -34,11 +34,6 @@
         display: none;
     }
 
-    body{
-        font-family: 'Noto Sans KR' !important;
-        font-weight: initial;
-    }
-
 
 </style>
 
@@ -65,7 +60,7 @@
 </div>
 <section id="multiple-column-form">
     <div class="row">
-        <div class="col-8">
+        <div class="col-5" id="wrap">
             <div class="card">
                 <div class="card-header" style="padding-bottom: 0;">
 
@@ -78,22 +73,22 @@
                                 <div class="col-md-12 col-12">
                                     <div class="form-group" style="display: flex;">
 
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <input type="search" id="first-name-column" class="form-control"
                                                    placeholder="담당자, 고객명, 전화번호" name="fname-column">
                                         </div>
-                                        <div class="col-1" style="margin-left: 1%;">
+                                        <div class="col-8" style="margin-left: 1%; display: flex;">
                                             <button type="button" class="btn btn-primary me-1 mb-1">검색</button>
-                                        </div>
-
-                                        <div id="searchFilterControll" class="row col-2" style="">
-                                            <div class="col-12" style="padding-right: 0; margin-bottom: 1%;">
-                                                <button type="button" class="btn btn-success">검색조건 펼치기</button>
+                                            <div id="searchFilterControll" class="row col-8" style="">
+                                                <div class="col-12" style="padding-right: 0; margin-bottom: 1%;">
+                                                    <button type="button" class="btn btn-success">검색조건 펼치기</button>
+                                                </div>
                                             </div>
                                         </div>
+
+
                                     </div>
                                 </div>
-
 
 
                                 <div class="row" id="searchFilterSpread" style="">
@@ -167,19 +162,19 @@
                                                     <div class="checkbox py-1 col-3">
                                                         <label for="checkbox5">재가완료</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
 
                                                     <div class="checkbox py-1 col-3">
                                                         <label for="checkbox5">출고완료</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
 
                                                     <div class="checkbox py-1 col-3">
                                                         <label for="checkbox5">구매완료</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
 
                                                 </div>
@@ -203,19 +198,19 @@
                                                     <div class="checkbox py-1 col-3 ">
                                                         <label for="checkbox5">정품체험</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
 
                                                     <div class="checkbox py-1 col-3 ">
                                                         <label for="checkbox5">증정</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
 
                                                     <div class="checkbox py-1 col-3 ">
                                                         <label for="checkbox5">클레임 증정</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
                                                 </div>
 
@@ -223,19 +218,19 @@
                                                     <div class="checkbox py-1 col-3 ">
                                                         <label for="checkbox5">샘플 상담용</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
 
                                                     <div class="checkbox py-1 col-3">
                                                         <label for=" checkbox5">샘플 연구용</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
 
                                                     <div class="checkbox py-1 col-3 ">
                                                         <label for="checkbox5">기부</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,13 +253,13 @@
                                                     <div class="checkbox py-1 col-3">
                                                         <label for="checkbox5">출고</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
 
                                                     <div class="checkbox py-1 col-3">
                                                         <label for="checkbox5">회송</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
                                                 </div>
                                             </div>
@@ -281,7 +276,7 @@
                                                     <div class="checkbox py-1 col-3">
                                                         <label for="checkbox5">남양주 창고</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
 
                                                     <div class="checkbox py-1 col-3">
@@ -310,7 +305,7 @@
                                                     <div class="checkbox py-1 col-3">
                                                         <label for="checkbox5">NO</label>
                                                         <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                               checked="">
+                                                        >
                                                     </div>
 
                                                 </div>
@@ -340,10 +335,25 @@
                 <div class="col-12">
                     <div class="card" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000">
                         <div class="card-header text-muted font-semibold">
-                            고객관리 리스트
+                            <p style="font-size:11px;">총건수 : <span>0000</span>개 / 검색건수 : <span>0000</span>개</p>
+                            <p class="">정품 입 / 출고 신청 리스트</p>
+
+                            <div style="width:100%;">
+                                <div style="display: flex; width:15%;" class="float-end">
+                                    <select name="" id="" >
+                                        <option value="">재가요청</option>
+                                        <option value="">제가완료</option>
+                                        <option value="">출고완료</option>
+                                        <option value="">구매완료</option>
+                                    </select>
+                                    <button class="btn btn-primary float-end" style="margin-left: 0.5%; width:60%;">상태변경</button>
+                                </div>
+
+                            </div>
+
                         </div>
                         <div class="card-body">
-                            <form action="" method="post" id="deleteForm">
+                            <form action="#" method="post" id="">
                                 <table class="table table-striped text-muted font-semibold" id="table1"
                                        style="border-spacing: 3px; border-collapse: separate; text-align: center;">
 
@@ -374,12 +384,8 @@
 
 
                                     <tr>
-                                        <td>&nbsp;&nbsp;
-                                            <a href="joinAgreeModalCenter"
-                                               class="font-semibold badge bg-primary employeeName"
-                                               style="width:65px; height:100%;" data-toggle="modal"
-                                               data-target="#joinAgreeModalCenter"
-                                               onclick=""></a>
+                                        <td>
+                                            <input type="checkbox" id="checkbox5" class="form-check-input" style="margin:auto;">
                                         </td>
                                         <td>
                                                         <span
@@ -471,11 +477,22 @@
                                         </td>
                                     </tr>
 
+
                                     </tbody>
 
                                 </table>
 
                             </form>
+                            <div class="row" style="margin-left: 0.3%;">
+                                <div class="row col-6">
+                                    <span class="badge bg-primary col-1">등록</span>
+                                    <span class="badge bg-primary col-2" style="margin-left: 0.3%;">다해 ERP 다운로드</span>
+                                    <span class="badge bg-primary col-2" style="margin-left: 0.3%;">다해 ERP 작업</span>
+                                    <span class="badge bg-primary col-2" style="margin-left: 0.3%;">회수 다운로드</span>
+                                    <span class="badge bg-primary col-1" style="margin-left: 0.3%;">복사</span>
+
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -493,20 +510,23 @@
 </div>
 
 <script>
-$(document).ready(function(){
-   $('#searchFilterSpread').hide();
-});
+    $(document).ready(function () {
+        $('#searchFilterSpread').hide();
+    });
 
-$('#searchFilterControll>div>button').click(function(){
-    if($('#searchFilterControll > div > button').text() =="검색조건 펼치기"){
-        $('#searchFilterSpread').slideDown();
-        $('#searchFilterControll > div > button').text('검색조건 접기');
-    }else{
-        $('#searchFilterSpread').slideUp();
-        $('#searchFilterControll > div > button').text('검색조건 펼치기');
-    }
+    $('#searchFilterControll>div>button').click(function () {
+        if ($('#searchFilterControll > div > button').text() == "검색조건 펼치기") {
+            $('#wrap').attr('class','col-8');
+            $('#searchFilterSpread').slideDown();
+            $('#searchFilterControll > div > button').text('검색조건 접기');
+        } else {
+            $('#wrap').attr('class','col-5');
+            $('#searchFilterSpread').slideUp();
+            $('#searchFilterControll > div > button').text('검색조건 펼치기');
 
-});
+        }
+
+    });
 
 </script>
 <script src="/assetsCustomer/vendors/simple-datatables/simple-datatables.js"></script>

@@ -164,7 +164,7 @@
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="form-element-textarea.html">정품 출고</a>
+                                <a href="<?=base_url('/genuine_out')?>">정품 출고</a>
                             </li>
 
                             <li class="submenu-item ">
