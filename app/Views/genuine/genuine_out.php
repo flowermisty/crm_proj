@@ -68,17 +68,17 @@
 
                 <div class="card-content">
                     <div class="card-body">
-                        <form class="form">
+                        <form class="form" action="<?=base_url("/genuine_out/search?page=1")?>" method="post">
                             <div class="row">
                                 <div class="col-md-12 col-12">
                                     <div class="form-group" style="display: flex;">
 
                                         <div class="col-8">
-                                            <input type="text" id="keyword" class="form-control"
-                                                   placeholder="담당자, 고객명, 전화번호" name="keyword">
+                                            <input type="text" id="searchMain" name="searchMain" class="form-control"
+                                                   placeholder="담당자, 고객명, 전화번호">
                                         </div>
                                         <div class="col-8" style="margin-left: 1%; display: flex;">
-                                            <button type="button" class="btn btn-primary me-1 mb-1">검색</button>
+                                            <button type="submit" id="searchSubmit" class="btn btn-primary me-1 mb-1">검색</button>
                                             <div id="searchFilterControll" class="row col-8" style="">
                                                 <div class="col-12" style="padding-right: 0; margin-bottom: 1%;">
                                                     <button type="button" class="btn btn-success">검색조건 펼치기</button>
@@ -89,7 +89,6 @@
 
                                     </div>
                                 </div>
-
 
                                 <div class="row" id="searchFilterSpread" style="">
                                     <div class="row"
@@ -363,7 +362,16 @@
                                     <button class="btn btn-primary float-end" style="margin-left: 0.5%; width:60%;">
                                         상태변경
                                     </button>
+
                                 </div>
+
+                                <?php
+                                    if($signal == "search"){
+                                        echo "<button id=\"searchReset\" class=\"btn btn-primary\" style=\"margin-left: 0.5%; width:8%;\">
+                                                    검색초기화
+                                                  </button>";
+                                    }
+                                ?>
 
                             </div>
 
@@ -386,7 +394,7 @@
                                         <th style="text-align: center;">결제날짜&nbsp;</th>
                                         <th style="text-align: center;">출고날짜&nbsp;</th>
                                         <th style="text-align: center;">사용용도&nbsp;</th>
-                                        <th style="text-align: center;">사용처/고객명&nbsp;&nbsp;</th>
+                                        <th style="text-align: center;">고객명&nbsp;&nbsp;</th>
                                         <th style="text-align: center;">연락처&nbsp;&nbsp;</th>
                                         <th style="text-align: center;">상태&nbsp;&nbsp;</th>
                                         <th style="text-align: center;">택배&nbsp;&nbsp;</th>
@@ -399,94 +407,108 @@
                                     <tbody class="employeeList">
 
                                     <?php foreach ($orderList as $row) : ?>
+
                                         <tr>
                                             <td>
                                                 <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                       style="margin:auto;">
+                                                       style="margin:auto; margin-top:4px;" value="<?=$row['idx']?>">
+                                                <span class="text-muted font-semibold" style="font-size:12px;"><?=$row['idx']?></span>
                                             </td>
                                             <td>
                                                         <span
                                                                 class="text-muted font-semibold employeeId"
-                                                                style="font-size:15px;"><?= $row['aName'] ?></span>
+                                                                style="font-size:12px;"><?= $row['aName'] ?></span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                                style="font-size:15px;"><?= $row['cabage'] ?>
+                                                                style="font-size:12px;"><?= $row['cabage'] ?>
 
                                                         </span>
                                             </td>
                                             <td>
-                                                        <span class="text-muted font-semibold" style="font-size:15px;"><?= $row['InOut'] ?></span>
+                                                        <span class="text-muted font-semibold" style="font-size:12px;"><?= $row['InOut'] ?></span>
                                             </td>
                                             <td>
                                                         <span
                                                                 class="text-muted font-semibold"
-                                                                style="font-size:15px;"><?= $row['reType'] ?>
+                                                                style="font-size:12px;"><?= $row['reType'] ?>
 
                                                         </span>
                                             </td>
                                             <td>
                                                         <span
                                                                 class="text-muted font-semibold"
-                                                                style="font-size:15px;"></span>
+                                                                style="font-size:12px;"><?= $row['prdRName'] ?></span>
                                             </td>
 
                                             <td>
-                                                        <span class="text-muted font-semibold" style="font-size:15px;"><?= number_format($row['resultTotalPrice']) ?>
+                                                        <span class="text-muted font-semibold" style="font-size:12px;"><?= number_format($row['resultPrice']) ?>
                                                         </span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                              style="font-size:15px;"><?= $row['pucDate'] ?></span>
+                                                              style="font-size:12px;"><?= substr("{$row['pucDate']}",0,10) ?></span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                              sstyle="font-size:15px;"><?= $row['pucDate1'] ?></span>
+                                                              style="font-size:12px;"><?=substr("{$row['pucDate1']}",0,10) ?></span>
                                             </td>
 
                                             <td>
-                                                        <span class="text-muted font-semibold" style="font-size:15px;">
+                                                        <span class="text-muted font-semibold" style="font-size:12px;">
 
                                                         </span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                              style="font-size:15px;"><?= $row['sellType'] ?>
+                                                              style="font-size:12px;"><?= $row['sellType'] ?>
                                                         </span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                              style="font-size:15px;"><?= $row['mName'] ?></span>
+                                                              style="font-size:12px;"><?php
+                                                            if(strlen($row['mName']) > 9){
+                                                                echo iconv_substr("{$row['mName']}",0,3,"utf-8")."..";
+                                                            }else if(strlen($row['mName']) <= 9){
+                                                                echo $row['mName'];
+                                                            }
+                                                            ?></span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                              style="font-size:15px;"><?= $row['mHp'] ?></span>
+                                                              style="font-size:12px;"><?= $row['mHp'] ?></span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                              style="font-size:15px;"></span>
+                                                              style="font-size:12px;"><?= $row['status'] ?></span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                              style="font-size:15px;"><?= $row['traDown'] ?></span>
+                                                              style="font-size:12px;"><?= $row['traDown'] ?></span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                              style="font-size:15px;"><?= $row['erpDown'] ?></span>
+                                                              style="font-size:12px;"><?= $row['erpDown'] ?></span>
                                             </td>
 
                                             <td>
-                                                        <span class="text-muted font-semibold"
-                                                              style="font-size:15px;"><?= substr("{$row['memo']}",0,10)."..." ?></span>
+                                                    <span class="text-muted font-semibold" title="<?=$row['memo']?>"
+                                                              style="font-size:12px;"><?php if(strlen($row['memo'])>5){
+                                                                echo iconv_substr("{$row['memo']}",0,5,"utf-8")."...";
+                                                            }else if(strlen($row['memo']) < 5){
+                                                                  echo $row['memo'];
+                                                            }
+                                                                                 ?>
+                                                        </span>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -536,6 +558,7 @@
         if ($('nav > .pagination > li > a > span').eq(-2).text() == "Next") {
             $('nav > .pagination > li > a > span').eq(-2).text('▶');
         }
+
     });
 
     $('#searchFilterControll>div>button').click(function () {
@@ -550,6 +573,10 @@
 
         }
 
+    });
+
+    $('#searchReset').click(function (){
+       location.href = "http://godo.event.admin/genuine_out?page=1";
     });
 
 </script>

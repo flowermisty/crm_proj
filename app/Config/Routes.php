@@ -144,6 +144,7 @@ $routes->match(['get','post'],'drymilk/delete','DryMilkController::delete');
 
 //개인설정->정품출고
 $routes->match(['get','post'],'genuine_out','GenuineController::index');
+$routes->match(['get','post'],'genuine_out/search','GenuineController::search');
 
 
 
