@@ -201,7 +201,7 @@
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="<?=base_url('/genuine_out')?>">정품 출고</a>
+                                <a href="<?=base_url('/genuine_out?page=1')?>">정품 출고</a>
                             </li>
 
                             <li class="submenu-item ">

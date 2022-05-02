@@ -63,34 +63,52 @@
         <div class="col-5" id="wrap">
             <div class="card">
                 <div class="card-header" style="padding-bottom: 0;">
-
+                    <span class="text text-muted">검색조건<span>
                 </div>
 
                 <div class="card-content">
                     <div class="card-body">
-                        <form class="form" action="<?=base_url("/genuine_out/search?page=1")?>" method="post">
+                        <form class="form" action="<?= base_url("/genuine_out/search?page=1") ?>" method="post">
                             <div class="row">
-                                <div class="col-md-12 col-12">
+
+                                <div class="col-md-12 col-12" id="searchObjContainer" style="padding-left: 0;">
                                     <div class="form-group" style="display: flex;">
 
-                                        <div class="col-8">
-                                            <input type="text" id="searchMain" name="searchMain" class="form-control"
-                                                   placeholder="담당자, 고객명, 전화번호">
+                                        <div class="col-10">
+                                            <select name="searchObj" id="searchObj" onchange="addSearch(this);">
+                                                <option value="">검색조건을 선택 하세요</option>
+                                                <option value="2">담당자,고객명 전화번호</option>
+                                                <option value="3">날짜(신청날짜,결재날짜,출고날짜)</option>
+                                                <option value="4">구매비용</option>
+                                                <option value="5">상태</option>
+                                                <option value="6">용도</option>
+                                                <option value="7">입출고 형태</option>
+                                                <option value="8">출고창고</option>
+                                                <option value="9">결과 내려받기 여부</option>
+                                            </select>
                                         </div>
-                                        <div class="col-8" style="margin-left: 1%; display: flex;">
-                                            <button type="submit" id="searchSubmit" class="btn btn-primary me-1 mb-1">검색</button>
-                                            <div id="searchFilterControll" class="row col-8" style="">
-                                                <div class="col-12" style="padding-right: 0; margin-bottom: 1%;">
-                                                    <button type="button" class="btn btn-success">검색조건 펼치기</button>
-                                                </div>
+                                        <div class="col-3" style="margin-left: 1%; padding: 0.5%;">
+                                            <button type="submit" id="searchSubmit" class="btn btn-primary me-1 mb-1">검색
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12" id="searchMainSection" style="display: flex; margin-right: 0;">
+                                    <div class="col-7" style="padding-left: 0">
+                                        <input type="text" id="searchMain" name="searchMain" class="form-control"
+                                               placeholder="담당자, 고객명, 전화번호">
+                                    </div>
+                                    <div class="col-3">
+
+                                        <!--<div id="searchFilterControll" class="row col-8" style="">
+                                            <div class="col-12" style="padding-right: 0; margin-bottom: 1%;">
+                                                <button type="button" class="btn btn-success">검색조건 펼치기</button>
                                             </div>
-                                        </div>
-
-
+                                        </div>-->
                                     </div>
                                 </div>
 
-                                <div class="row" id="searchFilterSpread" style="">
+                                <div class="row" id="date" style="">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="col-md-4 col-12">
@@ -119,8 +137,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-
+                                <div class="row" id="cost" style="">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="col-md-5 col-12">
@@ -144,7 +163,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
+                                <div class="row" id="statusMain" style="">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
 
@@ -180,7 +201,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
+
+                                <div class="row" id="use" style="">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="form-group col-12">
@@ -242,8 +266,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-
+                                <div class="row" id="inNout" style="">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="form-group col-12">
@@ -271,8 +296,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-
+                                <div class="row" id="container" style="">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="form-group col-12">
@@ -295,7 +321,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
+                                <div class="row" id="downLoad" style="">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="form-group col-12">
@@ -325,6 +353,7 @@
                                         </div>
                                     </div>
                                 </div>
+
 
                             </div>
 
@@ -366,11 +395,11 @@
                                 </div>
 
                                 <?php
-                                    if($signal == "search"){
-                                        echo "<button id=\"searchReset\" class=\"btn btn-primary\" style=\"margin-left: 0.5%; width:8%;\">
+                                if ($signal == "search") {
+                                    echo "<button id=\"searchReset\" class=\"btn btn-primary\" style=\"margin-left: 0.5%; width:8%;\">
                                                     검색초기화
                                                   </button>";
-                                    }
+                                }
                                 ?>
 
                             </div>
@@ -411,8 +440,9 @@
                                         <tr>
                                             <td>
                                                 <input type="checkbox" id="checkbox5" class="form-check-input"
-                                                       style="margin:auto; margin-top:4px;" value="<?=$row['idx']?>">
-                                                <span class="text-muted font-semibold" style="font-size:12px;"><?=$row['idx']?></span>
+                                                       style="margin:auto; margin-top:4px;" value="<?= $row['idx'] ?>">
+                                                <span class="text-muted font-semibold"
+                                                      style="font-size:12px;"><?= $row['idx'] ?></span>
                                             </td>
                                             <td>
                                                         <span
@@ -422,12 +452,13 @@
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                                style="font-size:12px;"><?= $row['cabage'] ?>
+                                                              style="font-size:12px;"><?= $row['cabage'] ?>
 
                                                         </span>
                                             </td>
                                             <td>
-                                                        <span class="text-muted font-semibold" style="font-size:12px;"><?= $row['InOut'] ?></span>
+                                                <span class="text-muted font-semibold"
+                                                      style="font-size:12px;"><?= $row['InOut'] ?></span>
                                             </td>
                                             <td>
                                                         <span
@@ -443,18 +474,19 @@
                                             </td>
 
                                             <td>
-                                                        <span class="text-muted font-semibold" style="font-size:12px;"><?= number_format($row['resultPrice']) ?>
+                                                        <span class="text-muted font-semibold"
+                                                              style="font-size:12px;"><?= number_format($row['resultPrice']) ?>
                                                         </span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                              style="font-size:12px;"><?= substr("{$row['pucDate']}",0,10) ?></span>
+                                                              style="font-size:12px;"><?= substr("{$row['pucDate']}", 0, 10) ?></span>
                                             </td>
 
                                             <td>
                                                         <span class="text-muted font-semibold"
-                                                              style="font-size:12px;"><?=substr("{$row['pucDate1']}",0,10) ?></span>
+                                                              style="font-size:12px;"><?= substr("{$row['pucDate1']}", 0, 10) ?></span>
                                             </td>
 
                                             <td>
@@ -472,9 +504,9 @@
                                             <td>
                                                         <span class="text-muted font-semibold"
                                                               style="font-size:12px;"><?php
-                                                            if(strlen($row['mName']) > 9){
-                                                                echo iconv_substr("{$row['mName']}",0,3,"utf-8")."..";
-                                                            }else if(strlen($row['mName']) <= 9){
+                                                            if (strlen($row['mName']) > 9) {
+                                                                echo iconv_substr("{$row['mName']}", 0, 3, "utf-8") . "..";
+                                                            } else if (strlen($row['mName']) <= 9) {
                                                                 echo $row['mName'];
                                                             }
                                                             ?></span>
@@ -501,13 +533,13 @@
                                             </td>
 
                                             <td>
-                                                    <span class="text-muted font-semibold" title="<?=$row['memo']?>"
-                                                              style="font-size:12px;"><?php if(strlen($row['memo'])>5){
-                                                                echo iconv_substr("{$row['memo']}",0,5,"utf-8")."...";
-                                                            }else if(strlen($row['memo']) < 5){
-                                                                  echo $row['memo'];
-                                                            }
-                                                                                 ?>
+                                                    <span class="text-muted font-semibold" title="<?= $row['memo'] ?>"
+                                                          style="font-size:12px;"><?php if (strlen($row['memo']) > 5) {
+                                                            echo iconv_substr("{$row['memo']}", 0, 5, "utf-8") . "...";
+                                                        } else if (strlen($row['memo']) < 5) {
+                                                            echo $row['memo'];
+                                                        }
+                                                        ?>
                                                         </span>
                                             </td>
                                         </tr>
@@ -547,6 +579,15 @@
 <script>
     $(document).ready(function () {
         $('#searchFilterSpread').hide();
+        $('#searchMainSection').hide();
+        $('#date').hide();
+        $('#cost').hide();
+        $('#statusMain').hide();
+        $('#use').hide();
+        $('#inNout').hide();
+        $('#container').hide();
+        $('#downLoad').hide();
+
 
         $('nav > .pagination').attr("class", "pagination pagination-primary float-end dataTable-pagination");
         $('nav > .pagination > li').addClass("page-item");
@@ -561,23 +602,125 @@
 
     });
 
-    $('#searchFilterControll>div>button').click(function () {
-        if ($('#searchFilterControll > div > button').text() == "검색조건 펼치기") {
-            $('#wrap').attr('class', 'col-8');
-            $('#searchFilterSpread').slideDown();
-            $('#searchFilterControll > div > button').text('검색조건 접기');
+    // $('#searchFilterControll>div>button').click(function () {
+    //     if ($('#searchFilterControll > div > button').text() == "검색조건 펼치기") {
+    //         $('#wrap').attr('class', 'col-8');
+    //         $('#searchFilterSpread').slideDown();
+    //         $('#searchFilterControll > div > button').text('검색조건 접기');
+    //     } else {
+    //         $('#wrap').attr('class', 'col-5');
+    //         $('#searchFilterSpread').slideUp();
+    //         $('#searchFilterControll > div > button').text('검색조건 펼치기');
+    //
+    //     }
+    //
+    // });
+
+    $('#searchReset').click(function () {
+        location.href = "http://godo.event.admin/genuine_out?page=1";
+    });
+
+    function addSearch(obj) {
+        if ($(obj).val() == "2") {
+            $('#searchMainSection').show();
+
+            $('#searchFilterSpread').hide();
+            $('#date').hide();
+            $('#cost').hide();
+            $('#statusMain').hide();
+            $('#use').hide();
+            $('#inNout').hide();
+            $('#container').hide();
+            $('#downLoad').hide();
+        } else if ($(obj).val() == "3") {
+            $('#date').show();
+
+            $('#searchFilterSpread').hide();
+            $('#searchMainSection').hide();
+            $('#cost').hide();
+            $('#statusMain').hide();
+            $('#use').hide();
+            $('#inNout').hide();
+            $('#container').hide();
+            $('#downLoad').hide();
+        } else if ($(obj).val() == "4") {
+            $('#cost').show();
+
+            $('#searchFilterSpread').hide();
+            $('#date').hide();
+            $('#searchMainSection').hide();
+            $('#statusMain').hide();
+            $('#use').hide();
+            $('#inNout').hide();
+            $('#container').hide();
+            $('#downLoad').hide();
+        } else if ($(obj).val() == "5") {
+            $('#statusMain').show();
+
+            $('#searchFilterSpread').hide();
+            $('#date').hide();
+            $('#searchMainSection').hide();
+            $('#cost').hide();
+            $('#use').hide();
+            $('#inNout').hide();
+            $('#container').hide();
+            $('#downLoad').hide();
+        } else if ($(obj).val() == "6") {
+            $('#use').show();
+
+            $('#searchFilterSpread').hide();
+            $('#date').hide();
+            $('#searchMainSection').hide();
+            $('#cost').hide();
+            $('#statusMain').hide();
+            $('#inNout').hide();
+            $('#container').hide();
+            $('#downLoad').hide();
+        } else if ($(obj).val() == "7") {
+            $('#inNout').show();
+
+            $('#searchFilterSpread').hide();
+            $('#date').hide();
+            $('#searchMainSection').hide();
+            $('#cost').hide();
+            $('#statusMain').hide();
+            $('#use').hide();
+            $('#container').hide();
+            $('#downLoad').hide();
+        } else if ($(obj).val() == "8") {
+            $('#container').show();
+
+            $('#searchFilterSpread').hide();
+            $('#date').hide();
+            $('#searchMainSection').hide();
+            $('#cost').hide();
+            $('#statusMain').hide();
+            $('#use').hide();
+            $('#inNout').hide();
+            $('#downLoad').hide();
+        } else if ($(obj).val() == "9") {
+            $('#downLoad').show();
+
+            $('#searchFilterSpread').hide();
+            $('#date').hide();
+            $('#searchMainSection').hide();
+            $('#cost').hide();
+            $('#statusMain').hide();
+            $('#use').hide();
+            $('#inNout').hide();
+            $('#container').hide();
         } else {
-            $('#wrap').attr('class', 'col-5');
-            $('#searchFilterSpread').slideUp();
-            $('#searchFilterControll > div > button').text('검색조건 펼치기');
-
+            $('#searchFilterSpread').hide();
+            $('#searchMainSection').hide();
+            $('#date').hide();
+            $('#cost').hide();
+            $('#statusMain').hide();
+            $('#use').hide();
+            $('#inNout').hide();
+            $('#container').hide();
+            $('#downLoad').hide();
         }
-
-    });
-
-    $('#searchReset').click(function (){
-       location.href = "http://godo.event.admin/genuine_out?page=1";
-    });
+    }
 
 </script>
 <script src="/assetsCustomer/vendors/simple-datatables/simple-datatables.js"></script>
