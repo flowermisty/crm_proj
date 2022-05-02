@@ -15,10 +15,6 @@ class NOrderHistoryModel  extends Model{
     ];
 
 
-
-
-
-
     public function getList($page):array{
         $db = \Config\Database::connect();
         $model = new NOrderHistoryModel();
@@ -97,7 +93,7 @@ class NOrderHistoryModel  extends Model{
         return $data;
     }
 
-    public function search($keyword){
+    public function search($searchValue){
         helper(['form', 'alert']);
 
         define("IVENETCRMKEY", "ODU1NjM=");
@@ -124,12 +120,72 @@ class NOrderHistoryModel  extends Model{
                         case when reType='D' then '직접' when reType='T' then '택배' end as reType,
                         resultPrice, pucDate, pucDate1, sellType, mName, AES_DECRYPT(UNHEX(mHp), '".IVENETCRMKEY."') as mHp, 
                         status, traDown, erpDown, memo 
-                   FROM nOrderHistory 
+                   FROM nOrderHistory";
+
+
+        if($searchValue['searchObj'] == "2") {
+            $query .= " WHERE (select aName from nAdmin where idx = nOrderHistory.employee) = '{$searchValue['searchMain']}'
+                       or mName = '{$searchValue['searchMain']}' or AES_DECRYPT(UNHEX(mHp), '".IVENETCRMKEY."') Like '%{$searchValue['searchMain']}%'
+                       ORDER BY idx DESC ";
+        }else if($searchValue['searchObj'] == "3"){
+            $query .= " WHERE `{$searchValue['serDate']}` BETWEEN  '{$searchValue['sPucDate']}' AND '{$searchValue['ePucDate']}' ORDER BY idx DESC ";
+        }else if($searchValue['searchObj'] == "4"){
+            $query .= " WHERE resultPrice BETWEEN  '{$searchValue['sPrice']}' AND '{$searchValue['ePrice']}' ORDER BY idx DESC ";
+        }else if($searchValue['searchObj'] == "5"){
+            $statusLength = count($searchValue['STATUS']);
+            for($i = 0; $i < $statusLength; $i++){
+                if($searchValue['STATUS'][$i] && $i==0){
+                    $query .= " WHERE status = '{$searchValue['STATUS'][$i]}'";
+                }
+                if($searchValue['STATUS'][$i] && $i!=0){
+                    $query .= " OR status = '{$searchValue['STATUS'][$i]}'";
+                }
+            }
+            $query .= " ORDER BY idx DESC ";
+
+        }else if($searchValue['searchObj'] == "6"){
+            $useLength = count($searchValue['sellType']);
+            for($i = 0; $i < $useLength; $i++){
+                if($searchValue['sellType'][$i] && $i==0){
+                    $query .= " WHERE sellType = '{$searchValue['sellType'][$i]}'";
+                }
+                if($searchValue['sellType'][$i] && $i!=0){
+                    $query .= " OR sellType = '{$searchValue['sellType'][$i]}'";
+                }
+            }
+            $query .= " ORDER BY idx DESC ";
+
+        }else if($searchValue['searchObj'] == "7"){
+            $inOutLength = count($searchValue['InOut']);
+            for($i = 0; $i < $inOutLength; $i++){
+                if($searchValue['InOut'][$i] && $i==0){
+                    $query .= " WHERE `InOut` = ' {$searchValue['InOut'][$i]} ' ";
+                }
+                if($searchValue['InOut'][$i] && $i!=0){
+                    $query .= " OR `InOut` = ' {$searchValue['InOut'][$i]} ' ";
+                }
+            }
+            $query .= "  ORDER BY idx DESC ";
+
+        }else if($searchValue['searchObj'] == "8"){
+            $cabageLength = count($searchValue['cabage']);
+            for($i = 0; $i < $cabageLength; $i++){
+                if($searchValue['cabage'][$i] && $i==0){
+                    $query .= " WHERE cabage = '{$searchValue['cabage'][$i]}'";
+                }
+                if($searchValue['cabage'][$i] && $i!=0){
+                    $query .= " OR cabage = '{$searchValue['cabage'][$i]}'";
+                }
+            }
+            $query .= " ORDER BY idx DESC ";
+        }else if($searchValue['searchObj'] == "9"){
+            $query .= " WHERE erpDown = '{$searchValue['xlsDown']}'  ORDER BY idx DESC ";
+        }else{
+
+        }
+
                    
-                   WHERE (select aName from nAdmin where idx = nOrderHistory.employee) = '$keyword'
-                   or mName = '$keyword' or AES_DECRYPT(UNHEX(mHp), '".IVENETCRMKEY."') Like '%$keyword%'
-                   
-                   ORDER BY idx DESC";
+
         $SQL = $db->query($query);
         $data['orderList'] = $SQL->getResultArray();
 
@@ -160,29 +216,19 @@ class NOrderHistoryModel  extends Model{
             }
             $prdName = $ROW['prdRName']." (".$ROW['ea']." 개) ". $etcPrdName;
             $data['orderList'][$i]['prdRName'] = $prdName;
+            $statusFlag = in_array("{$data['orderList'][$i]['status']}",$IVstatus);
+            $sellTypeFlag = in_array("{$data['orderList'][$i]['sellType']}",$IVsellType);
+            $cabageFlag = in_array("{$data['orderList'][$i]['sellType']}",$IVsellType);
 
-            $data['orderList'][$i]['status'] = $IVstatus["{$data['orderList'][$i]['status']}"];
-            $data['orderList'][$i]['sellType'] = $IVsellType["{$data['orderList'][$i]['sellType']}"];
-            $data['orderList'][$i]['cabage'] = $IVcabage["{$data['orderList'][$i]['cabage']}"];
-
-//            if(in_array("{$data['orderList'][$i]['status']}",$IVstatus)){
-//                $data['orderList'][$i]['status'] = $IVstatus["{$data['orderList'][$i]['status']}"];
-//            }else{
-//                $data['orderList'][$i]['status'] = "예외";
-//            }
-//
-//            if(in_array("{$data['orderList'][$i]['sellType']}",$IVsellType)){
-//                $data['orderList'][$i]['sellType'] = $IVsellType["{$data['orderList'][$i]['sellType']}"];
-//            }else{
-//                $data['orderList'][$i]['sellType'] = "예외";
-//            }
-//
-//            if(in_array("{$data['orderList'][$i]['cabage']}",$IVcabage)) {
-//                $data['orderList'][$i]['cabage'] = $IVcabage["{$data['orderList'][$i]['cabage']}"];
-//            }else{
-//                $data['orderList'][$i]['cabage'] = "예외";
-//            }
-
+            if($statusFlag){
+                $data['orderList'][$i]['status'] = $IVstatus["{$data['orderList'][$i]['status']}"];
+            }
+            if($sellTypeFlag){
+                $data['orderList'][$i]['sellType'] = $IVsellType["{$data['orderList'][$i]['sellType']}"];
+            }
+            if($cabageFlag){
+                $data['orderList'][$i]['cabage'] = $IVcabage["{$data['orderList'][$i]['cabage']}"];
+            }
 
 
             $searchModel->insert($data['orderList'][$i]);
@@ -190,11 +236,10 @@ class NOrderHistoryModel  extends Model{
         }
 
 
-
-
-
-
     }
+
+
+
 
     public function createSearchTable(){
         $forge = \Config\Database::forge();

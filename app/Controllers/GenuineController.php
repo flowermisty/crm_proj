@@ -15,7 +15,7 @@ class GenuineController extends BaseController
     {
         helper(['form', 'alert']);
 
-        if( session()->has('aIdx') == "") {
+        if (session()->has('aIdx') == "") {
             alert_move("로그인 후 들어와 주세요 ", "http://godo.event.admin/");
         }
 
@@ -24,59 +24,48 @@ class GenuineController extends BaseController
 
 
         echo view('genuine/templates/header');
-        echo view('genuine/genuine_out',$data);
+        echo view('genuine/genuine_out', $data);
         echo view('genuine/templates/footer');
     }
 
-    public function search(){
+    public function search()
+    {
         helper(['form', 'alert']);
+
         $model = new NOrderHistoryModel();
         $searchModel = new NGenuineSearchModel();
         $db = \Config\Database::connect();
-        $limitstart = ((int)$_GET['page']-1)*10;
-        if($db->tableExists('genuine_search') && $this->request->getPost('searchObj')!=""){
+
+        $limitstart = ((int)$_GET['page'] - 1) * 10;
+
+
+        $searchValue = $this->request->getPost();
+
+
+        /**
+         * @section 테이블 생성 여부  / 새로운 검색 키워드 판별
+         *                  - $db->tableExists('genuine_search')
+         *                    가. 테이블의 존재 여부를 확인 한다.
+         *                  - $this->request->getPost('searchObj')!=""
+         *                    가. 검색 키워드의 유형이 무엇인지 판별하는 셀렉트값
+         *                    나. 해당 값이 새로 전송되었다는 것은, 새로운 검색 키워드가
+         *                        입력 되었음을 의미한다.
+         *                  - 조건문의 두 AND 조건을 만족하면, 기존재하는 테이블을 삭제 하고,
+         *                    새로 태이블을 생성할 준비를 한다.
+         */
+        if ($db->tableExists('genuine_search') && $this->request->getPost('searchObj') != "") {
             $forge = \Config\Database::forge();
             $forge->dropTable('genuine_search');
         }
 
-        if ($this->request->getMethod() == 'post' && $this->request->getPost('searchObj')!="") {
-            $searchObj = $this->request->getPost('searchObj');
-            if($searchObj=="2"){
-                $model->search($this->request->getPost('searchMain'));
-            }else if($searchObj=="3"){
-                $date = [
-                    'serDate' => $this->request->getPost('serDate'),
-                    'from' => $this->request->getPost('sPucDate'),
-                    'to' => $this->request->getPost('ePucDate'),
-                    ];
-                $model->search($date);
-            }else if($searchObj=="4"){
-                $price = [
-                    'sPrice' => $this->request->getPost('sPrice'),
-                    'ePrice' => $this->request->getPost('ePrice'),
-                ];
-                $model->search($price);
-            }else if($searchObj=="5"){
-                $model->search($this->request->getPost('STATUS'));
-            }else if($searchObj=="6"){
-                $model->search($this->request->getPost('sellType'));
-            }else if($searchObj=="7"){
-                $model->search($this->request->getPost('InOut'));
-            }else if($searchObj=="8"){
-                $model->search($this->request->getPost('cabage'));
-            }else if($searchObj=="9"){
-                $model->search($this->request->getPost('xlsDown'));
-            }else{
-                alert_only('검색조건이 입력되지 않았습니다.');
-            }
-
+        if ($this->request->getMethod() == 'post' && $this->request->getPost('searchObj') != "") {
+            $model->search($searchValue);
         }
-        if($_GET['page']=="1" && $searchModel->findAll()){
-            $data['orderList'] = $searchModel->orderBy('idx','desc')->findAll("10");
-        }else{
-            $data['orderList'] = $searchModel->orderBy('idx','desc')->findAll("10","$limitstart");
+        if ($_GET['page'] == "1" && $searchModel->findAll()) {
+            $data['orderList'] = $searchModel->orderBy('idx', 'desc')->findAll("10");
+        } else {
+            $data['orderList'] = $searchModel->orderBy('idx', 'desc')->findAll("10", "$limitstart");
         }
-
 
 
         $data['user'] = $searchModel->paginate(10);
@@ -84,12 +73,11 @@ class GenuineController extends BaseController
         $data['signal'] = "search";
 
         echo view('genuine/templates/header');
-        echo view('genuine/genuine_out',$data);
+        echo view('genuine/genuine_out', $data);
         echo view('genuine/templates/footer');
 
 
-        }
-
+    }
 
 
 }

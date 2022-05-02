@@ -115,6 +115,7 @@
                                             <div class="form-group">
                                                 <label for="last-name-column">날짜</label>
                                                 <select name="serDate" id="serDate">
+                                                    <option value="">유형선택</option>
                                                     <option value="pucDate">신청날짜</option>
                                                     <option value="pucDate1">결제날짜</option>
                                                     <option value="pucDate2">출고날짜</option>
@@ -123,15 +124,15 @@
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label for="city-column">from</label>
+                                                <label for="">from</label>
                                                 <input type="date" id="sPucDate" class="form-control"
-                                                       placeholder="City"
+                                                       placeholder=""
                                                        name="sPucDate">
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label for="country-floating">to</label>
+                                                <label for="">to</label>
                                                 <input type="date" id="ePucDate" class="form-control"
                                                        name="ePucDate" placeholder="">
                                             </div>
@@ -345,7 +346,7 @@
                                                             NO
                                                         </label>
                                                         <input type="radio" name="xlsDown" class="form-check-input"
-                                                               value="N" checked>
+                                                               value="N">
                                                     </div>
 
                                                 </div>
