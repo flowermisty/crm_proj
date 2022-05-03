@@ -1,3 +1,4 @@
+
 <script>
     AOS.init();
 </script>
@@ -68,7 +69,7 @@
 
                 <div class="card-content">
                     <div class="card-body">
-                        <form class="form" action="<?= base_url("/genuine_out/search?page=1") ?>" method="post">
+                        <form class="form" method="post" name="genuineForm" id="genuineForm">
                             <div class="row">
 
                                 <div class="col-md-12 col-12" id="searchObjContainer" style="padding-left: 0;">
@@ -88,7 +89,7 @@
                                             </select>
                                         </div>
                                         <div class="col-3" style="margin-left: 1%; padding: 0.5%;">
-                                            <button type="submit" id="searchSubmit" class="btn btn-primary me-1 mb-1">검색
+                                            <button type="button" id="searchSubmit" class="btn btn-primary me-1 mb-1">검색
                                             </button>
                                         </div>
                                     </div>
@@ -618,7 +619,7 @@
     // });
 
     $('#searchReset').click(function () {
-        location.href = "http://godo.event.admin/genuine_out?page=1";
+        location.replace("http://godo.event.admin/genuine_out?page=1");
     });
 
     function addSearch(obj) {
@@ -723,6 +724,31 @@
         }
     }
 
+
+    $('#searchSubmit').click(function(){
+        var mode = "<?=$signal?>";
+        if(mode == "list"){
+            if($('#searchObj').val() == ""){
+                alert('검색 조건을 선택 하세요');
+                return false;
+            }else{
+                $('#genuineForm').attr("action", "http://godo.event.admin/genuine_out/search?page=1");
+                $('#genuineForm').submit();
+
+            }
+
+        }else if(mode == "search"){
+            if($('#searchObj').val() == ""){
+                alert('검색 조건을 선택 하세요');
+                return false;
+            }else{
+                $('#genuineForm').attr("action", "http://godo.event.admin/genuine_out/resultSearch");
+                $('#genuineForm').submit();
+
+            }
+        }
+
+    });
 </script>
 <script src="/assetsCustomer/vendors/simple-datatables/simple-datatables.js"></script>
 

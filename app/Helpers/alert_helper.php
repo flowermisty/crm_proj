@@ -1,11 +1,11 @@
 <?php
 
 // alert만
-function alert_only($msg, $exit = TRUE)
+function alert_only($msg)
 {
     echo "<meta http-equiv=\"content-type\" content=\"text/html; charset=\"utf-8\">";
     echo "<script type='text/javascript' charset='utf-8'> alert('" . $msg . "'); </script>";
-    if ($exit) exit;
+
 }
 
 // alert 띄우고 창닫기

@@ -79,5 +79,9 @@ class GenuineController extends BaseController
 
     }
 
+    public function resultSearch(){
+
+    }
+
 
 }
