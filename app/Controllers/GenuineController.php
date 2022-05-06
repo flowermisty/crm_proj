@@ -24,7 +24,7 @@ class GenuineController extends BaseController
 
 
         echo view('genuine/templates/header');
-        echo view('genuine/genuine_out', $data);
+        echo view('genuine/main/genuine_out', $data);
         echo view('genuine/templates/footer');
     }
 
@@ -73,13 +73,37 @@ class GenuineController extends BaseController
         $data['signal'] = "search";
 
         echo view('genuine/templates/header');
-        echo view('genuine/genuine_out', $data);
+        echo view('genuine/search/search', $data);
         echo view('genuine/templates/footer');
+
+
 
 
     }
 
     public function resultSearch(){
+        helper(['form', 'alert']);
+
+        $model = new NOrderHistoryModel();
+        $searchModel = new NGenuineSearchModel();
+
+        $data = [];
+
+        $searchValue = $this->request->getPost();
+
+
+
+        $data['signal'] = "research";
+        $data['orderList'] = $model->reSearch($searchValue);
+
+
+
+
+
+        echo view('genuine/templates/header');
+        echo view('genuine/research/research', $data);
+        echo view('genuine/templates/footer');
+
 
     }
 

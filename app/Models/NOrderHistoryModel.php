@@ -285,20 +285,28 @@ class NOrderHistoryModel extends Model
     }
 
 
-    public function reSearch(){
+    public function reSearch($searchValue){
         helper(['form', 'alert']);
 
-        define("IVENETCRMKEY", "ODU1NjM=");
-
-        $model = new NOrderHistoryModel();
         $searchModel = new NGenuineSearchModel();
         $db = \Config\Database::connect();
 
-        $query = "select * from genuine_search";
+        $query = "SELECT * FROM genuine_search";
+
+        $IVsellType = ["4" => "기부", "401" => "기부", "18" => "지인",
+            "30" => "친인척", "50" => "직계", "101" => "홍보 > 체험단",
+            "102" => "홍보 > 정품체험", "103" => "홍보 > 증정", "104" => "홍보 > CP 정품체험",
+            "201" => "클레임 > 증정", "301" => "샘플 > 상담용", "302" => "샘플 > 연구용"];
+
+        $IVstatus = ["C" => "신청중", "I" => "임시저장", "P" => "신청접수", "J" => "주문완료", "S" => "재가요청",
+            "A" => "재가완료", "E" => "구매완료", "R" => "환불완료", "T" => "출고완료", "B" => "ERP다운중"];
+
+        $IVcabage = ["C0001" => "충주 창고", "C0005" => "본사창고", "C0015" => "경기제품창고", "C0008" => "광주제품창고",
+            "C0007" => "대구제품창고", "C0009" => "대전제품창고", "C0006" => "부산제품창고"];
 
         if ($searchValue['searchObj'] == "2") {
-            $query .= " WHERE (select aName from nAdmin where idx = nOrderHistory.employee) = '{$searchValue['searchMain']}'
-                       or mName = '{$searchValue['searchMain']}' or AES_DECRYPT(UNHEX(mHp), '" . IVENETCRMKEY . "') Like '%{$searchValue['searchMain']}%'
+            $query .= " WHERE aName = '{$searchValue['searchMain']}'
+                       or mName = '{$searchValue['searchMain']}' or mHp Like '%{$searchValue['searchMain']}%'
                        ORDER BY idx DESC ";
         } else if ($searchValue['searchObj'] == "3") {
             $query .= " WHERE `{$searchValue['serDate']}` BETWEEN  '{$searchValue['sPucDate']}' AND '{$searchValue['ePucDate']}' ORDER BY idx DESC ";
@@ -308,10 +316,10 @@ class NOrderHistoryModel extends Model
             $statusLength = count($searchValue['STATUS']);
             for ($i = 0; $i < $statusLength; $i++) {
                 if ($searchValue['STATUS'][$i] && $i == 0) {
-                    $query .= " WHERE status = '{$searchValue['STATUS'][$i]}'";
+                    $query .= " WHERE status = '{$IVstatus[$searchValue['STATUS'][$i]]}'";
                 }
                 if ($searchValue['STATUS'][$i] && $i != 0) {
-                    $query .= " OR status = '{$searchValue['STATUS'][$i]}'";
+                    $query .= " OR status = '{$IVstatus[$searchValue['STATUS'][$i]]}'";
                 }
             }
             $query .= " ORDER BY idx DESC ";
@@ -320,10 +328,10 @@ class NOrderHistoryModel extends Model
             $useLength = count($searchValue['sellType']);
             for ($i = 0; $i < $useLength; $i++) {
                 if ($searchValue['sellType'][$i] && $i == 0) {
-                    $query .= " WHERE sellType = '{$searchValue['sellType'][$i]}'";
+                    $query .= " WHERE sellType = '{$IVsellType[$searchValue['sellType'][$i]]}'";
                 }
                 if ($searchValue['sellType'][$i] && $i != 0) {
-                    $query .= " OR sellType = '{$searchValue['sellType'][$i]}'";
+                    $query .= " OR sellType = '{$IVsellType[$searchValue['sellType'][$i]]}'";
                 }
             }
             $query .= " ORDER BY idx DESC ";
@@ -344,10 +352,10 @@ class NOrderHistoryModel extends Model
             $cabageLength = count($searchValue['cabage']);
             for ($i = 0; $i < $cabageLength; $i++) {
                 if ($searchValue['cabage'][$i] && $i == 0) {
-                    $query .= " WHERE cabage = '{$searchValue['cabage'][$i]}'";
+                    $query .= " WHERE cabage = '{$IVcabage[$searchValue['cabage'][$i]]}'";
                 }
                 if ($searchValue['cabage'][$i] && $i != 0) {
-                    $query .= " OR cabage = '{$searchValue['cabage'][$i]}'";
+                    $query .= " OR cabage = '{$IVcabage[$searchValue['cabage'][$i]]}'";
                 }
             }
             $query .= " ORDER BY idx DESC ";
@@ -356,6 +364,13 @@ class NOrderHistoryModel extends Model
         } else {
 
         }
+
+        $SQL = $db->query($query);
+        $data['orderList'] = $SQL->getResultArray();
+        return  $data['orderList'];
+
+
+
     }
 
 
