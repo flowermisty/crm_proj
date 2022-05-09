@@ -48,6 +48,7 @@
         margin-bottom: 2%;
 
     }
+
     .modal-body .form-group-wrapper:last-child {
         border-bottom: 0;
         margin-bottom: 0;
@@ -113,7 +114,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row col-12" id="searchMainSection" style="display: flex; margin-right: 0;">
+                                <div class="row col-12" id="searchMainSection"
+                                     style="display: flex; display:none; margin-right: 0;">
                                     <div class="col-7" style="padding-left: 0">
                                         <input type="text" id="searchMain" name="searchMain" class="form-control"
                                                placeholder="담당자, 고객명, 전화번호">
@@ -128,7 +130,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" id="date" style="">
+                                <div class="row" id="date" style="display:none;">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="col-md-4 col-12">
@@ -160,7 +162,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" id="cost" style="">
+                                <div class="row" id="cost" style="display:none;">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="col-md-5 col-12">
@@ -186,7 +188,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" id="statusMain" style="">
+                                <div class="row" id="statusMain" style="display:none;">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
 
@@ -225,7 +227,7 @@
                                 </div>
 
 
-                                <div class="row" id="use" style="">
+                                <div class="row" id="use" style="display:none;">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="form-group col-12">
@@ -289,7 +291,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" id="inNout" style="">
+                                <div class="row" id="inNout" style="display:none;">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="form-group col-12">
@@ -319,7 +321,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" id="container" style="">
+                                <div class="row" id="container" style="display:none;">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="form-group col-12">
@@ -344,7 +346,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" id="downLoad" style="">
+                                <div class="row" id="downLoad" style="display:none;">
                                     <div class="row"
                                          style="border: 1px solid #dee2e6; margin:auto; margin-bottom:1%; border-radius:5px; padding:1%;">
                                         <div class="form-group col-12">
@@ -613,28 +615,105 @@
                                 <div class="col-4">
                                     <label>부서명 </label>
                                     <div class="form-group">
-                                        <input type="text"  class="form-control">
+                                        <input type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <label>직원명 </label>
                                     <div class="form-group">
-                                        <input type="text"  class="form-control">
+                                        <input type="text" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-4">
-                                    <label>신청일자 </label>
+                                    <label>고객/ 업체명 </label>
                                     <div class="form-group">
-                                        <input type="date"  class="form-control">
+                                        <input type="text" class="form-control">
                                     </div>
                                 </div>
+
                             </div>
 
                             <div class="form-group form-group-wrapper row col-12">
                                 <div class="col-4">
+                                    <label>신청일자 </label>
+                                    <div class="form-group">
+                                        <input type="date" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
+                                    <label>아기이름 </label>
+                                    <div class="form-group">
+                                        <select name="" id="">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
+                                    <label>체험경로 </label>
+                                    <div class="form-group">
+                                        <select name="" id="">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group form-group-wrapper row col-12">
+                                <div class="col-8">
+                                    <div class="row col-12">
+                                        <div class="col-4">
+                                            <label>입출고 창고선택 </label>
+                                            <div class="form-group">
+                                                <select name="" id="">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8">
+                                            <label></label>
+                                            <div class="form-group"
+                                                 style="border : 1px solid #dce7f1; border-radius: 3px; padding:0.4rem;">
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="" id="" value=""
+                                                       style="padding:0;" checked>
+                                                <label class="form-check-label  col-md-2" for="danger">
+                                                    입고
+                                                </label>
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="" id="" value=""
+                                                       style="padding:0;">
+                                                <label class="form-check-label col-md-2" for="danger">
+                                                    출고
+                                                </label>
+
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="" id="" value=""
+                                                       style="padding:0;">
+                                                <label class="form-check-label col-md-2" for="danger">
+                                                    회수
+                                                </label>
+
+                                                <input class="form-check-input col-md-3" type="radio"
+                                                       name="" id="" value=""
+                                                       style="padding:0;">
+                                                <label class="form-check-label col-md-2" for="danger">
+                                                    맞교환
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
                                     <label>수령방법 </label>
-                                    <div class="form-group" style="border : 1px solid #dce7f1; border-radius: 3px; padding:0.4rem;">
+                                    <div class="form-group"
+                                         style="border : 1px solid #dce7f1; border-radius: 3px; padding:0.4rem;">
                                         <input class="form-check-input col-md-3" type="radio"
                                                name="" id="" value=""
                                                style="padding:0;" checked>
@@ -649,50 +728,83 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <label>입출고 창고선택 </label>
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Email Address" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <label>유형 </label>
-                                    <div class="form-group">
-                                        <input type="password" placeholder="Password" class="form-control">
-                                    </div>
-                                </div>
+
                             </div>
 
+
                             <div class="form-group form-group-wrapper row col-12">
-                                <div class="col-4">
-                                    <label>고객/ 업체명 </label>
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Email Address" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-4">
+
+                                <div class="col-7">
                                     <label>용도 </label>
-                                    <div class="form-group">
-                                        <input type="password" placeholder="Password" class="form-control">
+                                    <div class="form-group"
+                                         style="border : 1px solid #dce7f1; border-radius: 3px; padding:0.4rem;">
+                                        <input class="form-check-input col-md-1" type="radio"
+                                               name="" id="" value=""
+                                               style="padding:0;" checked>
+                                        <label class="form-check-label  col-md-2" for="danger">
+                                            체험단
+                                        </label>
+                                        <input class="form-check-input col-md-1" type="radio"
+                                               name="" id="" value=""
+                                               style="padding:0;">
+                                        <label class="form-check-label col-md-2" for="danger">
+                                            정품체험
+                                        </label>
+
+                                        <input class="form-check-input col-md-1" type="radio"
+                                               name="" id="" value=""
+                                               style="padding:0;">
+                                        <label class="form-check-label col-md-2" for="danger">
+                                            증정
+                                        </label>
+
+                                        <input class="form-check-input col-md-1" type="radio"
+                                               name="" id="" value=""
+                                               style="padding:0;">
+                                        <label class="form-check-label col-md-3" for="danger">
+                                            컨피던트 정품체험
+                                        </label>
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <label>아기이름 </label>
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Email Address" class="form-control">
+
+                                <div class="col-5">
+                                    <label>유형 </label>
+                                    <div class="form-group"
+                                         style="border : 1px solid #dce7f1; border-radius: 3px; padding:0.4rem;">
+                                        <input class="form-check-input col-md-3" type="radio"
+                                               name="" id="" value=""
+                                               style="padding:0;" checked>
+                                        <label class="form-check-label  col-md-2" for="danger">
+                                            홍보
+                                        </label>
+                                        <input class="form-check-input col-md-3" type="radio"
+                                               name="" id="" value=""
+                                               style="padding:0;">
+                                        <label class="form-check-label col-md-2" for="danger">
+                                            클레임
+                                        </label>
+
+                                        <input class="form-check-input col-md-3" type="radio"
+                                               name="" id="" value=""
+                                               style="padding:0;">
+                                        <label class="form-check-label col-md-2" for="danger">
+                                            샘플
+                                        </label>
+
+                                        <input class="form-check-input col-md-3" type="radio"
+                                               name="" id="" value=""
+                                               style="padding:0;">
+                                        <label class="form-check-label col-md-2" for="danger">
+                                            기부
+                                        </label>
                                     </div>
                                 </div>
+
                             </div>
 
 
                             <div class="form-group form-group-wrapper row col-12">
 
-                                <div class="col-4">
-                                    <label>체험경로 </label>
-                                    <div class="form-group">
-                                        <input type="password" placeholder="Password" class="form-control">
-                                    </div>
-                                </div>
 
                                 <div class="col-4">
                                     <label>휴대전화번호 </label>
@@ -792,7 +904,6 @@
 
 <script>
     $(document).ready(function () {
-        $('#searchFilterSpread').hide();
         $('#searchMainSection').hide();
         $('#date').hide();
         $('#cost').hide();
@@ -838,7 +949,7 @@
         if ($(obj).val() == "2") {
             $('#searchMainSection').show();
 
-            $('#searchFilterSpread').hide();
+
             $('#date').hide();
             $('#cost').hide();
             $('#statusMain').hide();
@@ -849,7 +960,7 @@
         } else if ($(obj).val() == "3") {
             $('#date').show();
 
-            $('#searchFilterSpread').hide();
+
             $('#searchMainSection').hide();
             $('#cost').hide();
             $('#statusMain').hide();
@@ -860,7 +971,7 @@
         } else if ($(obj).val() == "4") {
             $('#cost').show();
 
-            $('#searchFilterSpread').hide();
+
             $('#date').hide();
             $('#searchMainSection').hide();
             $('#statusMain').hide();
@@ -871,7 +982,7 @@
         } else if ($(obj).val() == "5") {
             $('#statusMain').show();
 
-            $('#searchFilterSpread').hide();
+
             $('#date').hide();
             $('#searchMainSection').hide();
             $('#cost').hide();
@@ -882,7 +993,7 @@
         } else if ($(obj).val() == "6") {
             $('#use').show();
 
-            $('#searchFilterSpread').hide();
+
             $('#date').hide();
             $('#searchMainSection').hide();
             $('#cost').hide();
@@ -893,7 +1004,7 @@
         } else if ($(obj).val() == "7") {
             $('#inNout').show();
 
-            $('#searchFilterSpread').hide();
+
             $('#date').hide();
             $('#searchMainSection').hide();
             $('#cost').hide();
@@ -904,7 +1015,7 @@
         } else if ($(obj).val() == "8") {
             $('#container').show();
 
-            $('#searchFilterSpread').hide();
+
             $('#date').hide();
             $('#searchMainSection').hide();
             $('#cost').hide();
@@ -915,7 +1026,7 @@
         } else if ($(obj).val() == "9") {
             $('#downLoad').show();
 
-            $('#searchFilterSpread').hide();
+
             $('#date').hide();
             $('#searchMainSection').hide();
             $('#cost').hide();
@@ -924,7 +1035,7 @@
             $('#inNout').hide();
             $('#container').hide();
         } else {
-            $('#searchFilterSpread').hide();
+
             $('#searchMainSection').hide();
             $('#date').hide();
             $('#cost').hide();
