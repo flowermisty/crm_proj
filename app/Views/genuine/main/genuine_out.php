@@ -1,4 +1,3 @@
-
 <script>
     AOS.init();
 </script>
@@ -33,6 +32,26 @@
         color: whitesmoke;
         font-weight: bold;
         display: none;
+    }
+
+    .badge:hover {
+        opacity: 0.6;
+    }
+
+    .badge a {
+        color: white;
+    }
+
+    .modal-body .form-group-wrapper {
+        border-bottom: 1px dotted #ccc;
+        margin: 0 auto;
+        margin-bottom: 2%;
+
+    }
+    .modal-body .form-group-wrapper:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+
     }
 
 
@@ -554,11 +573,15 @@
                             </form>
                             <div class="row" style="margin-left: 0.3%;">
                                 <div class="row col-6">
-                                    <span class="badge bg-primary col-1">등록</span>
-                                    <span class="badge bg-primary col-3" style="margin-left: 0.3%;">다해 ERP 다운로드</span>
-                                    <span class="badge bg-primary col-3" style="margin-left: 0.3%;">다해 ERP 작업</span>
-                                    <span class="badge bg-primary col-3" style="margin-left: 0.3%;">회수 다운로드</span>
-                                    <span class="badge bg-primary col-1" style="margin-left: 0.3%;">복사</span>
+                                    <span class="badge bg-primary col-1"><a href="" data-bs-toggle="modal"
+                                                                            data-bs-target="#genuine_regist">등록</a></span>
+                                    <span class="badge bg-primary col-3" style="margin-left: 0.3%;"><a href="">다해 ERP 다운로드</a></span>
+                                    <span class="badge bg-primary col-3" style="margin-left: 0.3%;"><a
+                                                href="">다해 ERP 작업</a></span>
+                                    <span class="badge bg-primary col-3" style="margin-left: 0.3%;"><a
+                                                href="">회수 다운로드</a></span>
+                                    <span class="badge bg-primary col-1" style="margin-left: 0.3%;"><a
+                                                href="">복사</a></span>
 
                                 </div>
                             </div>
@@ -573,6 +596,195 @@
                 <?= $validation->listErrors() ?>
             </div>
         <?php endif; ?>
+
+        <div class="modal fade text-left show" id="genuine_regist" tabindex="-1" aria-labelledby="myModalLabel33"
+             aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel33">정품 입출고 관리 </h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <form action="#">
+                        <div class="modal-body">
+                            <div class="form-group form-group-wrapper row col-12">
+                                <div class="col-4">
+                                    <label>부서명 </label>
+                                    <div class="form-group">
+                                        <input type="text"  class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>직원명 </label>
+                                    <div class="form-group">
+                                        <input type="text"  class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
+                                    <label>신청일자 </label>
+                                    <div class="form-group">
+                                        <input type="date"  class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-wrapper row col-12">
+                                <div class="col-4">
+                                    <label>수령방법 </label>
+                                    <div class="form-group" style="border : 1px solid #dce7f1; border-radius: 3px; padding:0.4rem;">
+                                        <input class="form-check-input col-md-3" type="radio"
+                                               name="" id="" value=""
+                                               style="padding:0;" checked>
+                                        <label class="form-check-label  col-md-3" for="danger">
+                                            직접
+                                        </label>
+                                        <input class="form-check-input col-md-3" type="radio"
+                                               name="" id="" value=""
+                                               style="padding:0;">
+                                        <label class="form-check-label col-md-2" for="danger">
+                                            택배
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>입출고 창고선택 </label>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Email Address" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>유형 </label>
+                                    <div class="form-group">
+                                        <input type="password" placeholder="Password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-wrapper row col-12">
+                                <div class="col-4">
+                                    <label>고객/ 업체명 </label>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Email Address" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>용도 </label>
+                                    <div class="form-group">
+                                        <input type="password" placeholder="Password" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>아기이름 </label>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Email Address" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group form-group-wrapper row col-12">
+
+                                <div class="col-4">
+                                    <label>체험경로 </label>
+                                    <div class="form-group">
+                                        <input type="password" placeholder="Password" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
+                                    <label>휴대전화번호 </label>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Email Address" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>전화번호 </label>
+                                    <div class="form-group">
+                                        <input type="password" placeholder="Password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-wrapper row col-12">
+                                <div class="col-12">
+                                    <label>배송지 주소 </label>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Email Address" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-wrapper row col-12">
+                                <div class="col-12">
+                                    <label>입출고 품목 </label>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Email Address" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group form-group-wrapper row col-12">
+                                <div class="col-4">
+                                    <label>구매상태 </label>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Email Address" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>금액 </label>
+                                    <div class="form-group">
+                                        <input type="password" placeholder="Password" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
+                                    <label>로그 </label>
+                                    <div class="form-group">
+                                        <input type="password" placeholder="Password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group form-group-wrapper row col-12">
+                                <div class="col-6">
+                                    <label>배송메세지 </label>
+                                    <div class="form-group">
+                                        <textarea placeholder="Password" class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <label>관리메모 </label>
+                                    <div class="form-group">
+                                        <textarea placeholder="Password" class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Close</span>
+                            </button>
+                            <button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                                <i class="bx bx-check d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">login</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </section>
 
 
@@ -725,23 +937,23 @@
     }
 
 
-    $('#searchSubmit').click(function(){
+    $('#searchSubmit').click(function () {
         var mode = "<?=$signal?>";
-        if(mode == "list"){
-            if($('#searchObj').val() == ""){
+        if (mode == "list") {
+            if ($('#searchObj').val() == "") {
                 alert('검색 조건을 선택 하세요');
                 return false;
-            }else{
+            } else {
                 $('#genuineForm').attr("action", "http://godo.event.admin/genuine_out/search?page=1");
                 $('#genuineForm').submit();
 
             }
 
-        }else if(mode == "search"){
-            if($('#searchObj').val() == ""){
+        } else if (mode == "search") {
+            if ($('#searchObj').val() == "") {
                 alert('검색 조건을 선택 하세요');
                 return false;
-            }else{
+            } else {
                 $('#genuineForm').attr("action", "http://godo.event.admin/genuine_out/resultSearch");
                 $('#genuineForm').submit();
 
