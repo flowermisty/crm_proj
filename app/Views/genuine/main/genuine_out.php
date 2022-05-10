@@ -573,14 +573,14 @@
                                 </table>
                                 <?= $pager->links() ?>
                             </form>
-                            <div class="row" style="margin-left: 0.3%;">
+                            <div class="row" style="margin-left: 0.3%; font-size: 13px;">
                                 <div class="row col-6">
                                     <span class="badge bg-primary col-1"><a href="" data-bs-toggle="modal"
                                                                             data-bs-target="#genuine_regist">등록</a></span>
-                                    <span class="badge bg-primary col-3" style="margin-left: 0.3%;"><a href="">다해 ERP 다운로드</a></span>
-                                    <span class="badge bg-primary col-3" style="margin-left: 0.3%;"><a
+                                    <span class="badge bg-primary col-2" style="margin-left: 0.3%;"><a href="">다해 ERP 다운로드</a></span>
+                                    <span class="badge bg-primary col-2" style="margin-left: 0.3%;"><a
                                                 href="">다해 ERP 작업</a></span>
-                                    <span class="badge bg-primary col-3" style="margin-left: 0.3%;"><a
+                                    <span class="badge bg-primary col-2" style="margin-left: 0.3%;"><a
                                                 href="">회수 다운로드</a></span>
                                     <span class="badge bg-primary col-1" style="margin-left: 0.3%;"><a
                                                 href="">복사</a></span>
@@ -615,20 +615,21 @@
                                 <div class="col-4">
                                     <label>부서명 </label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="orgCode" id="orgCode" value="">
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <label>직원명 </label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="cempName" id="cempName" value="">
+                                        <input type="hidden" name="cempIdx" id="cempIdx" value="">
                                     </div>
                                 </div>
 
                                 <div class="col-4">
                                     <label>고객/ 업체명 </label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" id="mName" name="mName" value="">
                                     </div>
                                 </div>
 
@@ -638,14 +639,14 @@
                                 <div class="col-4">
                                     <label>신청일자 </label>
                                     <div class="form-group">
-                                        <input type="date" class="form-control">
+                                        <input type="date" class="form-control" name="pucDate" id="pucDate" value="">
                                     </div>
                                 </div>
 
                                 <div class="col-4">
                                     <label>아기이름 </label>
                                     <div class="form-group">
-                                        <select name="" id="">
+                                        <select name="bIdx" id="bIdx">
                                             <option value=""></option>
                                         </select>
                                     </div>
@@ -654,7 +655,7 @@
                                 <div class="col-4">
                                     <label>체험경로 </label>
                                     <div class="form-group">
-                                        <select name="" id="">
+                                        <select name="bExp" id="bExp">
                                             <option value=""></option>
                                         </select>
                                     </div>
@@ -806,16 +807,30 @@
                             <div class="form-group form-group-wrapper row col-12">
 
 
-                                <div class="col-4">
+                                <div class="col-3">
                                     <label>휴대전화번호 </label>
                                     <div class="form-group">
-                                        <input type="text" placeholder="Email Address" class="form-control">
+                                        <input type="text" class="form-control" id="cHp" name="cHp" value="">
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <label>전화번호 </label>
                                     <div class="form-group">
-                                        <input type="password" placeholder="Password" class="form-control">
+                                        <input type="text" class="form-control" id="cTel" name="cTel" value="">
+                                    </div>
+                                </div>
+
+                                <div class="col-3">
+                                    <label>구매상태 </label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-3">
+                                    <label>금액 </label>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="resultPrice" id="resultPrice">
                                     </div>
                                 </div>
                             </div>
@@ -823,40 +838,89 @@
                             <div class="form-group form-group-wrapper row col-12">
                                 <div class="col-12">
                                     <label>배송지 주소 </label>
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Email Address" class="form-control">
+                                    <div class="form-group col-6" style="display: flex;">
+                                        <div class="col-2" style="text-align: center;">
+                                            <span class="text text-muted" style="line-height: 38px;">우편번호 : </span>
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="text" class="form-control"
+                                                   placeholder="구우편주소 ex) _ _ _ - _ _ _">
+                                        </div>
+
+                                        <div class="col-5" style="margin-left: 1%;">
+                                            <input type="text" class="form-control" placeholder="신우편주소 ex) _ _ _ _ _ ">
+                                        </div>
+                                        <div class="col-2" style="margin-left:1%; line-height: 38px;">
+                                            <button type="button" class="btn btn-primary btn-sm">주소검색</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-6" style="display: flex;">
+                                        <div class="col-2" style="text-align: center;">
+                                            <span class="text text-muted" style="line-height: 38px;">배송주소 : </span>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" class="form-control" placeholder="지번">
+                                        </div>
+
+                                        <div class="col-7" style="margin-left: 1%;">
+                                            <input type="text" class="form-control" placeholder="도로명">
+                                        </div>
+                                        <div class="col-7" style="margin-left:1%; line-height: 38px;">
+                                            <input type="text" class="form-control" placeholder="공통상세">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group form-group-wrapper row col-12">
-                                <div class="col-12">
+                                <div class="col-12 inNoutProductWrap">
                                     <label>입출고 품목 </label>
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Email Address" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
+                                    <div class="inNoutProduct" id="0">
+                                        <div class="form-group col-6" style="display: flex;">
+                                            <div class="col-1" style="padding:1%;">
+                                                <button type="button" class="btn btn-primary btn-sm" id="plus">+</button>
+                                            </div>
+                                            <div class="col-4">
+                                                <select name="" id="">
+                                                    <option value="">카테고리</option>
+                                                </select>
+                                            </div>
 
+                                            <div class="col-4" style="margin-left: 1%;">
+                                                <select name="" id="">
+                                                    <option value="">세부품목</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-1" style="margin-left:2%; margin-top: 2px;">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="col-1" style="margin-left:1%; line-height: 38px;">
+                                                <span>EA</span>
+                                            </div>
 
-                            <div class="form-group form-group-wrapper row col-12">
-                                <div class="col-4">
-                                    <label>구매상태 </label>
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Email Address" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <label>금액 </label>
-                                    <div class="form-group">
-                                        <input type="password" placeholder="Password" class="form-control">
-                                    </div>
-                                </div>
+                                            <div class="col-1" style="line-height: 38px;">
+                                                <span class="badge bg-success" style="border-radius: 20px;">X</span>
+                                            </div>
 
-                                <div class="col-4">
-                                    <label>로그 </label>
-                                    <div class="form-group">
-                                        <input type="password" placeholder="Password" class="form-control">
+                                            <div class="col-3" style="margin-top: 2px; margin-left:1%;">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="col-1" style="margin-left:1%; line-height: 38px;">
+                                                <span>원</span>
+                                            </div>
+
+                                            <div class="col-1" style="line-height: 38px;">
+                                                <span class="badge bg-success" style="border-radius: 20px;">=</span>
+                                            </div>
+
+                                            <div class="col-5" style="">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="col-1" style="margin-left:1%; line-height: 38px;">
+                                                <span>원</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -866,14 +930,14 @@
                                 <div class="col-6">
                                     <label>배송메세지 </label>
                                     <div class="form-group">
-                                        <textarea placeholder="Password" class="form-control"></textarea>
+                                        <textarea class="form-control"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <label>관리메모 </label>
                                     <div class="form-group">
-                                        <textarea placeholder="Password" class="form-control"></textarea>
+                                        <textarea class="form-control"></textarea>
                                     </div>
                                 </div>
 
@@ -882,7 +946,8 @@
                         </div>
 
 
-                        <div class="modal-footer">
+                        <div class="modal-footer col-12">
+                            <span class="text text-muted align-content-lg-start"></span>
                             <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
                                 <i class="bx bx-x d-block d-sm-none"></i>
                                 <span class="d-none d-sm-block">Close</span>
@@ -1072,6 +1137,31 @@
         }
 
     });
+
+
+    $('#plus').click(function(){
+       var clone = $('#0').clone();
+       var number = parseInt($('.inNoutProduct').last().attr('id'))+1;
+
+       $(".inNoutProductWrap").append(clone);
+       $(".inNoutProduct").last().attr('id',number);
+
+       var buttonChange = $(".inNoutProduct").last().find('#plus');
+       buttonChange.text('-');
+       buttonChange.attr('id','minus');
+
+       var buttonChangeAfter = $(".inNoutProduct").last().find('#minus');
+        buttonChangeAfter.click(function(){
+            minusClick();
+        })
+    });
+
+    function minusClick(){
+        $(".inNoutProduct").last().remove();
+    }
+
+
+
 </script>
 <script src="/assetsCustomer/vendors/simple-datatables/simple-datatables.js"></script>
 
