@@ -27,6 +27,8 @@
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script src="/assets2/js/refundCalc.js"></script>
+    <script src="/assetsGenuine/js/genuine_out.js"></script>
+
 </head>
 
 <style>
@@ -234,5 +236,4 @@
                 <i class="bi bi-justify fs-3"></i>
             </a>
         </header>
-
 <?php

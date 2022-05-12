@@ -374,6 +374,16 @@ class NOrderHistoryModel extends Model
     }
 
 
+    public function getCartegory(){
+        $model = new NPrdInfoModel();
+        $cate1 = $model->select("prdCode, prdName")->where("length(prdCode)","3")
+                        ->where("sellYN","Y")
+                        ->where("viewYN","Y")
+                        ->findAll();
+        return $cate1;
+    }
+
+
     public function createSearchTable()
     {
         $forge = \Config\Database::forge();
