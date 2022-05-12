@@ -21,7 +21,7 @@ class GenuineController extends BaseController
 
         $model = new NOrderHistoryModel();
         $data = $model->getList($_GET['page']);
-        $data['category'] = $model->getCartegory();
+        $data['category'] = $model->getCategory();
 
         echo view('genuine/templates/header');
         echo view('genuine/main/genuine_out', $data);
@@ -109,7 +109,14 @@ class GenuineController extends BaseController
 
     public function getCategory(){
         $model = new NOrderHistoryModel();
-        $model->getCartegory();
+        $model->getCategory();
+    }
+
+    public function getCategory2(){
+        $cate1 = $this->request->getPost('pcate1');
+        $model = new NOrderHistoryModel();
+        $data['cate2'] = $model->getCategory2($cate1);
+        return $this->response->setJSON($data);
     }
 
 

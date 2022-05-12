@@ -196,5 +196,58 @@ function modalClose(){
 
 
 function getCategory2(){
+    var select = $('#pcate1').val();
+    var param = {pcate1: select};
 
+
+    $.ajax({
+        type: "POST",
+        url: "/genuine_out/getCategory2",
+        data: param,
+        success: function (response) {
+            $('#pcate2 > option').remove();
+            for(var i = 0; i < response.cate2.length; i++){
+                var prdRName = response.cate2[i]['prdRName'];
+                var prdCode = response.cate2[i]['prdCode'];
+                $('#pcate2').append("<option style=\"font-size:12px;\" value=\""+prdCode+"\">"+prdRName+"</option>");
+            }
+            // $('#prdCode').val(response.prdInfo[0]['prdCode'])
+            // $('#prdName').val(response.prdInfo[0]['prdName'])
+            // $('#prdRname').val(response.prdInfo[0]['prdRName']);
+            //
+            //
+            // if (response.prdInfo[0]['viewYN'] == $('#viewYN_y').val()) {
+            //     $('#viewYN_y').attr('checked', 'true');
+            // } else if (response.prdInfo[0]['viewYN'] == $('#viewYN_n').val()) {
+            //     $('#viewYN_n').attr('checked', 'true');
+            // }
+            // if (response.prdInfo[0]['cpYN'] == $('#cpYN_y').val()) {
+            //     $('#cpYN_y').attr('checked', 'true');
+            // } else if (response.prdInfo[0]['cpYN'] == $('#cpYN_n').val()) {
+            //     $('#cpYN_n').attr('checked', 'true');
+            // }
+            //
+            // $('#sell18_tot').val(response.prdInfo[0]['sell18_tot']);
+            // $('#sell18_sup').val(response.prdInfo[0]['sell18_sup']);
+            // $('#sell18_tax').val(response.prdInfo[0]['sell18_tax']);
+            // $('#sell30_tot').val(response.prdInfo[0]['sell30_tot']);
+            // $('#sell30_sup').val(response.prdInfo[0]['sell30_sup']);
+            // $('#sell30_tax').val(response.prdInfo[0]['sell30_tax']);
+            // $('#sell50_tot').val(response.prdInfo[0]['sell50_tot']);
+            // $('#sell50_sup').val(response.prdInfo[0]['sell50_sup']);
+            // $('#sell50_tax').val(response.prdInfo[0]['sell50_tax']);
+            //
+            //
+            // $('#prdPrice').val(response.prdInfo[0]['prdPrice']);
+            // $('#idx').val(response.prdInfo[0]['idx']);
+            //
+            // $('#submit').text('수정');
+            // $('#submit').show();
+            // $('#reset_delete').text('삭제');
+            // $('#reset_delete').show();
+
+        }
+
+
+    });
 }

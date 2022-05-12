@@ -374,13 +374,23 @@ class NOrderHistoryModel extends Model
     }
 
 
-    public function getCartegory(){
+    public function getCategory(){
         $model = new NPrdInfoModel();
         $cate1 = $model->select("prdCode, prdName")->where("length(prdCode)","3")
                         ->where("sellYN","Y")
                         ->where("viewYN","Y")
                         ->findAll();
         return $cate1;
+    }
+
+    public function getCategory2($cate1){
+        $model = new NPrdInfoModel();
+        $cate2 = $model->select("prdCode, prdRName")->where("left(prdCode,3)","$cate1")
+            ->where("length(prdCode)","6")
+            ->where("sellYN","Y")
+            ->where("viewYN","Y")
+            ->findAll();
+        return $cate2;
     }
 
 

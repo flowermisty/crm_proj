@@ -55,6 +55,15 @@
 
     }
 
+    #pcate1{
+        font-size: 14px;
+        height:38px;
+    }
+    #pcate2{
+        font-size: 14px;
+        height:38px;
+    }
+
 
 </style>
 

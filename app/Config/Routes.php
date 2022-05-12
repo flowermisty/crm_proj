@@ -146,6 +146,7 @@ $routes->match(['get','post'],'drymilk/delete','DryMilkController::delete');
 $routes->match(['get','post'],'genuine_out','GenuineController::index');
 $routes->match(['get','post'],'genuine_out/search','GenuineController::search');
 $routes->match(['get','post'],'genuine_out/resultSearch','GenuineController::resultSearch');
+$routes->match(['get','post'],'genuine_out/getCategory2','GenuineController::getCategory2');
 
 
 
