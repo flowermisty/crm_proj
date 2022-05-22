@@ -1,41 +1,81 @@
 <script>
-    window.addEventListener('DOMContentLoaded', function () {
-        let menuTable = document.getElementById("menuTable");
+    function flagSet() {
+        var inputCategory = document.getElementById("inputCategory");
+        inputCategory.value = 1;
+        var menuTable = document.getElementById("menuTable");
+        var addRow = menuTable.insertRow();
 
-        for (let i = 1; i <= menuTable.rows.length; i++) {
-            let clickEventPlus = document.getElementById("plus" + (i));
-            var hiddenEa = clickEventPlus.parentElement.children[3];
-            hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
-            clickEventPlus.addEventListener('click', function () {
-                let count = clickEventPlus.parentElement.children[0].textContent;
+        var addCell0 = addRow.insertCell(0);
+        var addCell1 = addRow.insertCell(1);
+        var addCell2 = addRow.insertCell(2);
+        var addCell3 = addRow.insertCell(3);
 
-                count = parseInt(count) + 1;
-                if (count > 10) {
-                    alert('수량은 10개를 초과할 수 없습니다.');
-                    count = 10;
-                }
-                clickEventPlus.parentElement.children[0].innerText = count.toString();
-                var hiddenEa = clickEventPlus.parentElement.children[3];
-                hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
-            });
+        var addCheckBox = document.createElement("input");
+        addCheckBox.setAttribute("type", "checkbox");
 
-            let clickEventMinus = document.getElementById("minus" + (i));
+        var addInputMenuname = document.createElement("input");
+        addInputMenuname.setAttribute("type", "text");
+        addInputMenuname.setAttribute("style", "width:180px;");
+        addInputMenuname.setAttribute("name", "menuName[]");
+
+        var addInputErpCode = document.createElement("input");
+        addInputErpCode.setAttribute("type", "text");
+        addInputErpCode.setAttribute("style", "width:110px;");
+        addInputErpCode.setAttribute("name", "erpCode[]");
+
+        var addInputEa = document.createElement("input");
+        addInputEa.setAttribute("type", "hidden");
+        addInputEa.setAttribute("name", "ea[]");
+
+        var addPlus = document.createElement("button");
+        addPlus.setAttribute("type", "button");
+        addPlus.classList.add("btn-primary");
+        addPlus.classList.add("btn");
+        addPlus.classList.add("btn-sm");
+        addPlus.id = "plus";
+        addPlus.innerText = "+";
+        addPlus.style.float = "right";
+        addPlus.style.marginRight = "5px";
+
+        var addMinus = document.createElement("button");
+        addMinus.setAttribute("type", "button");
+        addMinus.classList.add("btn-primary");
+        addMinus.classList.add("btn");
+        addMinus.classList.add("btn-sm");
+        addMinus.id = "minus";
+        addMinus.innerText = "-";
+        addMinus.style.width = "27px";
+        addMinus.style.float = "right";
+        var addCount = document.createElement("span");
+
+        addCell0.appendChild(addCheckBox);
+        addCell1.appendChild(addInputMenuname);
+        addCell2.appendChild(addInputErpCode);
 
 
-            clickEventMinus.addEventListener('click', function () {
-                let count = clickEventMinus.parentElement.children[0].textContent;
-                count = parseInt(count) - 1;
-                if (count < 1) {
-                    alert("등록 수량은 0이 될 수 없습니다.")
-                    count = 1;
-                }
-                clickEventMinus.parentElement.children[0].innerText = count.toString();
-                var hiddenEa = clickEventPlus.parentElement.children[3];
-                hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
+        addCount.innerText = "1";
 
-            });
+        var rowCnt = menuTable.rows.length;
+        if (rowCnt != 0) {
+            j = rowCnt;
+        } else {
+            j = 0;
         }
-    });
+
+        addCell3.id = "quantity" + j;
+        addPlus.id = "plus" + j;
+        addMinus.id = "minus" + j;
+
+
+        addCell3.appendChild(addCount);
+        addCell3.appendChild(addMinus);
+        addCell3.appendChild(addPlus);
+
+        addCell3.appendChild(addInputEa);
+        addInputEa.value = addCount.innerText;
+
+        buttonClickAddEvent();
+    }
 </script>
 
 <script>
@@ -48,7 +88,8 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo py-3">
-                        <a href="<?=base_url('/eventAdmin')?>"><img src="/assets/images/logo/logo_big.png" alt="Logo" srcset=""></a>
+                        <a href="<?= base_url('/eventAdmin') ?>"><img src="/assets/images/logo/logo_big.png" alt="Logo"
+                                                                      srcset=""></a>
                         <h6 class="font-extrabold mb-0" style="font-size:12px;">이벤트 주문코드 등록 관리자 프로그램</h6>
                     </div>
                     <div class="toggler">
@@ -68,7 +109,7 @@
                         </a>
                         <ul class="submenu" style="display:block;">
                             <li class="submenu-item ">
-                                <a href="<?=base_url('customer/all?page=1')?>">회원관리</a>
+                                <a href="<?= base_url('customer/all?page=1') ?>">회원관리</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="component-badge.html">상담관리</a>
@@ -87,7 +128,7 @@
                     </li>
 
                     <?php
-                    if($_SESSION['aIdx']=="159"){
+                    if ($_SESSION['aIdx'] == "159") {
                         echo "<li class=\"sidebar-item  has-sub\">
                         <a href=\"#\" class='sidebar-link'>
                             <i class=\"bi bi-stack\"></i>
@@ -161,31 +202,31 @@
                                 <a href="form-element-input.html">바이모션 변환</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="<?=base_url('convert/godo')?>">고도몰 변환</a>
+                                <a href="<?= base_url('convert/godo') ?>">고도몰 변환</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="<?=base_url('convert/coupang')?>">쿠팡 변환</a>
+                                <a href="<?= base_url('convert/coupang') ?>">쿠팡 변환</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="<?=base_url('convert/mart')?>">마트 변환</a>
+                                <a href="<?= base_url('convert/mart') ?>">마트 변환</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="form-element-checkbox.html">세이베베 변환</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="<?=base_url('convert/lemonTree')?>">레몬트리 변환</a>
+                                <a href="<?= base_url('convert/lemonTree') ?>">레몬트리 변환</a>
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="<?=base_url('convert/foodHistory')?>">식품이력</a>
+                                <a href="<?= base_url('convert/foodHistory') ?>">식품이력</a>
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="<?=base_url('convert/erpConvert')?>">ERP 변경</a>
+                                <a href="<?= base_url('convert/erpConvert') ?>">ERP 변경</a>
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="<?=base_url('convert/self')?>">자가사용 변경</a>
+                                <a href="<?= base_url('convert/self') ?>">자가사용 변경</a>
                             </li>
                         </ul>
                     </li>
@@ -201,7 +242,7 @@
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="<?=base_url('/genuine_out?page=1')?>">정품 출고</a>
+                                <a href="<?= base_url('/genuine_out?page=1') ?>">정품 출고</a>
                             </li>
 
                             <li class="submenu-item ">
@@ -229,8 +270,9 @@
             <section class="row">
                 <div class="col-12 col-lg-11">
                     <div class="row">
-                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000">
-                            <a href="<?=base_url('/eventAdmin')?>" class="" onmouseover="this.style.opacity='0.7';"s
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50"
+                             data-aos-duration="1000">
+                            <a href="<?= base_url('/eventAdmin') ?>" class="" onmouseover="this.style.opacity='0.7';" s
                                onmouseout="this.style.opacity='1';" style=display:block;" data-bs-toggle="tooltip"
                                data-placement="bottom" data-bs-or>
                                 <div class="card">
@@ -251,13 +293,15 @@
                             </a>
                         </div>
                         <script>
-                        function validationRefresh() {
-                        location.replace('http://godo.event.admin/event_admin_new/init/<?=$event_code?>');
-                        }
+                            function validationRefresh() {
+                                location.replace('http://godo.event.admin/event_admin_new/init/<?=$event_code?>');
+                            }
                         </script>
-                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000" style="margin-left:4%;">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50"
+                             data-aos-duration="1000" style="margin-left:4%;">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
-                               onmouseout="this.style.opacity='1';" style="display:block;" onclick=" validationRefresh();">
+                               onmouseout="this.style.opacity='1';" style="display:block;"
+                               onclick=" validationRefresh();">
 
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
@@ -276,9 +320,11 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000" style="margin-left:4%;">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50"
+                             data-aos-duration="1000" style="margin-left:4%;">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
-                               onmouseout="this.style.opacity='1';" style=display:block;" onclick="menuCheckDeleteRow();">
+                               onmouseout="this.style.opacity='1';" style=display:block;"
+                               onclick="menuCheckDeleteRow();">
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
                                         <div class="row">
@@ -296,9 +342,11 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000" style="margin-left:4%;">
+                        <div class="col-6 col-lg-2 col-md-6" data-aos="flip-left" data-aos-delay="50"
+                             data-aos-duration="1000" style="margin-left:4%;">
                             <a href="javascript:void(0);" class="" onmouseover="this.style.opacity='0.7';"
-                               onmouseout="this.style.opacity='1';" style="display:block;" onclick="menuAllDeleteRow();">
+                               onmouseout="this.style.opacity='1';" style="display:block;"
+                               onclick="menuAllDeleteRow();">
                                 <div class="card">
                                     <div class="card-body px-3 py-2-3">
                                         <div class="row">
@@ -323,15 +371,21 @@
                                 <div class="card-body px-3 py-2-3" style="padding-bottom: 17%;">
                                     <div class="d-flex align-items-center">
                                         <div class="stats-icon gray" style="margin-left:4%;">
-                                            <a href="<?= base_url('profile')?>"><i class="iconly-boldProfile" data-bs-toggle="tooltip" data-bs-placement="top" title data-bs-original-title="정보변경"
-                                               onmouseover="this.style.opacity='0.3';"
-                                               onmouseout="this.style.opacity='1';"></i></a>
+                                            <a href="<?= base_url('profile') ?>"><i class="iconly-boldProfile"
+                                                                                    data-bs-toggle="tooltip"
+                                                                                    data-bs-placement="top" title
+                                                                                    data-bs-original-title="정보변경"
+                                                                                    onmouseover="this.style.opacity='0.3';"
+                                                                                    onmouseout="this.style.opacity='1';"></i></a>
                                         </div>
-                                        <?php  if (isset($_SESSION['aIdx'])): ?>
+                                        <?php if (isset($_SESSION['aIdx'])): ?>
 
                                             <div class="ms-3 name">
-                                                <h6 class="font-bold text-muted"><?=$_SESSION['aName']?> 님</h6>
-                                                <a href="<?=base_url("logout")?>" onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';"><h6 class="text-primary mb-0">Log-Out</h6></a>
+                                                <h6 class="font-bold text-muted"><?= $_SESSION['aName'] ?> 님</h6>
+                                                <a href="<?= base_url("logout") ?>"
+                                                   onmouseover="this.style.fontStyle='italic';"
+                                                   onmouseout="this.style.fontStyle='normal';"><h6
+                                                            class="text-primary mb-0">Log-Out</h6></a>
                                             </div>
                                         <?php endif; ?>
                                     </div>
@@ -369,13 +423,15 @@
                                                 <?php foreach ($eventList as $row) : ?>
                                                     <tr>
                                                         <td>
-                                                            <a href="javascript:void(0);" class="text-muted font-semibold"
+                                                            <a href="javascript:void(0);"
+                                                               class="text-muted font-semibold"
                                                                onclick="get_event_profile('<?= $row['optionCode'] ?>')"
                                                                 <?php if ($row['optionCode'] == session()->get('item_code')): ?>
                                                                     <?php echo "style='text-decoration:none; color:green !important;'" ?><?php endif; ?>><?= $row['step'] ?></a>
                                                         </td>
                                                         <td>
-                                                            <a href="javascript:void(0);" class="text-muted font-semibold"
+                                                            <a href="javascript:void(0);"
+                                                               class="text-muted font-semibold"
                                                                onclick="get_event_profile('<?= $row['optionCode'] ?>')"
                                                                 <?php if ($row['optionCode'] == session()->get('item_code')): ?>
                                                                     <?php echo "style='text-decoration:none; color:green !important;'" ?><?php endif; ?>><?= $row['optionCode'] ?></a>
@@ -385,8 +441,10 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <hr class="input-group" style="margin-left: auto; margin-right:auto; width:97%;">
-                                        <div class="btn-con" style="width:100%; float:right; line-height:47px; margin-right: 3%;">
+                                        <hr class="input-group"
+                                            style="margin-left: auto; margin-right:auto; width:97%;">
+                                        <div class="btn-con"
+                                             style="width:100%; float:right; line-height:47px; margin-right: 3%;">
                                             <div class="btn-wrap" style="float:right;">
                                                 <!--<button type="button" class="btn btn-secondary" style=""
                                                         onclick="window.location.reload()">세트등록
@@ -398,12 +456,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="table__cell text-muted font-semibold" style="background: white; font-size: smaller;">
+                            <div class="table__cell text-muted font-semibold"
+                                 style="background: white; font-size: smaller;">
                                 <div class="col-md-12 py-3 border" style="background:white; height:600px;">
                                     <div class="" style="position: relative; width: 95%; height:95%;  margin: auto;">
                                         <div class="form-row text-muted font-semibold">
                                             <div class="input-group text-muted font-semibold">
-                                                <input type="search" class="form-control rounded text-muted font-semibold"
+                                                <input type="search"
+                                                       class="form-control rounded text-muted font-semibold"
                                                        placeholder="메뉴명, ERP코드 검색"
                                                        aria-label="Search"
                                                        aria-describedby="search-addon" id="search" onkeyup="filter()"/>
@@ -418,7 +478,8 @@
 
                                         <div class="form-row">
                                             <div class="input-group col-md-12 py-3">
-                                                <select name="inputState" id="inputState" class="form-control text-muted font-semibold" multiple
+                                                <select name="inputState" id="inputState"
+                                                        class="form-control text-muted font-semibold" multiple
                                                         size="20">
                                                     <?php foreach ($eventModel as $row) : ?>
                                                         <?php if ($row['menuName']) : ?>
@@ -434,27 +495,32 @@
                             </div>
 
 
-                            <div class="table__cell text-muted font-semibold" style="background: white; font-size: smaller;">
-                                <form id="submit_form" style="position: relative; width: 95%; height:95%;  margin: auto;">
+                            <div class="table__cell text-muted font-semibold"
+                                 style="background: white; font-size: smaller;">
+                                <form id="submit_form"
+                                      style="position: relative; width: 95%; height:95%;  margin: auto;">
                                     <div class="col-md-12 py-3 " style="background:white; height:600px;">
                                         <div class="input-group col-md-12">
 
                                             <div class="input-group py-1" style="height: 40px; text-indent:3px;">
                                                 <span style="line-height: 38px;">단 계 입 력 : &nbsp; </span>
-                                                <input id="step" name="step" class="form-control text-muted font-semibold"
+                                                <input id="step" name="step"
+                                                       class="form-control text-muted font-semibold"
                                                        type="text" value="<?= set_value('step') ?>"
                                                        style="margin-left: 4.5px;">
                                             </div>
 
                                             <div class="input-group py-1 " style="height: 40px;">
                                                 <span style="line-height: 38px;">아이템 코드 : &nbsp;  </span>&nbsp;
-                                                <input id="itemCode" name="itemCode" class="form-control text-muted font-semibold"
+                                                <input id="itemCode" name="itemCode"
+                                                       class="form-control text-muted font-semibold"
                                                        type="text" value="<?= set_value('itemCode') ?>">
                                             </div>
 
                                             <div class="input-group py-1" style="height: 40px;">
                                                 <span style="line-height: 38px;">이벤트 코드 : &nbsp;  </span>&nbsp;
-                                                <input id="event_code" name="event_code" class="form-control text-muted font-semibold"
+                                                <input id="event_code" name="event_code"
+                                                       class="form-control text-muted font-semibold"
                                                        type="text" value="<?= $event_code ?>" readonly>
                                             </div>
 
@@ -474,7 +540,8 @@
 
                                                         <tr>
                                                             <?php if (isset($validation)): ?>
-                                                                <div class="alert alert-danger col-md-12" role="alert" id="validation">
+                                                                <div class="alert alert-danger col-md-12" role="alert"
+                                                                     id="validation">
                                                                     <?= $validation->listErrors() ?>
                                                                 </div>
                                                             <?php endif; ?>
@@ -499,6 +566,10 @@
                                         <hr class="input-group" style="float:right;">
                                         <div class="btn-con" style="width:100%; float:right; line-height:47px;">
                                             <div class="btn-wrap" style="float:right;">
+                                                <button type="button" class="btn btn-secondary directInput" style=""
+                                                        id="directInput"
+                                                        onclick="flagSet();">직접입력
+                                                </button>
                                                 <button type="button" class="btn btn-secondary" style=""
                                                         onclick="location.href='http://godo.event.admin/'">취소
                                                 </button>
@@ -519,7 +590,8 @@
                                     </div>
                                 </form>
 
-                                <form action="<?= base_url('/event_admin_new/delete') ?>" name="deletePack" id="deletePack"
+                                <form action="<?= base_url('/event_admin_new/delete') ?>" name="deletePack"
+                                      id="deletePack"
                                       method="post">
                                     <input type="hidden" id="item_code" name="item_code" value="">
                                     <input type="hidden" id="event_code" name="event_delete" value="<?= $event_code ?>">
@@ -532,7 +604,7 @@
                     </div>
                 </div>
             </section>
-
+            <input type="hidden" name="inputCategory" id="inputCategory" value="0">
 
         </div>
 

@@ -99,32 +99,62 @@ function menuAddRow() {
             addCell3.appendChild(addInputEa);
             addInputEa.value = addCount.innerText;
 
-
-            let clickEventPlus = document.getElementById("plus" + (j - 1));
+            let clickEventPlus = document.getElementById("plus" + (j-1));
+            var hiddenEa = clickEventPlus.parentElement.children[3];
+            hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
             clickEventPlus.addEventListener('click', function () {
-                let count = clickEventPlus.parentElement.textContent[0];
+                let count = clickEventPlus.parentElement.children[0].textContent;
+
                 count = parseInt(count) + 1;
                 if (count > 10) {
                     alert('수량은 10개를 초과할 수 없습니다.');
                     count = 10;
                 }
                 clickEventPlus.parentElement.children[0].innerText = count.toString();
-                clickEventPlus.parentElement.children[3].value = clickEventPlus.parentElement.children[0].innerText;
+                var hiddenEa = clickEventPlus.parentElement.children[3];
+                hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
             });
 
-            let clickEventMinus = document.getElementById("minus" + (j - 1));
+            let clickEventMinus = document.getElementById("minus" + (j-1));
+
+
             clickEventMinus.addEventListener('click', function () {
-                let count = clickEventMinus.parentElement.textContent[0];
+                let count = clickEventMinus.parentElement.children[0].textContent;
                 count = parseInt(count) - 1;
                 if (count < 1) {
                     alert("등록 수량은 0이 될 수 없습니다.")
                     count = 1;
                 }
                 clickEventMinus.parentElement.children[0].innerText = count.toString();
-                clickEventPlus.parentElement.children[3].value = clickEventMinus.parentElement.children[0].innerText;
+                var hiddenEa = clickEventPlus.parentElement.children[3];
+                hiddenEa.value = clickEventPlus.parentElement.children[0].innerText;
+
             });
 
 
+            // let clickEventPlus = document.getElementById("plus" + (j - 1));
+            // clickEventPlus.addEventListener('click', function () {
+            //     let count = clickEventPlus.parentElement.textContent[0];
+            //     count = parseInt(count) + 1;
+            //     if (count > 10) {
+            //         alert('수량은 10개를 초과할 수 없습니다.');
+            //         count = 10;
+            //     }
+            //     clickEventPlus.parentElement.children[0].innerText = count.toString();
+            //     clickEventPlus.parentElement.children[3].value = clickEventPlus.parentElement.children[0].innerText;
+            // });
+            //
+            // let clickEventMinus = document.getElementById("minus" + (j - 1));
+            // clickEventMinus.addEventListener('click', function () {
+            //     let count = clickEventMinus.parentElement.textContent[0];
+            //     count = parseInt(count) - 1;
+            //     if (count < 1) {
+            //         alert("등록 수량은 0이 될 수 없습니다.")
+            //         count = 1;
+            //     }
+            //     clickEventMinus.parentElement.children[0].innerText = count.toString();
+            //     clickEventPlus.parentElement.children[3].value = clickEventMinus.parentElement.children[0].innerText;
+            // });
         }
 
     }
@@ -220,7 +250,7 @@ function menuAllDeleteRow() {
  *                    가. 동적 생성된 테이블의 행 전체 삭제를 위한 함수
  */
 function filter() {
-    let search = document.getElementById("search").value;
+    let search = document.getElementById("search").value.toUpperCase();
     let listInner = document.getElementsByTagName("option");
     let menuName = [];
     for (let i = 0; i < listInner.length; i++) {

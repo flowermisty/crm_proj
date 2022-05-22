@@ -14,6 +14,7 @@ function menuAddRow() {
     for (let i = 0; i < select.length; i++) {
         if (select.options[i].selected) {
             select2.push(select.options[i].text);
+            var inputCategory = document.getElementById("inputCategory").value;
             var menuTable = document.getElementById("menuTable");
             var addRow = menuTable.insertRow();
 
@@ -21,6 +22,9 @@ function menuAddRow() {
             var addCell1 = addRow.insertCell(1);
             var addCell2 = addRow.insertCell(2);
             var addCell3 = addRow.insertCell(3);
+
+
+
 
             var addCheckBox = document.createElement("input");
             addCheckBox.setAttribute("type", "checkbox");
@@ -517,6 +521,7 @@ function get_event_profile(itemCode){
         url: "/update/"+item_code+"/"+event_code,
         success: function(response){
             $('.item_save').hide();
+            $('.directInput').hide();
             $('.item_update').show();
             $('.item_delete').show();
             $('#menuTable').html("");
@@ -560,6 +565,8 @@ function modal_reset(){
     document.getElementById('error_duplicate').innerText="";
     document.forms['eventRegist'].reset();
 }
+
+
 
 
 

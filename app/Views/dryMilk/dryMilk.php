@@ -498,8 +498,8 @@ Auto resize image file uploader
             url: "/drymilk/productInit",
             data: param,
             success: function (response) {
-                $('#prdCode').val(response.prdInfo[0]['prdCode'])
-                $('#prdName').val(response.prdInfo[0]['prdName'])
+                $('#prdCode').val(response.prdInfo[0]['prdCode']);
+                $('#prdName').val(response.prdInfo[0]['prdName']);
                 $('#prdRname').val(response.prdInfo[0]['prdRName']);
 
 
